@@ -2,33 +2,41 @@
    Danila Igoshin — v5 / Studio Ochre
    ============================================ */
 
-// ---------- Scroll progress + body state + hero hint ----------
+// ---------- Scroll progress + body state + hero hint (rAF-throttled, cached geom) ----------
 (() => {
   const bar = document.getElementById('progressBar');
   const hint = document.getElementById('scrollHint');
 
-  // Cache scroll dimensions to avoid forced reflow on every scroll event.
+  // Cached values — only re-read when layout actually changes
   let maxScroll = 0;
+  let ticking = false;
+
   const recalc = () => {
     const h = document.documentElement;
     maxScroll = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
   };
 
-  const update = () => {
-    const scrolled = window.scrollY || document.documentElement.scrollTop;
+  const apply = (scrolled) => {
     const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
     if (bar) bar.style.width = pct + '%';
     document.body.classList.toggle('is-scrolled', scrolled > 80);
     if (hint) hint.classList.toggle('is-hidden', scrolled > 120);
+    ticking = false;
   };
 
-  // Recompute on resize + after load (images affect layout height).
-  window.addEventListener('resize', recalc);
-  window.addEventListener('load', recalc);
-  if (document.readyState === 'complete') recalc(); else recalc();
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => apply(window.scrollY));
+  };
 
-  window.addEventListener('scroll', update, { passive: true });
-  update();
+  // Recalc only on resize and after full load (images, fonts settle)
+  window.addEventListener('resize', recalc, { passive: true });
+  window.addEventListener('load', recalc);
+  recalc();
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  apply(window.scrollY);
 })();
 
 // ---------- Side-nav: active section indicator ----------
@@ -274,20 +282,33 @@
   }, msToNextMinute);
 })();
 
-// ---------- Back-to-top ----------
+// ---------- Back-to-top (cached threshold, rAF-throttled) ----------
 (() => {
   const btn = document.getElementById('backToTop');
   const contact = document.getElementById('contact');
   if (!btn) return;
 
-  const update = () => {
-    const threshold = contact ? contact.offsetTop - window.innerHeight * 0.6 : 1200;
-    if (window.scrollY > threshold) btn.classList.add('is-visible');
-    else btn.classList.remove('is-visible');
+  let threshold = 1200;
+  let ticking = false;
+  const recalcThreshold = () => {
+    threshold = contact ? contact.offsetTop - window.innerHeight * 0.6 : 1200;
   };
-  update();
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
+
+  const apply = () => {
+    btn.classList.toggle('is-visible', window.scrollY > threshold);
+    ticking = false;
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(apply);
+  };
+
+  window.addEventListener('load', recalcThreshold);
+  window.addEventListener('resize', recalcThreshold);
+  recalcThreshold();
+  apply();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
