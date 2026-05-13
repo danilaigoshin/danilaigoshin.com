@@ -35,7 +35,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,300..600,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=JetBrains+Mono:wght@300..600&display=swap" rel="stylesheet" />
+
+<!-- Preload LCP image (hero-card photo) — eliminates LCP delay -->
+<link rel="preload" as="image" href="public/my_photo.jpg" fetchpriority="high" />
+
+<!-- Async-load Google Fonts (non-render-blocking via media-flip trick) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,300..600,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=JetBrains+Mono:wght@300..600&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,300..600,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=JetBrains+Mono:wght@300..600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,300..600,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=JetBrains+Mono:wght@300..600&display=swap" rel="stylesheet" /></noscript>
 
 <link rel="stylesheet" href="styles.css" />
 </head>
@@ -58,7 +65,7 @@
 <header class="nav">
   <a href="#top" class="brand">
     <span class="brand-mark brand-mark-photo">
-      <img src="public/my_photo.jpg" alt="Danila Igoshin" width="640" height="640" loading="eager" />
+      <img src="public/my_photo.jpg" alt="Danila Igoshin" width="640" height="640" loading="eager" fetchpriority="low" />
     </span>
     <span class="brand-name">Danila Igoshin</span>
   </a>
@@ -93,7 +100,7 @@
 
     <aside class="hero-card" aria-label="status">
       <figure class="hero-card-photo">
-        <img src="public/my_photo.jpg" alt="Danila Igoshin, frontend developer" width="640" height="640" loading="eager" />
+        <img src="public/my_photo.jpg" alt="Danila Igoshin, frontend developer" width="640" height="640" loading="eager" fetchpriority="high" />
         <figcaption>
           <span class="hcp-name">Danila Igoshin</span>
           <span class="hcp-meta"><em>The author,</em> photographed at dusk</span>

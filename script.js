@@ -7,21 +7,27 @@
   const bar = document.getElementById('progressBar');
   const hint = document.getElementById('scrollHint');
 
-  const update = () => {
+  // Cache scroll dimensions to avoid forced reflow on every scroll event.
+  let maxScroll = 0;
+  const recalc = () => {
     const h = document.documentElement;
-    const scrolled = h.scrollTop || document.body.scrollTop;
-    const max = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
-    const pct = max > 0 ? (scrolled / max) * 100 : 0;
+    maxScroll = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+  };
+
+  const update = () => {
+    const scrolled = window.scrollY || document.documentElement.scrollTop;
+    const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
     if (bar) bar.style.width = pct + '%';
-
-    // body class toggles nav compaction
     document.body.classList.toggle('is-scrolled', scrolled > 80);
-
-    // hide hero hint once scrolled
     if (hint) hint.classList.toggle('is-hidden', scrolled > 120);
   };
+
+  // Recompute on resize + after load (images affect layout height).
+  window.addEventListener('resize', recalc);
+  window.addEventListener('load', recalc);
+  if (document.readyState === 'complete') recalc(); else recalc();
+
   window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
   update();
 })();
 
