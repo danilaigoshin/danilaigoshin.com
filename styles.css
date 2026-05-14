@@ -349,7 +349,7 @@ body.is-scrolled .brand-mark { width: 30px; height: 30px; transition: width .35s
   font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 100, "WONK" 1;
   color: var(--ochre);
 }
-.reveal-row { display: block; overflow: hidden; }
+.reveal-row { display: block; overflow: clip; overflow-clip-margin: 0.2em; padding-bottom: 0.05em; }
 .reveal-word {
   display: inline-block;
   transform: translateY(110%);
