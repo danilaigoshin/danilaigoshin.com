@@ -1,85 +1,118 @@
-/* ============================================
-   Danila Igoshin — v5 / Studio Ochre
-   ============================================ */
+/* ============================================================
+   Danila Igoshin — v6 / "FOLIO"
+   Plain, dependency-free. Progressive-enhancement only:
+   everything is visible without JS; JS just adds motion + live bits.
+   ============================================================ */
 
-// ---------- Scroll progress + body state + hero hint (rAF-throttled, cached geom) ----------
+'use strict';
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- condensed-nav on scroll (rAF-throttled) ---------- */
 (() => {
-  const bar = document.getElementById('progressBar');
-  const hint = document.getElementById('scrollHint');
-
-  // Cached values — only re-read when layout actually changes
-  let maxScroll = 0;
   let ticking = false;
-
-  const recalc = () => {
-    const h = document.documentElement;
-    maxScroll = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
-  };
-
-  const apply = (scrolled) => {
-    const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
-    if (bar) bar.style.width = pct + '%';
-    document.body.classList.toggle('is-scrolled', scrolled > 80);
-    if (hint) hint.classList.toggle('is-hidden', scrolled > 120);
+  const apply = () => {
+    document.body.classList.toggle('is-scrolled', window.scrollY > 60);
     ticking = false;
   };
-
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(() => apply(window.scrollY));
+    requestAnimationFrame(apply);
   };
-
-  // Recalc only on resize and after full load (images, fonts settle)
-  window.addEventListener('resize', recalc, { passive: true });
-  window.addEventListener('load', recalc);
-  recalc();
-
   window.addEventListener('scroll', onScroll, { passive: true });
-  apply(window.scrollY);
+  apply();
 })();
 
-// ---------- Side-nav: active section indicator ----------
+/* ---------- reveal-on-scroll ---------- */
 (() => {
-  const sideNav = document.querySelector('.side-nav');
-  if (!sideNav) return;
-  const links = sideNav.querySelectorAll('a');
-  const sections = [];
-  links.forEach((a) => {
-    const id = a.getAttribute('data-target');
-    if (!id) return;
-    const el = id === 'top' ? document.getElementById('top') : document.getElementById(id);
-    if (el) sections.push({ id, el, link: a });
-  });
-  if (!sections.length) return;
-
-  // show side-nav once hero is scrolled past
-  const showThreshold = 200;
-  window.addEventListener('scroll', () => {
-    sideNav.classList.toggle('is-visible', window.scrollY > showThreshold);
-  }, { passive: true });
-
-  // active section via IntersectionObserver
-  if (!('IntersectionObserver' in window)) return;
+  const els = document.querySelectorAll('.r');
+  if (!els.length) return;
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.add('in'));
+    return;
+  }
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const id = entry.target.id;
-          links.forEach((link) => {
-            link.classList.toggle('is-active', link.getAttribute('data-target') === id);
-          });
-          // dark variant when contact is active (dark bg)
-          sideNav.classList.toggle('is-dark', id === 'contact');
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.35, rootMargin: '-30% 0px -40% 0px' }
+    { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
   );
-  sections.forEach((s) => io.observe(s.el));
+  els.forEach((el) => io.observe(el));
 })();
 
-// ---------- Copy email ----------
+/* ---------- count-up for the Numbers figures ---------- */
+(() => {
+  const nums = document.querySelectorAll('.cnt');
+  if (!nums.length) return;
+
+  const run = (el) => {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const target = parseInt(el.dataset.count, 10);
+    if (Number.isNaN(target)) return;
+    const fmt = (n) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    if (reduceMotion) { el.textContent = fmt(target); return; }
+    const dur = parseInt(el.dataset.dur || '1500', 10);
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt(target * eased);
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  if (!('IntersectionObserver' in window)) { nums.forEach(run); return; }
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // small per-column stagger
+          const sibs = Array.prototype.slice.call(nums);
+          const i = Math.max(0, sibs.indexOf(entry.target));
+          setTimeout(() => run(entry.target), reduceMotion ? 0 : (i % 4) * 120);
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+  nums.forEach((el) => io.observe(el));
+})();
+
+/* ---------- live Penza clock + time-of-day greeting ---------- */
+(() => {
+  const clocks = document.querySelectorAll('[data-clock="penza"]');
+  const greeting = document.getElementById('greeting');
+  if (!clocks.length && !greeting) return;
+
+  const penzaNow = () => {
+    // UTC+3, fixed (no DST in Russia)
+    const now = new Date();
+    return new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 3 * 3600000);
+  };
+  const pad = (n) => String(n).padStart(2, '0');
+  const greet = (h) => (h < 5 ? 'Good night' : h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : h < 22 ? 'Good evening' : 'Good night');
+
+  const tick = () => {
+    const t = penzaNow();
+    const time = `${pad(t.getHours())}:${pad(t.getMinutes())}`;
+    clocks.forEach((el) => { el.textContent = time; });
+    if (greeting) greeting.textContent = greet(t.getHours());
+  };
+  tick();
+  const t0 = penzaNow();
+  setTimeout(() => { tick(); setInterval(tick, 60000); }, (60 - t0.getSeconds()) * 1000);
+})();
+
+/* ---------- copy email ---------- */
 (() => {
   const btn = document.getElementById('copyEmail');
   const label = document.getElementById('copyLabel');
@@ -89,219 +122,20 @@
     try {
       await navigator.clipboard.writeText('danigoshin@gmail.com');
       label.textContent = 'Copied ✓';
-      btn.classList.add('is-copied');
-      setTimeout(() => {
-        label.textContent = original;
-        btn.classList.remove('is-copied');
-      }, 1800);
+      setTimeout(() => { label.textContent = original; }, 1800);
     } catch (e) {
       window.location.href = 'mailto:danigoshin@gmail.com';
     }
   });
 })();
 
-// ---------- Reveal on scroll ----------
+/* ---------- back to top ---------- */
 (() => {
-  const els = document.querySelectorAll('.card, .stat, .section-head, .about-text p, .about-side, .ship-item');
-  if (!('IntersectionObserver' in window)) return;
-
-  els.forEach((el) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)';
-  });
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          const delay = entry.target.classList.contains('card') ||
-                        entry.target.classList.contains('stat') ||
-                        entry.target.classList.contains('ship-item')
-            ? Math.min(i, 4) * 60
-            : 0;
-          setTimeout(() => {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }, delay);
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-  );
-  els.forEach((el) => io.observe(el));
-})();
-
-// ---------- Card cover parallax (real screenshots) ----------
-(() => {
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const cards = document.querySelectorAll('.card');
-  cards.forEach((card) => {
-    const target = card.querySelector('.cover-img') || card.querySelector('.cover-mesh');
-    if (!target) return;
-    let raf;
-    card.addEventListener('mousemove', (e) => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        target.style.transform = `scale(1.05) translate(${x * -8}px, ${y * -5}px)`;
-      });
-    });
-    card.addEventListener('mouseleave', () => {
-      target.style.transform = '';
-    });
-  });
-})();
-
-// ---------- Cover & section animations: activate on viewport entry ----------
-(() => {
-  const cards = document.querySelectorAll('.card');
-  const stats = document.querySelectorAll('.stat');
-  const about = document.querySelector('.about');
-
-  function activateCounters(root, extraDelay = 0) {
-    root.querySelectorAll('[data-count]').forEach((el) => {
-      if (el.dataset.counted) return;
-      el.dataset.counted = '1';
-      const target = parseInt(el.dataset.count, 10);
-      if (Number.isNaN(target)) return;
-      const baseDelay = parseInt(el.dataset.countDelay || '300', 10);
-      const duration = parseInt(el.dataset.countDuration || '1600', 10);
-      const prefix = el.dataset.countPrefix || '';
-      setTimeout(() => countUp(el, target, duration, prefix), baseDelay + extraDelay);
-    });
-  }
-
-  function countUp(el, target, durationMs, prefix = '') {
-    function format(n) {
-      return prefix + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    }
-    // Respect reduced-motion: skip the animated tween, show the final value.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.textContent = format(target);
-      return;
-    }
-    const start = performance.now();
-    function step(now) {
-      const t = Math.min(1, (now - start) / durationMs);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = format(target * eased);
-      if (t < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  if (!('IntersectionObserver' in window)) {
-    cards.forEach((c) => c.classList.add('is-active'));
-    stats.forEach((s) => activateCounters(s));
-    if (about) about.classList.add('is-active');
-    return;
-  }
-
-  // cards (covers) — shop card has data-count=7210 inside
-  const cardIo = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-active');
-          activateCounters(entry.target);
-          cardIo.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.35, rootMargin: '0px 0px -10% 0px' }
-  );
-  cards.forEach((c) => cardIo.observe(c));
-
-  // stats — count up + sparkline draw with per-stat stagger
-  const statIo = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const i = Array.prototype.indexOf.call(stats, entry.target);
-          entry.target.classList.add('is-active');
-          activateCounters(entry.target, i * 140);
-          statIo.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.45, rootMargin: '0px 0px -10% 0px' }
-  );
-  stats.forEach((s) => statIo.observe(s));
-
-  // about section — triggers signature draw
-  if (about) {
-    const aboutIo = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-active');
-            aboutIo.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
-    aboutIo.observe(about);
-  }
-})();
-
-
-// ---------- Live Penza clock + time-of-day greeting ----------
-(() => {
-  function penzaNow() {
-    // UTC+3 — fixed offset, no DST in Russia
-    const now = new Date();
-    const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
-    return new Date(utcMs + 3 * 3600000);
-  }
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function fmt(d) { return `${pad(d.getHours())}:${pad(d.getMinutes())}`; }
-  function greet(hour) {
-    if (hour < 5)  return 'Good night';
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    if (hour < 22) return 'Good evening';
-    return 'Good night';
-  }
-
-  function tick() {
-    const t = penzaNow();
-    const time = fmt(t);
-    document.querySelectorAll('[data-clock="penza"]').forEach((el) => {
-      el.textContent = time;
-    });
-    const greeting = document.getElementById('greeting');
-    if (greeting) greeting.textContent = greet(t.getHours());
-  }
-  tick();
-  // align next tick to top of minute
-  const t0 = penzaNow();
-  const msToNextMinute = (60 - t0.getSeconds()) * 1000;
-  setTimeout(() => {
-    tick();
-    setInterval(tick, 60000);
-  }, msToNextMinute);
-})();
-
-// ---------- Back-to-top (cached threshold, rAF-throttled) ----------
-(() => {
-  const btn = document.getElementById('backToTop');
-  const contact = document.getElementById('contact');
+  const btn = document.getElementById('toTop');
   if (!btn) return;
-
-  let threshold = 1200;
   let ticking = false;
-  const recalcThreshold = () => {
-    threshold = contact ? contact.offsetTop - window.innerHeight * 0.6 : 1200;
-  };
-
   const apply = () => {
-    btn.classList.toggle('is-visible', window.scrollY > threshold);
+    btn.classList.toggle('show', window.scrollY > window.innerHeight * 1.1);
     ticking = false;
   };
   const onScroll = () => {
@@ -309,41 +143,12 @@
     ticking = true;
     requestAnimationFrame(apply);
   };
-
-  window.addEventListener('load', recalcThreshold);
-  window.addEventListener('resize', recalcThreshold);
-  recalcThreshold();
-  apply();
   window.addEventListener('scroll', onScroll, { passive: true });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  apply();
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
 })();
 
-// ---------- Magnetic CTAs ----------
-(() => {
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const magnets = document.querySelectorAll('.btn, .nav-cta, .copy-pill');
-  magnets.forEach((btn) => {
-    let raf;
-    btn.addEventListener('mousemove', (e) => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const r = btn.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) / r.width;
-        const y = (e.clientY - r.top - r.height / 2) / r.height;
-        btn.style.transform = `translate(${x * 6}px, ${y * 4}px)`;
-      });
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  });
-})();
-
-// ---------- Mobile menu (≤760px) ----------
+/* ---------- mobile menu ---------- */
 (() => {
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('mobileMenu');
@@ -359,24 +164,13 @@
     e.stopPropagation();
     setOpen(toggle.getAttribute('aria-expanded') !== 'true');
   });
-
-  // Close after picking a section, on Escape (return focus), or clicking outside.
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
-
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-      setOpen(false);
-      toggle.focus();
-    }
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
   });
-
   document.addEventListener('click', (e) => {
     if (toggle.getAttribute('aria-expanded') !== 'true') return;
     if (!menu.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
   });
-
-  // Collapse if the viewport grows past the mobile breakpoint while open.
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 760) setOpen(false);
-  }, { passive: true });
+  window.addEventListener('resize', () => { if (window.innerWidth > 820) setOpen(false); }, { passive: true });
 })();
