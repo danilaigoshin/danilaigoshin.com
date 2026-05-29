@@ -136,6 +136,7 @@
 // ---------- Card cover parallax (real screenshots) ----------
 (() => {
   if (window.matchMedia('(pointer: coarse)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const cards = document.querySelectorAll('.card');
   cards.forEach((card) => {
     const target = card.querySelector('.cover-img') || card.querySelector('.cover-mesh');
@@ -176,10 +177,15 @@
   }
 
   function countUp(el, target, durationMs, prefix = '') {
-    const start = performance.now();
     function format(n) {
       return prefix + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
+    // Respect reduced-motion: skip the animated tween, show the final value.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = format(target);
+      return;
+    }
+    const start = performance.now();
     function step(now) {
       const t = Math.min(1, (now - start) / durationMs);
       const eased = 1 - Math.pow(1 - t, 3);
@@ -318,6 +324,7 @@
 // ---------- Magnetic CTAs ----------
 (() => {
   if (window.matchMedia('(pointer: coarse)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const magnets = document.querySelectorAll('.btn, .nav-cta, .copy-pill');
   magnets.forEach((btn) => {
     let raf;
@@ -334,4 +341,42 @@
       btn.style.transform = '';
     });
   });
+})();
+
+// ---------- Mobile menu (≤760px) ----------
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (!toggle || !menu) return;
+
+  const setOpen = (open) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.classList.toggle('is-open', open);
+  };
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Close after picking a section, on Escape (return focus), or clicking outside.
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (toggle.getAttribute('aria-expanded') !== 'true') return;
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+  });
+
+  // Collapse if the viewport grows past the mobile breakpoint while open.
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 760) setOpen(false);
+  }, { passive: true });
 })();
