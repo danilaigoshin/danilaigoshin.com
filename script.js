@@ -46,47 +46,6 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
   els.forEach((el) => io.observe(el));
 })();
 
-/* ---------- count-up for the Numbers figures ---------- */
-(() => {
-  const nums = document.querySelectorAll('.cnt');
-  if (!nums.length) return;
-
-  const run = (el) => {
-    if (el.dataset.done) return;
-    el.dataset.done = '1';
-    const target = parseInt(el.dataset.count, 10);
-    if (Number.isNaN(target)) return;
-    const fmt = (n) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    if (reduceMotion) { el.textContent = fmt(target); return; }
-    const dur = parseInt(el.dataset.dur || '1500', 10);
-    const start = performance.now();
-    const step = (now) => {
-      const t = Math.min(1, (now - start) / dur);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = fmt(target * eased);
-      if (t < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-
-  if (!('IntersectionObserver' in window)) { nums.forEach(run); return; }
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // small per-column stagger
-          const sibs = Array.prototype.slice.call(nums);
-          const i = Math.max(0, sibs.indexOf(entry.target));
-          setTimeout(() => run(entry.target), reduceMotion ? 0 : (i % 4) * 120);
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.6 }
-  );
-  nums.forEach((el) => io.observe(el));
-})();
-
 /* ---------- live Penza clock + time-of-day greeting ---------- */
 (() => {
   const clocks = document.querySelectorAll('[data-clock="penza"]');
