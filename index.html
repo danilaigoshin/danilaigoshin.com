@@ -33,9 +33,6 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23A96A1B'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-weight='400' font-size='18' fill='%23F3EFE5'%3EDi%3C/text%3E%3C/svg%3E" />
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23A96A1B'/%3E%3Ctext x='90' y='122' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-weight='400' font-size='102' fill='%23F3EFE5'%3EDi%3C/text%3E%3C/svg%3E" />
 
-<!-- Preload LCP image (cover portrait) -->
-<link rel="preload" as="image" href="public/my_photo.jpg" fetchpriority="high" />
-
 <!-- Preload critical fonts (self-hosted, same-origin) -->
 <link rel="preload" as="font" type="font/woff2" href="public/fonts/bricolage-grotesque-v9-latin-500.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="public/fonts/fraunces-v38-latin-italic.woff2" crossorigin />
@@ -196,19 +193,21 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
 .plate-frame{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:13px 13px 0;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 24px 50px -28px rgba(27,23,16,.4)}
 .plate-frame .img{position:relative;overflow:hidden;border:1px solid var(--line-2);border-radius:3px}
 .plate-frame img{display:block;width:100%;height:100%;object-fit:cover}
-/* cover profile card (replaces the hero photo) */
-.cover-card{align-self:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,1.8vw,28px);opacity:0;animation:fade-up 1s var(--ease) .34s forwards;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 20px 46px -30px rgba(27,23,16,.34)}
-@media (max-width:900px){.cover-card{max-width:430px}}
-.cc-head{display:flex;align-items:center;gap:13px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-.cc-avatar{width:54px;height:54px;border-radius:999px;overflow:hidden;border:1px solid var(--line);flex-shrink:0;background:var(--paper-2)}
-.cc-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block;filter:saturate(.96)}
-.cc-name{display:block;font-weight:500;font-size:15.5px;letter-spacing:-.01em;color:var(--ink)}
-.cc-role{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-4);margin-top:4px}
-.cc-rows{margin:0}
-.cc-rows>div{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line-2)}
-.cc-rows>div:last-child{border-bottom:none;padding-bottom:0}
-.cc-rows dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);margin:0}
-.cc-rows dd{margin:0;font-size:13.5px;font-weight:500;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px;text-align:right}
+/* cover marginalia — a typographic signature colophon (not a card) */
+.cover-side{align-self:center;opacity:0;animation:fade-up 1s var(--ease) .34s forwards;
+  border-left:1px solid var(--line);padding-left:clamp(24px,2.2vw,34px)}
+@media (max-width:900px){.cover-side{border-left:none;padding-left:0}}
+.cs-sign{margin:0;font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 72,"wght" 400,"SOFT" 100,"WONK" 1;font-size:clamp(27px,2.5vw,34px);line-height:1.05;letter-spacing:-.015em;color:var(--ink)}
+.cs-role{margin:10px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)}
+.cs-rule{height:1px;background:var(--line-2);margin:clamp(17px,1.7vw,22px) 0}
+.cs-avail{margin:0;display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:500;color:var(--ink)}
+.cs-pulse{width:8px;height:8px;border-radius:50%;background:#3DAE5A;flex-shrink:0;animation:pulse-grn 2.2s var(--ease) infinite}
+@keyframes pulse-grn{0%{box-shadow:0 0 0 0 rgba(61,174,90,.55)}70%{box-shadow:0 0 0 7px rgba(61,174,90,0)}100%{box-shadow:0 0 0 0 rgba(61,174,90,0)}}
+.cs-sub{margin:8px 0 0;font-family:var(--serif);font-size:14.5px;color:var(--ink-3)}
+.cs-meta{margin:0;display:flex;flex-direction:column;gap:8px}
+.cs-meta>div{display:flex;gap:13px;align-items:baseline}
+.cs-meta dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);width:50px;flex-shrink:0}
+.cs-meta dd{margin:0;font-family:var(--serif);font-size:14.5px;color:var(--ink-2)}
 .plate-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 2px 12px;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-4)}
 .plate-cap b{color:var(--ink-3);font-weight:500}
 .plate-cap .ok{display:inline-flex;align-items:center;gap:6px;color:var(--ochre-deep)}
@@ -445,20 +444,17 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
         </div>
       </div>
 
-      <aside class="cover-card" aria-label="At a glance">
-        <div class="cc-head">
-          <span class="cc-avatar"><img src="public/my_photo.jpg" alt="Danila Igoshin" width="640" height="640" fetchpriority="high" /></span>
-          <div>
-            <span class="cc-name">Danila Igoshin</span>
-            <span class="cc-role">Senior Frontend Engineer</span>
-          </div>
-        </div>
-        <dl class="cc-rows">
-          <div><dt>Status</dt><dd><span class="dot" aria-hidden="true"></span> Open to roles</dd></div>
-          <div><dt>Based</dt><dd>Penza, RU · UTC+3</dd></div>
-          <div><dt>Looking</dt><dd>Remote · Relocation</dd></div>
-          <div><dt>Focus</dt><dd>Perf · Architecture</dd></div>
-          <div><dt>Languages</dt><dd>RU · EN</dd></div>
+      <aside class="cover-side" aria-label="At a glance">
+        <p class="cs-sign">Danila Igoshin</p>
+        <p class="cs-role">Senior Frontend Engineer · Penza, RU</p>
+        <div class="cs-rule" aria-hidden="true"></div>
+        <p class="cs-avail"><span class="cs-pulse" aria-hidden="true"></span> Open to work</p>
+        <p class="cs-sub">Senior roles · remote or relocation</p>
+        <div class="cs-rule" aria-hidden="true"></div>
+        <dl class="cs-meta">
+          <div><dt>Stack</dt><dd>React · TypeScript · Next.js</dd></div>
+          <div><dt>Focus</dt><dd>Performance · Architecture</dd></div>
+          <div><dt>Langs</dt><dd>RU · EN</dd></div>
         </dl>
       </aside>
     </div>
