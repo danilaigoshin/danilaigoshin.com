@@ -129,11 +129,14 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
 .nav-links a i{font-family:var(--mono);font-style:normal;font-size:10px;color:var(--ink-4);letter-spacing:.04em}
 .nav-links a:hover{background:var(--card);color:var(--ink)}
 .nav-links a:hover i{color:var(--ochre)}
-.nav-cta{justify-self:end;display:inline-flex;align-items:center;gap:9px;padding:9px 17px;border-radius:999px;font-size:13.5px;font-weight:500;
-  background:var(--ink);color:var(--paper);border:1px solid var(--ink);transition:transform .25s,background-color .25s,border-color .25s}
-.nav-cta:hover{transform:translateY(-1px);background:var(--ochre-deep);border-color:var(--ochre-deep)}
-.nav-cta .dot{background:#F0C674;animation-name:pulse-l}
-@keyframes pulse-l{0%{box-shadow:0 0 0 0 rgba(240,198,116,.7)}70%{box-shadow:0 0 0 7px rgba(240,198,116,0)}100%{box-shadow:0 0 0 0 rgba(240,198,116,0)}}
+.nav-cta{justify-self:end;display:inline-flex;align-items:center;gap:9px;padding:8px 4px;
+  font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 60,"wght" 400,"SOFT" 100,"WONK" 1;
+  font-size:18px;color:var(--ochre-deep);transition:color .25s}
+.nav-cta .nc-t{background:linear-gradient(transparent 90%,transparent 90%);transition:background .25s}
+.nav-cta:hover{color:var(--ochre)}
+.nav-cta:hover .nc-t{background:linear-gradient(transparent 90%,rgba(169,106,27,.5) 90%)}
+.nav-cta .nc-arr{font-family:var(--mono);font-style:normal;font-size:14px;color:var(--ochre);transition:transform .3s var(--ease)}
+.nav-cta:hover .nc-arr{transform:translateX(4px)}
 
 /* nav toggle / mobile menu */
 .nav-toggle{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;background:color-mix(in srgb,var(--ink) 5%,transparent);border:1px solid var(--line);justify-self:end}
@@ -363,29 +366,48 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
 .col-facts dd a:hover{background:#F0C674;color:var(--ink)}
 
 /* ============================================================
-   FOOTER colophon
+   FOOTER — the colophon / imprint (last page of the folio)
    ============================================================ */
-.foot{position:relative;z-index:1;background:var(--ink);color:var(--paper);padding:clamp(36px,5vw,56px) var(--rail) 30px}
-.foot-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1.1fr;gap:clamp(24px,4vw,56px);padding-bottom:28px;border-bottom:1px solid rgba(243,239,229,.09)}
-@media (max-width:860px){.foot-grid{grid-template-columns:1fr;gap:28px}}
-.foot-col{display:flex;flex-direction:column;gap:9px}
-.foot-key{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8C8270;margin-bottom:6px}
-.foot-brand{flex-direction:row;align-items:flex-start;gap:14px}
-.foot-brand .brand-mark{width:46px;height:46px;flex-shrink:0;border-color:rgba(243,239,229,.16)}
-.foot-bn{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 60,"wght" 420,"SOFT" 70;font-size:22px;color:var(--paper);line-height:1.1}
-.foot-br{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#C9BFA8;line-height:1.6;margin-top:4px}
-.foot-nav ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 18px}
-.foot-nav a{display:inline-block;padding:4px 0;font-family:var(--serif);font-size:16px;color:var(--paper);transition:color .25s,padding-left .35s var(--ease)}
-.foot-nav a:hover{color:#F0C674;padding-left:6px}
-.foot-time{display:inline-flex;align-items:baseline;gap:9px;font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 60,"wght" 420;font-size:23px;color:var(--paper)}
-.foot-time .dot{background:var(--ochre);align-self:center}
-.foot-time em{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8C8270}
-.foot-craft{font-family:var(--serif);font-size:13.5px;line-height:1.55;color:#C9BFA8;margin-top:4px}
-.foot-craft em{color:#F0C674}
-.foot-bottom{max-width:var(--maxw);margin:0 auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#8C8270}
-.foot-bottom a{color:#C9BFA8;border-bottom:1px dashed transparent;transition:color .25s,border-color .25s}
-.foot-bottom a:hover{color:#F0C674;border-color:#F0C674}
+.foot{position:relative;z-index:1;background:var(--ink);color:var(--paper);
+  padding:clamp(18px,3.5vw,36px) var(--rail) clamp(44px,6vw,82px)}
+/* seam — a ruled § that announces the colophon */
+.foot-seam{display:flex;align-items:center;gap:clamp(16px,3vw,30px);max-width:var(--maxw);margin:0 auto clamp(42px,5vw,68px)}
+.foot-seam::before,.foot-seam::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(243,239,229,.16),transparent)}
+.foot-seam span{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 40,"wght" 400;font-size:21px;line-height:1;color:var(--ochre)}
+/* grid */
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.25fr 1fr 1.2fr;gap:clamp(30px,5vw,76px);align-items:start;padding-bottom:clamp(30px,4vw,46px)}
+@media (max-width:880px){.foot-grid{grid-template-columns:1fr;gap:clamp(34px,6vw,46px)}}
+.foot-col{display:flex;flex-direction:column;min-width:0}
+.foot-key{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8C8270;margin-bottom:18px}
+/* 1 — signature */
+.foot-signature{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 72,"wght" 380,"SOFT" 100,"WONK" 1;font-size:clamp(30px,3.3vw,42px);line-height:1;letter-spacing:-.012em;color:var(--paper);transition:color .25s}
+.foot-signature:hover{color:#F0C674}
+.foot-role{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#C9BFA8;margin-top:18px}
+.foot-mail{align-self:flex-start;font-family:var(--serif);font-style:italic;font-size:16.5px;color:#C9BFA8;margin-top:9px;background:linear-gradient(transparent 86%,rgba(240,198,116,.45) 86%);transition:color .2s,background .2s}
+.foot-mail:hover{color:#F0C674}
+/* 2 — index */
+.foot-index ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:1px clamp(16px,2vw,30px)}
+.foot-index a{display:flex;align-items:baseline;gap:11px;padding:6px 0;font-family:var(--serif);font-size:16px;color:var(--paper);transition:color .25s,padding-left .35s var(--ease)}
+.foot-index a i{font-family:var(--mono);font-style:normal;font-size:10.5px;letter-spacing:.06em;color:#8C8270;transition:color .25s}
+.foot-index a:hover{color:#F0C674;padding-left:5px}
+.foot-index a:hover i{color:var(--ochre)}
+/* 3 — colophon imprint */
+.foot-imprint{font-family:var(--serif);font-size:14.5px;line-height:1.62;color:#C9BFA8;margin:0;max-width:34ch}
+.foot-imprint em{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 40,"wght" 400;color:#F0C674}
+.foot-elsewhere{display:flex;flex-wrap:wrap;gap:9px 18px;margin-top:22px}
+.foot-elsewhere a{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#C9BFA8;display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;padding-bottom:3px;transition:color .25s,border-color .25s}
+.foot-elsewhere a::after{content:"↗";color:var(--ochre);font-size:11px;transition:transform .3s var(--ease)}
+.foot-elsewhere a:hover{color:#F0C674;border-color:rgba(240,198,116,.4)}
+.foot-elsewhere a:hover::after{transform:translate(2px,-2px)}
+/* bottom rule */
+.foot-bottom{max-width:var(--maxw);margin:0 auto;padding-top:clamp(22px,3vw,30px);border-top:1px solid rgba(243,239,229,.1);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 26px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#8C8270}
+.foot-bottom a{color:#C9BFA8;transition:color .25s}
+.foot-bottom a:hover{color:#F0C674}
+.foot-up{display:inline-flex;align-items:center;gap:7px}
+.foot-up span{color:var(--ochre);transition:transform .3s var(--ease)}
+.foot-up:hover span{transform:translateY(-2px)}
 
 /* back to top */
 .to-top{position:fixed;right:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:70;display:inline-flex;align-items:center;gap:8px;
@@ -422,7 +444,7 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
 <div class="masthead">
   <span class="md-hide">Danila Igoshin — Senior Frontend Engineer</span>
   <span class="md-r">
-    <span class="md-hide">Folio · MMXXVI</span>
+    <span class="md-hide">MMXXVI</span>
     <span class="md-live"><span class="dot" aria-hidden="true"></span> Penza · <span data-clock="penza">—</span> UTC+3</span>
   </span>
 </div>
@@ -439,7 +461,7 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
     <a href="#about"><i>03</i> About</a>
     <a href="#contact"><i>04</i> Contact</a>
   </nav>
-  <a href="mailto:danigoshin@gmail.com" class="nav-cta"><span class="dot" aria-hidden="true"></span> Available</a>
+  <a href="mailto:danigoshin@gmail.com" class="nav-cta" aria-label="Let’s talk — email Danila"><span class="nc-t">Let’s talk</span><span class="nc-arr" aria-hidden="true">→</span></a>
   <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
   </button>
@@ -772,36 +794,41 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
   </div>
 </section>
 
-<!-- ============== FOOTER ============== -->
+<!-- ============== FOOTER · COLOPHON ============== -->
 <footer class="foot">
+  <div class="foot-seam"><span aria-hidden="true">§</span></div>
+
   <div class="foot-grid">
-    <div class="foot-col foot-brand">
-      <span class="brand-mark"><img src="public/my_photo.jpg" alt="" width="640" height="640" loading="lazy" /></span>
-      <div>
-        <div class="foot-bn">Danila Igoshin</div>
-        <div class="foot-br">Senior Frontend Engineer<br/>danigoshin@gmail.com</div>
+    <div class="foot-col foot-sign">
+      <a class="foot-signature" href="#top" aria-label="Danila Igoshin — back to top">Danila Igoshin</a>
+      <span class="foot-role">Senior Frontend Engineer · Penza, RU</span>
+      <a class="foot-mail" href="mailto:danigoshin@gmail.com">danigoshin@gmail.com</a>
+    </div>
+
+    <nav class="foot-col foot-index" aria-label="Footer">
+      <span class="foot-key">Index</span>
+      <ul>
+        <li><a href="#work"><i>01</i> Work</a></li>
+        <li><a href="#numbers"><i>02</i> Numbers</a></li>
+        <li><a href="#about"><i>03</i> About</a></li>
+        <li><a href="#contact"><i>04</i> Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="foot-col foot-colophon">
+      <span class="foot-key">Colophon</span>
+      <p class="foot-imprint">Set in <em>Fraunces</em>, Bricolage Grotesque, Newsreader &amp; JetBrains Mono. Hand-built — no framework, no build step, no analytics.</p>
+      <div class="foot-elsewhere">
+        <a href="/case/smartway/">Case study</a>
+        <a href="https://www.linkedin.com/in/developerdanila" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="/Danila_Igoshin_EMEA_Contract_CV" target="_blank" rel="noopener">Résumé</a>
       </div>
     </div>
-    <div class="foot-col foot-nav">
-      <span class="foot-key">Contents</span>
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#numbers">Numbers</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="/case/smartway/">Case study</a></li>
-        <li><a href="/Danila_Igoshin_EMEA_Contract_CV" target="_blank" rel="noopener">Résumé</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <span class="foot-key">In Penza right now</span>
-      <span class="foot-time"><span class="dot" aria-hidden="true"></span> <span data-clock="penza">—</span> <em>local · UTC+3</em></span>
-      <span class="foot-craft"><em>Set in Fraunces &amp; Bricolage Grotesque.</em> Built by hand — no framework, no build step, no analytics.</span>
-    </div>
   </div>
+
   <div class="foot-bottom">
-    <span>© MMXXVI · Penza, RU</span>
-    <span><a href="mailto:danigoshin@gmail.com">danigoshin@gmail.com</a></span>
+    <span>© MMXXVI · Danila Igoshin · Penza, Russia</span>
+    <a class="foot-up" href="#top">Back to top <span aria-hidden="true">↑</span></a>
   </div>
 </footer>
 
