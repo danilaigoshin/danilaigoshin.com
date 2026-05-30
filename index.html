@@ -330,84 +330,50 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
 .stack-line i{color:var(--ochre);font-style:normal;padding:0 5px}
 
 /* ============================================================
-   CONTACT — "back cover" (the one dark moment)
+   CLOSE — contact + colophon: a warm-dark "calling card" on paper
    ============================================================ */
-.colophon{position:relative;z-index:1;background:var(--ink);color:var(--paper);margin-top:clamp(80px,11vw,150px);
-  border-radius:30px 30px 0 0;padding:clamp(72px,11vw,150px) var(--rail) clamp(56px,7vw,90px);overflow:hidden}
-.colophon::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(52% 60% at 82% 12%,rgba(169,106,27,.4),transparent 60%),radial-gradient(40% 55% at 8% 92%,rgba(169,106,27,.22),transparent 60%)}
-.colophon-inner{position:relative;max-width:920px;margin:0 auto;text-align:center}
-.col-portrait{width:104px;height:104px;margin:0 auto clamp(20px,3vw,30px);position:relative;isolation:isolate}
-.col-portrait img{width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:50%;display:block;
-  box-shadow:0 0 0 1px rgba(243,239,229,.18),0 0 0 4px rgba(169,106,27,.28),0 16px 40px -16px rgba(0,0,0,.6);filter:saturate(.96)}
-.col-portrait .glow{position:absolute;inset:-26px;border-radius:50%;z-index:-1;background:radial-gradient(closest-side,rgba(169,106,27,.36),transparent 70%);animation:breathe 5s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.5;transform:scale(.95)}50%{opacity:.85;transform:scale(1.05)}}
-.col-portrait .live{position:absolute;right:5px;bottom:5px;width:13px;height:13px;border-radius:50%;background:#6BE583;border:2.5px solid var(--ink);animation:pulse-g 2s var(--ease) infinite}
+.close{position:relative;z-index:1;color:var(--ink);
+  padding:clamp(92px,11vw,150px) var(--rail) clamp(28px,3vw,40px)}
+.close-card{position:relative;max-width:760px;margin:0 auto;background:var(--ink);color:var(--paper);border-radius:22px;
+  padding:clamp(46px,6vw,78px) clamp(34px,5vw,70px) clamp(42px,5vw,64px);text-align:center;overflow:hidden;
+  box-shadow:0 44px 80px -44px rgba(27,23,16,.6)}
+.close-card::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(62% 52% at 50% 0,rgba(169,106,27,.36),transparent 65%),radial-gradient(45% 45% at 92% 112%,rgba(169,106,27,.16),transparent 60%)}
+.close-in{position:relative}
+.close-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#C9A86A;margin:0 0 20px}
+.close-greet{display:flex;align-items:center;justify-content:center;gap:12px;
+  font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 60,"wght" 380,"SOFT" 100,"WONK" 1;
+  font-size:clamp(18px,1.9vw,23px);color:#F0C674;margin:0 0 18px}
+.close-av{position:relative;width:40px;height:40px;flex-shrink:0}
+.close-av img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:center 30%;border:1px solid rgba(243,239,229,.22)}
+.close-live{position:absolute;right:0;bottom:0;width:10px;height:10px;border-radius:50%;background:#6BE583;border:2px solid var(--ink);animation:pulse-g 2s var(--ease) infinite}
 @keyframes pulse-g{0%{box-shadow:0 0 0 0 rgba(107,229,131,.7)}70%{box-shadow:0 0 0 8px rgba(107,229,131,0)}100%{box-shadow:0 0 0 0 rgba(107,229,131,0)}}
-.col-hello{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 60,"wght" 380,"SOFT" 100,"WONK" 1;font-size:clamp(17px,2vw,23px);color:#F0C674;margin:0 0 8px}
-.col-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#C9A86A;margin:0 0 16px}
-.col-headline{font-family:var(--sans);font-variation-settings:"opsz" 96,"wght" 460;font-size:clamp(34px,6vw,82px);line-height:1.02;letter-spacing:-.03em;margin:0 0 clamp(34px,5vw,52px);color:var(--paper)}
-.col-headline em{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 144,"wght" 360,"SOFT" 100,"WONK" 1;color:#F0C674}
-.col-actions{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;margin-bottom:clamp(44px,6vw,68px)}
-.colophon .btn-primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.colophon .btn-primary:hover{background:var(--ochre);color:var(--paper);border-color:var(--ochre)}
-.colophon .btn-ghost{color:var(--paper);border-color:rgba(243,239,229,.28)}
-.colophon .btn-ghost:hover{background:rgba(243,239,229,.07);border-color:var(--paper)}
+.close-note{font-family:var(--serif);font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#E8E0CF;margin:0 auto clamp(30px,4vw,40px);max-width:42ch}
+.close-note em{font-family:var(--display);font-style:italic;color:#F0C674}
+.close-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:clamp(32px,4vw,42px)}
+.close .btn-primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.close .btn-primary:hover{background:var(--ochre);color:var(--paper);border-color:var(--ochre)}
+.close .btn-ghost{color:var(--paper);border-color:rgba(243,239,229,.28)}
+.close .btn-ghost:hover{background:rgba(243,239,229,.08);border-color:var(--paper)}
 .has-plane .plane{width:21px;height:21px}
 .has-plane:hover .plane{animation:plane 1s cubic-bezier(.55,.06,.68,.19) forwards}
 @keyframes plane{0%{transform:translate(0,0) rotate(0);opacity:1}45%{transform:translate(40px,-28px);opacity:0}46%{transform:translate(-40px,14px);opacity:0}100%{transform:translate(0,0);opacity:1}}
-.col-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:left;margin:0;padding-top:clamp(32px,4vw,46px);border-top:1px solid rgba(243,239,229,.13)}
-@media (max-width:760px){.col-facts{grid-template-columns:1fr 1fr}}
-@media (max-width:430px){.col-facts{grid-template-columns:1fr}}
-.col-facts div{display:flex;flex-direction:column;gap:6px}
-.col-facts dt{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#C9A86A;margin:0}
-.col-facts dd{margin:0;font-family:var(--serif);font-size:15.5px;color:var(--paper)}
-.col-facts dd a{background:linear-gradient(transparent 86%,#F0C674 86% 92%,transparent 92%);padding:0 1px;transition:background .2s,color .2s}
-.col-facts dd a:hover{background:#F0C674;color:var(--ink)}
-
-/* ============================================================
-   FOOTER — the colophon / imprint (last page of the folio)
-   ============================================================ */
-.foot{position:relative;z-index:1;background:var(--ink);color:var(--paper);
-  padding:clamp(18px,3.5vw,36px) var(--rail) clamp(44px,6vw,82px)}
-/* seam — a ruled § that announces the colophon */
-.foot-seam{display:flex;align-items:center;gap:clamp(16px,3vw,30px);max-width:var(--maxw);margin:0 auto clamp(42px,5vw,68px)}
-.foot-seam::before,.foot-seam::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(243,239,229,.16),transparent)}
-.foot-seam span{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 40,"wght" 400;font-size:21px;line-height:1;color:var(--ochre)}
-/* grid */
-.foot-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.25fr 1fr 1.2fr;gap:clamp(30px,5vw,76px);align-items:start;padding-bottom:clamp(30px,4vw,46px)}
-@media (max-width:880px){.foot-grid{grid-template-columns:1fr;gap:clamp(34px,6vw,46px)}}
-.foot-col{display:flex;flex-direction:column;min-width:0}
-.foot-key{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8C8270;margin-bottom:18px}
-/* 1 — signature */
-.foot-signature{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 72,"wght" 380,"SOFT" 100,"WONK" 1;font-size:clamp(30px,3.3vw,42px);line-height:1;letter-spacing:-.012em;color:var(--paper);transition:color .25s}
-.foot-signature:hover{color:#F0C674}
-.foot-role{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#C9BFA8;margin-top:18px}
-.foot-mail{align-self:flex-start;font-family:var(--serif);font-style:italic;font-size:16.5px;color:#C9BFA8;margin-top:9px;background:linear-gradient(transparent 86%,rgba(240,198,116,.45) 86%);transition:color .2s,background .2s}
-.foot-mail:hover{color:#F0C674}
-/* 2 — index */
-.foot-index ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:1px clamp(16px,2vw,30px)}
-.foot-index a{display:flex;align-items:baseline;gap:11px;padding:6px 0;font-family:var(--serif);font-size:16px;color:var(--paper);transition:color .25s,padding-left .35s var(--ease)}
-.foot-index a i{font-family:var(--mono);font-style:normal;font-size:10.5px;letter-spacing:.06em;color:#8C8270;transition:color .25s}
-.foot-index a:hover{color:#F0C674;padding-left:5px}
-.foot-index a:hover i{color:var(--ochre)}
-/* 3 — colophon imprint */
-.foot-imprint{font-family:var(--serif);font-size:14.5px;line-height:1.62;color:#C9BFA8;margin:0;max-width:34ch}
-.foot-imprint em{font-family:var(--display);font-style:italic;font-variation-settings:"opsz" 40,"wght" 400;color:#F0C674}
-.foot-elsewhere{display:flex;flex-wrap:wrap;gap:9px 18px;margin-top:22px}
-.foot-elsewhere a{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#C9BFA8;display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;padding-bottom:3px;transition:color .25s,border-color .25s}
-.foot-elsewhere a::after{content:"↗";color:var(--ochre);font-size:11px;transition:transform .3s var(--ease)}
-.foot-elsewhere a:hover{color:#F0C674;border-color:rgba(240,198,116,.4)}
-.foot-elsewhere a:hover::after{transform:translate(2px,-2px)}
-/* bottom rule */
-.foot-bottom{max-width:var(--maxw);margin:0 auto;padding-top:clamp(22px,3vw,30px);border-top:1px solid rgba(243,239,229,.1);
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 26px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#8C8270}
-.foot-bottom a{color:#C9BFA8;transition:color .25s}
-.foot-bottom a:hover{color:#F0C674}
-.foot-up{display:inline-flex;align-items:center;gap:7px}
-.foot-up span{color:var(--ochre);transition:transform .3s var(--ease)}
-.foot-up:hover span{transform:translateY(-2px)}
+.close-sign{display:inline-block;font-family:var(--display);font-style:italic;
+  font-variation-settings:"opsz" 144,"wght" 380,"SOFT" 100,"WONK" 1;
+  font-size:clamp(34px,4vw,52px);line-height:1;letter-spacing:-.02em;color:var(--paper);transition:color .25s}
+.close-sign:hover{color:#F0C674}
+.close-sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#C9BFA8;margin:14px 0 0}
+.close-foot{max-width:var(--maxw);margin:clamp(40px,5vw,64px) auto 0;display:flex;justify-content:space-between;align-items:center;gap:14px 30px;flex-wrap:wrap}
+.close-foot nav{display:flex;flex-wrap:wrap;gap:7px 20px}
+.close-foot nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);transition:color .2s}
+.close-foot nav a:hover{color:var(--ochre-deep)}
+.close-meta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
+.close-meta a{color:var(--ink-3);transition:color .2s}
+.close-meta a:hover{color:var(--ochre-deep)}
+.close-fine{max-width:var(--maxw);margin:18px auto 0;padding-top:16px;border-top:1px solid var(--line-2);text-align:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-4)}
+.close-fine em{font-family:var(--display);font-style:italic;text-transform:none;color:var(--ochre-deep)}
+@media (max-width:560px){.close-foot{flex-direction:column;align-items:flex-start;gap:14px}}
 
 /* back to top */
 .to-top{position:fixed;right:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:70;display:inline-flex;align-items:center;gap:8px;
@@ -765,72 +731,40 @@ body.is-scrolled .brand-mark{width:30px;height:30px}
 
 </main>
 
-<!-- ============== CONTACT / BACK COVER ============== -->
-<section class="colophon" id="contact">
-  <div class="colophon-inner">
-    <figure class="col-portrait">
-      <img src="public/my_photo.jpg" alt="Danila Igoshin" width="640" height="640" loading="lazy" />
-      <span class="glow" aria-hidden="true"></span>
-      <span class="live" aria-hidden="true" title="Online"></span>
-    </figure>
-    <p class="col-hello"><em id="greeting">Hello</em> — it's Danila.</p>
-    <p class="col-eyebrow">§ 04 — Let's talk</p>
-    <h2 class="col-headline">Building a product where <em>frontend quality</em> matters?</h2>
-    <div class="col-actions">
-      <a href="mailto:danigoshin@gmail.com" class="btn btn-primary big has-plane">
-        <span>danigoshin@gmail.com</span>
-        <svg class="plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12 L21.5 4 L13 21.5 L11 13 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 13 L21.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
-      </a>
-      <button class="btn btn-ghost big" id="copyEmail" type="button" aria-label="Copy email address">
-        <span id="copyLabel">Copy email</span><span class="arr" aria-hidden="true">⎘</span>
-      </button>
-    </div>
-    <dl class="col-facts">
-      <div><dt>Response time</dt><dd>Usually within 48 hours.</dd></div>
-      <div><dt>Available</dt><dd>Immediately · full-time or contract.</dd></div>
-      <div><dt>Local time</dt><dd><span data-clock="penza">—</span> <em>(UTC+3)</em></dd></div>
-      <div><dt>Elsewhere</dt><dd><a href="https://www.linkedin.com/in/developerdanila" target="_blank" rel="noopener">LinkedIn</a> · <a href="/Danila_Igoshin_EMEA_Contract_CV" target="_blank" rel="noopener">Résumé</a></dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- ============== FOOTER · COLOPHON ============== -->
-<footer class="foot">
-  <div class="foot-seam"><span aria-hidden="true">§</span></div>
-
-  <div class="foot-grid">
-    <div class="foot-col foot-sign">
-      <a class="foot-signature" href="#top" aria-label="Danila Igoshin — back to top">Danila Igoshin</a>
-      <span class="foot-role">Senior Frontend Engineer · Penza, RU</span>
-      <a class="foot-mail" href="mailto:danigoshin@gmail.com">danigoshin@gmail.com</a>
-    </div>
-
-    <nav class="foot-col foot-index" aria-label="Footer">
-      <span class="foot-key">Index</span>
-      <ul>
-        <li><a href="#work"><i>01</i> Work</a></li>
-        <li><a href="#numbers"><i>02</i> Numbers</a></li>
-        <li><a href="#about"><i>03</i> About</a></li>
-        <li><a href="#contact"><i>04</i> Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="foot-col foot-colophon">
-      <span class="foot-key">Colophon</span>
-      <p class="foot-imprint">Set in <em>Fraunces</em>, Bricolage Grotesque, Newsreader &amp; JetBrains Mono. Hand-built — no framework, no build step, no analytics.</p>
-      <div class="foot-elsewhere">
-        <a href="/case/smartway/">Case study</a>
-        <a href="https://www.linkedin.com/in/developerdanila" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="/Danila_Igoshin_EMEA_Contract_CV" target="_blank" rel="noopener">Résumé</a>
+<!-- ============== CLOSE · contact + colophon (warm-dark calling card) ============== -->
+<section class="close" id="contact">
+  <div class="close-card">
+    <div class="close-in">
+      <p class="close-eyebrow">§ 04 — Let's talk</p>
+      <p class="close-greet"><span class="close-av"><img src="public/my_photo.jpg" alt="Danila Igoshin" width="640" height="640" loading="lazy" /><span class="close-live" aria-hidden="true" title="Online"></span></span> <span id="greeting">Hello</span> — it's Danila.</p>
+      <p class="close-note">I build the frontend of complex products — React &amp; TypeScript, with real care for performance, architecture, and the small details that make an interface feel <em>reliable</em>. If that's the kind of work you're hiring for, I'd love to talk.</p>
+      <div class="close-actions">
+        <a href="mailto:danigoshin@gmail.com" class="btn btn-primary big has-plane">
+          <span>danigoshin@gmail.com</span>
+          <svg class="plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12 L21.5 4 L13 21.5 L11 13 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 13 L21.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </a>
+        <button class="btn btn-ghost big" id="copyEmail" type="button" aria-label="Copy email address">
+          <span id="copyLabel">Copy email</span><span class="arr" aria-hidden="true">⎘</span>
+        </button>
       </div>
+      <a class="close-sign" href="#top" aria-label="Danila Igoshin — back to top">Danila Igoshin</a>
+      <p class="close-sub">Senior Frontend Engineer · Penza, RU · open full-time or contract</p>
     </div>
   </div>
-
-  <div class="foot-bottom">
-    <span>© MMXXVI · Danila Igoshin · Penza, Russia</span>
-    <a class="foot-up" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  <div class="close-foot">
+    <nav aria-label="Footer">
+      <a href="#work">Work</a>
+      <a href="#numbers">Numbers</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="/case/smartway/">Case study ↗</a>
+      <a href="https://www.linkedin.com/in/developerdanila" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="/Danila_Igoshin_EMEA_Contract_CV" target="_blank" rel="noopener">Résumé ↗</a>
+    </nav>
+    <span class="close-meta">© MMXXVI · Penza, RU · <a href="#top">Back to top ↑</a></span>
   </div>
-</footer>
+  <p class="close-fine">Set in <em>Fraunces</em>, Bricolage Grotesque, Newsreader &amp; JetBrains Mono — hand-built, no framework, no analytics.</p>
+</section>
 
 <button id="toTop" class="to-top" type="button" aria-label="Back to top">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19 L12 5 M5 12 L12 5 L19 12" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
