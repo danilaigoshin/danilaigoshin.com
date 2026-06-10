@@ -3,28 +3,28 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Smartway — scaling a corporate travel platform · Danila Igoshin</title>
-<meta name="description" content="Case study: three years as senior frontend developer and tech-lead on Smartway's corporate travel platform — a full TypeScript migration, Webpack→Vite, +300% cart performance, and a growing team." />
+<title>EdTech MVP in five months — an engagement brief · Danila Igoshin</title>
+<meta name="description" content="Engagement brief: a psychology-education startup needed a product, not a team. Sole frontend engineer — course marketplace, booking, instructor admin, secure media, BFF in Next.js. Empty repository to live MVP in five months." />
 <meta name="theme-color" content="#F4EEDF" />
 <meta name="robots" content="index, follow" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Smartway — scaling a corporate travel platform" />
-<meta property="og:description" content="Three years as senior frontend developer and tech-lead: full TypeScript migration, Webpack→Vite (10× faster builds), +300% cart performance." />
-<meta property="og:url" content="https://danilaigoshin.com/case/smartway/" />
+<meta property="og:title" content="EdTech MVP in five months — an engagement brief" />
+<meta property="og:description" content="A founder needed a product, not a team. Sole frontend engineer: marketplace, booking, instructor admin, secure media, BFF in Next.js — empty repo to live MVP in five months." />
+<meta property="og:url" content="https://danilaigoshin.com/case/edtech/" />
 <meta property="og:image" content="https://danilaigoshin.com/public/og-image.jpg" />
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B23A14'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-weight='400' font-size='18' fill='%23F8F1E0'%3EDi%3C/text%3E%3C/svg%3E" />
 
-<!-- Self-hosted fonts (absolute paths so the page works at /case/smartway/) -->
-<link rel="preload" as="image" href="/public/smartway.webp" fetchpriority="high" />
+<!-- Self-hosted fonts (absolute paths so the page works at /case/edtech/) -->
+<link rel="preload" as="image" href="/public/online-institute.webp" fetchpriority="high" />
 <link rel="preload" as="font" type="font/woff2" href="/public/fonts/fraunces-vf-latin.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="/public/fonts/fraunces-vf-latin-italic.woff2" crossorigin />
 
 <style>
 /* ============================================================
-   Smartway — case study · "PROSPECTUS" (matches the homepage)
+   EdTech MVP — engagement brief · "PROSPECTUS" (matches the homepage)
    Two inks on warm paper: umber + vermilion.
    ============================================================ */
 @font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;font-display:swap;src:url('/public/fonts/fraunces-vf-latin.woff2') format('woff2')}
@@ -114,24 +114,12 @@ img{max-width:100%}
 .dek{font-family:var(--serif);font-size:clamp(17px,1.5vw,20px);line-height:1.58;color:var(--ink-2);margin:clamp(18px,2.4vw,26px) 0 0;max-width:58ch;
   opacity:0;animation:fade-up .25s var(--ease) .1s forwards}
 .dek em{color:var(--ink)}
-@keyframes fade-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .meta{display:flex;flex-wrap:wrap;gap:clamp(22px,4.5vw,58px);margin:clamp(26px,3.4vw,38px) 0 0;
   opacity:0;animation:fade-up .25s var(--ease) .13s forwards}
 .meta div{display:flex;flex-direction:column;gap:7px}
 .meta dt{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);margin:0}
 .meta dd{margin:0;font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.35}
-
-/* executive summary — the 30-second version, above the fold */
-.exec{background:var(--cream);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:6px;
-  padding:20px 26px 22px;margin-top:clamp(26px,3.4vw,38px);box-shadow:3px 3px 0 rgba(34,26,15,.07);
-  opacity:0;animation:fade-up .25s var(--ease) .16s forwards}
-.exec .nh{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
-.exec p{font-family:var(--serif);font-size:16px;line-height:1.58;color:var(--ink-2);margin:0;max-width:64ch}
-.exec p em{color:var(--ink)}
-.exec-n{display:flex;flex-wrap:wrap;gap:8px 26px;margin:14px 0 0 !important;padding-top:12px;border-top:1px solid var(--line-2)}
-.exec-n span{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
-.exec-n b{font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
-  font-size:17px;letter-spacing:-.01em;color:var(--red);margin-right:5px}
 
 /* ---------- framed cover plate ---------- */
 .cover{margin:clamp(28px,4vw,44px) auto 0}
@@ -235,8 +223,8 @@ img{max-width:100%}
 <a class="skip" href="#case">Skip to content</a>
 
 <div class="dateline">
-  <span>№ 08 — <span class="red">Case study</span> · Smartway</span>
-  <span><span class="dl-hide">Engagement record · </span>2021 — 2024</span>
+  <span>№ 08 — <span class="red">Engagement brief</span> · Smart Online Institute</span>
+  <span><span class="dl-hide">Contract record · </span>Feb — Aug 2025</span>
 </div>
 
 <div class="unav">
@@ -245,48 +233,32 @@ img{max-width:100%}
     <span class="av"><img src="/public/my_photo_320.jpg" alt="" width="320" height="320" /></span>
     <b>D. Igoshin</b><span class="lbl">Back to the prospectus</span>
   </a>
-  <a class="unav-cta" href="mailto:danigoshin@gmail.com?subject=Frontend%20help%20%E2%80%94%20%5Byour%20product%5D">Available now — email →</a>
+  <a class="unav-cta" href="mailto:danigoshin@gmail.com?subject=Contract%20inquiry%20%E2%80%94%20%5Byour%20product%5D">Available now — email →</a>
 </div>
 
 <main id="case">
   <section class="hero wrap">
-    <p class="kicker">Case study — Smartway</p>
-    <h1>Scaling a <em>corporate travel</em> platform across three years.</h1>
+    <p class="kicker">Engagement brief — EdTech MVP</p>
+    <h1>A founder needed a <em>product,</em> not a team.</h1>
     <div class="np-rule" aria-hidden="true"></div>
     <p class="dek">
-      Three years on Smartway's web platform as senior frontend developer and, in time, tech-lead —
-      flights, trains, taxis, transfers and hotels inside a single product companies use to book and
-      govern business travel.
+      Smart Online Institute — a psychology-education platform — had no frontend at all, a legacy
+      service with no API, and an MVP that needed to be live fast. I was the <em>sole frontend engineer</em>,
+      end to end: this is what the engagement looked like, and what shipped.
     </p>
     <dl class="meta">
-      <div><dt>Role</dt><dd>Senior Frontend Dev · Tech-lead</dd></div>
-      <div><dt>Period</dt><dd>Mar 2021 — Feb 2024</dd></div>
-      <div><dt>Team</dt><dd>Mentored 3 frontend devs</dd></div>
-      <div><dt>Domain</dt><dd>B2B corporate travel</dd></div>
+      <div><dt>Role</dt><dd>Sole Frontend Engineer</dd></div>
+      <div><dt>Period</dt><dd>Feb — Aug 2025</dd></div>
+      <div><dt>Shape</dt><dd>Solo build-out, zero to live</dd></div>
+      <div><dt>Domain</dt><dd>EdTech marketplace</dd></div>
     </dl>
-
-    <aside class="exec" aria-label="Executive summary">
-      <p class="nh">Executive summary — the 30-second version</p>
-      <p>
-        A long-lived B2B travel platform was slowing its own team down: untyped core, heavy Webpack
-        builds, a sluggish booking cart. Over three years I led the <em>full TypeScript migration</em>,
-        moved the build to Vite, restructured the cart's state and rendering, rebuilt auth without
-        breaking sessions — and mentored the team that maintains it now.
-      </p>
-      <p class="exec-n">
-        <span><b>10×</b> faster builds</span>
-        <span><b>+300%</b> cart performance</span>
-        <span><b>100%</b> TypeScript</span>
-        <span><b>3</b> devs mentored</span>
-      </p>
-    </aside>
   </section>
 
   <div class="wrap">
     <figure class="frame cover">
-      <span class="f-img"><img src="/public/smartway.webp" width="1672" height="941"
-           alt="Smartway corporate travel platform — booking search across flights, trains and transfers, a calendar of trips, and approval widgets." /></span>
-      <figcaption><b>Fig. 00 — Smartway web platform</b><span>Booking · Trips · Approvals</span></figcaption>
+      <span class="f-img"><img src="/public/online-institute.webp" width="1672" height="941"
+           alt="Smart Online Institute — course marketplace with a featured class and course catalogue." /></span>
+      <figcaption><b>Fig. 00 — Course marketplace</b><span>Catalogue · Booking · Admin</span></figcaption>
     </figure>
   </div>
 
@@ -294,84 +266,85 @@ img{max-width:100%}
 
     <section class="sec">
       <header class="sec-head">
-        <div><p class="sec-no">§ 01</p><h2 class="sec-title">Context</h2></div>
-        <p class="sec-note">B2B travel<br/>web client</p>
+        <div><p class="sec-no">§ 01</p><h2 class="sec-title">The brief</h2></div>
+        <p class="sec-note">one engineer<br/>whole frontend</p>
       </header>
       <div class="body">
         <p>
-          Smartway is a corporate travel platform: employees book flights, trains, taxis, transfers and
-          hotels, while their companies handle approvals, reporting, and travel policy. The web client is
-          large and long-lived — many domains, many engineers, years of steady growth. I joined as a senior
-          frontend developer and grew into the <em>tech-lead</em> role for the web platform.
+          The client wanted to sell courses and practice sessions online: a marketplace where students
+          browse and book, instructors manage schedules, and content — video, audio, documents — stays
+          protected. There was no frontend codebase, no design system, and <em>no team to coordinate
+          with</em>: the deal was one engineer who owns the surface entirely and ships it live.
+        </p>
+        <p>
+          That shape is the point of this brief. It's the cheapest way to buy an MVP — no coordination
+          tax, no handoffs — <em>if</em> the one engineer can actually carry marketplace, admin, infrastructure
+          and data migration alone.
         </p>
       </div>
     </section>
 
     <section class="sec">
       <header class="sec-head">
-        <div><p class="sec-no">§ 02</p><h2 class="sec-title">The <em>challenge</em></h2></div>
-        <p class="sec-note">growth debt<br/>+ a scaling team</p>
+        <div><p class="sec-no">§ 02</p><h2 class="sec-title">The <em>constraint</em></h2></div>
+        <p class="sec-note">a tight window<br/>no API on legacy</p>
       </header>
       <div class="body">
         <p>
-          By the time I took ownership, the codebase carried the weight of fast growth: a largely untyped
-          JavaScript core, a Webpack build slow enough to tax every developer's day, a booking cart that had
-          grown sluggish under real usage, and an authentication layer that needed rebuilding <em>without
-          disrupting active sessions.</em>
-        </p>
-        <p>
-          And the team was scaling. That raised the bar on everything else: the architecture and conventions
-          had to be legible to people who hadn't written them — not just to the few who had.
+          Two things made the window tight. First, the legacy service holding existing courses and user
+          data had <em>no API</em> — the data had to come out some other way. Second, &#8220;live&#8221; meant live:
+          real booking flows, secure media access, and an admin panel instructors would
+          actually use, not a demo.
         </p>
       </div>
     </section>
 
     <section class="sec">
       <header class="sec-head">
-        <div><p class="sec-no">§ 03</p><h2 class="sec-title">What I <em>did</em></h2></div>
-        <p class="sec-note">six workstreams<br/>over three years</p>
+        <div><p class="sec-no">§ 03</p><h2 class="sec-title">What <em>shipped</em></h2></div>
+        <p class="sec-note">six workstreams<br/>in five months</p>
       </header>
       <ol class="steps">
         <li>
           <span class="n" aria-hidden="true">01</span>
           <div>
-            <h3>Led a full TypeScript migration</h3>
-            <p class="sd">Moved the codebase from JavaScript to TypeScript, done incrementally so the product kept shipping the whole way. Types became the documentation the codebase never had.</p>
+            <h3>Course marketplace &amp; student profiles</h3>
+            <p class="sd">Catalogue, course pages, student accounts and learning progress — the storefront of the platform, built on Next.js with React Query and Zod-validated forms.</p>
           </div>
         </li>
         <li>
           <span class="n" aria-hidden="true">02</span>
           <div>
-            <h3>Replaced Webpack with Vite</h3>
-            <p class="sd">Swapped the build toolchain to Vite, collapsing build and feedback times and giving every developer faster local iteration — the change that paid back daily.</p>
+            <h3>Booking &amp; scheduling with auto-generated calls</h3>
+            <p class="sd">Practice-session booking against instructor schedules, with video-call links generated automatically on confirmation — no manual coordination step left in the flow.</p>
           </div>
         </li>
         <li>
           <span class="n" aria-hidden="true">03</span>
           <div>
-            <h3>Made the booking cart fast</h3>
-            <p class="sd">Restructured state ownership and re-render boundaries in the cart flow, turning a sluggish, much-used path into an instant one.</p>
+            <h3>Instructor admin panel</h3>
+            <p class="sd">Schedule and session management plus learning-progress visualization with Recharts — the tool the client's instructors run their day in.</p>
           </div>
         </li>
         <li>
           <span class="n" aria-hidden="true">04</span>
           <div>
-            <h3>Rewrote authentication without breaking sessions</h3>
-            <p class="sd">Rebuilt the auth layer as a quiet, high-stakes change — shipped without logging anyone out or interrupting work in progress.</p>
+            <h3>Secure media viewer</h3>
+            <p class="sd">Video, audio, PDF and DOC course content served from AWS S3 behind access control — paid content stays paid.</p>
           </div>
         </li>
         <li>
           <span class="n" aria-hidden="true">05</span>
           <div>
-            <h3>Built the analytics module</h3>
-            <p class="sd">Interactive tables and charts for expense and trip insights — the numbers companies run their travel policy on.</p>
+            <h3>BFF layer, CI/CD and deploys</h3>
+            <p class="sd">A backend-for-frontend in Next.js to orchestrate APIs, GitLab CI/CD and Docker-based deployment — set up from scratch so shipping was routine, not an event.</p>
           </div>
         </li>
         <li>
           <span class="n" aria-hidden="true">06</span>
           <div>
-            <h3>Grew the team</h3>
-            <p class="sd">Mentored three frontend developers and ran internal tech talks — state vs. cache, SSR vs. ISR — to make sound decisions the default rather than the exception.</p>
+            <h3>Legacy data migration — without an API</h3>
+            <p class="sd">Automated the migration from the legacy service with Playwright scraping where no API existed — existing courses and data arrived in the new platform without manual re-entry.</p>
           </div>
         </li>
       </ol>
@@ -384,43 +357,44 @@ img{max-width:100%}
       </header>
       <div class="figs">
         <div class="fig">
-          <p class="fig-n"><span>10</span><span class="u">×</span></p>
-          <p class="fig-l">faster builds after migrating the build to Vite.</p>
-          <p class="fig-src">Webpack → Vite</p>
+          <p class="fig-n"><span>5</span><span class="u">mo</span></p>
+          <p class="fig-l">from empty repository to live MVP.</p>
+          <p class="fig-src">Build window</p>
         </div>
         <div class="fig">
-          <p class="fig-n"><span class="u">+</span><span>300</span><span class="u">%</span></p>
-          <p class="fig-l">booking-cart performance via state &amp; render restructuring.</p>
-          <p class="fig-src">Cart flow</p>
+          <p class="fig-n"><span>1</span></p>
+          <p class="fig-l">engineer owning the entire frontend, end to end.</p>
+          <p class="fig-src">Solo build</p>
         </div>
         <div class="fig">
-          <p class="fig-n"><span>100</span><span class="u">%</span></p>
-          <p class="fig-l">of the web codebase migrated to TypeScript.</p>
-          <p class="fig-src">TS migration</p>
+          <p class="fig-n"><span>6</span></p>
+          <p class="fig-l">product surfaces shipped: marketplace, profiles, booking, scheduling, progress, secure media.</p>
+          <p class="fig-src">Scope</p>
         </div>
         <div class="fig">
-          <p class="fig-n"><span>3</span></p>
-          <p class="fig-l">frontend developers mentored as tech-lead.</p>
-          <p class="fig-src">Team</p>
+          <p class="fig-n"><span>0</span></p>
+          <p class="fig-l">APIs on the legacy service — migration automated with Playwright scraping.</p>
+          <p class="fig-src">Data migration</p>
         </div>
       </div>
     </section>
 
     <section class="sec">
       <header class="sec-head">
-        <div><p class="sec-no">§ 05</p><h2 class="sec-title">Stack &amp; role</h2></div>
-        <p class="sec-note">2021 — 2024</p>
+        <div><p class="sec-no">§ 05</p><h2 class="sec-title">Stack &amp; shape</h2></div>
+        <p class="sec-note">Feb — Aug 2025</p>
       </header>
       <ul class="chips">
-        <li>React</li><li>Redux</li><li>MobX</li><li>React Query</li><li>Next.js</li><li>React Native</li><li>TypeScript</li><li>Vite</li>
+        <li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>shadcn/ui</li><li>React Query</li><li>React Hook Form</li><li>Zod</li><li>Strapi</li><li>GitLab CI/CD</li><li>Docker</li><li>Playwright</li><li>AWS S3</li>
       </ul>
-      <p class="role-line">Senior Frontend Developer, then tech-lead for the web platform.</p>
+      <p class="role-line">Sole frontend engineer — product surfaces, BFF, infrastructure and data migration, owned end to end.</p>
 
       <div class="note">
         <p class="nh">Printer's note</p>
         <p>
-          Smartway is a private product, so this page describes scope and outcomes rather than internal code.
-          The numbers above are the ones I stand behind — and I'm happy to walk through the <em>how</em> in a conversation.
+          This is what the <em>MVP build-out</em> engagement on the homepage looks like in practice.
+          Smart Online Institute is a client product, so this page describes scope and record rather than
+          internals — I'm happy to walk through the <em>how</em> in a conversation.
         </p>
       </div>
     </section>
@@ -430,9 +404,9 @@ img{max-width:100%}
   <section class="flood">
     <div class="flood-in">
       <p class="flood-eyebrow">§ 06 — Correspondence</p>
-      <h2>Building something where <em>frontend quality</em> matters?</h2>
+      <h2>Need a product <em>shipped,</em> not staffed?</h2>
       <div class="cta-row">
-        <a class="btn btn-paper" href="mailto:danigoshin@gmail.com?subject=About%20the%20Smartway%20case">
+        <a class="btn btn-paper" href="mailto:danigoshin@gmail.com?subject=Contract%20inquiry%20%E2%80%94%20%5Byour%20product%5D">
           <span>danigoshin@gmail.com</span><span class="arr" aria-hidden="true">→</span>
         </a>
         <a class="btn btn-line" href="/#terms"><span>Read the terms</span><span class="arr" aria-hidden="true">→</span></a>

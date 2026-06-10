@@ -3,31 +3,31 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Danila Igoshin — Senior Frontend Engineer</title>
-<meta name="description" content="Senior Frontend Engineer. Six years of React, TypeScript, and Next.js — performance, architecture, migrations, and production UI. Open to remote and relocation." />
+<title>Danila Igoshin — Senior Frontend Engineer · React &amp; TypeScript Contractor</title>
+<meta name="description" content="Senior frontend engineer and React/TypeScript contractor. Six years of production frontend — React, TypeScript and Next.js for B2B SaaS: performance rescues, migrations, MVP build-outs, embedded senior work. Available now — remote (full EU overlap, UTC+3) or relocation within EMEA." />
 <meta name="theme-color" content="#F4EEDF" />
 <meta name="author" content="Danila Igoshin" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="profile" />
-<meta property="og:title" content="Danila Igoshin — Senior Frontend Engineer" />
-<meta property="og:description" content="Six years of React, TypeScript, and Next.js — performance, architecture, migrations, and production UI. Open to remote and relocation." />
+<meta property="og:title" content="Danila Igoshin — Senior Frontend Engineer · React &amp; TypeScript Contractor" />
+<meta property="og:description" content="Six years of production frontend — React, TypeScript and Next.js for B2B SaaS. Performance rescues, migrations, MVP build-outs, embedded senior work. Available now — remote (full EU overlap) or relocation." />
 <meta property="og:locale" content="en_US" />
 <meta property="og:image" content="https://danilaigoshin.com/public/og-image.jpg" />
 <meta property="og:url" content="https://danilaigoshin.com/" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Danila Igoshin — Senior Frontend Engineer · six years making complex products feel simple, and slow ones fast · open to work, remote or relocation" />
+<meta property="og:image:alt" content="Danila Igoshin — Senior Frontend Engineer · React &amp; TypeScript contractor · available now for contract or full-time, remote or relocation" />
 <meta property="profile:first_name" content="Danila" />
 <meta property="profile:last_name" content="Igoshin" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Danila Igoshin — Senior Frontend Engineer" />
-<meta name="twitter:description" content="Six years of React, TypeScript, and Next.js. Open to remote and relocation." />
+<meta name="twitter:title" content="Danila Igoshin — Senior Frontend Engineer · React &amp; TypeScript Contractor" />
+<meta name="twitter:description" content="Six years of production frontend — React, TypeScript and Next.js for B2B SaaS. Available now — contract or full-time, remote or relocation." />
 <meta name="twitter:image" content="https://danilaigoshin.com/public/og-image.jpg" />
-<meta name="twitter:image:alt" content="Danila Igoshin — Senior Frontend Engineer · six years making complex products feel simple, and slow ones fast · open to work" />
+<meta name="twitter:image:alt" content="Danila Igoshin — Senior Frontend Engineer · React &amp; TypeScript contractor · available now" />
 
 <!-- Favicon: vermilion roundel with italic Di -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B23A14'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-weight='400' font-size='18' fill='%23F8F1E0'%3EDi%3C/text%3E%3C/svg%3E" />
@@ -40,11 +40,12 @@
 
 <style>
 /* ============================================================
-   Danila Igoshin — v7 / "PRESSWORK"
-   A hand-set broadside. Two inks on warm paper: umber + vermilion.
-   Fraunces VF (display, real opsz/SOFT/WONK axes)
-   Bricolage Grotesque (UI sans) · Newsreader (body serif)
-   JetBrains Mono (meta). No framework. No analytics.
+   Danila Igoshin — v8 / "PROSPECTUS"
+   The same press, a different document. A broadside announces;
+   a prospectus invites an engagement. Two inks on warm paper:
+   umber + vermilion. Fraunces VF (display) · Bricolage Grotesque
+   (UI) · Newsreader (body) · JetBrains Mono (meta).
+   No framework. No build step. No analytics.
    ============================================================ */
 
 @font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;font-display:swap;src:url('public/fonts/fraunces-vf-latin.woff2') format('woff2')}
@@ -72,11 +73,10 @@
   --ease:cubic-bezier(.22,.75,.22,1);
   --wonk:"opsz" 144,"SOFT" 0,"WONK" 1;
 }
-@supports (interpolate-size: allow-keywords){ :root{interpolate-size:allow-keywords} }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-section[id]{scroll-margin-top:72px}
+section[id],article[id]{scroll-margin-top:72px}
 html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{overflow-x:hidden;position:relative}
 /* paper grain — one tiny noise tile over everything, like stock */
@@ -98,6 +98,13 @@ sup{font-size:.55em;vertical-align:super;line-height:0}
 .mono-l{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
 em{font-style:italic}
 
+/* entrance — one quiet fade, ≤300 ms total. Instant render is the pitch. */
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.f1{animation:fade .22s var(--ease) both}
+.f2{animation:fade-up .24s var(--ease) .05s both}
+.f3{animation:fade-up .24s var(--ease) .1s both}
+
 /* letterpress buttons — hard ink shadow, presses down on hover */
 .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:6px;
   font-family:var(--sans);font-size:14.5px;font-weight:500;letter-spacing:-.005em;
@@ -111,7 +118,7 @@ em{font-style:italic}
 .btn-red:hover{box-shadow:2px 2px 0 var(--red-deep);background:var(--red-deep)}
 .btn-red:active{box-shadow:0 0 0 var(--red-deep)}
 
-/* small underlined mono link (job CTAs, footer links) */
+/* small underlined mono link */
 .ln{display:inline-flex;align-items:baseline;gap:9px;font-family:var(--mono);font-size:11.5px;font-weight:500;
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--line);
   padding-bottom:6px;transition:color .2s,border-color .2s}
@@ -119,17 +126,23 @@ em{font-style:italic}
 .ln:hover{color:var(--red-deep);border-color:var(--red)}
 .ln:hover::after{transform:translateX(5px)}
 .ln .dim{color:var(--ink-4)}
+.ln.up::after{content:"↗"}
 
 /* ============================================================
-   DATELINE
+   DATELINE — availability from pixel one
    ============================================================ */
 .dateline{display:flex;justify-content:space-between;align-items:center;gap:16px;
-  padding:12px var(--rail);border-bottom:1px solid var(--line-2);
-  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
-  animation:fade .8s var(--ease) both}
+  padding:10px var(--rail);border-bottom:1px solid var(--line-2);
+  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .dateline .red{color:var(--red)}
+.dateline .dl-right{display:flex;align-items:center;gap:18px}
+.chip{display:inline-flex;align-items:center;gap:8px;color:var(--red-deep);border:1px solid var(--red);
+  border-radius:99px;padding:4px 12px 4px 10px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* on desktop the rubber stamp owns the availability moment; the chip serves mobile */
+@media (min-width:960px){.dateline .chip{display:none}}
 @media (max-width:720px){.dl-hide{display:none}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
 
 /* ============================================================
    STICKY BAR — slides in after the masthead
@@ -154,110 +167,115 @@ em{font-style:italic}
 @media (max-width:760px){.bar nav{display:none}}
 
 /* ============================================================
-   MASTHEAD — the nameplate
+   MASTHEAD — letterhead, claim, terms-in-brief, proof ledger
    ============================================================ */
-.mast{position:relative;padding:clamp(30px,4.5vw,64px) var(--rail) clamp(40px,5vw,72px)}
-.mast-in{max-width:var(--maxw);margin:0 auto;position:relative}
+.mast{position:relative;padding:clamp(20px,2.6vw,36px) var(--rail) 0}
+.mast-in{max-width:var(--maxw);margin:0 auto;position:relative;display:flex;flex-direction:column}
+@media (min-width:960px) and (min-height:700px){.mast-in{min-height:min(calc(100svh - 64px),1060px)}}
 .nameplate{margin:0;font-family:var(--display);font-weight:620;
   font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(54px,10.6vw,168px);line-height:.92;letter-spacing:-.035em;color:var(--ink)}
+  font-size:clamp(38px,4.5vw,64px);line-height:.96;letter-spacing:-.03em;color:var(--ink)}
 .nameplate .dot{color:var(--red)}
-.np-line{display:block;overflow:clip;overflow-clip-margin:.25em}
-.np-line>span{display:inline-block;transform:translateY(110%);animation:rise .9s var(--ease) .08s forwards}
-@keyframes rise{to{transform:translateY(0)}}
-/* double rule under the nameplate — newspaper style */
+/* double rule under the letterhead — newspaper furniture */
 .np-rule{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:3px;
-  margin-top:clamp(18px,2.4vw,30px);animation:fade .9s var(--ease) .3s both}
-.role-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 0 0;
+  margin-top:clamp(12px,1.6vw,18px)}
+.role-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:11px 0 0;
   font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ink-3);animation:fade .9s var(--ease) .4s both}
+  color:var(--ink-3)}
 .role-row b{color:var(--red-deep);font-weight:500}
 @media (max-width:720px){.role-row{font-size:9.5px;letter-spacing:.1em}}
 
-/* claim + deck */
-.mast-low{position:relative;padding-right:clamp(0px,18vw,260px)}
+/* claim + deck + actions, with the stamp set to the right */
+.mast-low{position:relative;padding-right:clamp(0px,17vw,250px)}
 @media (max-width:900px){.mast-low{padding-right:0}}
-.claim{margin:clamp(34px,4vw,56px) 0 0;max-width:26ch;text-wrap:balance;
-  font-family:var(--display);font-weight:480;font-variation-settings:"opsz" 110,"SOFT" 30,"WONK" 0;
-  font-size:clamp(28px,3.6vw,54px);line-height:1.08;letter-spacing:-.022em;color:var(--ink);
-  animation:fade-up .9s var(--ease) .5s both}
+.claim{margin:clamp(26px,3.2vw,46px) 0 0;max-width:24ch;text-wrap:balance;
+  font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
+  font-size:clamp(32px,4.6vw,68px);line-height:1.02;letter-spacing:-.026em;color:var(--ink)}
 .claim em{font-style:italic;color:var(--red);font-variation-settings:var(--wonk);font-weight:430;letter-spacing:-.01em}
-.deck{margin:clamp(18px,2.2vw,26px) 0 0;max-width:54ch;
-  font-family:var(--serif);font-size:clamp(16.5px,1.4vw,19.5px);line-height:1.58;color:var(--ink-2);
-  animation:fade-up .9s var(--ease) .62s both}
+.deck{margin:clamp(16px,2vw,24px) 0 0;max-width:56ch;
+  font-family:var(--serif);font-size:clamp(16.5px,1.35vw,19px);line-height:1.55;color:var(--ink-2)}
 .deck em{color:var(--ink)}
-.mast-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(26px,3.2vw,38px);animation:fade-up .9s var(--ease) .74s both}
-@keyframes fade-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.mast-actions{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;margin-top:clamp(22px,2.6vw,32px)}
+.reply-note{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--ink-3)}
 
-/* the rubber stamp — applied over the body of the notice */
-.stamp{position:absolute;right:clamp(0px,3vw,44px);top:clamp(40px,5vw,72px);z-index:3;transform:rotate(-7deg);
+/* the rubber stamp — recut for v8 */
+.stamp{position:absolute;right:clamp(0px,2.5vw,36px);top:clamp(2px,1vw,14px);z-index:3;transform:rotate(-7deg);
   color:var(--red);border:2.5px solid currentColor;outline:1px solid currentColor;outline-offset:3px;border-radius:10px;
   padding:13px 17px 12px;text-align:center;
   -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 2.3 -.32'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23m)'/%3E%3C/svg%3E");
   mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 2.3 -.32'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23m)'/%3E%3C/svg%3E");
-  animation:stamp-in .5s cubic-bezier(.2,1.4,.4,1) 1s both}
-.stamp .s-big{display:block;font-family:var(--mono);font-size:17px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;line-height:1.45}
+  animation:stamp-in .3s cubic-bezier(.2,1.4,.4,1) .12s both}
+.stamp .s-big{display:block;font-family:var(--mono);font-size:17px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;line-height:1.45}
 .stamp .s-small{display:block;margin-top:7px;padding-top:8px;border-top:1px solid currentColor;
   font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
-@keyframes stamp-in{0%{opacity:0;transform:rotate(-7deg) scale(1.7)}55%{opacity:1;transform:rotate(-7deg) scale(.94)}100%{opacity:1;transform:rotate(-7deg) scale(1)}}
-@media (max-width:900px){.stamp{position:static;display:inline-block;margin:26px 0 0;animation-delay:.9s}}
+@keyframes stamp-in{0%{opacity:0;transform:rotate(-7deg) scale(1.6)}60%{opacity:1;transform:rotate(-7deg) scale(.95)}100%{opacity:1;transform:rotate(-7deg) scale(1)}}
+@media (max-width:900px){.stamp{position:static;display:inline-block;margin:24px 0 0}}
+
+/* the proof ledger — pinned to the fold */
+.ledger{margin-top:auto;padding-top:clamp(26px,3vw,40px)}
+.ledger-rule{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:3px}
+.ledger-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(20px,3vw,48px);padding-top:clamp(14px,1.8vw,20px)}
+.lg-it{display:block;padding:2px 0 4px;border-radius:4px;transition:background-color .2s}
+.lg-it:hover{background:color-mix(in srgb,var(--cream) 55%,transparent)}
+.lg-l{display:flex;align-items:baseline;gap:10px;font-family:var(--mono);font-size:9.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.lg-l::after{content:"";flex:1;min-width:18px;border-bottom:1px dotted var(--line);transform:translateY(-1px)}
+.lg-n{display:block;margin-top:9px;font-family:var(--display);font-style:italic;font-weight:560;
+  font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;font-size:clamp(26px,2.6vw,40px);line-height:.9;letter-spacing:-.02em;color:var(--red)}
+.lg-n .u{font-size:.55em}
+.lg-d{display:block;margin-top:8px;font-family:var(--serif);font-size:13.5px;line-height:1.45;color:var(--ink-3);max-width:30ch}
+.lg-it:hover .lg-d{color:var(--ink-2)}
+.ledger-foot{display:flex;justify-content:space-between;gap:10px 24px;flex-wrap:wrap;margin-top:clamp(14px,1.8vw,20px);
+  padding:9px 0 clamp(14px,1.8vw,20px);border-top:1px solid var(--line-2);
+  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
+@media (max-width:880px){
+  .ledger-grid{grid-template-columns:1fr;gap:0}
+  .lg-it{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:2px 14px;padding:12px 0;border-bottom:1px solid var(--line-2)}
+  .lg-it:last-child{border-bottom:none}
+  .lg-n{margin-top:0;grid-column:2;grid-row:1;font-size:24px}
+  .lg-l{grid-column:1;grid-row:1}
+  .lg-d{grid-column:1/-1;margin-top:4px;max-width:none}
+}
 
 /* ============================================================
    SECTION HEADS
    ============================================================ */
-.sec{padding-top:clamp(76px,9.5vw,136px)}
-.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+.sec{padding-top:clamp(72px,9vw,128px)}
+.sec-head{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
   padding-bottom:clamp(20px,2.6vw,30px);border-bottom:3px solid var(--ink);margin-bottom:0}
-.sec-head.gap-b{margin-bottom:clamp(36px,4.5vw,56px)}
+.sec-head::after{content:"";position:absolute;left:0;right:0;bottom:-5px;border-bottom:1px solid var(--ink)}
 .sec-no{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin:0 0 14px}
 .sec-title{margin:0;font-family:var(--display);font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(36px,5.4vw,76px);line-height:.96;letter-spacing:-.03em;color:var(--ink);text-wrap:balance}
+  font-size:clamp(34px,5vw,68px);line-height:.96;letter-spacing:-.03em;color:var(--ink);text-wrap:balance}
 .sec-title em{font-style:italic;font-weight:430;color:var(--red);font-variation-settings:var(--wonk)}
 .sec-aside{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);text-align:right;line-height:1.9;white-space:nowrap}
 @media (max-width:720px){.sec-aside{display:none}}
 
 /* ============================================================
-   THE WORK — an index of jobs (details/summary rows)
+   № 01 · ENGAGEMENTS — dossier cards, nothing collapsed
    ============================================================ */
-.job{border-bottom:1px solid var(--line)}
-.job summary{list-style:none;cursor:pointer;display:grid;align-items:center;gap:8px 26px;
-  grid-template-columns:56px minmax(0,1fr) auto 34px;
-  padding:clamp(20px,2.8vw,32px) 6px;transition:background-color .25s var(--ease)}
-.job summary::-webkit-details-marker{display:none}
-.job summary:hover{background:color-mix(in srgb,var(--cream) 55%,transparent)}
-.j-no{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.1em;color:var(--ink-4);transition:color .2s}
-.job summary:hover .j-no,.job[open] .j-no{color:var(--red)}
-.j-title{margin:0;font-family:var(--display);font-weight:540;font-variation-settings:"opsz" 96,"SOFT" 0,"WONK" 0;
-  font-size:clamp(21px,2.7vw,38px);line-height:1.05;letter-spacing:-.022em;color:var(--ink);transition:color .2s}
-.j-title em{font-style:italic;font-weight:430;color:var(--red);font-variation-settings:var(--wonk)}
-.j-sub{margin:7px 0 0;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.j-sub .tag{color:var(--red-deep);border:1px solid var(--line);border-radius:99px;padding:2px 8px;margin-right:8px}
-.j-stat{text-align:right}
-.j-stat .n{display:block;font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
+.eng{border-bottom:1px solid var(--line);padding:clamp(26px,3.4vw,44px) 6px clamp(36px,4.4vw,56px)}
+.eng-head{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:8px 26px;align-items:start;
+  margin-bottom:clamp(20px,2.6vw,30px)}
+.e-no{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.1em;color:var(--red);padding-top:8px}
+.e-title{margin:0;font-family:var(--display);font-weight:540;font-variation-settings:"opsz" 96,"SOFT" 0,"WONK" 0;
+  font-size:clamp(22px,2.8vw,40px);line-height:1.05;letter-spacing:-.022em;color:var(--ink)}
+.e-title em{font-style:italic;font-weight:430;color:var(--red);font-variation-settings:var(--wonk)}
+.e-sub{margin:8px 0 0;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.e-sub .tag{color:var(--red-deep);border:1px solid var(--line);border-radius:99px;padding:2px 8px;margin-right:8px}
+.e-sub .tag.hot{color:var(--flood-cream);background:var(--red);border-color:var(--red)}
+.e-stat{text-align:right}
+.e-stat .n{display:block;font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
   font-size:clamp(26px,3vw,46px);line-height:.9;letter-spacing:-.02em;color:var(--red)}
-.j-stat .n .u{font-size:.52em}
-.j-stat .l{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
-/* plus → close */
-.j-x{position:relative;width:32px;height:32px;border:1.5px solid var(--line);border-radius:50%;justify-self:end;
-  transition:transform .4s var(--ease),border-color .25s,background-color .25s}
-.j-x::before,.j-x::after{content:"";position:absolute;left:50%;top:50%;background:var(--ink-3);transition:background-color .25s}
-.j-x::before{width:13px;height:1.5px;transform:translate(-50%,-50%)}
-.j-x::after{width:1.5px;height:13px;transform:translate(-50%,-50%)}
-.job summary:hover .j-x{border-color:var(--red);background:var(--red-soft)}
-.job summary:hover .j-x::before,.job summary:hover .j-x::after{background:var(--red)}
-.job[open] .j-x{transform:rotate(45deg);border-color:var(--red)}
-.job[open] .j-x::before,.job[open] .j-x::after{background:var(--red)}
+.e-stat .n .u{font-size:.52em}
+.e-stat .l{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
 @media (max-width:760px){
-  .job summary{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"no no" "title stat"}
-  .j-no{grid-area:no}.j-titlebox{grid-area:title}.j-stat{grid-area:stat;align-self:start}.j-x{display:none}
+  .eng-head{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"no no" "title stat"}
+  .e-no{grid-area:no;padding-top:0}.e-titlebox{grid-area:title}.e-stat{grid-area:stat;align-self:start}
 }
+.e-spread{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);gap:clamp(26px,4vw,60px);align-items:start}
+@media (max-width:880px){.e-spread{grid-template-columns:1fr;gap:26px}}
 
-/* expanding body — animates in modern engines, instant elsewhere */
-.job::details-content{block-size:0;overflow:clip;transition:block-size .55s var(--ease),content-visibility .55s allow-discrete}
-.job[open]::details-content{block-size:auto}
-.j-body{padding:clamp(6px,1vw,12px) 6px clamp(40px,5vw,60px)}
-.j-spread{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);gap:clamp(26px,4vw,60px);align-items:start}
-@media (max-width:880px){.j-spread{grid-template-columns:1fr;gap:26px}}
 /* framed plate */
 .frame{display:block;margin:0;background:var(--cream);border:1px solid var(--line);border-radius:5px;padding:10px 10px 0;
   box-shadow:4px 4px 0 rgba(34,26,15,.09);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
@@ -268,33 +286,119 @@ em{font-style:italic}
 .frame figcaption b{color:var(--ink-3);font-weight:500}
 .f-link{display:block}
 .frame:has(.f-link:hover){transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(178,58,20,.18)}
-.j-desc{margin:4px 0 22px;font-family:var(--serif);font-size:clamp(16px,1.25vw,18px);line-height:1.58;color:var(--ink-2);max-width:56ch}
-.j-desc em{color:var(--ink)}
-.j-meta{margin:0 0 26px;display:grid;border-top:1px solid var(--line)}
-.j-meta>div{display:grid;grid-template-columns:84px 1fr;gap:16px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line-2)}
-.j-meta dt{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
-.j-meta dd{margin:0;font-family:var(--serif);font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+
+/* typeset plate — for work under NDA, set in type instead of screenshotted */
+.frame .f-img.plate-tex{display:grid;grid-template-columns:1.15fr 1fr;background:var(--cream)}
+.tex-pane{display:flex;flex-direction:column;justify-content:center;gap:7px;padding:18px 16px;border-right:1px solid var(--line-2);
+  font-family:var(--mono);font-size:clamp(9px,.85vw,11.5px);line-height:1.5;color:var(--ink-3);overflow:hidden}
+.tex-pane code{white-space:pre}
+.tex-pane .k{color:var(--red)}
+.tex-cursor{display:inline-block;width:7px;height:1.1em;vertical-align:text-bottom;background:var(--red);animation:caret 1.1s steps(2) infinite}
+@keyframes caret{50%{opacity:0}}
+.tex-compiled{display:flex;flex-direction:column;justify-content:center;gap:10px;padding:18px 18px;background:var(--paper)}
+.tex-compiled b{font-family:var(--serif);font-size:clamp(11px,1vw,14px);letter-spacing:.02em;color:var(--ink-2)}
+.tex-compiled i{font-family:var(--serif);font-style:italic;font-size:clamp(14px,1.4vw,19px);color:var(--ink)}
+.tex-compiled .pg{height:4px;background:var(--line-2);border-radius:2px}
+.tex-compiled .pg.w1{width:86%}.tex-compiled .pg.w2{width:72%}.tex-compiled .pg.w3{width:80%}
+
+/* dossier rows */
+.e-rows{display:grid;border-top:1px solid var(--line)}
+.e-row{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line-2)}
+.e-row dt{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.e-row dd{margin:0;font-family:var(--serif);font-size:15px;line-height:1.55;color:var(--ink-2)}
+.e-row dd em{color:var(--ink)}
+.e-row.r-result dt{color:var(--red)}
+.e-row.r-result dd{color:var(--ink)}
+.e-cta{margin-top:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+@media (max-width:520px){.e-row{grid-template-columns:1fr;gap:4px;padding:10px 0}}
+
+/* earlier — one ruled line of provenance */
+.earlier{display:flex;align-items:baseline;gap:14px;padding:clamp(18px,2.4vw,26px) 6px;
+  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;color:var(--ink-4)}
+.earlier b{color:var(--red);font-weight:500;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.earlier span{font-family:var(--serif);font-size:14px;letter-spacing:0;line-height:1.5;color:var(--ink-3)}
 
 /* ============================================================
-   METHOD — 2×2 plate between double rules
+   № 02 · TERMS OF ENGAGEMENT — the printed rate card
    ============================================================ */
-.method-grid{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
-.m-it{padding:clamp(26px,3.4vw,44px) clamp(20px,2.6vw,40px);border-top:1px solid var(--line-2)}
-.m-it:nth-child(odd){border-right:1px solid var(--line-2);padding-left:6px}
-.m-it:nth-child(-n+2){border-top:none}
-.m-no{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;color:var(--red);margin:0 0 14px}
-.m-t{margin:0 0 10px;font-family:var(--display);font-style:italic;font-weight:460;font-variation-settings:var(--wonk);
-  font-size:clamp(22px,2.4vw,32px);line-height:1.05;letter-spacing:-.015em;color:var(--ink)}
-.m-d{margin:0;font-family:var(--serif);font-size:15px;line-height:1.5;color:var(--ink-3);max-width:34ch}
+.terms-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:0 clamp(32px,5vw,72px);
+  padding-top:clamp(30px,3.6vw,46px)}
+.t-col{display:flex;flex-direction:column}
+.t-foot{margin-top:auto}
+@media (max-width:880px){.terms-grid{grid-template-columns:1fr;gap:48px 0}.t-foot{margin-top:clamp(18px,2.2vw,24px)}}
+.t-col-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin:0 0 6px}
+.t-col-head h3{margin:0;font-family:var(--display);font-style:italic;font-weight:470;font-variation-settings:var(--wonk);
+  font-size:clamp(24px,2.6vw,34px);letter-spacing:-.015em;color:var(--ink)}
+.t-col-head .mono-l{color:var(--red)}
+.t-it{border-top:1px solid var(--line-2);padding:clamp(15px,1.9vw,20px) 0}
+.t-it h4{margin:0;display:flex;align-items:baseline;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;
+  font-family:var(--sans);font-size:16.5px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.t-it .t-time{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--red);white-space:nowrap}
+.t-it p{margin:7px 0 0;font-family:var(--serif);font-size:14.5px;line-height:1.55;color:var(--ink-3);max-width:52ch}
+.t-it p em{color:var(--ink-2)}
+.t-foot{display:flex;flex-direction:column;gap:16px;align-items:flex-start;padding-top:clamp(18px,2.2vw,24px)}
+.t-meta{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);line-height:2}
+.t-meta i{font-style:normal;color:var(--red);padding:0 7px}
+
+/* the first thirty days — itemized, with dotted leaders */
+.thirty{margin-top:clamp(48px,6vw,72px)}
+.thirty-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding-bottom:14px;border-bottom:0;margin-bottom:0}
+.thirty-head h3{margin:0;font-family:var(--display);font-weight:540;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
+  font-size:clamp(24px,3vw,40px);letter-spacing:-.022em;color:var(--ink)}
+.thirty-head h3 em{font-style:italic;font-weight:430;color:var(--red);font-variation-settings:var(--wonk)}
+.th-scope{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);white-space:nowrap}
+@media (max-width:720px){.th-scope{display:none}}
+.thirty-rule{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:3px}
+.th-row{display:flex;align-items:baseline;gap:14px;padding:clamp(14px,1.8vw,18px) 0;border-bottom:1px solid var(--line-2)}
+.th-d{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--red);white-space:nowrap}
+.th-lead{flex:1;min-width:24px;border-bottom:1px dotted var(--line);transform:translateY(-1px)}
+.th-t{font-family:var(--serif);font-size:clamp(15px,1.25vw,17px);line-height:1.5;color:var(--ink-2);text-align:right}
+.th-t em{color:var(--ink)}
+.th-keep{margin:16px 0 0;font-family:var(--serif);font-style:italic;font-size:clamp(15.5px,1.3vw,18px);color:var(--ink);text-align:right}
+.th-keep b{color:var(--red-deep);font-weight:inherit}
 @media (max-width:680px){
-  .method-grid{grid-template-columns:1fr}
-  .m-it:nth-child(odd){border-right:none;padding-left:6px}
-  .m-it{padding-left:6px;padding-right:6px}
-  .m-it:nth-child(2){border-top:1px solid var(--line-2)}
+  .th-row{flex-direction:column;gap:6px;align-items:flex-start}
+  .th-lead{display:none}
+  .th-t{text-align:left}
+  .th-keep{text-align:left}
 }
 
 /* ============================================================
-   NOTE — essay + marginalia
+   METHOD — one ruled band, four standing rules
+   ============================================================ */
+.method-band{margin-top:clamp(64px,8vw,104px)}
+.mb-label{margin:0 0 12px;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.mb-rule{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:3px}
+.mb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.6vw,40px);
+  padding:clamp(20px,2.6vw,30px) 0;border-bottom:1px solid var(--line)}
+.mb-it b{display:block;margin-bottom:7px;font-family:var(--display);font-style:italic;font-weight:470;
+  font-variation-settings:var(--wonk);font-size:clamp(18px,1.7vw,22px);letter-spacing:-.01em;color:var(--ink);font-weight:470}
+.mb-it span{display:block;font-family:var(--serif);font-size:13.5px;line-height:1.5;color:var(--ink-3)}
+@media (max-width:880px){.mb-grid{grid-template-columns:1fr 1fr;gap:22px 28px}}
+@media (max-width:520px){.mb-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   № 03 · THE RECORD — verify everything
+   ============================================================ */
+.rec{border-bottom:1px solid var(--line)}
+.rec-row{display:grid;grid-template-columns:208px minmax(0,1fr);gap:18px 40px;padding:clamp(24px,3vw,36px) 6px;border-bottom:1px solid var(--line-2)}
+.rec-row:last-child{border-bottom:none}
+.rec-row>h3{margin:0;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--red);padding-top:4px}
+@media (max-width:760px){.rec-row{grid-template-columns:1fr;gap:14px}}
+.q{margin:0;font-family:var(--serif);font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:var(--ink-2);max-width:60ch}
+.q em{color:var(--ink)}
+.q-by{display:block;margin-top:10px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.rec-links{display:flex;gap:14px 28px;flex-wrap:wrap;align-items:baseline;padding-top:6px}
+.craft{margin:0;font-family:var(--serif);font-size:clamp(15px,1.3vw,17.5px);line-height:1.6;color:var(--ink-2);max-width:62ch}
+.craft em{color:var(--ink)}
+.craft a{border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.craft a:hover{color:var(--red-deep);border-color:var(--red)}
+.craft a em{color:inherit}
+.craft .mono-n{font-family:var(--mono);font-size:.86em;color:var(--red-deep)}
+
+/* ============================================================
+   № 04 · A NOTE — essay + marginalia
    ============================================================ */
 .note-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(32px,5.5vw,84px);align-items:start;
   padding-top:clamp(36px,4.5vw,56px)}
@@ -327,7 +431,7 @@ em{font-style:italic}
 .stack i{font-style:normal;color:var(--red);padding:0 6px}
 
 /* ============================================================
-   CORRESPONDENCE — vermilion ink flood
+   № 05 · CORRESPONDENCE — vermilion ink flood
    ============================================================ */
 .flood{margin-top:clamp(80px,10vw,150px);background:var(--red);color:var(--flood-cream);position:relative;
   padding:clamp(72px,9vw,128px) var(--rail) clamp(56px,7vw,96px)}
@@ -338,7 +442,8 @@ em{font-style:italic}
 .flood h2{margin:0 0 18px;font-family:var(--display);font-weight:520;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
   font-size:clamp(34px,4.6vw,62px);line-height:1.02;letter-spacing:-.028em;color:var(--flood-cream);text-wrap:balance}
 .flood h2 em{font-style:italic;font-weight:430;font-variation-settings:var(--wonk)}
-.flood-sub{margin:0 auto clamp(30px,3.6vw,40px);max-width:46ch;font-family:var(--serif);font-size:clamp(16.5px,1.4vw,19px);line-height:1.58;color:rgba(251,243,224,.92)}
+.flood-sub{margin:0 auto clamp(30px,3.6vw,40px);max-width:48ch;font-family:var(--serif);font-size:clamp(16.5px,1.4vw,19px);line-height:1.58;color:rgba(251,243,224,.92)}
+.flood-sub em{color:#fff}
 .flood-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:clamp(34px,4.5vw,46px)}
 .btn-paper{background:var(--flood-cream);color:var(--ink);border-color:#5E1B05;box-shadow:3px 3px 0 #5E1B05;padding:15px 24px;font-size:15px}
 .btn-paper:hover{box-shadow:2px 2px 0 #5E1B05;background:#fff}
@@ -371,13 +476,11 @@ em{font-style:italic}
    ============================================================ */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s !important;animation-delay:0s !important;transition-duration:.001s !important}
-  .np-line>span{transform:none}
   html{scroll-behavior:auto}
 }
 @media (max-width:520px){
   :root{--rail:18px}
-  .nameplate{font-size:clamp(48px,13.5vw,72px)}
-  .np-line{overflow:visible}.np-line>span{transform:none;animation:none}
+  .nameplate{font-size:clamp(36px,10.4vw,44px)}
 }
 </style>
 </head>
@@ -390,270 +493,390 @@ em{font-style:italic}
   <a class="bar-brand" href="#top">D. Igoshin</a>
   <nav aria-label="Sections">
     <a href="#work"><i>01</i> Work</a>
-    <a href="#method"><i>02</i> Method</a>
-    <a href="#note"><i>03</i> Note</a>
-    <a href="#contact"><i>04</i> Contact</a>
+    <a href="#terms"><i>02</i> Terms</a>
+    <a href="#record"><i>03</i> Record</a>
+    <a href="#note"><i>04</i> Note</a>
+    <a href="#contact"><i>05</i> Contact</a>
   </nav>
-  <a class="bar-cta" href="mailto:danigoshin@gmail.com">Let’s talk →</a>
+  <a class="bar-cta" href="mailto:danigoshin@gmail.com?subject=Frontend%20help%20%E2%80%94%20%5Byour%20product%5D">Available now — email →</a>
 </div>
 
 <!-- ============== DATELINE ============== -->
-<div class="dateline">
-  <span>№ 07 — <span class="red">A broadside</span> of selected work</span>
-  <span><span class="dl-hide">MMXXVI · </span>Penza, RU · <span data-clock="penza">—</span> UTC+3</span>
+<div class="dateline f1">
+  <span>№ 08 — <span class="red">A prospectus</span> of work <span class="dl-hide">&amp; terms</span></span>
+  <span class="dl-right">
+    <span class="dl-hide">Penza, RU · <span data-clock="penza">—</span> UTC+3 · EN/RU</span>
+    <span class="chip" data-avail-chip>Available now</span>
+  </span>
 </div>
 
 <!-- ============== MASTHEAD ============== -->
 <header class="mast">
   <div class="mast-in">
-    <h1 class="nameplate">
-      <span class="np-line"><span>Danila Igoshin<span class="dot">.</span></span></span>
-    </h1>
-    <div class="np-rule" aria-hidden="true"></div>
-    <p class="role-row">
-      <span><b>Senior frontend engineer</b> — React · TypeScript · Next.js</span>
-      <span class="dl-hide">Full-time or contract · RU & EN</span>
-    </p>
+    <div class="f1">
+      <h1 class="nameplate">Danila Igoshin<span class="dot">.</span></h1>
+      <div class="np-rule" aria-hidden="true"></div>
+      <p class="role-row">
+        <span><b>Senior frontend engineer</b> — React · TypeScript · Next.js</span>
+        <span class="dl-hide">Contract · full-time — remote (full EU overlap) or relocation</span>
+      </p>
+    </div>
 
-    <div class="mast-low">
-      <p class="claim">Six years making complex products feel <em>simple</em> — and slow ones <em>fast.</em></p>
+    <div class="mast-low f2">
+      <p class="claim">Complex React products, made <em>fast</em> — stuck ones, <em>shipped.</em></p>
       <p class="deck">
-        React, TypeScript and Next.js in production — performance budgets, architecture,
-        migrations, and the small details that make an interface feel <em>trustworthy</em>.
+        Six years of production frontend — React, TypeScript and Next.js for B2B SaaS:
+        performance, migrations, architecture and AI-enabled product UX. Remote from UTC+3 —
+        <em>full working-day overlap with EU offices.</em>
       </p>
       <div class="mast-actions">
-        <a class="btn btn-red" href="#work"><span>Read the work</span><span class="arr" aria-hidden="true">↓</span></a>
-        <a class="btn" href="mailto:danigoshin@gmail.com"><span>danigoshin@gmail.com</span><span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-red" href="mailto:danigoshin@gmail.com?subject=Frontend%20help%20%E2%80%94%20%5Byour%20product%5D"><span>Email about your project</span><span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn" href="/Danila_Igoshin_EMEA_Contract_CV.pdf" target="_blank" rel="noopener"><span>Résumé — PDF</span><span class="arr" aria-hidden="true">↗</span></a>
+        <span class="reply-note">I reply within a day.</span>
       </div>
-      <p class="stamp" role="note" aria-label="Open to work — remote or relocation">
-        <span class="s-big">Open<br/>to work</span>
-        <span class="s-small">remote · relocation</span>
+      <p class="stamp" role="note" aria-label="Available now — contract or full-time">
+        <span class="s-big" data-avail-big>Available</span>
+        <span class="s-small" data-avail-small>contract · full-time</span>
       </p>
+    </div>
+
+    <!-- the proof ledger — pinned to the fold -->
+    <div class="ledger f3" role="group" aria-label="Selected results">
+      <div class="ledger-rule" aria-hidden="true"></div>
+      <div class="ledger-grid">
+        <a class="lg-it" href="#eng-platform">
+          <span class="lg-l">Smartway · 2021 — 2024</span>
+          <span class="lg-n">10<span class="u">×</span></span>
+          <span class="lg-d">faster builds, Webpack → Vite — the whole team ships faster</span>
+        </a>
+        <a class="lg-it" href="#eng-platform">
+          <span class="lg-l">Same platform</span>
+          <span class="lg-n">+300<span class="u">%</span></span>
+          <span class="lg-d">booking-cart performance, via state &amp; render restructuring</span>
+        </a>
+        <a class="lg-it" href="#eng-edtech">
+          <span class="lg-l">EdTech MVP · 2025</span>
+          <span class="lg-n">5<span class="u">mo</span></span>
+          <span class="lg-d">empty repository → live MVP, as the sole frontend engineer</span>
+        </a>
+      </div>
+      <div class="ledger-foot">
+        <span>How measured: production profiling, CI timings, before/after traces — method shown on request</span>
+        <span class="dl-hide">Figures &amp; availability last verified — <span data-avail-verified>June 2026</span></span>
+      </div>
     </div>
   </div>
 </header>
 
 <main id="main">
 
-<!-- ============== № 01 · THE WORK ============== -->
+<!-- ============== № 01 · ENGAGEMENTS ============== -->
 <section class="sec" id="work">
   <div class="wrap">
     <header class="sec-head">
       <div>
-        <p class="sec-no">№ 01 — The work</p>
-        <h2 class="sec-title">Four jobs, <em>six years of shipping.</em></h2>
+        <p class="sec-no">№ 01 — Selected engagements</p>
+        <h2 class="sec-title">Four engagements, <em>nothing collapsed.</em></h2>
       </div>
-      <p class="sec-aside">2020 — 2026<br/>open each entry ↓</p>
+      <p class="sec-aside">2020 — 2026<br/>every claim in the open ↓</p>
     </header>
 
-    <!-- Job 01 — Smartway support widget -->
-    <details class="job" id="job-widget" open>
-      <summary>
-        <span class="j-no">№ 01</span>
-        <div class="j-titlebox">
-          <h3 class="j-title">A <em>real-time</em> support widget for business travel</h3>
-          <p class="j-sub"><span class="tag">Featured</span>Smartway · 2025 — 2026 · Preact + WebSocket</p>
+    <!-- Engagement 01 — Morizo Digital (current) -->
+    <article class="eng" id="eng-morizo">
+      <header class="eng-head">
+        <span class="e-no">№ 01</span>
+        <div class="e-titlebox">
+          <h3 class="e-title">An <em>AI-assisted</em> research platform for scientists</h3>
+          <p class="e-sub"><span class="tag hot">Current</span>Morizo Digital · Feb 2026 — · React 19 + Monaco</p>
         </div>
-        <span class="j-stat"><span class="n">+70<span class="u">%</span></span><span class="l">chat render · 1k+ msgs</span></span>
-        <span class="j-x" aria-hidden="true"></span>
-      </summary>
-      <div class="j-body">
-        <div class="j-spread">
-          <figure class="frame">
-            <span class="f-img"><img src="public/chat.webp" width="1200" height="678" alt="Smartway support chat widget — admin panel with conversation list and ticket details" loading="lazy" /></span>
-            <figcaption><b>Fig. 01 — Support widget + admin</b><span>Preact · WS</span></figcaption>
-          </figure>
-          <div>
-            <p class="j-desc">
-              Owned the frontend for the support-chat widget and ticket-management admin panel embedded in a
-              corporate travel platform. Designed the widget API for third-party embedding, implemented HMAC auth,
-              WebSocket messaging, file uploads, and domain-aware ticket routing across flights, hotels, rail and transfers.
-              Virtualized rendering took chat threads of 1,000+ messages up <em>+70% in render performance</em>.
-            </p>
-            <dl class="j-meta">
-              <div><dt>Stack</dt><dd>Preact · TypeScript · Vite · Redux Toolkit · WebSocket · FSD</dd></div>
-              <div><dt>Role</dt><dd>Senior Frontend Developer · widget owner</dd></div>
-            </dl>
-            <a class="ln" href="mailto:danigoshin@gmail.com?subject=About%20the%20Smartway%20support%20widget"><span class="dim">Private —</span> discuss this work</a>
+        <span class="e-stat"><span class="n">now</span><span class="l">current engagement</span></span>
+      </header>
+      <div class="e-spread">
+        <figure class="frame">
+          <span class="f-img plate-tex" role="img" aria-label="Stylized LaTeX editor with compiled preview — client screenshots withheld">
+            <span class="tex-pane" aria-hidden="true">
+              <code><span class="k">\section</span>{Results}</code>
+              <code>We observe that</code>
+              <code><span class="k">\begin</span>{equation}</code>
+              <code>  \int_{-\infty}^{\infty}</code>
+              <code>  e^{-x^2}\,dx = \sqrt{\pi}</code>
+              <code><span class="k">\end</span>{equation}<span class="tex-cursor"></span></code>
+            </span>
+            <span class="tex-compiled" aria-hidden="true">
+              <b>§ 4 · Results</b>
+              <i>∫ e<sup>−x²</sup> dx = √π</i>
+              <span class="pg w1"></span><span class="pg w2"></span><span class="pg w3"></span>
+            </span>
+          </span>
+          <figcaption><b>Fig. 01 — LaTeX/Typst authoring</b><span>set in type · client work</span></figcaption>
+        </figure>
+        <div>
+          <dl class="e-rows">
+            <div class="e-row"><dt>Situation</dt><dd>A research platform where scientists write and compile papers in the browser, with AI in the loop — the authoring experience is the product.</dd></div>
+            <div class="e-row"><dt>What I do</dt><dd>Monaco-based LaTeX/Typst authoring — autocomplete, shortcuts, auxiliary TeX files, save flows; compiled-PDF preview with <em>source-to-error mapping</em>; AI-chat UX with per-message model selection, reasoning blocks and token-usage labels; admin tooling and EN/RU localization.</dd></div>
+            <div class="e-row"><dt>Stack</dt><dd>React 19 · TypeScript · Vite · Zustand · Monaco · PDF.js · Yjs</dd></div>
+          </dl>
+          <div class="e-cta">
+            <a class="ln" href="mailto:danigoshin@gmail.com?subject=About%20the%20current%20engagement"><span class="dim">Current —</span> ask me about it</a>
           </div>
         </div>
       </div>
-    </details>
+    </article>
 
-    <!-- Job 02 — Smartway platform (public case study) -->
-    <details class="job" id="job-platform">
-      <summary>
-        <span class="j-no">№ 02</span>
-        <div class="j-titlebox">
-          <h3 class="j-title"><em>Scaled</em> a corporate travel platform for three years</h3>
-          <p class="j-sub"><span class="tag">Tech-lead</span>Smartway · 2021 — 2024 · React + TS migration</p>
+    <!-- Engagement 02 — Smartway support widget -->
+    <article class="eng" id="eng-widget">
+      <header class="eng-head">
+        <span class="e-no">№ 02</span>
+        <div class="e-titlebox">
+          <h3 class="e-title">A <em>real-time</em> support widget any product can embed</h3>
+          <p class="e-sub"><span class="tag">Private</span>Smartway · Aug 2025 — Jan 2026 · Preact + WebSocket</p>
         </div>
-        <span class="j-stat"><span class="n">10<span class="u">×</span></span><span class="l">faster builds · Vite</span></span>
-        <span class="j-x" aria-hidden="true"></span>
-      </summary>
-      <div class="j-body">
-        <div class="j-spread">
-          <figure class="frame">
-            <a class="f-link" href="/case/smartway/" aria-label="Read the Smartway case study">
-              <span class="f-img"><img src="public/smartway.webp" width="1200" height="798" alt="Smartway corporate travel platform — booking search, trip calendar and approval widgets" loading="lazy" /></span>
-            </a>
-            <figcaption><b>Fig. 02 — Corporate travel platform</b><span>Read the case →</span></figcaption>
-          </figure>
-          <div>
-            <p class="j-desc">
-              Three years on Smartway's web platform — flights, trains, taxis, transfers, hotels. Led the
-              TypeScript migration of the full codebase, replaced Webpack with Vite for <em>ten-times-faster builds</em>,
-              rebuilt the analytics module, ran internal tech talks, and mentored three frontend developers as tech-lead.
-            </p>
-            <dl class="j-meta">
-              <div><dt>Stack</dt><dd>React · Redux · MobX · React Query · Next.js · React Native</dd></div>
-              <div><dt>Role</dt><dd>Senior Frontend Developer · tech-lead</dd></div>
-            </dl>
-            <a class="ln" href="/case/smartway/"><span class="dim">Public —</span> read the case study</a>
+        <span class="e-stat"><span class="n">+70<span class="u">%</span></span><span class="l">chat render · 1k+ msgs</span></span>
+      </header>
+      <div class="e-spread">
+        <figure class="frame">
+          <span class="f-img"><img src="public/chat.webp" width="1672" height="941" alt="Smartway support chat widget — admin panel with conversation list and ticket details" loading="lazy" /></span>
+          <figcaption><b>Fig. 02 — Support widget + admin</b><span>Preact · WS</span></figcaption>
+        </figure>
+        <div>
+          <dl class="e-rows">
+            <div class="e-row"><dt>Situation</dt><dd>A corporate travel platform needed live support chat embedded in its product — plus the admin panel that routes tickets across flights, hotels, rail and transfers.</dd></div>
+            <div class="e-row"><dt>What I did</dt><dd>Owned the widget end to end: embeddable architecture with a public integration API, HMAC auth migrated <em>without breaking existing integrations</em>, WebSocket messaging, drag-and-drop uploads for 15+ file formats, ticket-routing redesign.</dd></div>
+            <div class="e-row r-result"><dt>Result</dt><dd>Virtualized rendering made 1,000-message threads render <em>70% faster</em> — long support histories scroll like native.</dd></div>
+            <div class="e-row"><dt>Stack</dt><dd>Preact · TypeScript · Vite · Redux Toolkit · WebSocket · OpenAPI codegen</dd></div>
+          </dl>
+          <div class="e-cta">
+            <a class="ln" href="mailto:danigoshin@gmail.com?subject=Walk%20me%20through%20the%20support%20widget"><span class="dim">Under NDA —</span> I'll walk through it on a call</a>
           </div>
         </div>
       </div>
-    </details>
+    </article>
 
-    <!-- Job 03 — Smart Online Institute -->
-    <details class="job" id="job-edtech">
-      <summary>
-        <span class="j-no">№ 03</span>
-        <div class="j-titlebox">
-          <h3 class="j-title">An EdTech <em>marketplace</em>, zero to live in five months</h3>
-          <p class="j-sub"><span class="tag">Solo FE</span>Smart Online Institute · 2025 · Next.js + BFF</p>
+    <!-- Engagement 03 — EdTech MVP -->
+    <article class="eng" id="eng-edtech">
+      <header class="eng-head">
+        <span class="e-no">№ 03</span>
+        <div class="e-titlebox">
+          <h3 class="e-title">A founder needed a <em>product,</em> not a team</h3>
+          <p class="e-sub"><span class="tag">Solo FE</span>Smart Online Institute · Feb — Aug 2025 · Next.js + BFF</p>
         </div>
-        <span class="j-stat"><span class="n">5<span class="u">mo</span></span><span class="l">empty repo → live MVP</span></span>
-        <span class="j-x" aria-hidden="true"></span>
-      </summary>
-      <div class="j-body">
-        <div class="j-spread">
-          <figure class="frame">
-            <span class="f-img"><img src="public/online-institute.webp" width="1200" height="629" alt="Smart Online Institute — course marketplace with featured class and catalogue" loading="lazy" /></span>
-            <figcaption><b>Fig. 03 — EdTech marketplace</b><span>Next.js · BFF</span></figcaption>
-          </figure>
-          <div>
-            <p class="j-desc">
-              Owned the full frontend end-to-end — course marketplace, scheduling, instructor admin, secure media
-              viewer, loyalty system. Set up the BFF layer in Next.js, automated legacy-data migration via Playwright
-              scraping, and delivered the platform <em>from empty repository to live MVP</em>.
-            </p>
-            <dl class="j-meta">
-              <div><dt>Stack</dt><dd>Next.js · Tailwind · shadcn/ui · React Query · Zod</dd></div>
-              <div><dt>Infra</dt><dd>Strapi · AWS S3 · Docker · GitLab CI · Playwright</dd></div>
-            </dl>
-            <a class="ln" href="mailto:danigoshin@gmail.com?subject=About%20Smart%20Online%20Institute%20(EdTech%20MVP)"><span class="dim">Private —</span> ask about the MVP</a>
+        <span class="e-stat"><span class="n">5<span class="u">mo</span></span><span class="l">empty repo → live MVP</span></span>
+      </header>
+      <div class="e-spread">
+        <figure class="frame">
+          <a class="f-link" href="/case/edtech/" aria-label="Read the EdTech engagement brief">
+            <span class="f-img"><img src="public/online-institute.webp" width="1672" height="941" alt="Smart Online Institute — course marketplace with featured class and catalogue" loading="lazy" /></span>
+          </a>
+          <figcaption><b>Fig. 03 — EdTech marketplace</b><span>Read the brief →</span></figcaption>
+        </figure>
+        <div>
+          <dl class="e-rows">
+            <div class="e-row"><dt>Situation</dt><dd>An EdTech startup with no frontend, a legacy service with no API, and an MVP that had to be live within months.</dd></div>
+            <div class="e-row"><dt>What I did</dt><dd>Sole frontend engineer, end to end: course marketplace, booking and scheduling with auto-generated video-call links, instructor admin with progress charts, secure media viewer over AWS S3, a BFF layer in Next.js, CI/CD and Docker deploys — and legacy-data migration <em>automated with Playwright scraping</em>.</dd></div>
+            <div class="e-row r-result"><dt>Result</dt><dd><em>Empty repository to live MVP in five months</em> — one engineer, the whole frontend.</dd></div>
+            <div class="e-row"><dt>Stack</dt><dd>Next.js · Tailwind · shadcn/ui · React Query · Zod · Strapi · Playwright</dd></div>
+          </dl>
+          <div class="e-cta">
+            <a class="btn" href="/case/edtech/"><span>Read the engagement brief</span><span class="arr" aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
-    </details>
+    </article>
 
-    <!-- Job 04 — Germo-S -->
-    <details class="job" id="job-store">
-      <summary>
-        <span class="j-no">№ 04</span>
-        <div class="j-titlebox">
-          <h3 class="j-title">Where it started — a <em>solo-built</em> B2B store</h3>
-          <p class="j-sub"><span class="tag">Solo-built</span>Germo-S · 2020 · Nuxt + Express</p>
+    <!-- Engagement 04 — Smartway platform -->
+    <article class="eng" id="eng-platform">
+      <header class="eng-head">
+        <span class="e-no">№ 04</span>
+        <div class="e-titlebox">
+          <h3 class="e-title">Kept a corporate travel platform <em>fast</em> while the team grew</h3>
+          <p class="e-sub"><span class="tag">Tech-lead</span>Smartway · 2021 — 2024 · React + TS migration</p>
         </div>
-        <span class="j-stat"><span class="n">1<span class="u">dev</span></span><span class="l">shipped end-to-end</span></span>
-        <span class="j-x" aria-hidden="true"></span>
-      </summary>
-      <div class="j-body">
-        <div class="j-spread">
-          <figure class="frame">
-            <span class="f-img"><img src="public/germo-s.webp" width="1200" height="628" alt="Germo-S — B2B industrial-equipment storefront with category navigation and hero" loading="lazy" /></span>
-            <figcaption><b>Fig. 04 — B2B storefront + CMS</b><span>Nuxt · Express</span></figcaption>
-          </figure>
-          <div>
-            <p class="j-desc">
-              Built and shipped end-to-end as the sole developer — pipe fittings, cable glands, the unglamorous
-              backbone of factories. Storefront, search, cart, order management, plus a custom CMS for inventory.
-              <em>From requirements to production deploy, alone.</em>
-            </p>
-            <dl class="j-meta">
-              <div><dt>Stack</dt><dd>Nuxt.js · Vue 2 · Vuex · Express · MongoDB</dd></div>
-              <div><dt>Role</dt><dd>Full-stack Engineer · sole developer</dd></div>
-            </dl>
-            <a class="ln" href="mailto:danigoshin@gmail.com?subject=About%20the%20Germo-S%20B2B%20store"><span class="dim">Solo —</span> request project context</a>
+        <span class="e-stat"><span class="n">10<span class="u">×</span></span><span class="l">faster builds · Vite</span></span>
+      </header>
+      <div class="e-spread">
+        <figure class="frame">
+          <a class="f-link" href="/case/smartway/" aria-label="Read the Smartway case study">
+            <span class="f-img"><img src="public/smartway.webp" width="1672" height="941" alt="Smartway corporate travel platform — booking search, trip calendar and approval widgets" loading="lazy" /></span>
+          </a>
+          <figcaption><b>Fig. 04 — Corporate travel platform</b><span>Read the case →</span></figcaption>
+        </figure>
+        <div>
+          <dl class="e-rows">
+            <div class="e-row"><dt>Situation</dt><dd>Three years on Smartway's web platform — flights, trains, taxis, transfers, hotels, approvals — as the codebase and the team both grew.</dd></div>
+            <div class="e-row"><dt>What I did</dt><dd>Led the <em>full TypeScript migration</em> (including a custom UI library) within a year; replaced Webpack with Vite; restructured the booking cart's state and rendering; built the analytics module; ran tech talks and mentored three developers as tech-lead.</dd></div>
+            <div class="e-row r-result"><dt>Result</dt><dd>Builds <em>10× faster</em>, booking cart <em>+300%</em>, a fully typed codebase new hires can navigate — and the team stopped waiting on tooling.</dd></div>
+            <div class="e-row"><dt>Stack</dt><dd>React · Redux · MobX · React Query · Next.js · TypeScript · Vite</dd></div>
+          </dl>
+          <div class="e-cta">
+            <a class="btn" href="/case/smartway/"><span>Read the case study</span><span class="arr" aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
-    </details>
+    </article>
+
+    <p class="earlier"><b>Earlier — 2020</b><span>Germo-S: a complete B2B industrial store — storefront, search, cart, order management, custom CMS — built and shipped alone on Nuxt, Express and MongoDB.</span></p>
 
   </div>
 </section>
 
-<!-- ============== № 02 · METHOD ============== -->
-<section class="sec" id="method">
+<!-- ============== № 02 · TERMS OF ENGAGEMENT ============== -->
+<section class="sec" id="terms">
   <div class="wrap">
     <header class="sec-head">
       <div>
-        <p class="sec-no">№ 02 — Method</p>
-        <h2 class="sec-title">How the work <em>gets made.</em></h2>
+        <p class="sec-no">№ 02 — Terms of engagement</p>
+        <h2 class="sec-title">Two ways to <em>hire me.</em></h2>
       </div>
-      <p class="sec-aside">four standing rules</p>
+      <p class="sec-aside">contract-first · EMEA<br/>how it starts, below</p>
     </header>
-    <div class="method-grid">
-      <div class="m-it">
-        <p class="m-no">Rule 01</p>
-        <h3 class="m-t">Performance first.</h3>
-        <p class="m-d">Profile before optimizing. Measure after. Budgets are kept, not admired.</p>
+
+    <div class="terms-grid">
+      <div class="t-col">
+        <div class="t-col-head">
+          <h3>By contract</h3>
+          <span class="mono-l">A</span>
+        </div>
+        <div class="t-it">
+          <h4>Performance rescue <span class="t-time">2 – 6 weeks · fixed scope</span></h4>
+          <p>Your product is slow and everyone's used to it. Profiling, Core Web Vitals, render and build performance — you get a <em>before/after report your team can verify</em>. A good first engagement.</p>
+        </div>
+        <div class="t-it">
+          <h4>A migration that doesn't stop the roadmap <span class="t-time">scoped per codebase</span></h4>
+          <p>JS → TypeScript, Webpack → Vite, legacy → Next.js. Done alongside feature work — <em>the team keeps shipping</em> while the ground moves.</p>
+        </div>
+        <div class="t-it">
+          <h4>MVP build-out <span class="t-time">3 – 6 months · solo</span></h4>
+          <p>A product surface or a full MVP owned end to end, zero to live. One engineer, no coordination tax — see the EdTech brief for the record.</p>
+        </div>
+        <div class="t-it">
+          <h4>Embedded senior <span class="t-time">3 – 6 months</span></h4>
+          <p>Your team, your process, my ownership — architecture, complex features, AI-enabled product UX, mentoring along the way.</p>
+        </div>
+        <div class="t-foot">
+          <p class="t-meta">Remote<i>·</i>full EU overlap (UTC+3)<i>·</i>EN/RU<i>·</i>B2B invoicing</p>
+          <a class="btn btn-red" href="mailto:danigoshin@gmail.com?subject=Contract%20inquiry%20%E2%80%94%20%5Byour%20product%5D"><span>Contract inquiry</span><span class="arr" aria-hidden="true">→</span></a>
+        </div>
       </div>
-      <div class="m-it">
-        <p class="m-no">Rule 02</p>
-        <h3 class="m-t">Architecture that scales.</h3>
-        <p class="m-d">Feature-Sliced Design, modular boundaries, public APIs between slices.</p>
+
+      <div class="t-col">
+        <div class="t-col-head">
+          <h3>Full-time</h3>
+          <span class="mono-l">B</span>
+        </div>
+        <div class="t-it">
+          <h4>A senior seat on a complex product <span class="t-time">remote · relocation</span></h4>
+          <p>Performance, frontend platform or product engineering on a genuinely complex React product — dashboards, editors, AI-enabled workflows. EMEA, remote or relocation.</p>
+        </div>
+        <div class="t-it">
+          <h4>What you get on day one</h4>
+          <p>Six years of production scar tissue: a full TypeScript migration shipped without stopping the roadmap, performance budgets that held, three developers mentored — and documentation written before anyone asks.</p>
+        </div>
+        <div class="t-foot">
+          <p class="t-meta">The long game<i>·</i>quality &amp; ownership<i>·</i>EMEA</p>
+          <a class="btn" href="mailto:danigoshin@gmail.com?subject=Senior%20frontend%20role"><span>Senior frontend role</span><span class="arr" aria-hidden="true">→</span></a>
+        </div>
       </div>
-      <div class="m-it">
-        <p class="m-no">Rule 03</p>
-        <h3 class="m-t">Types are documentation.</h3>
-        <p class="m-d">Strict TypeScript everywhere — written with care, not ceremony.</p>
+    </div>
+
+    <!-- the first thirty days, itemized -->
+    <div class="thirty">
+      <div class="thirty-head">
+        <h3>The first thirty days, <em>itemized.</em></h3>
+        <span class="th-scope">as run on rescue &amp; embedded engagements</span>
       </div>
-      <div class="m-it">
-        <p class="m-no">Rule 04</p>
-        <h3 class="m-t">Write the docs.</h3>
-        <p class="m-d">Especially the ones nobody else wants to write.</p>
+      <div class="thirty-rule" aria-hidden="true"></div>
+      <div class="th-row">
+        <span class="th-d">Days 1 – 5</span>
+        <span class="th-lead" aria-hidden="true"></span>
+        <span class="th-t">A findings memo: where the product is slow, <em>in user-seconds and developer-hours.</em></span>
+      </div>
+      <div class="th-row">
+        <span class="th-d">Days 6 – 15</span>
+        <span class="th-lead" aria-hidden="true"></span>
+        <span class="th-t">One measured fix shipped to production — <em>before/after traces included.</em></span>
+      </div>
+      <div class="th-row">
+        <span class="th-d">Days 16 – 30</span>
+        <span class="th-lead" aria-hidden="true"></span>
+        <span class="th-t">A written plan your team can execute — <em>with or without me.</em></span>
+      </div>
+      <p class="th-keep">If we stop there, <b>you keep the memo, the fix and the plan.</b></p>
+    </div>
+
+    <!-- method — one ruled band -->
+    <aside class="method-band" aria-label="Method — four standing rules">
+      <p class="mb-label">Method — four standing rules</p>
+      <div class="mb-rule" aria-hidden="true"></div>
+      <div class="mb-grid">
+        <div class="mb-it"><b>Performance first.</b><span>Profile, then optimize, then measure — you get numbers, not vibes.</span></div>
+        <div class="mb-it"><b>Architecture that scales.</b><span>Modular boundaries your next hire can navigate without me.</span></div>
+        <div class="mb-it"><b>Types are documentation.</b><span>Strict TypeScript — the codebase explains itself.</span></div>
+        <div class="mb-it"><b>Write the docs.</b><span>I leave codebases more legible than I found them.</span></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============== № 03 · THE RECORD ============== -->
+<section class="sec" id="record">
+  <div class="wrap">
+    <header class="sec-head">
+      <div>
+        <p class="sec-no">№ 03 — The record</p>
+        <h2 class="sec-title">Verify <em>everything.</em></h2>
+      </div>
+      <p class="sec-aside">no claims without receipts</p>
+    </header>
+
+    <div class="rec">
+      <div class="rec-row">
+        <h3>On the record</h3>
+        <div>
+          <p class="q">Recommendations from the people I've shipped with — leads, teammates and mentees — are public on LinkedIn, names attached. For a contract, I'll connect you with a reference <em>directly</em>.</p>
+          <span class="q-by"><a class="ln up" href="https://www.linkedin.com/in/developerdanila" target="_blank" rel="noopener">Read them on LinkedIn</a></span>
+        </div>
+      </div>
+      <div class="rec-row">
+        <h3>Verify the work</h3>
+        <div class="rec-links">
+          <a class="ln" href="/case/smartway/"><span class="dim">Public —</span> the Smartway case study</a>
+          <a class="ln" href="/case/edtech/"><span class="dim">Public —</span> the EdTech engagement brief</a>
+          <a class="ln up" href="https://github.com/danilaigoshin" target="_blank" rel="noopener">GitHub</a>
+          <a class="ln up" href="/Danila_Igoshin_EMEA_Contract_CV.pdf" target="_blank" rel="noopener">Résumé — PDF</a>
+        </div>
+      </div>
+      <div class="rec-row">
+        <h3>Verify the craft</h3>
+        <p class="craft">This page is the demo — no framework, no build step, no analytics. <span class="mono-n">~65 KB</span> of hand-set HTML and CSS plus a 3 KB script, fonts self-hosted, instant on a phone. <a href="https://github.com/danilaigoshin/danilaigoshin.com" target="_blank" rel="noopener"><em>View the source ↗</em></a></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============== № 03 · A NOTE ============== -->
+<!-- ============== № 04 · A NOTE ============== -->
 <section class="sec" id="note">
   <div class="wrap">
     <header class="sec-head">
       <div>
-        <p class="sec-no">№ 03 — A note</p>
+        <p class="sec-no">№ 04 — A note</p>
         <h2 class="sec-title">From <em>the author.</em></h2>
       </div>
-      <p class="sec-aside">Penza, RU · RU & EN</p>
+      <p class="sec-aside">Penza, RU · RU &amp; EN</p>
     </header>
 
     <div class="note-grid">
       <div class="note-text">
         <p>
-          I'm Danila — a senior frontend engineer from Penza, Russia, with six years building
-          <em>React, TypeScript</em> and Next.js products. I started with a solo B2B e-commerce platform
-          and moved into larger product teams, where my focus became performance, architecture,
-          migrations, and developer experience.
+          I'm Danila — a senior frontend engineer from Penza, six years of production frontend, most of it
+          <em>React, TypeScript</em> and Next.js. I started alone — an entire B2B store shipped solo — and grew into product teams,
+          where my work became performance, architecture, migrations and developer experience. I'm the person
+          who cares about <em>build times and performance budgets</em>, and who writes the docs nobody else wants to.
+          AI tools are instruments here, not authors; the product judgment is mine.
         </p>
         <p>
-          I tend to be the person who cares about <em>build times, performance budgets</em> and TypeScript
-          adoption. I've migrated Webpack to Vite (ten times faster builds), brought a sluggish shopping cart
-          to instant, rewritten authentication without breaking anyone's session, and led a full TypeScript
-          migration of a non-trivial codebase in a year.
-        </p>
-        <p>
-          I mentor, host internal tech talks (state vs. cache, SSR vs. ISR, the usual), and use AI tools as
-          instruments, not authors — they speed up exploration, refactoring and documentation. The real work
-          is still <em>product judgment</em>: understanding the flow, reducing complexity, and shipping
-          interfaces people can trust.
-        </p>
-        <p>
-          I'm open to <em>senior frontend roles</em>, remote or relocation, with teams working on complex React
-          products — performance, architecture, and frontend platform work. Ideally a team that values quality,
-          ownership, and long-term maintainability.
+          If you're hiring full-time: I'm looking for a team that values quality and ownership, on a product
+          complex enough to be interesting — remote, or relocation within EMEA. If you need a contractor:
+          the terms are above, and it starts with a <em>two-line email</em>. Either way, I reply within a day.
         </p>
         <div class="sign" aria-hidden="true">
           <span class="s-pre">Yours,</span>
@@ -670,9 +893,10 @@ em{font-style:italic}
         <div class="m-block">
           <h3 class="m-head">Now</h3>
           <ul class="now">
-            <li class="hot"><span class="t">Open to senior frontend roles</span><span class="w">Now</span><span class="d">Remote or relocation. Best fit: product teams on complex React UI, performance and platform work.</span></li>
-            <li><span class="t">Wrapped up at Smartway</span><span class="w">Jan 2026</span><span class="d">Shipped the v1 support widget into production; wrote an internal article on LLM practices.</span></li>
-            <li><span class="t">EdTech MVP delivered</span><span class="w">Aug 2025</span><span class="d">Five months, zero to live MVP for Smart Online Institute.</span></li>
+            <li class="hot"><span class="t">Available for new work</span><span class="w">Now</span><span class="d">Contract or full-time — remote with full EU overlap, or relocation.</span></li>
+            <li><span class="t">Morizo Digital — current client</span><span class="w">Feb 2026 —</span><span class="d">AI-assisted research platform: Monaco-based LaTeX/Typst authoring, AI-chat UX.</span></li>
+            <li><span class="t">Wrapped at Smartway</span><span class="w">Jan 2026</span><span class="d">Shipped the v1 support widget to production; wrote internal LLM-practice guidelines.</span></li>
+            <li><span class="t">EdTech MVP delivered</span><span class="w">Aug 2025</span><span class="d">Five months, empty repo to live MVP — sole frontend engineer.</span></li>
           </ul>
         </div>
 
@@ -680,8 +904,8 @@ em{font-style:italic}
           <h3 class="m-head">Stack</h3>
           <p class="stack">
             React<i>·</i>TypeScript<i>·</i>Next.js<i>·</i>React Native<br/>
-            Redux Toolkit<i>·</i>MobX<i>·</i>React Query<i>·</i>Zod<br/>
-            Vite<i>·</i>Tailwind<i>·</i>shadcn/ui<i>·</i>Storybook<br/>
+            Redux Toolkit<i>·</i>Zustand<i>·</i>MobX<i>·</i>React Query<br/>
+            Vite<i>·</i>Tailwind<i>·</i>Monaco<i>·</i>Storybook<br/>
             Playwright<i>·</i>WebSocket<i>·</i>Docker<i>·</i>FSD
           </p>
         </div>
@@ -692,41 +916,43 @@ em{font-style:italic}
 
 </main>
 
-<!-- ============== № 04 · CORRESPONDENCE ============== -->
+<!-- ============== № 05 · CORRESPONDENCE ============== -->
 <section class="flood" id="contact">
   <div class="flood-in">
-    <p class="flood-eyebrow">№ 04 — Correspondence</p>
-    <h2>Hiring for a <em>complex</em> React product?</h2>
+    <p class="flood-eyebrow">№ 05 — Correspondence</p>
+    <h2>Something <em>slow, stuck or unbuilt?</em></h2>
     <p class="flood-sub">
-      I'm open to senior frontend roles — remote or relocation, full-time or contract.
-      It starts with an email, and I answer quickly.
+      Two lines about your product is enough — what it is, and what's slow, stuck or unbuilt.
+      I reply <em>within a day</em>, with a concrete next step. No discovery theatre.
     </p>
     <div class="flood-actions">
-      <a href="mailto:danigoshin@gmail.com" class="btn btn-paper has-plane">
+      <a href="mailto:danigoshin@gmail.com?subject=Frontend%20help%20%E2%80%94%20%5Byour%20product%5D" class="btn btn-paper has-plane">
         <span>danigoshin@gmail.com</span>
         <svg class="plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12 L21.5 4 L13 21.5 L11 13 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 13 L21.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
       </a>
-      <button class="btn btn-line" id="copyEmail" type="button" aria-label="Copy email address">
-        <span id="copyLabel">Copy email</span><span class="arr" aria-hidden="true">⎘</span>
+      <button class="btn btn-line" id="copyEmail" type="button">
+        <span id="copyLabel" aria-live="polite">Copy email</span><span class="arr" aria-hidden="true">⎘</span>
       </button>
     </div>
     <a class="flood-sign" href="#top" aria-label="Danila Igoshin — back to top">Danila Igoshin</a>
-    <p class="flood-sub2">Senior Frontend Engineer · Penza, RU · UTC+3</p>
+    <p class="flood-sub2">Senior Frontend Engineer · React &amp; TypeScript Contractor · Penza, RU · UTC+3</p>
   </div>
   <div class="flood-links">
     <nav aria-label="Footer">
       <a href="#work">Work</a>
-      <a href="#method">Method</a>
-      <a href="#note">Note</a>
-      <a href="/case/smartway/">Case study ↗</a>
+      <a href="#terms">Terms</a>
+      <a href="#record">Record</a>
+      <a href="/case/smartway/">Case study →</a>
+      <a href="/case/edtech/">Engagement brief →</a>
+      <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener">GitHub ↗</a>
       <a href="https://www.linkedin.com/in/developerdanila" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="/Danila_Igoshin_EMEA_Contract_CV" target="_blank" rel="noopener">Résumé ↗</a>
+      <a href="/Danila_Igoshin_EMEA_Contract_CV.pdf" target="_blank" rel="noopener">Résumé ↗</a>
     </nav>
     <span class="fl-meta">© MMXXVI · Penza, RU · <a href="#top">Back to top ↑</a></span>
   </div>
 </section>
 
-<p class="colophon">Set in <em>Fraunces</em>, Bricolage Grotesque, Newsreader &amp; JetBrains Mono · printed by hand — no framework, no analytics</p>
+<p class="colophon">№ 08 · Set in <em>Fraunces</em>, Bricolage Grotesque, Newsreader &amp; JetBrains Mono · printed by hand — no framework, no build step, no analytics</p>
 
 <script src="script.js"></script>
 </body>

@@ -1,12 +1,28 @@
 /* ============================================================
-   Danila Igoshin — v7 / "PRESSWORK"
+   Danila Igoshin — v8 / "PROSPECTUS"
    Plain, dependency-free. Progressive-enhancement only:
    everything works without JS; JS adds the bar, clock, clipboard.
    ============================================================ */
 
 'use strict';
 
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- availability — single source of truth ----------
+   Edit here; the dateline chip, the stamp and the "last verified"
+   line all render from this. Keep `verified` honest. */
+const AVAILABILITY = {
+  chip: 'Available now',
+  stampBig: 'Available',
+  stampSmall: 'contract · full-time',
+  verified: 'June 2026',
+};
+
+(() => {
+  const set = (sel, text) => document.querySelectorAll(sel).forEach((el) => { el.textContent = text; });
+  set('[data-avail-chip]', AVAILABILITY.chip);
+  set('[data-avail-big]', AVAILABILITY.stampBig);
+  set('[data-avail-small]', AVAILABILITY.stampSmall);
+  set('[data-avail-verified]', AVAILABILITY.verified);
+})();
 
 /* ---------- sticky bar after the masthead (rAF-throttled) ---------- */
 (() => {
@@ -66,16 +82,4 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
       window.location.href = 'mailto:danigoshin@gmail.com';
     }
   });
-})();
-
-/* ---------- deep-link: open a job row when its hash is targeted ---------- */
-(() => {
-  const openFromHash = () => {
-    const id = location.hash.slice(1);
-    if (!id) return;
-    const el = document.getElementById(id);
-    if (el && el.tagName === 'DETAILS') el.open = true;
-  };
-  openFromHash();
-  window.addEventListener('hashchange', openFromHash);
 })();
