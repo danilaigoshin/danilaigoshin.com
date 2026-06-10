@@ -388,7 +388,10 @@ em{font-style:italic}
 @media (max-width:760px){.rec-row{grid-template-columns:1fr;gap:14px}}
 .q{margin:0;font-family:var(--serif);font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:var(--ink-2);max-width:60ch}
 .q em{color:var(--ink)}
-.q-by{display:block;margin-top:10px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.q-by{display:flex;align-items:baseline;gap:10px 22px;flex-wrap:wrap;margin-top:14px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.q-by b{color:var(--ink-2);font-weight:500}
+.q-foot{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line-2);font-family:var(--serif);font-size:14.5px;line-height:1.5;color:var(--ink-3);max-width:60ch}
+.q-foot em{color:var(--ink-2)}
 .rec-links{display:flex;gap:14px 28px;flex-wrap:wrap;align-items:baseline;padding-top:6px}
 .craft{margin:0;font-family:var(--serif);font-size:clamp(15px,1.3vw,17.5px);line-height:1.6;color:var(--ink-2);max-width:62ch}
 .craft em{color:var(--ink)}
@@ -832,8 +835,17 @@ em{font-style:italic}
       <div class="rec-row">
         <h3>On the record</h3>
         <div>
-          <p class="q">Recommendations from the people I've shipped with — leads, teammates and mentees — are public on LinkedIn, names attached. For a contract, I'll connect you with a reference <em>directly</em>.</p>
-          <span class="q-by"><a class="ln up" href="https://www.linkedin.com/in/developer-danila/" target="_blank" rel="noopener">Read them on LinkedIn</a></span>
+          <blockquote class="q">
+            &#8220;Danila is the kind of engineer who doesn't just write features but genuinely cares about
+            performance and architecture. He delivered measurable optimizations, like a 300% improvement in
+            shopping cart performance and a 10x build speed boost after migrating to Vite. &#8230; He mentored
+            developers, hosted internal tech talks, and consistently raised the bar for the whole engineering
+            team. I'd recommend him without hesitation.&#8221;
+            <span class="q-by"><b>Kirill Ispolnov</b> — Engineering manager · worked together at Smartway
+              <a class="ln up" href="https://www.linkedin.com/in/developer-danila/" target="_blank" rel="noopener">via LinkedIn</a></span>
+          </blockquote>
+          <p class="q-foot">Recommendations are public on LinkedIn, names attached. For a contract,
+            I'll connect you with a reference <em>directly</em>.</p>
         </div>
       </div>
       <div class="rec-row">
