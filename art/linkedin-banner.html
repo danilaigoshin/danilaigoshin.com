@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>LinkedIn banner source — 1584×396</title>
+<meta name="robots" content="noindex" />
+<!--
+  Source of /public/linkedin-banner.jpg (1584×396, rendered at 2× for sharpness).
+  The avatar circle overlaps the BOTTOM-LEFT of the banner on the profile page,
+  so everything that matters sits centre-right.
+  Regenerate:
+    python3 -m http.server 8743   (from the repo root)
+    CHROME --headless --disable-gpu --hide-scrollbars --window-size=1584,396 \
+      --force-device-scale-factor=2 --virtual-time-budget=2500 \
+      --screenshot=/tmp/banner.png "http://localhost:8743/art/linkedin-banner.html"
+    sips -s format jpeg -s formatOptions 90 /tmp/banner.png --out public/linkedin-banner.jpg
+-->
+<style>
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;src:url('../public/fonts/fraunces-vf-latin.woff2') format('woff2')}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;src:url('../public/fonts/fraunces-vf-latin-italic.woff2') format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;src:url('../public/fonts/jetbrains-mono-v24-latin-500.woff2') format('woff2')}
+:root{
+  --paper:#F4EEDF; --ink:#221A0F; --ink-2:#473E2D; --ink-3:#776B53; --ink-4:#A2967D;
+  --red:#B23A14; --red-deep:#8C2B0C; --line:rgba(34,26,15,.22); --line-2:rgba(34,26,15,.1);
+  --display:'Fraunces',serif; --mono:'JetBrains Mono',monospace;
+  --wonk:"opsz" 144,"SOFT" 0,"WONK" 1;
+}
+*{box-sizing:border-box;margin:0}
+html,body{width:1584px;height:396px;overflow:hidden}
+body{position:relative;background:var(--paper);color:var(--ink);padding:30px 56px 26px;
+  -webkit-font-smoothing:antialiased}
+body::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+.dateline{display:flex;justify-content:space-between;padding-bottom:11px;border-bottom:1px solid var(--line-2);
+  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.dateline .red{color:var(--red)}
+/* content sits centre-right — the avatar circle covers the bottom-left */
+.main{position:absolute;left:400px;right:300px;top:108px}
+.claim{font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
+  font-size:47px;line-height:1.06;letter-spacing:-.024em;text-wrap:balance}
+.claim em{font-style:italic;color:var(--red);font-variation-settings:var(--wonk);font-weight:430}
+.rule2{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:3px;margin-top:20px}
+.ledger{display:flex;gap:44px;margin-top:12px;
+  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ledger b{font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
+  font-size:20px;letter-spacing:-.02em;color:var(--red);text-transform:none;margin-right:5px}
+.stamp{position:absolute;right:64px;top:120px;transform:rotate(-7deg);color:var(--red);text-align:center;
+  border:3px solid currentColor;outline:1.2px solid currentColor;outline-offset:3.5px;border-radius:11px;padding:14px 19px 12px;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 2.3 -.32'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23m)'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 2.3 -.32'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23m)'/%3E%3C/svg%3E")}
+.stamp .big{display:block;font-family:var(--mono);font-size:18px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;line-height:1.4}
+.stamp .small{display:block;margin-top:7px;padding-top:8px;border-top:1.2px solid currentColor;
+  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.site{position:absolute;right:56px;bottom:24px;
+  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep)}
+</style>
+</head>
+<body>
+  <div class="dateline">
+    <span>№ 08 — <span class="red">A prospectus</span> of work &amp; terms</span>
+    <span>Penza, RU · UTC+3 · full EU overlap · EN/RU</span>
+  </div>
+
+  <div class="main">
+    <p class="claim">Complex React products, made <em>fast</em> — stuck ones, <em>shipped.</em></p>
+    <div class="rule2"></div>
+    <p class="ledger">
+      <span><b>10×</b> faster builds</span>
+      <span><b>+300%</b> checkout</span>
+      <span><b>5 mo</b> → live MVP, solo</span>
+    </p>
+  </div>
+
+  <p class="stamp">
+    <span class="big">Available</span>
+    <span class="small">contract · full-time</span>
+  </p>
+
+  <p class="site">danilaigoshin.com</p>
+</body>
+</html>
