@@ -13,7 +13,7 @@ const AVAILABILITY = {
   chip: 'Available now',
   stampBig: 'Available',
   stampSmall: 'contract · full-time',
-  verified: 'June 2026',
+  verified: 'July 2026',
 };
 
 (() => {
