@@ -239,6 +239,60 @@
       });
     });
 
+    const projectMediaLinks = Array.from(document.querySelectorAll(".project-media-link"));
+    const lightbox = document.querySelector("[data-project-lightbox]");
+    const lightboxImage = lightbox?.querySelector("[data-project-lightbox-image]");
+    const lightboxCaption = lightbox?.querySelector("[data-project-lightbox-caption]");
+    const lightboxClose = lightbox?.querySelector("[data-project-lightbox-close]");
+    let lightboxTrigger;
+
+    const closeLightbox = () => {
+      if (lightbox?.open) lightbox.close();
+    };
+
+    if (lightbox && lightboxImage && lightboxCaption && lightboxClose) {
+      projectMediaLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          if (typeof lightbox.showModal !== "function") return;
+
+          const preview = link.querySelector("img");
+          if (!preview) return;
+
+          event.preventDefault();
+          lightboxTrigger = link;
+          lightboxImage.src = link.href;
+          lightboxImage.alt = preview.alt;
+          const previewCaption = link
+            .closest("figure")
+            ?.querySelector("figcaption")
+            ?.textContent?.trim();
+          lightboxCaption.textContent =
+            previewCaption?.replace(/\s*·\s*open image for full size\s*$/i, "") ||
+            preview.alt;
+          document.documentElement.classList.add("lightbox-open");
+          document.body.classList.add("lightbox-open");
+          lightbox.showModal();
+          lightboxClose.focus();
+        });
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (event) => {
+        if (event.target instanceof Element && !event.target.closest("img, button")) {
+          closeLightbox();
+        }
+      });
+      lightbox.addEventListener("close", () => {
+        document.documentElement.classList.remove("lightbox-open");
+        document.body.classList.remove("lightbox-open");
+        lightboxImage.removeAttribute("src");
+        lightboxImage.alt = "";
+        lightboxCaption.textContent = "";
+        lightboxTrigger?.focus({ preventScroll: true });
+        lightboxTrigger = undefined;
+      });
+    }
+
     const copyButton = document.querySelector("[data-copy-email]");
     const copyToast = document.querySelector("[data-copy-toast]");
     const emailLink = copyButton

@@ -279,9 +279,7 @@
                     <a
                       class="project-media-link"
                       href="public/ai4s.webp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Open the full-size AI-assisted research workspace screenshot in a new tab"
+                      aria-label="Open the full-size AI-assisted research workspace screenshot in an image viewer"
                     >
                       <img
                         src="public/ai4s.webp"
@@ -391,9 +389,7 @@
                     <a
                       class="project-media-link"
                       href="public/chat.webp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Open the full-size Smartway Support production interface in a new tab"
+                      aria-label="Open the full-size Smartway Support production interface in an image viewer"
                     >
                       <img
                         src="public/chat.webp"
@@ -492,9 +488,7 @@
                     <a
                       class="project-media-link"
                       href="public/smartway.webp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Open the full-size Smartway travel platform production interface in a new tab"
+                      aria-label="Open the full-size Smartway travel platform production interface in an image viewer"
                     >
                       <img
                         src="public/smartway.webp"
@@ -605,9 +599,7 @@
                     <a
                       class="project-media-link"
                       href="public/online-institute.webp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Open the full-size Smart Online Institute production interface in a new tab"
+                      aria-label="Open the full-size Smart Online Institute production interface in an image viewer"
                     >
                       <img
                         src="public/online-institute.webp"
@@ -938,5 +930,27 @@
       aria-atomic="true"
       data-copy-toast
     ></div>
+
+    <dialog
+      class="project-lightbox"
+      aria-label="Project image viewer"
+      aria-describedby="project-lightbox-caption"
+      data-project-lightbox
+    >
+      <div class="project-lightbox-shell">
+        <button
+          class="project-lightbox-close"
+          type="button"
+          aria-label="Close full-size image"
+          data-project-lightbox-close
+        >
+          <span>Close</span><span aria-hidden="true">×</span>
+        </button>
+        <figure>
+          <img alt="" data-project-lightbox-image />
+          <figcaption id="project-lightbox-caption" data-project-lightbox-caption></figcaption>
+        </figure>
+      </div>
+    </dialog>
   </body>
 </html>
