@@ -18,7 +18,8 @@ CHROME_RUN=0
 
 chrome_to_file() {
   OUTPUT_FILE=$1
-  shift
+  SCALE_FACTOR=$2
+  shift 2
   CHROME_RUN=$((CHROME_RUN + 1))
   rm -f "$OUTPUT_FILE"
   "$CHROME" \
@@ -32,7 +33,7 @@ chrome_to_file() {
     --no-default-browser-check \
     --no-first-run \
     --hide-scrollbars \
-    --force-device-scale-factor=1 \
+    --force-device-scale-factor="$SCALE_FACTOR" \
     --run-all-compositor-stages-before-draw \
     --virtual-time-budget=1500 \
     --user-data-dir="$TMP_DIR/chrome-profile-$CHROME_RUN" \
@@ -66,6 +67,7 @@ chrome_to_file() {
 }
 
 chrome_to_file "$PDF_OUTPUT_DIR/Danila_Igoshin_EMEA_Contract_CV.pdf" \
+  1 \
   --no-pdf-header-footer \
   --print-to-pdf-no-header \
   --print-to-pdf="$PDF_OUTPUT_DIR/Danila_Igoshin_EMEA_Contract_CV.pdf" \
@@ -73,14 +75,26 @@ chrome_to_file "$PDF_OUTPUT_DIR/Danila_Igoshin_EMEA_Contract_CV.pdf" \
 
 cp "$PDF_OUTPUT_DIR/Danila_Igoshin_EMEA_Contract_CV.pdf" "$ROOT/Danila_Igoshin_EMEA_Contract_CV.pdf"
 
-chrome_to_file "$TMP_DIR/og-image.png" --window-size=1200,630 --screenshot="$TMP_DIR/og-image.png" "file://$ROOT/art/og-image.html"
-chrome_to_file "$TMP_DIR/og-cv.png" --window-size=1200,630 --screenshot="$TMP_DIR/og-cv.png" "file://$ROOT/art/og-cv.html"
-chrome_to_file "$TMP_DIR/linkedin-banner.png" --window-size=3168,792 --screenshot="$TMP_DIR/linkedin-banner.png" "file://$ROOT/art/linkedin-banner.html"
+chrome_to_file "$TMP_DIR/og-image@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-image@2x.png" "file://$ROOT/art/og-image.html"
+chrome_to_file "$TMP_DIR/og-cv@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-cv@2x.png" "file://$ROOT/art/og-cv.html"
+chrome_to_file "$TMP_DIR/linkedin-banner@2x.png" 2 --window-size=3168,792 --screenshot="$TMP_DIR/linkedin-banner@2x.png" "file://$ROOT/art/linkedin-banner.html"
 
-rm -f "$ROOT/public/og-image.jpg" "$ROOT/public/og-cv.jpg" "$ROOT/public/linkedin-banner.jpg"
-sips -s format jpeg -s formatOptions 92 "$TMP_DIR/og-image.png" --out "$ROOT/public/og-image.jpg" >/dev/null
-sips -s format jpeg -s formatOptions 92 "$TMP_DIR/og-cv.png" --out "$ROOT/public/og-cv.jpg" >/dev/null
-sips -s format jpeg -s formatOptions 92 "$TMP_DIR/linkedin-banner.png" --out "$ROOT/public/linkedin-banner.jpg" >/dev/null
+rm -f \
+  "$ROOT/public/og-image.jpg" \
+  "$ROOT/public/og-cv.jpg" \
+  "$ROOT/public/linkedin-banner.jpg" \
+  "$ROOT/public/og-image.png" \
+  "$ROOT/public/og-cv.png" \
+  "$ROOT/public/linkedin-banner.png"
+
+# Keep the Open Graph cards at the full 2x render size. The flat, text-heavy
+# artwork stays lossless in PNG, avoiding JPEG ringing and chroma blur.
+cp "$TMP_DIR/og-image@2x.png" "$ROOT/public/og-image.png"
+cp "$TMP_DIR/og-cv@2x.png" "$ROOT/public/og-cv.png"
+
+# LinkedIn recommends a 1584x396 canvas. This 2x deliverable is first rendered
+# at 4x and then downsampled once for cleaner type and rules on high-DPI screens.
+sips -z 792 3168 "$TMP_DIR/linkedin-banner@2x.png" --out "$ROOT/public/linkedin-banner.png" >/dev/null
 
 rm -rf "$TMP_DIR"
 
