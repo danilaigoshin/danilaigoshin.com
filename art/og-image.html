@@ -1,91 +1,38 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>og-image source — 1200×630</title>
-<meta name="robots" content="noindex" />
-<!--
-  Source of /public/og-image.jpg (1200×630). Regenerate:
-    python3 -m http.server 8743   (from the repo root)
-    CHROME --headless --disable-gpu --hide-scrollbars --window-size=1200,630 \
-      --virtual-time-budget=2500 --screenshot=/tmp/og.png "http://localhost:8743/art/og-image.html"
-    sips -s format jpeg -s formatOptions 88 /tmp/og.png --out public/og-image.jpg
--->
-<style>
-@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;src:url('../public/fonts/fraunces-vf-latin.woff2') format('woff2')}
-@font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;src:url('../public/fonts/fraunces-vf-latin-italic.woff2') format('woff2')}
-@font-face{font-family:'Newsreader';font-style:normal;font-weight:400;src:url('../public/fonts/newsreader-v26-latin-regular.woff2') format('woff2')}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;src:url('../public/fonts/jetbrains-mono-v24-latin-500.woff2') format('woff2')}
-:root{
-  --paper:#F4EEDF; --ink:#221A0F; --ink-2:#473E2D; --ink-3:#776B53; --ink-4:#A2967D;
-  --red:#B23A14; --red-deep:#8C2B0C; --line:rgba(34,26,15,.22); --line-2:rgba(34,26,15,.1);
-  --display:'Fraunces',serif; --serif:'Newsreader',serif; --mono:'JetBrains Mono',monospace;
-  --wonk:"opsz" 144,"SOFT" 0,"WONK" 1;
-}
-*{box-sizing:border-box;margin:0}
-html,body{width:1200px;height:630px;overflow:hidden}
-body{position:relative;background:var(--paper);color:var(--ink);padding:44px 60px 40px;
-  display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-body::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
-.dateline{display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line-2);
-  font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.dateline .red{color:var(--red)}
-.name{margin-top:30px;font-family:var(--display);font-weight:620;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:52px;line-height:1;letter-spacing:-.03em}
-.name span{color:var(--red)}
-.rule2{height:0;border-top:4px solid var(--ink);border-bottom:1.5px solid var(--ink);padding-top:4px;margin-top:18px}
-.role{display:flex;justify-content:space-between;margin-top:13px;
-  font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
-.role b{color:var(--red-deep);font-weight:500}
-.claim{margin-top:44px;max-width:860px;font-family:var(--display);font-weight:500;
-  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:64px;line-height:1.04;letter-spacing:-.026em;text-wrap:balance}
-.claim em{font-style:italic;color:var(--red);font-variation-settings:var(--wonk);font-weight:430}
-.foot{margin-top:auto}
-.foot .rule2{margin:0 0 14px}
-.ledger{display:flex;justify-content:space-between;align-items:baseline;
-  font-family:var(--mono);font-size:13.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-.ledger b{font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
-  font-size:25px;letter-spacing:-.02em;color:var(--red);text-transform:none;margin-right:6px}
-.ledger .site{color:var(--red-deep);letter-spacing:.14em}
-.stamp{position:absolute;right:70px;top:236px;transform:rotate(-7deg);color:var(--red);text-align:center;
-  border:3.5px solid currentColor;outline:1.5px solid currentColor;outline-offset:4px;border-radius:13px;padding:18px 24px 16px;
-  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 2.3 -.32'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23m)'/%3E%3C/svg%3E");
-  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 2.3 -.32'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23m)'/%3E%3C/svg%3E")}
-.stamp .big{display:block;font-family:var(--mono);font-size:24px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;line-height:1.4}
-.stamp .small{display:block;margin-top:9px;padding-top:10px;border-top:1.5px solid currentColor;
-  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
-</style>
-</head>
-<body>
-  <div class="dateline">
-    <span>№ 08 — <span class="red">A prospectus</span> of work &amp; terms</span>
-    <span>Penza, RU · UTC+3 · EN/RU</span>
-  </div>
-
-  <h1 class="name">Danila Igoshin<span>.</span></h1>
-  <div class="rule2"></div>
-  <p class="role">
-    <span><b>Senior frontend engineer</b> — React · TypeScript · Next.js</span>
-    <span>Remote · full EU overlap</span>
-  </p>
-
-  <p class="claim">Complex React products, made <em>fast</em> — stuck ones, <em>shipped.</em></p>
-
-  <p class="stamp">
-    <span class="big">Available</span>
-    <span class="small">contract · full-time</span>
-  </p>
-
-  <div class="foot">
-    <div class="rule2"></div>
-    <p class="ledger">
-      <span><b>10×</b> faster builds</span>
-      <span><b>+300%</b> checkout</span>
-      <span><b>5 mo</b> → live MVP, solo</span>
-      <span class="site">danilaigoshin.com</span>
-    </p>
-  </div>
-</body>
+<html lang="en" style="--width:1200px;--height:630px;--pad-x:60px;--pad-y:44px">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Portfolio social image source - 1200x630</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="artboard">
+      <header class="art-top">
+        <span class="art-brand"><span class="art-mark">D/I</span> Danila Igoshin</span>
+        <span class="art-meta">Senior Frontend Engineer · <strong>Available now</strong> · UTC+3</span>
+      </header>
+      <section class="art-main">
+        <div>
+          <p class="art-kicker">React · TypeScript · Next.js</p>
+          <h1 class="art-title">Complex product systems. <span class="muted">Faster, clearer, shipped.</span></h1>
+        </div>
+        <aside class="art-side">
+          <p>Hands-on frontend ownership for performance, migrations in motion, and zero-to-one delivery.</p>
+          <ul class="art-side-list">
+            <li><span>Based</span><strong>UTC+3</strong></li>
+            <li><span>Format</span><strong>Remote / EMEA</strong></li>
+            <li><span>Web</span><strong>danilaigoshin.com</strong></li>
+          </ul>
+        </aside>
+      </section>
+      <footer class="art-bottom">
+        <div class="art-proof"><strong>10x</strong><span>faster builds</span></div>
+        <div class="art-proof"><strong>300%</strong><span>cart performance improvement</span></div>
+        <div class="art-proof"><strong>70%</strong><span>faster long-thread rendering</span></div>
+        <div class="art-proof"><strong>5 mo.</strong><span>empty repository to production</span></div>
+      </footer>
+    </main>
+  </body>
 </html>

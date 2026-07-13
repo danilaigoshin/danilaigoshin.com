@@ -1,431 +1,235 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>EdTech MVP in five months — an engagement brief · Danila Igoshin</title>
-<meta name="description" content="Engagement brief: a psychology-education startup needed a product, not a team. Sole frontend engineer — course marketplace, booking, instructor admin, secure media, BFF in Next.js. Empty repository to live MVP in five months." />
-<meta name="theme-color" content="#F4EEDF" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://danilaigoshin.com/case/edtech/" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="EdTech case study by Danila Igoshin: sole frontend ownership from an empty repository to a production MVP in approximately five months."
+    />
+    <meta name="theme-color" content="#f4f6f8" />
+    <link rel="canonical" href="https://danilaigoshin.com/case/edtech/" />
+    <meta property="og:site_name" content="Danila Igoshin" />
+    <meta property="og:title" content="EdTech MVP from empty repository to production" />
+    <meta property="og:description" content="Sole frontend delivery across product workflows, a Next.js BFF, secure media, migration, CI/CD, and deployment." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://danilaigoshin.com/case/edtech/" />
+    <meta property="og:image" content="https://danilaigoshin.com/public/online-institute.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>EdTech MVP case study — Danila Igoshin</title>
+    <link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/public/online-institute.webp" fetchpriority="high" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/case/styles.css" />
+    <script src="/script.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "An EdTech product from empty repository to production",
+        "author": { "@type": "Person", "name": "Danila Igoshin", "url": "https://danilaigoshin.com/" },
+        "dateModified": "2026-07-13",
+        "mainEntityOfPage": "https://danilaigoshin.com/case/edtech/",
+        "image": "https://danilaigoshin.com/public/online-institute.webp"
+      }
+    </script>
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-<!-- Open Graph -->
-<meta property="og:type" content="article" />
-<meta property="og:title" content="EdTech MVP in five months — an engagement brief" />
-<meta property="og:description" content="A founder needed a product, not a team. Sole frontend engineer: marketplace, booking, instructor admin, secure media, BFF in Next.js — empty repo to live MVP in five months." />
-<meta property="og:url" content="https://danilaigoshin.com/case/edtech/" />
-<meta property="og:image" content="https://danilaigoshin.com/public/og-image.jpg" />
-
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B23A14'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-weight='400' font-size='18' fill='%23F8F1E0'%3EDi%3C/text%3E%3C/svg%3E" />
-
-<!-- Self-hosted fonts (absolute paths so the page works at /case/edtech/) -->
-<link rel="preload" as="image" href="/public/online-institute.webp" fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/public/fonts/fraunces-vf-latin.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="/public/fonts/fraunces-vf-latin-italic.woff2" crossorigin />
-
-<style>
-/* ============================================================
-   EdTech MVP — engagement brief · "PROSPECTUS" (matches the homepage)
-   Two inks on warm paper: umber + vermilion.
-   ============================================================ */
-@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;font-display:swap;src:url('/public/fonts/fraunces-vf-latin.woff2') format('woff2')}
-@font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;font-display:swap;src:url('/public/fonts/fraunces-vf-latin-italic.woff2') format('woff2')}
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:400;font-display:swap;src:url('/public/fonts/bricolage-grotesque-v9-latin-regular.woff2') format('woff2')}
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500;font-display:swap;src:url('/public/fonts/bricolage-grotesque-v9-latin-500.woff2') format('woff2')}
-@font-face{font-family:'Newsreader';font-style:normal;font-weight:400;font-display:swap;src:url('/public/fonts/newsreader-v26-latin-regular.woff2') format('woff2')}
-@font-face{font-family:'Newsreader';font-style:italic;font-weight:400;font-display:swap;src:url('/public/fonts/newsreader-v26-latin-italic.woff2') format('woff2')}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('/public/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2')}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url('/public/fonts/jetbrains-mono-v24-latin-500.woff2') format('woff2')}
-
-:root{
-  --paper:#F4EEDF; --paper-2:#EDE5D0; --cream:#FBF6E9;
-  --ink:#221A0F; --ink-2:#473E2D; --ink-3:#776B53; --ink-4:#A2967D;
-  --red:#B23A14; --red-deep:#8C2B0C; --red-soft:rgba(178,58,20,.1);
-  --flood-cream:#FBF3E0;
-  --line:rgba(34,26,15,.2); --line-2:rgba(34,26,15,.09);
-  --display:'Fraunces','Georgia',serif;
-  --sans:'Bricolage Grotesque','Helvetica Neue',system-ui,sans-serif;
-  --serif:'Newsreader','Times New Roman',serif;
-  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
-  --rail:clamp(20px,5vw,72px); --maxw:1020px;
-  --ease:cubic-bezier(.22,.75,.22,1);
-  --wonk:"opsz" 144,"SOFT" 0,"WONK" 1;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body{overflow-x:hidden;position:relative}
-/* paper grain */
-body::after{content:"";position:fixed;inset:0;z-index:240;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
-a{color:inherit;text-decoration:none}
-img{max-width:100%}
-::selection{background:var(--red);color:var(--flood-cream)}
-:focus{outline:none}
-:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:3px}
-.skip{position:fixed;top:-60px;left:16px;z-index:300;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:6px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;transition:top .25s var(--ease)}
-.skip:focus{top:16px}
-.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--rail)}
-
-/* letterpress buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:6px;
-  font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:-.005em;
-  background:var(--cream);color:var(--ink);border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
-  transition:transform .14s var(--ease),box-shadow .14s var(--ease),background-color .2s,color .2s}
-.btn:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink)}
-.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
-.btn .arr{transition:transform .3s var(--ease)}
-.btn:hover .arr{transform:translate(2px,0)}
-.btn-paper{background:var(--flood-cream);border-color:#5E1B05;box-shadow:3px 3px 0 #5E1B05}
-.btn-paper:hover{box-shadow:2px 2px 0 #5E1B05;background:#fff}
-.btn-paper:active{box-shadow:0 0 0 #5E1B05}
-.btn-line{background:transparent;color:var(--flood-cream);border-color:rgba(251,243,224,.5);box-shadow:3px 3px 0 rgba(0,0,0,.25)}
-.btn-line:hover{border-color:var(--flood-cream);box-shadow:2px 2px 0 rgba(0,0,0,.25);background:rgba(251,243,224,.07)}
-.btn-line:active{box-shadow:0 0 0 rgba(0,0,0,.25)}
-
-/* ---------- dateline + utility nav ---------- */
-.dateline{display:flex;justify-content:space-between;align-items:center;gap:16px;
-  padding:12px var(--rail);border-bottom:1px solid var(--line-2);
-  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.dateline .red{color:var(--red)}
-@media (max-width:720px){.dl-hide{display:none}}
-.unav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px var(--rail);border-bottom:1px solid var(--line-2)}
-.back{display:inline-flex;align-items:center;gap:11px;font-size:14px;font-weight:500;color:var(--ink-2);transition:color .2s}
-.back .arr{font-family:var(--mono);color:var(--red);transition:transform .3s var(--ease)}
-.back:hover{color:var(--ink)}
-.back:hover .arr{transform:translateX(-4px)}
-.back .av{width:28px;height:28px;border-radius:50%;overflow:hidden;border:1px solid var(--line);flex-shrink:0}
-.back .av img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
-.back .lbl{color:var(--ink-4);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-left:2px}
-@media (max-width:560px){.back .lbl{display:none}}
-.unav-cta{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--red-deep);border-bottom:1px solid var(--red);padding-bottom:3px;white-space:nowrap;transition:color .2s}
-.unav-cta:hover{color:var(--red)}
-
-/* ---------- hero ---------- */
-.hero{padding:clamp(36px,5vw,64px) 0 clamp(20px,3vw,32px)}
-.kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin:0 0 22px;
-  opacity:0;animation:fade-up .25s var(--ease) 0s forwards}
-.hero h1{margin:0;font-family:var(--display);font-weight:600;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(38px,6.4vw,84px);line-height:.98;letter-spacing:-.032em;color:var(--ink);max-width:18ch;text-wrap:balance;
-  opacity:0;animation:fade-up .25s var(--ease) .04s forwards}
-.hero h1 em{font-style:italic;font-weight:440;color:var(--red);font-variation-settings:var(--wonk)}
-.np-rule{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:3px;
-  margin-top:clamp(20px,2.6vw,30px);opacity:0;animation:fade-up .25s var(--ease) .07s forwards}
-.dek{font-family:var(--serif);font-size:clamp(17px,1.5vw,20px);line-height:1.58;color:var(--ink-2);margin:clamp(18px,2.4vw,26px) 0 0;max-width:58ch;
-  opacity:0;animation:fade-up .25s var(--ease) .1s forwards}
-.dek em{color:var(--ink)}
-@keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.meta{display:flex;flex-wrap:wrap;gap:clamp(22px,4.5vw,58px);margin:clamp(26px,3.4vw,38px) 0 0;
-  opacity:0;animation:fade-up .25s var(--ease) .13s forwards}
-.meta div{display:flex;flex-direction:column;gap:7px}
-.meta dt{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);margin:0}
-.meta dd{margin:0;font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.35}
-
-/* ---------- framed cover plate ---------- */
-.cover{margin:clamp(28px,4vw,44px) auto 0}
-.frame{display:block;margin:0;background:var(--cream);border:1px solid var(--line);border-radius:5px;padding:11px 11px 0;
-  box-shadow:5px 5px 0 rgba(34,26,15,.09)}
-.frame .f-img{display:block;overflow:hidden;border:1px solid var(--line-2);border-radius:3px;aspect-ratio:16/9;background:#fff}
-.frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.96)}
-.frame figcaption{display:flex;justify-content:space-between;gap:12px;padding:11px 3px 12px;
-  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-4)}
-.frame figcaption b{color:var(--ink-3);font-weight:500}
-
-/* ---------- article ---------- */
-.prose{padding-bottom:clamp(16px,3vw,28px)}
-.sec{padding-top:clamp(52px,7vw,92px)}
-.sec-head{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
-  padding-bottom:clamp(16px,2vw,22px);margin-bottom:clamp(26px,3.2vw,38px);border-bottom:3px solid var(--ink)}
-.sec-head::after{content:"";position:absolute;left:0;right:0;bottom:-5px;border-bottom:1px solid var(--ink)}
-.sec-no{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin:0 0 12px}
-.sec-title{margin:0;font-family:var(--display);font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(28px,3.6vw,48px);line-height:1;letter-spacing:-.026em;color:var(--ink)}
-.sec-title em{font-style:italic;font-weight:430;color:var(--red);font-variation-settings:var(--wonk)}
-.sec-note{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);text-align:right;line-height:1.8;white-space:nowrap}
-@media (max-width:620px){.sec-note{display:none}}
-.body p{font-family:var(--serif);font-size:clamp(16.5px,1.35vw,19px);line-height:1.62;color:var(--ink-2);margin:0 0 1.05em;max-width:62ch}
-.body p:last-child{margin-bottom:0}
-.body p em{color:var(--ink)}
-.body>p:first-of-type::first-letter{font-family:var(--display);font-style:italic;font-weight:480;font-variation-settings:var(--wonk);
-  float:left;font-size:4.4em;line-height:.74;padding:6px 13px 0 0;color:var(--red)}
-
-/* steps ledger */
-.steps{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-.steps li{display:grid;grid-template-columns:auto 1fr;column-gap:clamp(18px,3vw,38px);padding:clamp(20px,2.4vw,28px) 0;border-bottom:1px solid var(--line-2)}
-.steps .n{font-family:var(--display);font-style:italic;font-weight:540;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
-  font-size:clamp(24px,2.5vw,32px);line-height:.95;color:var(--red);letter-spacing:-.02em}
-.steps h3{font-family:var(--sans);font-size:clamp(17px,1.45vw,20px);font-weight:500;letter-spacing:-.012em;margin:0 0 7px;color:var(--ink)}
-.steps .sd{font-family:var(--serif);font-size:clamp(15px,1.2vw,16.5px);line-height:1.55;color:var(--ink-2);margin:0;max-width:60ch}
-
-/* outcomes figures */
-.figs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
-@media (max-width:760px){.figs{grid-template-columns:1fr 1fr}}
-@media (max-width:460px){.figs{grid-template-columns:1fr}}
-.fig{padding:clamp(28px,3vw,40px) clamp(18px,2vw,28px);border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
-.fig:first-child{padding-left:0}
-.fig:last-child{border-right:none}
-@media (max-width:760px){.fig:nth-child(2n){border-right:none}.fig:nth-child(odd){padding-left:0}}
-@media (max-width:460px){.fig{border-right:none;padding-left:0}}
-.fig-n{font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
-  font-size:clamp(46px,5vw,76px);line-height:.9;letter-spacing:-.03em;color:var(--red);margin:0 0 14px;font-feature-settings:"tnum"}
-.fig-n .u{font-size:.5em}
-.fig-l{font-family:var(--serif);font-size:14.5px;line-height:1.48;color:var(--ink-2);margin:0;max-width:24ch}
-.fig-src{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin:13px 0 0}
-
-/* stack chips */
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
-.chips li{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.03em;padding:7px 13px;border-radius:99px;border:1px solid var(--line);color:var(--ink-2)}
-.role-line{font-family:var(--serif);font-size:16.5px;line-height:1.5;color:var(--ink-2);margin:22px 0 0}
-
-/* printer's note */
-.note{background:var(--cream);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:6px;
-  padding:20px 26px 22px;margin-top:clamp(46px,6vw,68px);box-shadow:3px 3px 0 rgba(34,26,15,.07)}
-.note .nh{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
-.note p{font-family:var(--serif);font-size:16px;line-height:1.58;color:var(--ink-2);margin:0}
-.note p em{color:var(--ink)}
-
-/* ---------- closing — vermilion ink flood ---------- */
-.flood{margin-top:clamp(72px,9vw,120px);background:var(--red);color:var(--flood-cream);position:relative;
-  padding:clamp(64px,8vw,110px) var(--rail) clamp(44px,5vw,64px)}
-.flood::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(75% 65% at 50% -5%,rgba(0,0,0,.18),transparent 62%),radial-gradient(40% 42% at 96% 108%,rgba(0,0,0,.12),transparent 60%)}
-.flood-in{position:relative;max-width:780px;margin:0 auto;text-align:center}
-.flood-eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,243,224,.75);margin:0 0 20px}
-.flood h2{margin:0 0 clamp(30px,4vw,42px);font-family:var(--display);font-weight:520;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(30px,4.4vw,56px);line-height:1.02;letter-spacing:-.026em;color:var(--flood-cream);text-wrap:balance}
-.flood h2 em{font-style:italic;font-weight:430;font-variation-settings:var(--wonk)}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
-.reply-line{margin:0 0 clamp(32px,4vw,46px);font-family:var(--serif);font-style:italic;font-size:15.5px;color:rgba(251,243,224,.85)}
-.flood-facts{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(20px,4vw,48px);padding-top:clamp(26px,3.5vw,38px);
-  border-top:1px solid rgba(251,243,224,.28);text-align:left}
-.flood-facts div{display:flex;flex-direction:column;gap:6px}
-.flood-facts dt{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,243,224,.65);margin:0}
-.flood-facts dd{margin:0;font-family:var(--serif);font-size:15px;color:var(--flood-cream)}
-.flood-facts dd a{border-bottom:1px solid rgba(251,243,224,.5);transition:border-color .2s,color .2s}
-.flood-facts dd a:hover{color:#fff;border-color:#fff}
-
-/* colophon on paper */
-.colophon{padding:18px var(--rail) 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
-  max-width:var(--maxw);margin:0 auto;
-  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
-.colophon a{color:var(--ink-3);border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
-.colophon a:hover{color:var(--red-deep);border-color:var(--red)}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001s !important;animation-delay:0s !important;transition-duration:.001s !important}
-  .kicker,.hero h1,.np-rule,.dek,.meta{opacity:1 !important;transform:none !important}
-  html{scroll-behavior:auto}
-}
-@media (max-width:520px){:root{--rail:18px}}
-</style>
-</head>
-<body>
-<a class="skip" href="#case">Skip to content</a>
-
-<div class="dateline">
-  <span>№ 08 — <span class="red">Engagement brief</span> · Smart Online Institute</span>
-  <span><span class="dl-hide">Engagement record · </span>Feb — Aug 2025</span>
-</div>
-
-<div class="unav">
-  <a class="back" href="/#work">
-    <span class="arr" aria-hidden="true">←</span>
-    <span class="av"><img src="/public/my_photo_320.jpg" alt="" width="320" height="320" /></span>
-    <b>D. Igoshin</b><span class="lbl">Back to the prospectus</span>
-  </a>
-  <a class="unav-cta" href="mailto:danigoshin@gmail.com?subject=Contract%20inquiry%20%E2%80%94%20%5Byour%20product%5D">Available now — email →</a>
-</div>
-
-<main id="case">
-  <section class="hero wrap">
-    <p class="kicker">Engagement brief — EdTech MVP</p>
-    <h1>A founder needed a <em>product,</em> not a team.</h1>
-    <div class="np-rule" aria-hidden="true"></div>
-    <p class="dek">
-      Smart Online Institute — a psychology-education platform — had no frontend at all, a legacy
-      service with no API, and an MVP that needed to be live fast. I was the <em>sole frontend engineer</em>,
-      end to end: this is what the engagement looked like, and what shipped.
-    </p>
-    <dl class="meta">
-      <div><dt>Role</dt><dd>Sole Frontend Engineer</dd></div>
-      <div><dt>Period</dt><dd>Feb — Aug 2025</dd></div>
-      <div><dt>Shape</dt><dd>Solo build-out, zero to live</dd></div>
-      <div><dt>Domain</dt><dd>EdTech marketplace</dd></div>
-    </dl>
-  </section>
-
-  <div class="wrap">
-    <figure class="frame cover">
-      <span class="f-img"><img src="/public/online-institute.webp" width="1672" height="941"
-           alt="Smart Online Institute — course marketplace with a featured class and course catalogue." /></span>
-      <figcaption><b>Fig. 00 — Course marketplace</b><span>Catalogue · Booking · Admin</span></figcaption>
-    </figure>
-  </div>
-
-  <article class="prose wrap">
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 01</p><h2 class="sec-title">The brief</h2></div>
-        <p class="sec-note">one engineer<br/>whole frontend</p>
-      </header>
-      <div class="body">
-        <p>
-          The client wanted to sell courses and practice sessions online: a marketplace where students
-          browse and book, instructors manage schedules, and content — video, audio, documents — stays
-          protected. There was no frontend codebase, no design system, and <em>no team to coordinate
-          with</em>: the deal was one engineer who owns the surface entirely and ships it live.
-        </p>
-        <p>
-          That shape is the point of this brief. It's the cheapest way to buy an MVP — no coordination
-          tax, no handoffs — <em>if</em> the one engineer can actually carry marketplace, admin, infrastructure
-          and data migration alone.
-        </p>
-      </div>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 02</p><h2 class="sec-title">The <em>constraint</em></h2></div>
-        <p class="sec-note">a tight window<br/>no API on legacy</p>
-      </header>
-      <div class="body">
-        <p>
-          Two things made the window tight. First, the legacy service holding existing courses and user
-          data had <em>no API</em> — the data had to come out some other way. Second, &#8220;live&#8221; meant live:
-          real booking flows, secure media access, and an admin panel instructors would
-          actually use, not a demo.
-        </p>
-      </div>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 03</p><h2 class="sec-title">What <em>shipped</em></h2></div>
-        <p class="sec-note">six workstreams<br/>in five months</p>
-      </header>
-      <ol class="steps">
-        <li>
-          <span class="n" aria-hidden="true">01</span>
-          <div>
-            <h3>Course marketplace &amp; student profiles</h3>
-            <p class="sd">Catalogue, course pages, student accounts and learning progress — the storefront of the platform, built on Next.js with React Query and Zod-validated forms.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">02</span>
-          <div>
-            <h3>Booking &amp; scheduling with auto-generated calls</h3>
-            <p class="sd">Practice-session booking against instructor schedules, with video-call links generated automatically on confirmation — no manual coordination step left in the flow.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">03</span>
-          <div>
-            <h3>Instructor admin panel</h3>
-            <p class="sd">Schedule and session management plus learning-progress visualization with Recharts — the tool the client's instructors run their day in.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">04</span>
-          <div>
-            <h3>Secure media viewer</h3>
-            <p class="sd">Video, audio, PDF and DOC course content served from AWS S3 behind access control — paid content stays paid.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">05</span>
-          <div>
-            <h3>BFF layer, CI/CD and deploys</h3>
-            <p class="sd">A backend-for-frontend in Next.js to orchestrate APIs, GitLab CI/CD and Docker-based deployment — set up from scratch so shipping was routine, not an event.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">06</span>
-          <div>
-            <h3>Legacy data migration — without an API</h3>
-            <p class="sd">Automated the migration from the legacy service with Playwright scraping where no API existed — existing courses and data arrived in the new platform without manual re-entry.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 04</p><h2 class="sec-title">Outcomes</h2></div>
-        <p class="sec-note">what moved</p>
-      </header>
-      <div class="figs">
-        <div class="fig">
-          <p class="fig-n"><span>5</span><span class="u">mo</span></p>
-          <p class="fig-l">from empty repository to live MVP.</p>
-          <p class="fig-src">Build window</p>
-        </div>
-        <div class="fig">
-          <p class="fig-n"><span>1</span></p>
-          <p class="fig-l">engineer owning the entire frontend, end to end.</p>
-          <p class="fig-src">Solo build</p>
-        </div>
-        <div class="fig">
-          <p class="fig-n"><span>6</span></p>
-          <p class="fig-l">product surfaces shipped: marketplace, profiles, booking, scheduling, progress, secure media.</p>
-          <p class="fig-src">Scope</p>
-        </div>
-        <div class="fig">
-          <p class="fig-n"><span>0</span></p>
-          <p class="fig-l">APIs on the legacy service — migration automated with Playwright scraping.</p>
-          <p class="fig-src">Data migration</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 05</p><h2 class="sec-title">Stack &amp; shape</h2></div>
-        <p class="sec-note">Feb — Aug 2025</p>
-      </header>
-      <ul class="chips">
-        <li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>shadcn/ui</li><li>React Query</li><li>React Hook Form</li><li>Zod</li><li>Strapi</li><li>GitLab CI/CD</li><li>Docker</li><li>Playwright</li><li>AWS S3</li>
-      </ul>
-      <p class="role-line">Sole frontend engineer — product surfaces, BFF, infrastructure and data migration, owned end to end.</p>
-
-      <div class="note">
-        <p class="nh">Printer's note</p>
-        <p>
-          This is what the <em>MVP build-out</em> engagement on the homepage looks like in practice.
-          Smart Online Institute is a client product, so this page describes scope and record rather than
-          internals — I'm happy to walk through the <em>how</em> in a conversation.
-        </p>
-      </div>
-    </section>
-
-  </article>
-
-  <section class="flood">
-    <div class="flood-in">
-      <p class="flood-eyebrow">§ 06 — Correspondence</p>
-      <h2>Need a product <em>shipped,</em> not staffed?</h2>
-      <div class="cta-row">
-        <a class="btn btn-paper" href="mailto:danigoshin@gmail.com?subject=Contract%20inquiry%20%E2%80%94%20%5Byour%20product%5D">
-          <span>danigoshin@gmail.com</span><span class="arr" aria-hidden="true">→</span>
+    <header class="site-header" data-header>
+      <div class="nav-shell">
+        <a class="brand" href="/" aria-label="Danila Igoshin — home">
+          <span class="brand-mark" aria-hidden="true">D/I</span>
+          <span class="brand-copy">Danila Igoshin</span>
         </a>
-        <a class="btn btn-line" href="/#terms"><span>Read the terms</span><span class="arr" aria-hidden="true">→</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation" data-menu-toggle>
+          <span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
+          <div class="nav-panel" data-nav-panel>
+            <a href="/#work" data-nav-link>Work</a>
+            <a href="/#experience" data-nav-link>Experience</a>
+            <a href="/#services" data-nav-link>Services</a>
+            <a href="/#about" data-nav-link>About</a>
+            <a href="/#contact" data-nav-link>Contact</a>
+            <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
+              <a href="/cv/">Résumé <span aria-hidden="true">→</span></a>
+              <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+              <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+        <div class="nav-actions">
+          <span class="availability"><i aria-hidden="true"></i> Available now · UTC+3</span>
+          <a class="nav-email" href="mailto:danigoshin@gmail.com?subject=EdTech%20case">Email <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
-      <p class="reply-line">I reply within a day.</p>
-      <dl class="flood-facts">
-        <div><dt>Available</dt><dd>Now · contract or full-time</dd></div>
-        <div><dt>Based</dt><dd>Penza, RU · UTC+3 · full EU overlap</dd></div>
-        <div><dt>Elsewhere</dt><dd><a href="https://www.linkedin.com/in/developer-danila/" target="_blank" rel="noopener">LinkedIn</a> · <a href="/Danila_Igoshin_EMEA_Contract_CV.pdf" target="_blank" rel="noopener">Résumé</a></dd></div>
-      </dl>
-    </div>
-  </section>
-</main>
+    </header>
 
-<footer class="colophon">
-  <span>© MMXXVI · Danila Igoshin · Penza, RU</span>
-  <a href="/">danilaigoshin.com →</a>
-</footer>
+    <main class="case-main" id="main-content" tabindex="-1">
+      <header class="case-hero section-shell reveal">
+        <a class="case-back" href="/case/"><span aria-hidden="true">←</span> All case studies</a>
+        <p class="case-eyebrow">Case 02 · Zero-to-one delivery · Smart Online Institute</p>
+        <h1 class="case-title">From an empty repository to a production learning product.</h1>
+        <p class="case-deck">
+          Sole frontend ownership across architecture, learner and instructor workflows,
+          integrations, secure media, legacy migration, CI/CD, and deployment.
+        </p>
+        <dl class="case-meta">
+          <div><dt>Company</dt><dd>Smart Online Institute</dd></div>
+          <div><dt>Role</dt><dd>Sole Frontend Engineer</dd></div>
+          <div><dt>Period</dt><dd>Feb—Aug 2025</dd></div>
+          <div><dt>Delivery</dt><dd>≈5 months to live MVP</dd></div>
+        </dl>
+      </header>
 
-</body>
+      <section class="case-cover section-shell reveal" aria-label="Product interface">
+        <figure>
+          <a class="case-cover-link" href="/public/online-institute.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Smart Online Institute screenshot in a new tab">
+            <img src="/public/online-institute.webp" width="1672" height="941" fetchpriority="high" alt="Smart Online Institute course marketplace with a featured event and course catalog" />
+          </a>
+          <figcaption><span>Production product interface</span><span>Marketplace · learning · booking · open full size ↗</span></figcaption>
+        </figure>
+      </section>
+
+      <article class="case-article section-shell">
+        <section class="case-section reveal">
+          <p class="case-section-label">01 / Brief</p>
+          <div class="case-prose">
+            <h2>The founder needed a working product, not a frontend department.</h2>
+            <p>
+              The new psychology-education platform started without a frontend codebase.
+              It needed a public course marketplace, learner profiles and progress, practice
+              booking, instructor operations, secure educational media, and a reliable path to production.
+            </p>
+            <p>
+              I owned the frontend end to end: system shape, product implementation, API orchestration,
+              validation, delivery infrastructure, deployment, and the migration of existing content.
+            </p>
+            <dl class="case-brief">
+              <div><dt>Operating constraint</dt><dd>Move from zero to real learners quickly without producing a disposable prototype.</dd></div>
+              <div><dt>My ownership</dt><dd>All frontend product surfaces, Next.js BFF, CI/CD, Docker deployment, and legacy migration.</dd></div>
+              <div><dt>Primary users</dt><dd>Prospective learners, enrolled students, instructors, and product administrators.</dd></div>
+              <div><dt>Launch target</dt><dd>A maintainable production MVP with real content and operational workflows.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">02 / Constraints</p>
+          <div class="case-prose">
+            <h2>Product scope, delivery infrastructure, and migration arrived together.</h2>
+            <p>
+              The product could not launch as a set of disconnected screens. Booking had to create
+              the right call links, permissions had to protect paid media, instructor tooling had to
+              support daily operations, and existing content had to arrive from a service with no API.
+            </p>
+            <dl class="case-facts">
+              <div><dt>Starting point</dt><dd>An empty frontend repository and a backend/CMS surface that needed product-facing orchestration.</dd></div>
+              <div><dt>Legacy data</dt><dd>The previous service exposed no API suitable for content migration.</dd></div>
+              <div><dt>Media</dt><dd>Video, audio, PDF, and document content required secure delivery from AWS S3.</dd></div>
+              <div><dt>Operations</dt><dd>Instructors needed schedules, session management, and learning-progress visualization.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">03 / Decisions</p>
+          <div class="case-prose">
+            <h2>A small architecture with explicit boundaries around external complexity.</h2>
+            <p>
+              The frontend was organized around product workflows, with a BFF layer absorbing API
+              orchestration and infrastructure details that did not belong in page components.
+            </p>
+            <div class="case-decisions">
+              <article class="case-decision">
+                <span>01 · Product surface</span>
+                <h3>Build learner and instructor workflows as one product system.</h3>
+                <p>Delivered the marketplace, profiles, progress, practice booking, schedule management, and instructor progress views on shared domain rules.</p>
+              </article>
+              <article class="case-decision">
+                <span>02 · API boundary</span>
+                <h3>Use a Next.js BFF for orchestration and stable client contracts.</h3>
+                <p>Kept backend composition, validation, and integration-specific behavior behind a server boundary instead of spreading it through UI code.</p>
+              </article>
+              <article class="case-decision">
+                <span>03 · Content delivery</span>
+                <h3>Keep access control attached to media delivery.</h3>
+                <p>Implemented secure viewing for video, audio, PDFs, and documents stored in S3, with product permissions governing access.</p>
+              </article>
+              <article class="case-decision">
+                <span>04 · Migration</span>
+                <h3>Automate extraction when no migration API exists.</h3>
+                <p>Used Playwright-based scraping to move existing courses and content without manual re-entry, then put deployment behind GitLab CI/CD and Docker.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">04 / What shipped</p>
+          <div class="case-prose">
+            <h2>A production MVP that covered both customer experience and daily operations.</h2>
+            <p>
+              The first release was not only a marketing shell. Learners could discover courses,
+              manage their learning, book practice, and consume protected content; instructors could
+              operate schedules and follow progress; the team had a repeatable route to deployment.
+            </p>
+            <div class="case-results" aria-label="Project outcomes">
+              <div class="case-result"><strong>≈5 mo.</strong><span>from an empty repository to a live production MVP</span></div>
+              <div class="case-result"><strong>1 FE</strong><span>sole frontend ownership from architecture through deployment</span></div>
+              <div class="case-result"><strong>0 APIs</strong><span>migration APIs available from the previous service</span></div>
+            </div>
+            <p class="case-note"><strong>Scope note.</strong> The delivery window refers to the first production MVP inside a seven-month engagement. This public case focuses on the frontend scope I owned and omits private customer and operational data.</p>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">05 / Scope</p>
+          <div class="case-prose">
+            <h2>One frontend owner, from product behavior to the deployment path.</h2>
+            <p>
+              Working solo meant keeping architectural ambition proportional to the team while still
+              protecting the parts most likely to become expensive: product boundaries, API contracts,
+              validation, access control, automated delivery, and migration repeatability.
+            </p>
+            <dl class="case-facts">
+              <div><dt>Learner product</dt><dd>Course discovery, profiles, progress, booking, schedules, and protected educational content.</dd></div>
+              <div><dt>Instructor product</dt><dd>Session management, schedule workflows, and progress visualization with Recharts.</dd></div>
+              <div><dt>Delivery</dt><dd>GitLab CI/CD and Docker-based deployment created from scratch for the new frontend.</dd></div>
+            </dl>
+            <p class="case-stack-label">Technology used</p>
+            <ul class="case-stack" aria-label="Technology stack">
+              <li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>shadcn/ui</li><li>React Query</li>
+              <li>Zod</li><li>Strapi</li><li>Recharts</li><li>Playwright</li><li>AWS S3</li><li>Docker</li><li>GitLab CI/CD</li>
+            </ul>
+          </div>
+        </section>
+
+        <aside class="case-next reveal" aria-label="Next steps">
+          <div>
+            <p class="case-eyebrow">Related case · Platform modernization</p>
+            <h2>A live travel product modernized without stopping delivery.</h2>
+          </div>
+          <div class="case-next-actions">
+            <a href="/case/smartway/"><span>Read the Smartway case</span><span aria-hidden="true">→</span></a>
+            <a href="mailto:danigoshin@gmail.com?subject=Frontend%20engineering%20inquiry"><span>Discuss a frontend problem</span><span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </article>
+    </main>
+
+    <footer class="footer section-shell">
+      <p>© <span data-year>2026</span> Danila Igoshin</p>
+      <p>Case study · Smart Online Institute · 2025</p>
+      <a href="/Danila_Igoshin_EMEA_Contract_CV.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+    </footer>
+  </body>
 </html>

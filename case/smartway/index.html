@@ -1,457 +1,237 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Smartway — scaling a corporate travel platform · Danila Igoshin</title>
-<meta name="description" content="Case study: three years as senior frontend developer and tech-lead on Smartway's corporate travel platform — a full TypeScript migration, Webpack→Vite, +300% cart performance, and a growing team." />
-<meta name="theme-color" content="#F4EEDF" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://danilaigoshin.com/case/smartway/" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Smartway case study by Danila Igoshin: incremental TypeScript migration, Webpack-to-Vite, approximately 300% cart performance improvement, analytics, and technical leadership."
+    />
+    <meta name="theme-color" content="#f4f6f8" />
+    <link rel="canonical" href="https://danilaigoshin.com/case/smartway/" />
+    <meta property="og:site_name" content="Danila Igoshin" />
+    <meta property="og:title" content="Modernizing Smartway without stopping delivery" />
+    <meta property="og:description" content="A three-year frontend modernization: TypeScript, Vite, runtime performance, analytics, and team practices." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://danilaigoshin.com/case/smartway/" />
+    <meta property="og:image" content="https://danilaigoshin.com/public/smartway.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Smartway case study — Danila Igoshin</title>
+    <link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/public/smartway.webp" fetchpriority="high" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/case/styles.css" />
+    <script src="/script.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Modernizing a corporate travel platform without stopping delivery",
+        "author": { "@type": "Person", "name": "Danila Igoshin", "url": "https://danilaigoshin.com/" },
+        "dateModified": "2026-07-13",
+        "mainEntityOfPage": "https://danilaigoshin.com/case/smartway/",
+        "image": "https://danilaigoshin.com/public/smartway.webp"
+      }
+    </script>
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-<!-- Open Graph -->
-<meta property="og:type" content="article" />
-<meta property="og:title" content="Smartway — scaling a corporate travel platform" />
-<meta property="og:description" content="Three years as senior frontend developer and tech-lead: full TypeScript migration, Webpack→Vite (10× faster builds), +300% cart performance." />
-<meta property="og:url" content="https://danilaigoshin.com/case/smartway/" />
-<meta property="og:image" content="https://danilaigoshin.com/public/og-image.jpg" />
-
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B23A14'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-weight='400' font-size='18' fill='%23F8F1E0'%3EDi%3C/text%3E%3C/svg%3E" />
-
-<!-- Self-hosted fonts (absolute paths so the page works at /case/smartway/) -->
-<link rel="preload" as="image" href="/public/smartway.webp" fetchpriority="high" />
-<link rel="preload" as="font" type="font/woff2" href="/public/fonts/fraunces-vf-latin.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="/public/fonts/fraunces-vf-latin-italic.woff2" crossorigin />
-
-<style>
-/* ============================================================
-   Smartway — case study · "PROSPECTUS" (matches the homepage)
-   Two inks on warm paper: umber + vermilion.
-   ============================================================ */
-@font-face{font-family:'Fraunces';font-style:normal;font-weight:100 900;font-display:swap;src:url('/public/fonts/fraunces-vf-latin.woff2') format('woff2')}
-@font-face{font-family:'Fraunces';font-style:italic;font-weight:100 900;font-display:swap;src:url('/public/fonts/fraunces-vf-latin-italic.woff2') format('woff2')}
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:400;font-display:swap;src:url('/public/fonts/bricolage-grotesque-v9-latin-regular.woff2') format('woff2')}
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500;font-display:swap;src:url('/public/fonts/bricolage-grotesque-v9-latin-500.woff2') format('woff2')}
-@font-face{font-family:'Newsreader';font-style:normal;font-weight:400;font-display:swap;src:url('/public/fonts/newsreader-v26-latin-regular.woff2') format('woff2')}
-@font-face{font-family:'Newsreader';font-style:italic;font-weight:400;font-display:swap;src:url('/public/fonts/newsreader-v26-latin-italic.woff2') format('woff2')}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('/public/fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2')}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url('/public/fonts/jetbrains-mono-v24-latin-500.woff2') format('woff2')}
-
-:root{
-  --paper:#F4EEDF; --paper-2:#EDE5D0; --cream:#FBF6E9;
-  --ink:#221A0F; --ink-2:#473E2D; --ink-3:#776B53; --ink-4:#A2967D;
-  --red:#B23A14; --red-deep:#8C2B0C; --red-soft:rgba(178,58,20,.1);
-  --flood-cream:#FBF3E0;
-  --line:rgba(34,26,15,.2); --line-2:rgba(34,26,15,.09);
-  --display:'Fraunces','Georgia',serif;
-  --sans:'Bricolage Grotesque','Helvetica Neue',system-ui,sans-serif;
-  --serif:'Newsreader','Times New Roman',serif;
-  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
-  --rail:clamp(20px,5vw,72px); --maxw:1020px;
-  --ease:cubic-bezier(.22,.75,.22,1);
-  --wonk:"opsz" 144,"SOFT" 0,"WONK" 1;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body{overflow-x:hidden;position:relative}
-/* paper grain */
-body::after{content:"";position:fixed;inset:0;z-index:240;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
-a{color:inherit;text-decoration:none}
-img{max-width:100%}
-::selection{background:var(--red);color:var(--flood-cream)}
-:focus{outline:none}
-:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:3px}
-.skip{position:fixed;top:-60px;left:16px;z-index:300;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:6px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;transition:top .25s var(--ease)}
-.skip:focus{top:16px}
-.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--rail)}
-
-/* letterpress buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:6px;
-  font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:-.005em;
-  background:var(--cream);color:var(--ink);border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
-  transition:transform .14s var(--ease),box-shadow .14s var(--ease),background-color .2s,color .2s}
-.btn:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink)}
-.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
-.btn .arr{transition:transform .3s var(--ease)}
-.btn:hover .arr{transform:translate(2px,0)}
-.btn-paper{background:var(--flood-cream);border-color:#5E1B05;box-shadow:3px 3px 0 #5E1B05}
-.btn-paper:hover{box-shadow:2px 2px 0 #5E1B05;background:#fff}
-.btn-paper:active{box-shadow:0 0 0 #5E1B05}
-.btn-line{background:transparent;color:var(--flood-cream);border-color:rgba(251,243,224,.5);box-shadow:3px 3px 0 rgba(0,0,0,.25)}
-.btn-line:hover{border-color:var(--flood-cream);box-shadow:2px 2px 0 rgba(0,0,0,.25);background:rgba(251,243,224,.07)}
-.btn-line:active{box-shadow:0 0 0 rgba(0,0,0,.25)}
-
-/* ---------- dateline + utility nav ---------- */
-.dateline{display:flex;justify-content:space-between;align-items:center;gap:16px;
-  padding:12px var(--rail);border-bottom:1px solid var(--line-2);
-  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.dateline .red{color:var(--red)}
-@media (max-width:720px){.dl-hide{display:none}}
-.unav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px var(--rail);border-bottom:1px solid var(--line-2)}
-.back{display:inline-flex;align-items:center;gap:11px;font-size:14px;font-weight:500;color:var(--ink-2);transition:color .2s}
-.back .arr{font-family:var(--mono);color:var(--red);transition:transform .3s var(--ease)}
-.back:hover{color:var(--ink)}
-.back:hover .arr{transform:translateX(-4px)}
-.back .av{width:28px;height:28px;border-radius:50%;overflow:hidden;border:1px solid var(--line);flex-shrink:0}
-.back .av img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
-.back .lbl{color:var(--ink-4);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-left:2px}
-@media (max-width:560px){.back .lbl{display:none}}
-.unav-cta{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--red-deep);border-bottom:1px solid var(--red);padding-bottom:3px;white-space:nowrap;transition:color .2s}
-.unav-cta:hover{color:var(--red)}
-
-/* ---------- hero ---------- */
-.hero{padding:clamp(36px,5vw,64px) 0 clamp(20px,3vw,32px)}
-.kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin:0 0 22px;
-  opacity:0;animation:fade-up .25s var(--ease) 0s forwards}
-.hero h1{margin:0;font-family:var(--display);font-weight:600;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(38px,6.4vw,84px);line-height:.98;letter-spacing:-.032em;color:var(--ink);max-width:18ch;text-wrap:balance;
-  opacity:0;animation:fade-up .25s var(--ease) .04s forwards}
-.hero h1 em{font-style:italic;font-weight:440;color:var(--red);font-variation-settings:var(--wonk)}
-.np-rule{height:0;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:3px;
-  margin-top:clamp(20px,2.6vw,30px);opacity:0;animation:fade-up .25s var(--ease) .07s forwards}
-.dek{font-family:var(--serif);font-size:clamp(17px,1.5vw,20px);line-height:1.58;color:var(--ink-2);margin:clamp(18px,2.4vw,26px) 0 0;max-width:58ch;
-  opacity:0;animation:fade-up .25s var(--ease) .1s forwards}
-.dek em{color:var(--ink)}
-@keyframes fade-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.meta{display:flex;flex-wrap:wrap;gap:clamp(22px,4.5vw,58px);margin:clamp(26px,3.4vw,38px) 0 0;
-  opacity:0;animation:fade-up .25s var(--ease) .13s forwards}
-.meta div{display:flex;flex-direction:column;gap:7px}
-.meta dt{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);margin:0}
-.meta dd{margin:0;font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.35}
-
-/* executive summary — the 30-second version, above the fold */
-.exec{background:var(--cream);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:6px;
-  padding:20px 26px 22px;margin-top:clamp(26px,3.4vw,38px);box-shadow:3px 3px 0 rgba(34,26,15,.07);
-  opacity:0;animation:fade-up .25s var(--ease) .16s forwards}
-.exec .nh{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
-.exec p{font-family:var(--serif);font-size:16px;line-height:1.58;color:var(--ink-2);margin:0;max-width:64ch}
-.exec p em{color:var(--ink)}
-.exec-n{display:flex;flex-wrap:wrap;gap:8px 26px;margin:14px 0 0 !important;padding-top:12px;border-top:1px solid var(--line-2)}
-.exec-n span{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
-.exec-n b{font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
-  font-size:17px;letter-spacing:-.01em;color:var(--red);margin-right:5px}
-
-/* ---------- framed cover plate ---------- */
-.cover{margin:clamp(28px,4vw,44px) auto 0}
-.frame{display:block;margin:0;background:var(--cream);border:1px solid var(--line);border-radius:5px;padding:11px 11px 0;
-  box-shadow:5px 5px 0 rgba(34,26,15,.09)}
-.frame .f-img{display:block;overflow:hidden;border:1px solid var(--line-2);border-radius:3px;aspect-ratio:16/9;background:#fff}
-.frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.96)}
-.frame figcaption{display:flex;justify-content:space-between;gap:12px;padding:11px 3px 12px;
-  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-4)}
-.frame figcaption b{color:var(--ink-3);font-weight:500}
-
-/* ---------- article ---------- */
-.prose{padding-bottom:clamp(16px,3vw,28px)}
-.sec{padding-top:clamp(52px,7vw,92px)}
-.sec-head{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
-  padding-bottom:clamp(16px,2vw,22px);margin-bottom:clamp(26px,3.2vw,38px);border-bottom:3px solid var(--ink)}
-.sec-head::after{content:"";position:absolute;left:0;right:0;bottom:-5px;border-bottom:1px solid var(--ink)}
-.sec-no{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin:0 0 12px}
-.sec-title{margin:0;font-family:var(--display);font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(28px,3.6vw,48px);line-height:1;letter-spacing:-.026em;color:var(--ink)}
-.sec-title em{font-style:italic;font-weight:430;color:var(--red);font-variation-settings:var(--wonk)}
-.sec-note{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);text-align:right;line-height:1.8;white-space:nowrap}
-@media (max-width:620px){.sec-note{display:none}}
-.body p{font-family:var(--serif);font-size:clamp(16.5px,1.35vw,19px);line-height:1.62;color:var(--ink-2);margin:0 0 1.05em;max-width:62ch}
-.body p:last-child{margin-bottom:0}
-.body p em{color:var(--ink)}
-.body>p:first-of-type::first-letter{font-family:var(--display);font-style:italic;font-weight:480;font-variation-settings:var(--wonk);
-  float:left;font-size:4.4em;line-height:.74;padding:6px 13px 0 0;color:var(--red)}
-
-/* steps ledger */
-.steps{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-.steps li{display:grid;grid-template-columns:auto 1fr;column-gap:clamp(18px,3vw,38px);padding:clamp(20px,2.4vw,28px) 0;border-bottom:1px solid var(--line-2)}
-.steps .n{font-family:var(--display);font-style:italic;font-weight:540;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
-  font-size:clamp(24px,2.5vw,32px);line-height:.95;color:var(--red);letter-spacing:-.02em}
-.steps h3{font-family:var(--sans);font-size:clamp(17px,1.45vw,20px);font-weight:500;letter-spacing:-.012em;margin:0 0 7px;color:var(--ink)}
-.steps .sd{font-family:var(--serif);font-size:clamp(15px,1.2vw,16.5px);line-height:1.55;color:var(--ink-2);margin:0;max-width:60ch}
-
-/* outcomes figures */
-.figs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
-@media (max-width:760px){.figs{grid-template-columns:1fr 1fr}}
-@media (max-width:460px){.figs{grid-template-columns:1fr}}
-.fig{padding:clamp(28px,3vw,40px) clamp(18px,2vw,28px);border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
-.fig:first-child{padding-left:0}
-.fig:last-child{border-right:none}
-@media (max-width:760px){.fig:nth-child(2n){border-right:none}.fig:nth-child(odd){padding-left:0}}
-@media (max-width:460px){.fig{border-right:none;padding-left:0}}
-.fig-n{font-family:var(--display);font-style:italic;font-weight:560;font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1;
-  font-size:clamp(46px,5vw,76px);line-height:.9;letter-spacing:-.03em;color:var(--red);margin:0 0 14px;font-feature-settings:"tnum"}
-.fig-n .u{font-size:.5em}
-.fig-l{font-family:var(--serif);font-size:14.5px;line-height:1.48;color:var(--ink-2);margin:0;max-width:24ch}
-.fig-src{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin:13px 0 0}
-
-/* stack chips */
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
-.chips li{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.03em;padding:7px 13px;border-radius:99px;border:1px solid var(--line);color:var(--ink-2)}
-.role-line{font-family:var(--serif);font-size:16.5px;line-height:1.5;color:var(--ink-2);margin:22px 0 0}
-
-/* printer's note */
-.note{background:var(--cream);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:6px;
-  padding:20px 26px 22px;margin-top:clamp(46px,6vw,68px);box-shadow:3px 3px 0 rgba(34,26,15,.07)}
-.note .nh{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
-.note p{font-family:var(--serif);font-size:16px;line-height:1.58;color:var(--ink-2);margin:0}
-.note p em{color:var(--ink)}
-
-/* ---------- closing — vermilion ink flood ---------- */
-.flood{margin-top:clamp(72px,9vw,120px);background:var(--red);color:var(--flood-cream);position:relative;
-  padding:clamp(64px,8vw,110px) var(--rail) clamp(44px,5vw,64px)}
-.flood::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(75% 65% at 50% -5%,rgba(0,0,0,.18),transparent 62%),radial-gradient(40% 42% at 96% 108%,rgba(0,0,0,.12),transparent 60%)}
-.flood-in{position:relative;max-width:780px;margin:0 auto;text-align:center}
-.flood-eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,243,224,.75);margin:0 0 20px}
-.flood h2{margin:0 0 clamp(30px,4vw,42px);font-family:var(--display);font-weight:520;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
-  font-size:clamp(30px,4.4vw,56px);line-height:1.02;letter-spacing:-.026em;color:var(--flood-cream);text-wrap:balance}
-.flood h2 em{font-style:italic;font-weight:430;font-variation-settings:var(--wonk)}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
-.reply-line{margin:0 0 clamp(32px,4vw,46px);font-family:var(--serif);font-style:italic;font-size:15.5px;color:rgba(251,243,224,.85)}
-.flood-facts{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(20px,4vw,48px);padding-top:clamp(26px,3.5vw,38px);
-  border-top:1px solid rgba(251,243,224,.28);text-align:left}
-.flood-facts div{display:flex;flex-direction:column;gap:6px}
-.flood-facts dt{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,243,224,.65);margin:0}
-.flood-facts dd{margin:0;font-family:var(--serif);font-size:15px;color:var(--flood-cream)}
-.flood-facts dd a{border-bottom:1px solid rgba(251,243,224,.5);transition:border-color .2s,color .2s}
-.flood-facts dd a:hover{color:#fff;border-color:#fff}
-
-/* colophon on paper */
-.colophon{padding:18px var(--rail) 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
-  max-width:var(--maxw);margin:0 auto;
-  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
-.colophon a{color:var(--ink-3);border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
-.colophon a:hover{color:var(--red-deep);border-color:var(--red)}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001s !important;animation-delay:0s !important;transition-duration:.001s !important}
-  .kicker,.hero h1,.np-rule,.dek,.meta{opacity:1 !important;transform:none !important}
-  html{scroll-behavior:auto}
-}
-@media (max-width:520px){:root{--rail:18px}}
-</style>
-</head>
-<body>
-<a class="skip" href="#case">Skip to content</a>
-
-<div class="dateline">
-  <span>№ 08 — <span class="red">Case study</span> · Smartway</span>
-  <span><span class="dl-hide">Engagement record · </span>2021 — 2024</span>
-</div>
-
-<div class="unav">
-  <a class="back" href="/#work">
-    <span class="arr" aria-hidden="true">←</span>
-    <span class="av"><img src="/public/my_photo_320.jpg" alt="" width="320" height="320" /></span>
-    <b>D. Igoshin</b><span class="lbl">Back to the prospectus</span>
-  </a>
-  <a class="unav-cta" href="mailto:danigoshin@gmail.com?subject=Frontend%20help%20%E2%80%94%20%5Byour%20product%5D">Available now — email →</a>
-</div>
-
-<main id="case">
-  <section class="hero wrap">
-    <p class="kicker">Case study — Smartway</p>
-    <h1>Scaling a <em>corporate travel</em> platform across three years.</h1>
-    <div class="np-rule" aria-hidden="true"></div>
-    <p class="dek">
-      Three years on Smartway's web platform as senior frontend developer and, in time, tech-lead —
-      flights, trains, taxis, transfers and hotels inside a single product companies use to book and
-      govern business travel.
-    </p>
-    <dl class="meta">
-      <div><dt>Role</dt><dd>Senior Frontend Dev · Tech-lead</dd></div>
-      <div><dt>Period</dt><dd>Mar 2021 — Feb 2024</dd></div>
-      <div><dt>Team</dt><dd>Mentored 3 frontend devs</dd></div>
-      <div><dt>Domain</dt><dd>B2B corporate travel</dd></div>
-    </dl>
-
-    <aside class="exec" aria-label="Executive summary">
-      <p class="nh">Executive summary — the 30-second version</p>
-      <p>
-        A long-lived B2B travel platform was slowing its own team down: untyped core, heavy Webpack
-        builds, a sluggish booking cart. Over three years I led the <em>full TypeScript migration</em>,
-        moved the build to Vite, restructured the cart's state and rendering, rebuilt auth without
-        breaking sessions — and mentored the team that maintains it now.
-      </p>
-      <p class="exec-n">
-        <span><b>10×</b> faster builds</span>
-        <span><b>+300%</b> cart performance</span>
-        <span><b>100%</b> TypeScript</span>
-        <span><b>3</b> devs mentored</span>
-      </p>
-    </aside>
-  </section>
-
-  <div class="wrap">
-    <figure class="frame cover">
-      <span class="f-img"><img src="/public/smartway.webp" width="1672" height="941"
-           alt="Smartway corporate travel platform — booking search across flights, trains and transfers, a calendar of trips, and approval widgets." /></span>
-      <figcaption><b>Fig. 00 — Smartway web platform</b><span>Booking · Trips · Approvals</span></figcaption>
-    </figure>
-  </div>
-
-  <article class="prose wrap">
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 01</p><h2 class="sec-title">Context</h2></div>
-        <p class="sec-note">B2B travel<br/>web client</p>
-      </header>
-      <div class="body">
-        <p>
-          Smartway is a corporate travel platform: employees book flights, trains, taxis, transfers and
-          hotels, while their companies handle approvals, reporting, and travel policy. The web client is
-          large and long-lived — many domains, many engineers, years of steady growth. I joined as a senior
-          frontend developer and grew into the <em>tech-lead</em> role for the web platform.
-        </p>
-      </div>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 02</p><h2 class="sec-title">The <em>challenge</em></h2></div>
-        <p class="sec-note">growth debt<br/>+ a scaling team</p>
-      </header>
-      <div class="body">
-        <p>
-          By the time I took ownership, the codebase carried the weight of fast growth: a largely untyped
-          JavaScript core, a Webpack build slow enough to tax every developer's day, a booking cart that had
-          grown sluggish under real usage, and an authentication layer that needed rebuilding <em>without
-          disrupting active sessions.</em>
-        </p>
-        <p>
-          And the team was scaling. That raised the bar on everything else: the architecture and conventions
-          had to be legible to people who hadn't written them — not just to the few who had.
-        </p>
-      </div>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 03</p><h2 class="sec-title">What I <em>did</em></h2></div>
-        <p class="sec-note">six workstreams<br/>over three years</p>
-      </header>
-      <ol class="steps">
-        <li>
-          <span class="n" aria-hidden="true">01</span>
-          <div>
-            <h3>Led a full TypeScript migration</h3>
-            <p class="sd">Moved the codebase from JavaScript to TypeScript, done incrementally so the product kept shipping the whole way. Types became the documentation the codebase never had.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">02</span>
-          <div>
-            <h3>Replaced Webpack with Vite</h3>
-            <p class="sd">Swapped the build toolchain to Vite, collapsing build and feedback times and giving every developer faster local iteration — the change that paid back daily.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">03</span>
-          <div>
-            <h3>Made the booking cart fast</h3>
-            <p class="sd">Restructured state ownership and re-render boundaries in the cart flow, turning a sluggish, much-used path into an instant one.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">04</span>
-          <div>
-            <h3>Rewrote authentication without breaking sessions</h3>
-            <p class="sd">Rebuilt the auth layer as a quiet, high-stakes change — shipped without logging anyone out or interrupting work in progress.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">05</span>
-          <div>
-            <h3>Built the analytics module</h3>
-            <p class="sd">Interactive tables and charts for expense and trip insights — the numbers companies run their travel policy on.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n" aria-hidden="true">06</span>
-          <div>
-            <h3>Grew the team</h3>
-            <p class="sd">Mentored three frontend developers and ran internal tech talks — state vs. cache, SSR vs. ISR — to make sound decisions the default rather than the exception.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 04</p><h2 class="sec-title">Outcomes</h2></div>
-        <p class="sec-note">what moved</p>
-      </header>
-      <div class="figs">
-        <div class="fig">
-          <p class="fig-n"><span>10</span><span class="u">×</span></p>
-          <p class="fig-l">faster builds after migrating the build to Vite.</p>
-          <p class="fig-src">Webpack → Vite</p>
-        </div>
-        <div class="fig">
-          <p class="fig-n"><span class="u">+</span><span>300</span><span class="u">%</span></p>
-          <p class="fig-l">booking-cart performance via state &amp; render restructuring.</p>
-          <p class="fig-src">Cart flow</p>
-        </div>
-        <div class="fig">
-          <p class="fig-n"><span>100</span><span class="u">%</span></p>
-          <p class="fig-l">of the web codebase migrated to TypeScript.</p>
-          <p class="fig-src">TS migration</p>
-        </div>
-        <div class="fig">
-          <p class="fig-n"><span>3</span></p>
-          <p class="fig-l">frontend developers mentored as tech-lead.</p>
-          <p class="fig-src">Team</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <header class="sec-head">
-        <div><p class="sec-no">§ 05</p><h2 class="sec-title">Stack &amp; role</h2></div>
-        <p class="sec-note">2021 — 2024</p>
-      </header>
-      <ul class="chips">
-        <li>React</li><li>Redux</li><li>MobX</li><li>React Query</li><li>Next.js</li><li>React Native</li><li>TypeScript</li><li>Vite</li>
-      </ul>
-      <p class="role-line">Senior Frontend Developer, then tech-lead for the web platform.</p>
-
-      <div class="note">
-        <p class="nh">Printer's note</p>
-        <p>
-          Smartway is a private product, so this page describes scope and outcomes rather than internal code.
-          The numbers above are the ones I stand behind — and I'm happy to walk through the <em>how</em> in a conversation.
-        </p>
-      </div>
-    </section>
-
-  </article>
-
-  <section class="flood">
-    <div class="flood-in">
-      <p class="flood-eyebrow">§ 06 — Correspondence</p>
-      <h2>Building something where <em>frontend quality</em> matters?</h2>
-      <div class="cta-row">
-        <a class="btn btn-paper" href="mailto:danigoshin@gmail.com?subject=About%20the%20Smartway%20case">
-          <span>danigoshin@gmail.com</span><span class="arr" aria-hidden="true">→</span>
+    <header class="site-header" data-header>
+      <div class="nav-shell">
+        <a class="brand" href="/" aria-label="Danila Igoshin — home">
+          <span class="brand-mark" aria-hidden="true">D/I</span>
+          <span class="brand-copy">Danila Igoshin</span>
         </a>
-        <a class="btn btn-line" href="/#terms"><span>Read the terms</span><span class="arr" aria-hidden="true">→</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation" data-menu-toggle>
+          <span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
+          <div class="nav-panel" data-nav-panel>
+            <a href="/#work" data-nav-link>Work</a>
+            <a href="/#experience" data-nav-link>Experience</a>
+            <a href="/#services" data-nav-link>Services</a>
+            <a href="/#about" data-nav-link>About</a>
+            <a href="/#contact" data-nav-link>Contact</a>
+            <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
+              <a href="/cv/">Résumé <span aria-hidden="true">→</span></a>
+              <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+              <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+        <div class="nav-actions">
+          <span class="availability"><i aria-hidden="true"></i> Available now · UTC+3</span>
+          <a class="nav-email" href="mailto:danigoshin@gmail.com?subject=Smartway%20case">Email <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
-      <p class="reply-line">I reply within a day.</p>
-      <dl class="flood-facts">
-        <div><dt>Available</dt><dd>Now · contract or full-time</dd></div>
-        <div><dt>Based</dt><dd>Penza, RU · UTC+3 · full EU overlap</dd></div>
-        <div><dt>Elsewhere</dt><dd><a href="https://www.linkedin.com/in/developer-danila/" target="_blank" rel="noopener">LinkedIn</a> · <a href="/Danila_Igoshin_EMEA_Contract_CV.pdf" target="_blank" rel="noopener">Résumé</a></dd></div>
-      </dl>
-    </div>
-  </section>
-</main>
+    </header>
 
-<footer class="colophon">
-  <span>© MMXXVI · Danila Igoshin · Penza, RU</span>
-  <a href="/">danilaigoshin.com →</a>
-</footer>
+    <main class="case-main" id="main-content" tabindex="-1">
+      <header class="case-hero section-shell reveal">
+        <a class="case-back" href="/case/"><span aria-hidden="true">←</span> All case studies</a>
+        <p class="case-eyebrow">Case 01 · Platform modernization · Smartway</p>
+        <h1 class="case-title">Changing the foundation while delivery continued.</h1>
+        <p class="case-deck">
+          Three years of hands-on frontend ownership across a live corporate travel product:
+          migration, build tooling, runtime performance, product modules, and team practices.
+        </p>
+        <dl class="case-meta">
+          <div><dt>Company</dt><dd>Smartway</dd></div>
+          <div><dt>Role</dt><dd>Senior Frontend Engineer → Tech Lead</dd></div>
+          <div><dt>Period</dt><dd>Mar 2021—Feb 2024</dd></div>
+          <div><dt>Product</dt><dd>Corporate travel platform</dd></div>
+        </dl>
+      </header>
 
-</body>
+      <section class="case-cover section-shell reveal" aria-label="Product interface">
+        <figure>
+          <a class="case-cover-link" href="/public/smartway.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Smartway product screenshot in a new tab">
+            <img src="/public/smartway.webp" width="1672" height="941" fetchpriority="high" alt="Smartway corporate travel dashboard with booking search, approvals, and trip overview" />
+          </a>
+          <figcaption><span>Production product interface</span><span>Booking · trips · approvals · open full size ↗</span></figcaption>
+        </figure>
+      </section>
+
+      <article class="case-article section-shell">
+        <section class="case-section reveal">
+          <p class="case-section-label">01 / Situation</p>
+          <div class="case-prose">
+            <h2>A growing product on a frontend foundation that needed to grow with it.</h2>
+            <p>
+              Smartway brings flights, rail, hotels, taxis, transfers, approvals, trip management,
+              and expense analytics into one product. The frontend was already business-critical,
+              but its JavaScript codebase, Webpack feedback loop, and expanding state surface made
+              every new workflow more expensive to change.
+            </p>
+            <p>
+              The practical requirement was not a rewrite. Product delivery had to continue while
+              the foundation became typed, faster to build, easier to navigate, and more predictable
+              under load.
+            </p>
+            <dl class="case-brief">
+              <div><dt>Operating constraint</dt><dd>Modernize a live, multi-domain product without freezing roadmap delivery.</dd></div>
+              <div><dt>My ownership</dt><dd>Migration strategy, implementation, performance work, product modules, standards, and mentoring.</dd></div>
+              <div><dt>Primary users</dt><dd>Travelers, approvers, travel managers, and internal operational teams.</dd></div>
+              <div><dt>Evidence</dt><dd>Build timings, production profiling, completed migration scope, and shipped product behavior.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">02 / Constraint</p>
+          <div class="case-prose">
+            <h2>The system had several bottlenecks, but only one delivery calendar.</h2>
+            <p>
+              Type safety, build performance, cart rendering, internationalization, analytics,
+              mobile work, and team conventions were connected problems. Treating any one of them
+              as an isolated rewrite would have moved risk elsewhere.
+            </p>
+            <dl class="case-facts">
+              <div><dt>Codebase</dt><dd>A large JavaScript application plus a custom UI library moving toward TypeScript.</dd></div>
+              <div><dt>Feedback loop</dt><dd>Webpack builds were slow enough to interrupt the daily flow of the whole frontend team.</dd></div>
+              <div><dt>Runtime</dt><dd>The high-use shopping-cart flow paid for broad state updates and unnecessary rendering.</dd></div>
+              <div><dt>Team</dt><dd>More contributors required clearer boundaries, review standards, documentation, and shared ownership.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">03 / Decisions</p>
+          <div class="case-prose">
+            <h2>Incremental changes, each useful before the migration was complete.</h2>
+            <p>
+              The modernization was structured so feature teams could keep shipping. Each change
+              reduced an immediate constraint while making the next change safer.
+            </p>
+            <div class="case-decisions">
+              <article class="case-decision">
+                <span>01 · Migration</span>
+                <h3>Move the full codebase and UI library to TypeScript in slices.</h3>
+                <p>Introduced TypeScript, established usable boundaries, and completed the product-wide migration within one year without a stop-the-world rewrite.</p>
+              </article>
+              <article class="case-decision">
+                <span>02 · Build system</span>
+                <h3>Replace Webpack with Vite around active delivery.</h3>
+                <p>Changed the build pipeline while preserving the team's working product surface and integrations, then validated the improvement against real build timings.</p>
+              </article>
+              <article class="case-decision">
+                <span>03 · Runtime</span>
+                <h3>Narrow state ownership and render boundaries in the cart.</h3>
+                <p>Profiled the shopping flow, reduced the work triggered by common actions, and kept the optimization attached to the real user workload.</p>
+              </article>
+              <article class="case-decision">
+                <span>04 · Team system</span>
+                <h3>Make quality repeatable beyond one contributor.</h3>
+                <p>Established review and CI/CD practices, documented decisions, ran technical talks, and mentored three developers through regular code review.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">04 / Outcomes</p>
+          <div class="case-prose">
+            <h2>Faster feedback for the team and faster behavior for the customer.</h2>
+            <p>
+              The visible output included analytics, English-language support, and ongoing product
+              delivery. The deeper result was a frontend foundation that was easier to change and a
+              team with shared practices for keeping it that way.
+            </p>
+            <div class="case-results" aria-label="Project outcomes">
+              <div class="case-result"><strong>≈10×</strong><span>faster builds after moving from Webpack to Vite</span></div>
+              <div class="case-result"><strong>≈300%</strong><span>shopping-cart performance improvement after state and render restructuring</span></div>
+              <div class="case-result"><strong>100%</strong><span>TypeScript migration, including the custom UI library, completed within one year</span></div>
+            </div>
+            <p class="case-note"><strong>Measurement note.</strong> The performance figures come from internal build timings and production profiling. Smartway is a private product, so this public case describes scope, decisions, and outcomes without exposing internal code or customer data.</p>
+          </div>
+        </section>
+
+        <section class="case-section reveal">
+          <p class="case-section-label">05 / Scope</p>
+          <div class="case-prose">
+            <h2>Hands-on engineering with technical leadership attached.</h2>
+            <p>
+              I remained an individual contributor while taking responsibility for migration direction,
+              standards, documentation, technical talks, and mentoring. Product work included booking,
+              analytics, internationalization, and React Native surfaces.
+            </p>
+            <dl class="case-facts">
+              <div><dt>Role</dt><dd>Senior Frontend Engineer, later Tech Lead; implementation, design decisions, reviews, and mentoring.</dd></div>
+              <div><dt>Product areas</dt><dd>Booking, cart, analytics, localization, mobile, shared UI, build and delivery tooling.</dd></div>
+              <div><dt>Team impact</dt><dd>Three developers mentored alongside code-quality standards, CI/CD, internal documentation, and technical talks.</dd></div>
+            </dl>
+            <p class="case-stack-label">Technology used</p>
+            <ul class="case-stack" aria-label="Technology stack">
+              <li>React</li><li>TypeScript</li><li>Redux</li><li>MobX</li><li>React Query</li>
+              <li>Next.js</li><li>Vite</li><li>React Native</li><li>Storybook</li><li>Jenkins</li>
+            </ul>
+          </div>
+        </section>
+
+        <aside class="case-next reveal" aria-label="Next steps">
+          <div>
+            <p class="case-eyebrow">Next case · Zero-to-one delivery</p>
+            <h2>An EdTech product from empty repository to production.</h2>
+          </div>
+          <div class="case-next-actions">
+            <a href="/case/edtech/"><span>Read the EdTech case</span><span aria-hidden="true">→</span></a>
+            <a href="mailto:danigoshin@gmail.com?subject=Frontend%20engineering%20inquiry"><span>Discuss a frontend problem</span><span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </article>
+    </main>
+
+    <footer class="footer section-shell">
+      <p>© <span data-year>2026</span> Danila Igoshin</p>
+      <p>Case study · Smartway · 2021—2024</p>
+      <a href="/Danila_Igoshin_EMEA_Contract_CV.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+    </footer>
+  </body>
 </html>

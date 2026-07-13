@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Selected frontend engineering case studies by Danila Igoshin: product modernization, performance, migrations, and zero-to-one delivery."
+    />
+    <meta name="theme-color" content="#f4f6f8" />
+    <link rel="canonical" href="https://danilaigoshin.com/case/" />
+    <meta property="og:site_name" content="Danila Igoshin" />
+    <meta property="og:title" content="Frontend engineering case studies — Danila Igoshin" />
+    <meta property="og:description" content="Detailed product work: constraints, ownership, engineering decisions, and outcomes." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://danilaigoshin.com/case/" />
+    <meta property="og:image" content="https://danilaigoshin.com/public/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Case studies — Danila Igoshin · Senior Frontend Engineer</title>
+    <link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/case/styles.css" />
+    <script src="/script.js" defer></script>
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+    <header class="site-header" data-header>
+      <div class="nav-shell">
+        <a class="brand" href="/" aria-label="Danila Igoshin — home">
+          <span class="brand-mark" aria-hidden="true">D/I</span>
+          <span class="brand-copy">Danila Igoshin</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation" data-menu-toggle>
+          <span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
+          <div class="nav-panel" data-nav-panel>
+            <a href="/#work" data-nav-link>Work</a>
+            <a href="/#experience" data-nav-link>Experience</a>
+            <a href="/#services" data-nav-link>Services</a>
+            <a href="/#about" data-nav-link>About</a>
+            <a href="/#contact" data-nav-link>Contact</a>
+            <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
+              <a href="/cv/">Résumé <span aria-hidden="true">→</span></a>
+              <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+              <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+        <div class="nav-actions">
+          <span class="availability"><i aria-hidden="true"></i> Available now · UTC+3</span>
+          <a class="nav-email" href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </header>
+
+    <main class="case-main" id="main-content" tabindex="-1">
+      <section class="case-index-hero section-shell reveal">
+        <a class="case-back" href="/"><span aria-hidden="true">←</span> Portfolio</a>
+        <p class="case-eyebrow">Selected case studies · 02</p>
+        <h1 class="case-index-title">The decisions behind the shipped screen.</h1>
+        <p class="case-index-deck">
+          Two deeper accounts of product work: the operating constraint, what I owned,
+          why the implementation took its shape, and what changed in production.
+        </p>
+      </section>
+
+      <section class="case-grid section-shell" aria-label="Case studies">
+        <article class="case-card reveal">
+          <a href="/case/smartway/">
+            <div class="case-card-media">
+              <img src="/public/smartway.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Smartway corporate travel product interface" />
+            </div>
+            <div class="case-card-meta"><span>01 · Platform modernization</span><span>2021—2024</span></div>
+            <h2>Changing the frontend foundation while delivery continued.</h2>
+            <p>TypeScript adoption, Webpack-to-Vite, cart performance, analytics, standards, and technical leadership across a live travel platform.</p>
+            <span class="case-card-result"><strong>≈10×</strong> faster builds · <strong>≈300%</strong> cart improvement</span>
+          </a>
+        </article>
+
+        <article class="case-card reveal">
+          <a href="/case/edtech/">
+            <div class="case-card-media">
+              <img src="/public/online-institute.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Smart Online Institute course marketplace" />
+            </div>
+            <div class="case-card-meta"><span>02 · Zero-to-one delivery</span><span>2025</span></div>
+            <h2>From an empty repository to a production learning product.</h2>
+            <p>Sole frontend ownership across architecture, product workflows, a Next.js BFF, secure media, legacy migration, CI/CD, and deployment.</p>
+            <span class="case-card-result"><strong>≈5 mo.</strong> empty repository → production MVP</span>
+          </a>
+        </article>
+      </section>
+
+      <section class="case-index-note section-shell reveal">
+        <div>
+          <h2>More product evidence lives in the project index.</h2>
+          <p>The current AI research platform and the real-time support product stay concise because the work is private or ongoing. Their public scope and verified outcomes are documented on the homepage.</p>
+        </div>
+        <a class="secondary-link" href="/#work">Open selected work <span aria-hidden="true">→</span></a>
+      </section>
+    </main>
+
+    <footer class="footer section-shell">
+      <p>© <span data-year>2026</span> Danila Igoshin</p>
+      <p>Senior frontend engineering · React / TypeScript / Next.js</p>
+      <a href="/#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+    </footer>
+  </body>
+</html>
