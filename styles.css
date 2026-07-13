@@ -424,6 +424,8 @@ p {
 }
 
 .project-browser {
+  --work-grid-columns: repeat(4, minmax(0, 1fr));
+
   min-width: 0;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -467,7 +469,7 @@ p {
 
 .evidence-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: var(--work-grid-columns);
   padding: 0;
   margin: 0;
   border-bottom: 1px solid var(--line);
@@ -515,7 +517,7 @@ p {
 
 .browser-layout {
   display: grid;
-  grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.7fr);
+  grid-template-columns: var(--work-grid-columns);
   align-items: start;
 }
 
@@ -1665,6 +1667,36 @@ html:not(.js) .contact-email-row button {
 }
 
 /* Responsive */
+
+@media (min-width: 1221px) {
+  .js .project-list {
+    grid-column: 1;
+  }
+
+  .js .project-stage {
+    grid-column: 2 / -1;
+  }
+
+  .project-tab {
+    grid-template-columns: 30px minmax(0, 1fr) max-content;
+    column-gap: 8px;
+    min-height: 120px;
+    padding-inline: 14px;
+  }
+
+  .tab-copy strong,
+  .tab-copy small {
+    overflow: visible;
+    text-overflow: initial;
+    white-space: normal;
+  }
+
+  .tab-result {
+    justify-self: end;
+    text-align: right;
+    white-space: nowrap;
+  }
+}
 
 @media (max-width: 1220px) {
   :root {
