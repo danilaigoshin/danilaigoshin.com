@@ -1965,6 +1965,7 @@ html:not(.js) .contact-email-row button {
     height: 100vh;
     height: 100dvh;
     padding: 0;
+    overflow: hidden;
     border: 0;
     background: rgba(15, 23, 34, 0.12);
     opacity: 0;
