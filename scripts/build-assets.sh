@@ -77,6 +77,7 @@ cp "$PDF_OUTPUT_DIR/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" "$ROOT/Danil
 
 chrome_to_file "$TMP_DIR/og-image@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-image@2x.png" "file://$ROOT/art/og-image.html"
 chrome_to_file "$TMP_DIR/og-cv@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-cv@2x.png" "file://$ROOT/art/og-cv.html"
+chrome_to_file "$TMP_DIR/og-smartway@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-smartway@2x.png" "file://$ROOT/art/og-smartway.html"
 chrome_to_file "$TMP_DIR/linkedin-banner@2x.png" 2 --window-size=3168,792 --screenshot="$TMP_DIR/linkedin-banner@2x.png" "file://$ROOT/art/linkedin-banner.html"
 
 rm -f \
@@ -85,12 +86,14 @@ rm -f \
   "$ROOT/public/linkedin-banner.jpg" \
   "$ROOT/public/og-image.png" \
   "$ROOT/public/og-cv.png" \
+  "$ROOT/public/og-smartway.png" \
   "$ROOT/public/linkedin-banner.png"
 
 # Keep the Open Graph cards at the full 2x render size. The flat, text-heavy
 # artwork stays lossless in PNG, avoiding JPEG ringing and chroma blur.
 cp "$TMP_DIR/og-image@2x.png" "$ROOT/public/og-image.png"
 cp "$TMP_DIR/og-cv@2x.png" "$ROOT/public/og-cv.png"
+cp "$TMP_DIR/og-smartway@2x.png" "$ROOT/public/og-smartway.png"
 
 # LinkedIn recommends a 1584x396 canvas. This 2x deliverable is first rendered
 # at 4x and then downsampled once for cleaner type and rules on high-DPI screens.

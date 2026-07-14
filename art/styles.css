@@ -312,6 +312,18 @@ body {
   width: 75%;
 }
 
+/* Smartway case-study card */
+
+.artboard-smartway .art-main {
+  grid-template-columns: minmax(0, 1.22fr) minmax(300px, 0.78fr);
+  gap: 64px;
+}
+
+.artboard-smartway .art-title {
+  max-width: 740px;
+  font-size: 76px;
+}
+
 /* LinkedIn banner */
 
 .artboard-banner {

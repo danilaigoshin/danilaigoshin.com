@@ -294,7 +294,7 @@ p {
 
 .portfolio-layout {
   display: grid;
-  grid-template-columns: minmax(255px, 0.72fr) minmax(0, 2.28fr);
+  grid-template-columns: minmax(255px, 0.78fr) minmax(0, 2.22fr);
   gap: clamp(30px, 4vw, 62px);
   align-items: start;
 }
@@ -902,7 +902,7 @@ html:not(.js) .project-panel + .project-panel {
 .project-kpi strong {
   display: block;
   margin: 15px 0 13px;
-  font-size: clamp(3.6rem, 6vw, 6.4rem);
+  font-size: clamp(3.15rem, 5.25vw, 5.6rem);
   font-weight: 560;
   letter-spacing: -0.075em;
   line-height: 0.82;
@@ -1708,7 +1708,7 @@ html:not(.js) .contact-email-row button {
   }
 
   .portfolio-layout {
-    grid-template-columns: minmax(230px, 0.6fr) minmax(0, 2.4fr);
+    grid-template-columns: minmax(230px, 0.66fr) minmax(0, 2.34fr);
     gap: 32px;
   }
 
@@ -2434,7 +2434,7 @@ html:not(.js) .contact-email-row button {
   }
 
   .project-kpi strong {
-    font-size: clamp(3.8rem, 18vw, 5.2rem);
+    font-size: clamp(3.3rem, 15.75vw, 4.55rem);
   }
 
   .project-kpi-description {
