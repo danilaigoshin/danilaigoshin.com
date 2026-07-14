@@ -52,6 +52,8 @@ build/
 .vercel/
 
 # Temp / backup
+output/
+tmp/
 *.tmp
 *.temp
 *.bak

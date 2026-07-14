@@ -66,14 +66,14 @@ chrome_to_file() {
   wait "$CHROME_PID" 2>/dev/null || true
 }
 
-chrome_to_file "$PDF_OUTPUT_DIR/Danila_Igoshin_EMEA_Contract_CV.pdf" \
+chrome_to_file "$PDF_OUTPUT_DIR/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" \
   1 \
   --no-pdf-header-footer \
   --print-to-pdf-no-header \
-  --print-to-pdf="$PDF_OUTPUT_DIR/Danila_Igoshin_EMEA_Contract_CV.pdf" \
+  --print-to-pdf="$PDF_OUTPUT_DIR/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" \
   "file://$ROOT/cv/index.html"
 
-cp "$PDF_OUTPUT_DIR/Danila_Igoshin_EMEA_Contract_CV.pdf" "$ROOT/Danila_Igoshin_EMEA_Contract_CV.pdf"
+cp "$PDF_OUTPUT_DIR/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" "$ROOT/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf"
 
 chrome_to_file "$TMP_DIR/og-image@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-image@2x.png" "file://$ROOT/art/og-image.html"
 chrome_to_file "$TMP_DIR/og-cv@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-cv@2x.png" "file://$ROOT/art/og-cv.html"
