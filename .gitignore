@@ -29,6 +29,7 @@ $RECYCLE.BIN/
 .claude/
 .cursor/
 .aider*
+.kilo
 
 # Logs
 *.log

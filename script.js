@@ -11,7 +11,7 @@
     const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const menuBackground = Array.from(
-      document.querySelectorAll("body > .skip-link, main, body > footer, .nav-actions"),
+      document.querySelectorAll("body > .skip-link, main, body > .page-finale, body > footer, .nav-actions"),
     );
 
     const isMenuOpen = () => menuButton?.getAttribute("aria-expanded") === "true";
@@ -265,10 +265,8 @@
           const previewCaption = link
             .closest("figure")
             ?.querySelector("figcaption")
-            ?.textContent?.trim();
-          lightboxCaption.textContent =
-            previewCaption?.replace(/\s*·\s*open image for full size\s*$/i, "") ||
-            preview.alt;
+            ?.firstElementChild?.textContent?.trim();
+          lightboxCaption.textContent = previewCaption || preview.alt;
           document.documentElement.classList.add("lightbox-open");
           document.body.classList.add("lightbox-open");
           lightbox.showModal();

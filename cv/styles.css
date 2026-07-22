@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/public/fonts/InterVariable.woff2") format("woff2");
+}
+
 :root {
   --paper: #ffffff;
   --canvas: #e9edf1;
@@ -6,10 +14,10 @@
   --faint: #7b848e;
   --line: #d9dee4;
   --line-strong: #bfc7cf;
-  --accent: #536b88;
-  --accent-dark: #30445b;
-  --soft: #edf1f5;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --accent: #3f5d7e;
+  --accent-dark: #263749;
+  --soft: #e4eaf0;
+  --sans: "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
@@ -142,8 +150,8 @@ a {
   margin: 0 0 2mm;
   font-size: 28pt;
   font-weight: 650;
-  letter-spacing: -0.065em;
-  line-height: 0.95;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
 }
 
 .resume-role {
