@@ -29,16 +29,41 @@
 
     <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="public/my_photo_320.jpg" as="image" fetchpriority="high" />
+    <link
+      rel="preload"
+      href="public/my_photo_320.jpg"
+      as="image"
+      imagesrcset="public/my_photo_320.jpg 320w, public/my_photo_640.jpg 640w"
+      imagesizes="52px"
+      fetchpriority="high"
+    />
+    <script data-js-bootstrap>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add("js");
+        window.addEventListener(
+          "error",
+          (event) => {
+            if (
+              event.target instanceof HTMLScriptElement &&
+              event.target.hasAttribute("data-enhancements")
+            ) {
+              root.classList.remove("js", "js-ready");
+            }
+          },
+          true,
+        );
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <script src="script.js" defer data-enhancements></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Danila Igoshin",
         "url": "https://danilaigoshin.com/",
-        "image": "https://danilaigoshin.com/public/my_photo_320.jpg",
+        "image": "https://danilaigoshin.com/public/my_photo_640.jpg",
         "jobTitle": "Senior Frontend Engineer",
         "email": "mailto:danigoshin@gmail.com",
         "knowsAbout": [
@@ -115,6 +140,8 @@
             <div class="intro-profile">
               <img
                 src="public/my_photo_320.jpg"
+                srcset="public/my_photo_320.jpg 320w, public/my_photo_640.jpg 640w"
+                sizes="52px"
                 width="320"
                 height="320"
                 fetchpriority="high"
@@ -865,6 +892,8 @@
           <figure class="about-portrait reveal">
             <img
               src="public/my_photo_320.jpg"
+              srcset="public/my_photo_320.jpg 320w, public/my_photo_640.jpg 640w"
+              sizes="(max-width: 480px) 130px, (max-width: 767px) 220px, 320px"
               width="320"
               height="320"
               loading="lazy"

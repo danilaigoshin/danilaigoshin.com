@@ -385,14 +385,17 @@
     const year = document.querySelector("[data-year]");
     if (year) year.textContent = String(new Date().getFullYear());
 
-    // The opt-in class is added only after every enhancement has initialized.
+    // Keep the drawer closed from the first render, then enable user-triggered motion.
     document.documentElement.classList.add("js");
+    window.requestAnimationFrame(() => {
+      document.documentElement.classList.add("js-ready");
+    });
   };
 
   try {
     initializeEnhancements();
   } catch (error) {
-    document.documentElement.classList.remove("js");
+    document.documentElement.classList.remove("js", "js-ready");
     console.error("Progressive enhancements could not be initialized.", error);
   }
 })();

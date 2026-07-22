@@ -2180,6 +2180,9 @@ html:not(.js) .contact-email-row button {
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
+  }
+
+  .js.js-ready .site-nav {
     transition: opacity 160ms ease, visibility 0s linear 210ms;
   }
 
@@ -2208,6 +2211,9 @@ html:not(.js) .contact-email-row button {
     background: var(--canvas);
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .js.js-ready .nav-panel {
     transition: transform 210ms var(--ease);
   }
 
