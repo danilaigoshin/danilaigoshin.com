@@ -1,6 +1,15 @@
 (function () {
   "use strict";
 
+  const loadDeferredImages = (container) => {
+    container.querySelectorAll("img[data-src]").forEach((image) => {
+      if (image.dataset.srcset) image.srcset = image.dataset.srcset;
+      image.src = image.dataset.src;
+      image.removeAttribute("data-src");
+      image.removeAttribute("data-srcset");
+    });
+  };
+
   const initializeEnhancements = () => {
     const header = document.querySelector("[data-header]");
     const progress = document.querySelector(".scroll-progress span");
@@ -187,6 +196,8 @@
       const nextTab = projectTabs.find((tab) => tab.dataset.projectTab === projectId);
       const nextPanel = projectPanels.find((panel) => panel.dataset.projectPanel === projectId);
       if (!nextTab || !nextPanel) return;
+
+      loadDeferredImages(nextPanel);
 
       projectTabs.forEach((tab) => {
         const isActive = tab === nextTab;
@@ -396,6 +407,10 @@
     initializeEnhancements();
   } catch (error) {
     document.documentElement.classList.remove("js", "js-ready");
+    loadDeferredImages(document);
+    document.querySelectorAll("[data-project-panel]").forEach((panel) => {
+      panel.hidden = false;
+    });
     console.error("Progressive enhancements could not be initialized.", error);
   }
 })();

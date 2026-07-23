@@ -29,17 +29,22 @@
 
     <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link
-      rel="preload"
-      href="public/my_photo_320.jpg"
-      as="image"
-      imagesrcset="public/my_photo_320.jpg 320w, public/my_photo_640.jpg 640w"
-      imagesizes="52px"
-      fetchpriority="high"
-    />
     <script data-js-bootstrap>
       (() => {
         const root = document.documentElement;
+        const restoreStaticFallback = () => {
+          root.classList.remove("js", "js-ready");
+          document.querySelectorAll("[data-project-panel]").forEach((panel) => {
+            panel.hidden = false;
+          });
+          document.querySelectorAll("img[data-src]").forEach((image) => {
+            if (image.dataset.srcset) image.srcset = image.dataset.srcset;
+            image.src = image.dataset.src;
+            image.removeAttribute("data-src");
+            image.removeAttribute("data-srcset");
+          });
+        };
+
         root.classList.add("js");
         window.addEventListener(
           "error",
@@ -48,7 +53,13 @@
               event.target instanceof HTMLScriptElement &&
               event.target.hasAttribute("data-enhancements")
             ) {
-              root.classList.remove("js", "js-ready");
+              if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", restoreStaticFallback, {
+                  once: true,
+                });
+              } else {
+                restoreStaticFallback();
+              }
             }
           },
           true,
@@ -136,15 +147,20 @@
     <main id="main-content" tabindex="-1">
       <section class="portfolio-home" id="top" aria-label="Portfolio introduction and selected work">
         <div class="portfolio-layout section-shell">
-          <aside class="intro-panel reveal">
+          <aside class="intro-panel">
             <div class="intro-profile">
               <img
-                src="public/my_photo_320.jpg"
-                srcset="public/my_photo_320.jpg 320w, public/my_photo_640.jpg 640w"
+                src="public/optimized/v1/my_photo-104.webp"
+                srcset="
+                  public/optimized/v1/my_photo-104.webp 104w,
+                  public/optimized/v1/my_photo-160.webp 160w,
+                  public/optimized/v1/my_photo-320.webp 320w,
+                  public/optimized/v1/my_photo-640.webp 640w
+                "
                 sizes="52px"
-                width="320"
-                height="320"
-                fetchpriority="high"
+                width="104"
+                height="104"
+                decoding="async"
                 alt="Danila Igoshin"
               />
               <div>
@@ -178,7 +194,7 @@
           </aside>
 
           <section
-            class="project-browser reveal"
+            class="project-browser"
             id="work"
             aria-labelledby="work-title"
             data-section
@@ -311,7 +327,13 @@
                       aria-label="Open the full-size AI-assisted research workspace screenshot in an image viewer"
                     >
                       <img
-                        src="public/ai4s.webp"
+                        src="public/optimized/v1/ai4s-720.webp"
+                        srcset="
+                          public/optimized/v1/ai4s-720.webp 720w,
+                          public/optimized/v1/ai4s-1080.webp 1080w,
+                          public/optimized/v1/ai4s-1440.webp 1440w
+                        "
+                        sizes="(max-width: 900px) calc(100vw - 72px), (max-width: 1220px) 56vw, min(710px, calc(55vw - 110px))"
                         width="3024"
                         height="1472"
                         loading="lazy"
@@ -424,13 +446,35 @@
                       aria-label="Open the full-size Smartway Support production interface in an image viewer"
                     >
                       <img
-                        src="public/chat.webp"
+                        data-src="public/optimized/v1/chat-720.webp"
+                        data-srcset="
+                          public/optimized/v1/chat-720.webp 720w,
+                          public/optimized/v1/chat-1080.webp 1080w,
+                          public/optimized/v1/chat-1440.webp 1440w
+                        "
+                        sizes="(max-width: 900px) calc(100vw - 72px), (max-width: 1220px) 56vw, min(710px, calc(55vw - 110px))"
                         width="1672"
                         height="941"
                         loading="lazy"
                         decoding="async"
                         alt="Customer-support workspace with a ticket queue, conversation, and request details"
                       />
+                      <noscript>
+                        <img
+                          src="public/optimized/v1/chat-720.webp"
+                          srcset="
+                            public/optimized/v1/chat-720.webp 720w,
+                            public/optimized/v1/chat-1080.webp 1080w,
+                            public/optimized/v1/chat-1440.webp 1440w
+                          "
+                          sizes="(max-width: 900px) calc(100vw - 72px), (max-width: 1220px) 56vw, min(710px, calc(55vw - 110px))"
+                          width="1672"
+                          height="941"
+                          loading="lazy"
+                          decoding="async"
+                          alt="Customer-support workspace with a ticket queue, conversation, and request details"
+                        />
+                      </noscript>
                     </a>
                     <figcaption>
                       <span>Production interface</span>
@@ -526,13 +570,35 @@
                       aria-label="Open the full-size Smartway travel platform production interface in an image viewer"
                     >
                       <img
-                        src="public/smartway.webp"
+                        data-src="public/optimized/v1/smartway-720.webp"
+                        data-srcset="
+                          public/optimized/v1/smartway-720.webp 720w,
+                          public/optimized/v1/smartway-1080.webp 1080w,
+                          public/optimized/v1/smartway-1440.webp 1440w
+                        "
+                        sizes="(max-width: 900px) calc(100vw - 72px), (max-width: 1220px) 56vw, min(710px, calc(55vw - 110px))"
                         width="1672"
                         height="941"
                         loading="lazy"
                         decoding="async"
                         alt="Smartway corporate travel dashboard with booking search, approvals, and trip overview"
                       />
+                      <noscript>
+                        <img
+                          src="public/optimized/v1/smartway-720.webp"
+                          srcset="
+                            public/optimized/v1/smartway-720.webp 720w,
+                            public/optimized/v1/smartway-1080.webp 1080w,
+                            public/optimized/v1/smartway-1440.webp 1440w
+                          "
+                          sizes="(max-width: 900px) calc(100vw - 72px), (max-width: 1220px) 56vw, min(710px, calc(55vw - 110px))"
+                          width="1672"
+                          height="941"
+                          loading="lazy"
+                          decoding="async"
+                          alt="Smartway corporate travel dashboard with booking search, approvals, and trip overview"
+                        />
+                      </noscript>
                     </a>
                     <figcaption>
                       <span>Production interface</span>
@@ -640,13 +706,35 @@
                       aria-label="Open the full-size Smart Online Institute production interface in an image viewer"
                     >
                       <img
-                        src="public/online-institute.webp"
+                        data-src="public/optimized/v1/online-institute-720.webp"
+                        data-srcset="
+                          public/optimized/v1/online-institute-720.webp 720w,
+                          public/optimized/v1/online-institute-1080.webp 1080w,
+                          public/optimized/v1/online-institute-1440.webp 1440w
+                        "
+                        sizes="(max-width: 900px) calc(100vw - 72px), (max-width: 1220px) 56vw, min(710px, calc(55vw - 110px))"
                         width="1672"
                         height="941"
                         loading="lazy"
                         decoding="async"
                         alt="Psychology course marketplace with navigation, featured event, and course cards"
                       />
+                      <noscript>
+                        <img
+                          src="public/optimized/v1/online-institute-720.webp"
+                          srcset="
+                            public/optimized/v1/online-institute-720.webp 720w,
+                            public/optimized/v1/online-institute-1080.webp 1080w,
+                            public/optimized/v1/online-institute-1440.webp 1440w
+                          "
+                          sizes="(max-width: 900px) calc(100vw - 72px), (max-width: 1220px) 56vw, min(710px, calc(55vw - 110px))"
+                          width="1672"
+                          height="941"
+                          loading="lazy"
+                          decoding="async"
+                          alt="Psychology course marketplace with navigation, featured event, and course cards"
+                        />
+                      </noscript>
                     </a>
                     <figcaption>
                       <span>Production interface</span>
@@ -891,8 +979,12 @@
         <div class="about-layout">
           <figure class="about-portrait reveal">
             <img
-              src="public/my_photo_320.jpg"
-              srcset="public/my_photo_320.jpg 320w, public/my_photo_640.jpg 640w"
+              src="public/optimized/v1/my_photo-320.webp"
+              srcset="
+                public/optimized/v1/my_photo-160.webp 160w,
+                public/optimized/v1/my_photo-320.webp 320w,
+                public/optimized/v1/my_photo-640.webp 640w
+              "
               sizes="(max-width: 480px) 130px, (max-width: 767px) 220px, 320px"
               width="320"
               height="320"

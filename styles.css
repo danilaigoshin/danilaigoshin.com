@@ -12,7 +12,7 @@
   --surface-muted: #eceff2;
   --ink: #15181d;
   --muted: #59616b;
-  --faint: #68717b;
+  --faint: #646d77;
   --line: #dde1e6;
   --line-strong: #c6ccd3;
   --accent: #3f5d7e;
@@ -723,6 +723,14 @@ html:not(.js) .project-stage {
   min-width: 0;
 }
 
+.js .project-panel:not(.is-active) {
+  display: none;
+}
+
+html:not(.js) img[data-src] {
+  display: none;
+}
+
 .js .project-panel {
   animation: panel-in 340ms var(--ease);
 }
@@ -925,7 +933,7 @@ html:not(.js) .project-panel + .project-panel {
 }
 
 .detail-number {
-  color: var(--line-strong);
+  color: #87909a;
   font-family: var(--font-mono);
   font-size: clamp(2rem, 3.2vw, 3.8rem);
   line-height: 0.9;
@@ -1719,7 +1727,7 @@ html:not(.js) .contact-email-row button {
   gap: 20px;
   padding-block: 26px 34px;
   border-top: 1px solid var(--line-inverse);
-  color: rgba(232, 235, 238, 0.48);
+  color: rgba(232, 235, 238, 0.52);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.04em;
