@@ -1610,12 +1610,21 @@ html:not(.js) .project-panel + .project-panel {
   line-height: 1.0;
 }
 
-.contact-copy > p:last-child {
+.contact-copy > p:not(.section-label) {
   max-width: 540px;
   margin: 0;
   color: var(--muted-inverse);
   font-size: 16px;
   line-height: 1.55;
+}
+
+.contact-copy > p.contact-logistics {
+  max-width: 560px;
+  padding-top: 18px;
+  margin-top: 20px;
+  border-top: 1px solid var(--line-inverse);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .contact-action {
