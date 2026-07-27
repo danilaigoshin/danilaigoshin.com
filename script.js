@@ -93,6 +93,18 @@
 
       brandLink?.addEventListener("click", closeMenu);
 
+      // Past this width the toggle is hidden and the nav is inline, so an open
+      // drawer would leave the page inert with no way to dismiss it.
+      const inlineNav = window.matchMedia("(min-width: 1281px)");
+      const syncNavMode = () => {
+        if (inlineNav.matches && isMenuOpen()) closeMenu();
+      };
+      if (inlineNav.addEventListener) {
+        inlineNav.addEventListener("change", syncNavMode);
+      } else {
+        inlineNav.addListener(syncNavMode);
+      }
+
       navigation.addEventListener("click", (event) => {
         if (event.target !== navigation || !navigationPanel) return;
         closeMenu({ restoreFocus: true });
