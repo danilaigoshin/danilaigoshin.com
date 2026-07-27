@@ -12,8 +12,9 @@
   --ink: #171b21;
   --muted: #5f6873;
   --faint: #7b848e;
-  --line: #d9dee4;
-  --line-strong: #bfc7cf;
+  --line: #d3d9df;
+  --line-strong: #b0b8c0;
+  --line-control: #868f9a;
   --accent: #3f5d7e;
   --accent-dark: #263749;
   --soft: #e4eaf0;
@@ -65,7 +66,7 @@ a {
   align-items: center;
   min-height: 38px;
   padding: 0 13px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line-control);
   background: var(--paper);
   font-size: 12px;
   font-weight: 700;
@@ -73,7 +74,7 @@ a {
 
 .resume-toolbar a:hover,
 .resume-toolbar a:focus-visible {
-  border-color: var(--ink);
+  border-color: var(--accent);
 }
 
 .resume-toolbar p {

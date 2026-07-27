@@ -13,9 +13,13 @@
   --ink: #15181d;
   --muted: #59616b;
   --faint: #646d77;
-  --line: #dde1e6;
-  --line-soft: #e8ebef;
-  --line-strong: #c6ccd3;
+  /* Four visible steps: internal divider, module border, structural emphasis,
+     and control boundary. The last one clears 3:1 on both canvas and white so
+     a button reads as a button without leaning on its label alone. */
+  --line-soft: #e2e6ea;
+  --line: #d3d9df;
+  --line-strong: #b0b8c0;
+  --line-control: #868f9a;
   --accent: #3f5d7e;
   --accent-dark: #263749;
   --accent-soft: #e4eaf0;
@@ -29,7 +33,11 @@
   --focus-inverse: #9db4c8;
   --shell: min(1420px, calc(100vw - 64px));
   --font-sans: "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  /* Mono carries the eyebrows, indices, metrics and captions, so the fallbacks
+     are ordered by how closely they match SF Mono's width rather than by
+     ubiquity — the texture holds up off Apple platforms. */
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", Consolas, "Liberation Mono", monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -152,7 +160,7 @@ p {
   height: 100%;
   transform: scaleX(0);
   transform-origin: left;
-  background: var(--accent-dark);
+  background: var(--accent);
 }
 
 /* Header */
@@ -330,7 +338,7 @@ p {
   align-items: center;
   min-height: 38px;
   padding: 0 13px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line-control);
   background: var(--surface);
   font-size: 11px;
   font-weight: 700;
@@ -348,7 +356,7 @@ p {
   width: 42px;
   height: 42px;
   padding: 0;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line-control);
   background: var(--surface);
   cursor: pointer;
 }
@@ -447,7 +455,7 @@ p {
   align-items: center;
   min-height: 44px;
   padding: 0 13px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line-control);
   background: var(--surface);
   font-size: 13px;
   font-weight: 700;
@@ -732,7 +740,7 @@ html:not(.js) .project-stage {
 }
 
 .project-tab.is-active .tab-index {
-  color: var(--ink);
+  color: var(--accent);
 }
 
 .tab-result {
@@ -745,7 +753,7 @@ html:not(.js) .project-stage {
 }
 
 .project-tab.is-active .tab-result {
-  border-color: var(--line-strong);
+  border-color: var(--line-control);
   background: var(--accent-soft);
 }
 
@@ -815,12 +823,15 @@ html:not(.js) .project-panel + .project-panel {
   background: var(--surface);
 }
 
+/* The brightest colour on the page belongs to other companies' products, so
+   every screenshot sits in the same frame-plus-caption-band the case covers
+   use — it always reads as quoted material, never as the site's own palette. */
 .project-media-link {
   position: relative;
   display: block;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   background: var(--surface-muted);
   cursor: zoom-in;
 }
@@ -833,7 +844,7 @@ html:not(.js) .project-panel + .project-panel {
   align-items: center;
   min-height: 30px;
   padding: 0 11px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line-control);
   background: rgba(255, 255, 255, 0.94);
   color: var(--accent-dark);
   font-family: var(--font-mono);
@@ -871,6 +882,8 @@ html:not(.js) .project-panel + .project-panel {
 
 .project-media figcaption {
   padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
   color: var(--faint);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -1337,6 +1350,18 @@ html:not(.js) .project-panel + .project-panel {
   border-top: 1px solid var(--line);
 }
 
+/* One full-bleed light band breaks up a page that is otherwise a single canvas
+   value from the hero to the dark closing block. */
+.approach {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.approach .service-grid {
+  background: transparent;
+  box-shadow: none;
+}
+
 .section-heading {
   display: grid;
   grid-template-columns: minmax(190px, 0.7fr) minmax(0, 2.3fr);
@@ -1370,6 +1395,65 @@ html:not(.js) .project-panel + .project-panel {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.55;
+}
+
+/* Three sections used to share one header shape, which made the page skimmable
+   in the wrong way — by the third repeat the eye knew the form and stopped
+   reading. Each now composes the same parts differently. */
+
+/* Experience: the eyebrow sits on the headline's baseline and the blurb drops
+   beneath it, so the header reads as a caption for the table below. */
+.section-heading-rule {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 22px;
+  align-items: baseline;
+}
+
+.section-heading-rule .section-label {
+  margin: 0;
+}
+
+.section-heading-rule > div {
+  display: block;
+}
+
+.section-heading-rule > div > p {
+  max-width: 640px;
+  margin-top: 22px;
+}
+
+/* Services opens the light band, so it runs as a spread: eyebrow, the widest
+   headline on the page, then the blurb as a lead paragraph rather than a rail. */
+.section-heading-lead {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.section-heading-lead .section-label {
+  margin: 0 0 20px;
+}
+
+.section-heading-lead > div {
+  display: block;
+}
+
+.section-heading-lead h2 {
+  max-width: 980px;
+  font-size: clamp(2.3rem, 3.6vw, 4.1rem);
+}
+
+.section-heading-lead > div > p {
+  max-width: 620px;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* About keeps the left rail but runs a single full-width headline; the domain
+   list it used to carry moved into the facts list below, where it reads as a
+   fact rather than as a second subtitle. */
+.section-heading-compact > div {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .career-columns {
@@ -1652,6 +1736,12 @@ html:not(.js) .project-panel + .project-panel {
   border-right: 0;
 }
 
+/* An odd number of facts would otherwise leave a half-drawn row at the end. */
+.about-facts > div:last-child:nth-child(2n + 1) {
+  grid-column: 1 / -1;
+  border-right: 0;
+}
+
 .about-facts dd {
   margin: 0;
   color: var(--muted);
@@ -1665,7 +1755,7 @@ html:not(.js) .project-panel + .project-panel {
   align-items: center;
   min-height: 44px;
   padding: 0 13px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line-control);
   background: var(--surface);
   font-size: 13px;
   font-weight: 700;
@@ -1925,17 +2015,25 @@ html:not(.js) .contact-email-row button {
   }
 
   .experience::before,
-  .approach::before,
   .about::before,
   .project-browser::before {
     left: -6px;
   }
 
   .experience::after,
-  .approach::after,
   .about::after,
   .project-browser::after {
     right: -6px;
+  }
+
+  /* Services runs full-bleed, so its marks sit on the shell edge rather than
+     the viewport edge — otherwise they hang 6px past it and scroll the page. */
+  .approach::before {
+    left: calc((100% - var(--shell)) / 2 - 6px);
+  }
+
+  .approach::after {
+    right: calc((100% - var(--shell)) / 2 - 6px);
   }
 }
 
