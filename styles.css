@@ -1347,14 +1347,13 @@ html:not(.js) .project-panel + .project-panel {
 .experience,
 .approach {
   padding-block: clamp(78px, 7vw, 112px);
-  border-top: 1px solid var(--line);
 }
 
 /* One full-bleed light band breaks up a page that is otherwise a single canvas
-   value from the hero to the dark closing block. */
+   value from the hero to the dark closing block. The value change is the
+   boundary — a rule on top of it only crowds the headline below. */
 .approach {
   background: var(--surface);
-  border-bottom: 1px solid var(--line);
 }
 
 .approach .service-grid {
@@ -1672,7 +1671,6 @@ html:not(.js) .project-panel + .project-panel {
 
 .about {
   padding-block: clamp(78px, 7vw, 112px);
-  border-top: 1px solid var(--line);
 }
 
 .about-layout {
@@ -1984,57 +1982,6 @@ html:not(.js) .contact-email-row button {
 
 .footer a:hover span[aria-hidden] {
   transform: translateY(-2px);
-}
-
-@media (min-width: 761px) {
-  .experience,
-  .approach,
-  .about,
-  .project-browser {
-    position: relative;
-  }
-
-  .experience::before,
-  .experience::after,
-  .approach::before,
-  .approach::after,
-  .about::before,
-  .about::after,
-  .project-browser::before,
-  .project-browser::after {
-    position: absolute;
-    top: -6px;
-    z-index: 2;
-    width: 13px;
-    height: 13px;
-    background:
-      linear-gradient(var(--line-strong), var(--line-strong)) center / 13px 1px no-repeat,
-      linear-gradient(var(--line-strong), var(--line-strong)) center / 1px 13px no-repeat;
-    content: "";
-    pointer-events: none;
-  }
-
-  .experience::before,
-  .about::before,
-  .project-browser::before {
-    left: -6px;
-  }
-
-  .experience::after,
-  .about::after,
-  .project-browser::after {
-    right: -6px;
-  }
-
-  /* Services runs full-bleed, so its marks sit on the shell edge rather than
-     the viewport edge — otherwise they hang 6px past it and scroll the page. */
-  .approach::before {
-    left: calc((100% - var(--shell)) / 2 - 6px);
-  }
-
-  .approach::after {
-    right: calc((100% - var(--shell)) / 2 - 6px);
-  }
 }
 
 /* Motion and interaction */
