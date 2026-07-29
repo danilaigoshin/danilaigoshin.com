@@ -1684,8 +1684,11 @@ html:not(.js) .project-panel + .project-panel {
   margin: 0;
 }
 
+/* The height attribute survives as a presentational hint, so height must be
+   reset explicitly or the square source gets sliced by object-fit. */
 .about-portrait img {
   width: min(100%, 320px);
+  height: auto;
   aspect-ratio: 1;
   object-fit: cover;
   filter: saturate(0.68) contrast(1.03);
@@ -1700,6 +1703,13 @@ html:not(.js) .project-panel + .project-panel {
   font-size: 12px;
   line-height: 1.5;
   text-transform: uppercase;
+}
+
+/* The markup keeps one fact per span so mobile can rule them into rows; the
+   separator is restored here for the single-line desktop caption. */
+.about-portrait figcaption span + span::before {
+  content: "·";
+  margin-right: 0.35em;
 }
 
 .about-copy > p {
@@ -2731,19 +2741,48 @@ html:not(.js) .contact-email-row button {
     grid-template-columns: 1fr;
   }
 
+  /* Beside the portrait the caption becomes a ruled stack, so the right-hand
+     column carries the same height as the photo instead of trailing off. */
   .about-portrait {
     display: grid;
-    grid-template-columns: minmax(140px, 220px) minmax(0, 1fr);
-    gap: 22px;
-    align-items: end;
+    grid-template-columns: min(44%, 210px) minmax(0, 1fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .about-portrait img {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 4 / 5;
   }
 
   .about-portrait figcaption {
-    border-top: 1px solid var(--line);
+    display: flex;
+    max-width: none;
+    padding: 0;
+    flex-direction: column;
+    border-bottom: 0;
+    color: var(--muted);
     font-family: var(--font-sans);
-    font-size: 12.5px;
+    font-size: 13px;
     letter-spacing: 0;
     text-transform: none;
+  }
+
+  .about-portrait figcaption span {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .about-portrait figcaption span:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .about-portrait figcaption span + span::before {
+    content: none;
   }
 
   .contact {
@@ -2898,10 +2937,6 @@ html:not(.js) .contact-email-row button {
 
   .service-item h3 {
     margin-top: 34px;
-  }
-
-  .about-portrait {
-    grid-template-columns: 130px minmax(0, 1fr);
   }
 
   .about-facts {
