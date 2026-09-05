@@ -229,6 +229,8 @@ body {
   width: 280px;
   height: 340px;
   justify-self: end;
+  transform: scale(0.85);
+  transform-origin: center;
 }
 
 .cv-sheet::before,

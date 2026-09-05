@@ -1,15 +1,6 @@
 (function () {
   "use strict";
 
-  const loadDeferredImages = (container) => {
-    container.querySelectorAll("img[data-src]").forEach((image) => {
-      if (image.dataset.srcset) image.srcset = image.dataset.srcset;
-      image.src = image.dataset.src;
-      image.removeAttribute("data-src");
-      image.removeAttribute("data-srcset");
-    });
-  };
-
   const initializeEnhancements = () => {
     const header = document.querySelector("[data-header]");
     const progress = document.querySelector(".scroll-progress span");
@@ -73,7 +64,9 @@
         setMenuOpen(nextOpen);
 
         if (nextOpen) {
-          window.requestAnimationFrame(() => navLinks[0]?.focus());
+          window.requestAnimationFrame(() => {
+            if (isMenuOpen()) navLinks[0]?.focus({ preventScroll: true });
+          });
         }
       });
 
@@ -97,7 +90,14 @@
       // drawer would leave the page inert with no way to dismiss it.
       const inlineNav = window.matchMedia("(min-width: 1281px)");
       const syncNavMode = () => {
+        // Do not animate the desktop navigation into a closed mobile drawer.
+        document.documentElement.classList.remove("js-ready");
         if (inlineNav.matches && isMenuOpen()) closeMenu();
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            document.documentElement.classList.add("js-ready");
+          });
+        });
       };
       if (inlineNav.addEventListener) {
         inlineNav.addEventListener("change", syncNavMode);
@@ -145,6 +145,9 @@
 
     }
 
+    const sections = Array.from(document.querySelectorAll("[data-section]"));
+    let activeSectionId;
+
     const updateScrollUI = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -154,10 +157,47 @@
         const ratio = maxScroll > 0 ? Math.min(1, scrollTop / maxScroll) : 0;
         progress.style.transform = `scaleX(${ratio})`;
       }
+
+      if (sections.length) {
+        // Read all section positions, rather than only the intersections that
+        // changed. This also covers long sections, gaps, and upward scrolling.
+        const activationLine = (header?.offsetHeight || 0) + 24;
+        let activeSection = sections[0];
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top > activationLine) break;
+          activeSection = section;
+        }
+        if (maxScroll > 0 && scrollTop >= maxScroll - 1) {
+          activeSection = sections[sections.length - 1];
+        }
+
+        if (activeSection.id !== activeSectionId) {
+          activeSectionId = activeSection.id;
+          navLinks.forEach((link) => {
+            const isActive = link.getAttribute("href") === `#${activeSectionId}`;
+            link.classList.toggle("is-active", isActive);
+            if (isActive) link.setAttribute("aria-current", "location");
+            else link.removeAttribute("aria-current");
+          });
+        }
+      }
+    };
+
+    let scrollUpdatePending = false;
+    const scheduleScrollUpdate = () => {
+      if (scrollUpdatePending) return;
+      scrollUpdatePending = true;
+      window.requestAnimationFrame(() => {
+        scrollUpdatePending = false;
+        updateScrollUI();
+      });
     };
 
     updateScrollUI();
-    window.addEventListener("scroll", updateScrollUI, { passive: true });
+    window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
+    window.addEventListener("resize", scheduleScrollUpdate);
+    window.addEventListener("load", scheduleScrollUpdate);
+    window.addEventListener("pageshow", scheduleScrollUpdate);
 
     const revealItems = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window && !reducedMotion.matches) {
@@ -178,89 +218,6 @@
     } else {
       revealItems.forEach((item) => item.classList.add("is-visible"));
     }
-
-    const sections = Array.from(document.querySelectorAll("[data-section]"));
-    if ("IntersectionObserver" in window && sections.length) {
-      const sectionObserver = new IntersectionObserver(
-        (entries) => {
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (!visible) return;
-
-          navLinks.forEach((link) => {
-            const isActive = link.getAttribute("href") === `#${visible.target.id}`;
-            link.classList.toggle("is-active", isActive);
-            if (isActive) link.setAttribute("aria-current", "location");
-            else link.removeAttribute("aria-current");
-          });
-        },
-        { rootMargin: "-30% 0px -55%", threshold: [0, 0.1, 0.4] },
-      );
-      sections.forEach((section) => sectionObserver.observe(section));
-    }
-
-    const projectTabs = Array.from(document.querySelectorAll("[data-project-tab]"));
-    const projectPanels = Array.from(document.querySelectorAll("[data-project-panel]"));
-    const preciseHover = window.matchMedia("(hover: hover) and (pointer: fine)");
-
-    const selectProject = (projectId, { moveFocus = false } = {}) => {
-      const nextTab = projectTabs.find((tab) => tab.dataset.projectTab === projectId);
-      const nextPanel = projectPanels.find((panel) => panel.dataset.projectPanel === projectId);
-      if (!nextTab || !nextPanel) return;
-
-      loadDeferredImages(nextPanel);
-
-      projectTabs.forEach((tab) => {
-        const isActive = tab === nextTab;
-        tab.classList.toggle("is-active", isActive);
-        tab.setAttribute("aria-selected", String(isActive));
-        tab.tabIndex = isActive ? 0 : -1;
-      });
-
-      projectPanels.forEach((panel) => {
-        const isActive = panel === nextPanel;
-        panel.hidden = !isActive;
-        panel.classList.toggle("is-active", isActive);
-      });
-
-      window.requestAnimationFrame(updateScrollUI);
-
-      if (moveFocus) nextTab.focus();
-    };
-
-    const initialProject =
-      projectTabs.find((tab) => tab.getAttribute("aria-selected") === "true")
-        ?.dataset.projectTab || projectTabs[0]?.dataset.projectTab;
-    if (initialProject) selectProject(initialProject);
-
-    projectTabs.forEach((tab, index) => {
-      const projectId = tab.dataset.projectTab;
-
-      tab.addEventListener("click", () => selectProject(projectId));
-      tab.addEventListener("focus", () => selectProject(projectId));
-      tab.addEventListener("pointerenter", () => {
-        if (preciseHover.matches) selectProject(projectId);
-      });
-
-      tab.addEventListener("keydown", (event) => {
-        let nextIndex;
-        if (event.key === "ArrowDown" || event.key === "ArrowRight") {
-          nextIndex = (index + 1) % projectTabs.length;
-        } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
-          nextIndex = (index - 1 + projectTabs.length) % projectTabs.length;
-        } else if (event.key === "Home") {
-          nextIndex = 0;
-        } else if (event.key === "End") {
-          nextIndex = projectTabs.length - 1;
-        } else {
-          return;
-        }
-
-        event.preventDefault();
-        selectProject(projectTabs[nextIndex].dataset.projectTab, { moveFocus: true });
-      });
-    });
 
     const projectMediaLinks = Array.from(document.querySelectorAll(".project-media-link"));
     const lightbox = document.querySelector("[data-project-lightbox]");
@@ -419,10 +376,6 @@
     initializeEnhancements();
   } catch (error) {
     document.documentElement.classList.remove("js", "js-ready");
-    loadDeferredImages(document);
-    document.querySelectorAll("[data-project-panel]").forEach((panel) => {
-      panel.hidden = false;
-    });
     console.error("Progressive enhancements could not be initialized.", error);
   }
 })();

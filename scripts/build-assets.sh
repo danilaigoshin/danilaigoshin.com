@@ -66,14 +66,31 @@ chrome_to_file() {
   wait "$CHROME_PID" 2>/dev/null || true
 }
 
-chrome_to_file "$PDF_OUTPUT_DIR/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" \
-  1 \
-  --no-pdf-header-footer \
-  --print-to-pdf-no-header \
-  --print-to-pdf="$PDF_OUTPUT_DIR/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" \
-  "file://$ROOT/cv/index.html"
+if [ "${1:-}" != "--social-only" ]; then
+for EDITION in Product Full_Stack; do
+  if [ "$EDITION" = "Product" ]; then
+    RESUME_SOURCE="$ROOT/cv/index.html"
+  else
+    RESUME_SOURCE="$ROOT/cv/full-stack/index.html"
+  fi
+  RESUME_FILE="Danila_Igoshin_${EDITION}_Engineer_CV.pdf"
+  chrome_to_file "$PDF_OUTPUT_DIR/$RESUME_FILE" 1 \
+    --no-pdf-header-footer \
+    --print-to-pdf-no-header \
+    --print-to-pdf="$PDF_OUTPUT_DIR/$RESUME_FILE" \
+    "file://$RESUME_SOURCE"
+  cp "$PDF_OUTPUT_DIR/$RESUME_FILE" "$ROOT/$RESUME_FILE"
+done
 
-cp "$PDF_OUTPUT_DIR/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" "$ROOT/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf"
+# Preserve old bookmarks and downloads with the current Product Engineer edition.
+cp "$ROOT/Danila_Igoshin_Product_Engineer_CV.pdf" "$ROOT/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf"
+fi
+
+if [ "${1:-}" = "--resumes-only" ]; then
+  rm -rf "$TMP_DIR"
+  echo "Built Product Engineer and Full-stack Engineer resumes."
+  exit 0
+fi
 
 chrome_to_file "$TMP_DIR/og-image@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-image@2x.png" "file://$ROOT/art/og-image.html"
 chrome_to_file "$TMP_DIR/og-cv@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-cv@2x.png" "file://$ROOT/art/og-cv.html"
@@ -101,4 +118,8 @@ sips -z 792 3168 "$TMP_DIR/linkedin-banner@2x.png" --out "$ROOT/public/linkedin-
 
 rm -rf "$TMP_DIR"
 
-echo "Built resume PDF and social images."
+if [ "${1:-}" = "--social-only" ]; then
+  echo "Built social images."
+else
+  echo "Built both resume PDFs and social images."
+fi

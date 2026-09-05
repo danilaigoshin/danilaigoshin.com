@@ -26,7 +26,7 @@
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" as="image" href="/public/smartway.webp" fetchpriority="high" />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/case/styles.css" />
+    <link rel="stylesheet" href="/case/styles.css?v=fbfc7ecf" />
     <script src="/script.js" defer></script>
     <script type="application/ld+json">
       {
@@ -50,19 +50,26 @@
           <span class="brand-mark" aria-hidden="true">D/I</span>
           <span class="brand-copy">Danila Igoshin</span>
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation" data-menu-toggle>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+          data-menu-toggle
+        >
           <span></span><span></span>
         </button>
+
         <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
           <div class="nav-panel" data-nav-panel>
             <a href="/#work" data-nav-link>Work</a>
             <a href="/#experience" data-nav-link>Experience</a>
-            <a href="/#services" data-nav-link>Services</a>
             <a href="/#about" data-nav-link>About</a>
-            <a href="/#contact" data-nav-link>Contact</a>
+            <a href="/cv/">Résumé</a>
             <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
               <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
-              <a href="/cv/">Résumé <span aria-hidden="true">→</span></a>
               <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
                 LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
               </a>
@@ -72,9 +79,12 @@
             </div>
           </div>
         </nav>
+
         <div class="nav-actions">
-          <span class="availability"><i aria-hidden="true"></i> Open to remote work · Yerevan, Armenia</span>
-          <a class="nav-email" href="mailto:danigoshin@gmail.com?subject=Smartway%20case">Email <span aria-hidden="true">↗</span></a>
+          <span class="availability"><i aria-hidden="true"></i> Open to remote roles</span>
+          <a class="nav-email" href="mailto:danigoshin@gmail.com">
+            Email <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </header>
@@ -228,7 +238,7 @@
           </div>
           <div class="case-next-actions">
             <a href="/case/edtech/"><span>Read the EdTech case</span><span aria-hidden="true">→</span></a>
-            <a href="mailto:danigoshin@gmail.com?subject=Frontend%20engineering%20inquiry"><span>Discuss a role or project</span><span aria-hidden="true">↗</span></a>
+            <a href="mailto:danigoshin@gmail.com?subject=Product%20engineering%20role"><span>Discuss a role or project</span><span aria-hidden="true">↗</span></a>
           </div>
         </aside>
       </article>
@@ -238,7 +248,7 @@
       <footer class="footer section-shell">
         <p>© <span data-year>2026</span> Danila Igoshin</p>
         <p>Case study · Smartway · 2021—2024</p>
-        <a href="/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+        <a href="/Danila_Igoshin_Product_Engineer_CV.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
       </footer>
     </div>
   </body>

@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("/public/fonts/InterVariable.woff2") format("woff2");
+  src: url("../public/fonts/InterVariable.woff2") format("woff2");
 }
 
 :root {
@@ -303,7 +303,7 @@ a {
 
 .experience-head h3 {
   margin: 0;
-  font-size: 9.4pt;
+  font-size: 10pt;
   font-weight: 720;
   letter-spacing: -0.018em;
 }
@@ -316,7 +316,7 @@ a {
 .experience-head time {
   color: var(--accent-dark);
   font-family: var(--mono);
-  font-size: 6.2pt;
+  font-size: 7pt;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -327,7 +327,7 @@ a {
   margin: 0 0 1.4mm;
   color: var(--faint);
   font-family: var(--mono);
-  font-size: 6.2pt;
+  font-size: 7pt;
   font-weight: 600;
   line-height: 1.35;
 }
@@ -344,7 +344,7 @@ a {
   position: relative;
   padding-left: 3.5mm;
   color: #3f4750;
-  font-size: 7.55pt;
+  font-size: 8.7pt;
   line-height: 1.35;
 }
 
@@ -381,7 +381,7 @@ a {
   margin-bottom: 1mm;
   color: var(--accent-dark);
   font-family: var(--mono);
-  font-size: 6pt;
+  font-size: 7pt;
   font-weight: 700;
   letter-spacing: 0.055em;
   text-transform: uppercase;
@@ -390,7 +390,7 @@ a {
 .skill-group dd {
   margin: 0;
   color: #414951;
-  font-size: 7.2pt;
+  font-size: 8.3pt;
   line-height: 1.4;
 }
 
@@ -403,14 +403,14 @@ a {
 .fit-item h3 {
   margin: 0 0 1.3mm;
   color: var(--accent-dark);
-  font-size: 7.5pt;
+  font-size: 8.5pt;
   font-weight: 720;
 }
 
 .fit-item p {
   margin: 0;
   color: #46505a;
-  font-size: 7pt;
+  font-size: 8.2pt;
   line-height: 1.42;
 }
 
@@ -421,7 +421,7 @@ a {
   border-left: 2.2mm solid var(--accent);
   background: var(--soft);
   color: #404851;
-  font-size: 7.1pt;
+  font-size: 8.2pt;
   line-height: 1.4;
 }
 
@@ -451,7 +451,7 @@ a {
 .resume-bottom-grid p {
   margin: 0 0 1mm;
   color: #444d56;
-  font-size: 7.1pt;
+  font-size: 8.2pt;
   line-height: 1.42;
 }
 
@@ -631,4 +631,29 @@ a {
     max-width: 130px;
     text-align: right;
   }
+}
+
+/* Separate role editions share the same experience and print layout. */
+.resume-versions { display: flex; gap: 4px; flex-wrap: wrap; }
+.resume-toolbar .resume-versions a { border-color: transparent; background: transparent; color: var(--muted); }
+.resume-toolbar .resume-versions a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+.resume-toolbar a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media screen {
+  .resume-toolbar { flex-wrap: wrap; padding-block: 10px; gap: 10px; }
+}
+@media screen and (max-width: 850px) {
+  .resume-toolbar { position: static; }
+  .resume-versions { order: 3; width: 100%; }
+  .resume-versions a { flex: 1; justify-content: center; }
+  .resume-summary { font-size: 16px; }
+  .experience-head h3 { font-size: 16px; }
+  .experience-list li, .skill-group dd, .fit-item p, .resume-note, .resume-bottom-grid p { font-size: 14px; line-height: 1.6; }
+  .experience-context, .experience-head time, .resume-contact dd { font-size: 12px; }
+  .skill-group dt, .fit-item h3 { font-size: 13px; }
+  .experience-item { padding-block: 18px; }
+  .experience-list { gap: 7px; }
+  .resume-section { margin-bottom: 24px; }
+  .resume-contact dt, .resume-edition, .resume-section-heading span { font-size: 10px; }
+  .resume-role { font-size: 12px; }
+  .resume-footer { font-size: 10px; }
 }

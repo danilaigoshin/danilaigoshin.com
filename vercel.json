@@ -3,19 +3,32 @@
   "redirects": [
     {
       "source": "/Danila_Igoshin_EMEA_Contract_CV",
-      "destination": "/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf",
+      "destination": "/Danila_Igoshin_Product_Engineer_CV.pdf",
       "permanent": true
     },
     {
       "source": "/Danila_Igoshin_EMEA_Contract_CV.pdf",
-      "destination": "/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf",
+      "destination": "/Danila_Igoshin_Product_Engineer_CV.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf",
+      "destination": "/Danila_Igoshin_Product_Engineer_CV.pdf",
       "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/Danila_Igoshin_Senior_Frontend_Engineer_CV",
-      "destination": "/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf"
+      "destination": "/Danila_Igoshin_Product_Engineer_CV.pdf"
+    },
+    {
+      "source": "/Danila_Igoshin_Product_Engineer_CV",
+      "destination": "/Danila_Igoshin_Product_Engineer_CV.pdf"
+    },
+    {
+      "source": "/Danila_Igoshin_Full_Stack_Engineer_CV",
+      "destination": "/Danila_Igoshin_Full_Stack_Engineer_CV.pdf"
     }
   ],
   "headers": [
@@ -40,7 +53,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; script-src 'self' 'sha256-mzW42WRKfmnMC+LLJaZxwC7JeDNqqWAf9jXyvlJ4MpY='; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
         }
       ]
     },

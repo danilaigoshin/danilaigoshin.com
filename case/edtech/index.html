@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="EdTech case study by Danila Igoshin: sole frontend ownership from an empty repository to a production MVP in approximately five months."
+      content="EdTech case study by Danila Igoshin: product delivery across frontend, Next.js BFF, integrations, and deployment from an empty repository to a production MVP in approximately five months."
     />
     <meta name="theme-color" content="#f3f5f7" />
     <link rel="canonical" href="https://danilaigoshin.com/case/edtech/" />
@@ -22,7 +22,7 @@
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" as="image" href="/public/online-institute.webp" fetchpriority="high" />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/case/styles.css" />
+    <link rel="stylesheet" href="/case/styles.css?v=fbfc7ecf" />
     <script src="/script.js" defer></script>
     <script type="application/ld+json">
       {
@@ -30,7 +30,7 @@
         "@type": "Article",
         "headline": "An EdTech product from empty repository to production",
         "author": { "@type": "Person", "name": "Danila Igoshin", "url": "https://danilaigoshin.com/" },
-        "dateModified": "2026-07-13",
+        "dateModified": "2026-09-05",
         "mainEntityOfPage": "https://danilaigoshin.com/case/edtech/",
         "image": "https://danilaigoshin.com/public/online-institute.webp"
       }
@@ -46,19 +46,26 @@
           <span class="brand-mark" aria-hidden="true">D/I</span>
           <span class="brand-copy">Danila Igoshin</span>
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation" data-menu-toggle>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+          data-menu-toggle
+        >
           <span></span><span></span>
         </button>
+
         <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
           <div class="nav-panel" data-nav-panel>
             <a href="/#work" data-nav-link>Work</a>
             <a href="/#experience" data-nav-link>Experience</a>
-            <a href="/#services" data-nav-link>Services</a>
             <a href="/#about" data-nav-link>About</a>
-            <a href="/#contact" data-nav-link>Contact</a>
+            <a href="/cv/">Résumé</a>
             <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
               <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
-              <a href="/cv/">Résumé <span aria-hidden="true">→</span></a>
               <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
                 LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
               </a>
@@ -68,9 +75,12 @@
             </div>
           </div>
         </nav>
+
         <div class="nav-actions">
-          <span class="availability"><i aria-hidden="true"></i> Open to remote work · Yerevan, Armenia</span>
-          <a class="nav-email" href="mailto:danigoshin@gmail.com?subject=EdTech%20case">Email <span aria-hidden="true">↗</span></a>
+          <span class="availability"><i aria-hidden="true"></i> Open to remote roles</span>
+          <a class="nav-email" href="mailto:danigoshin@gmail.com">
+            Email <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </header>
@@ -78,11 +88,11 @@
     <main class="case-main" id="main-content" tabindex="-1">
       <header class="case-hero section-shell reveal">
         <a class="case-back" href="/case/"><span aria-hidden="true">←</span> All case studies</a>
-        <p class="case-eyebrow">Case 02 · Zero-to-one delivery · Smart Online Institute</p>
+        <p class="case-eyebrow">Case study · Zero-to-one delivery · Smart Online Institute</p>
         <h1 class="case-title">From an empty repository to a production learning product.</h1>
         <p class="case-deck">
-          Sole frontend ownership across architecture, learner and instructor workflows,
-          integrations, secure media, legacy migration, CI/CD, and deployment.
+          Ownership across the frontend, Next.js BFF, learner and instructor workflows,
+          protected media, migration, and production delivery.
         </p>
         <dl class="case-meta">
           <div><dt>Company</dt><dd>Smart Online Institute</dd></div>
@@ -105,14 +115,14 @@
         <section class="case-section reveal">
           <p class="case-section-label">01 / Brief</p>
           <div class="case-prose">
-            <h2>The founder needed a working product, not a frontend department.</h2>
+            <h2>A complete learning journey, ready for launch.</h2>
             <p>
               The new psychology-education platform started without a frontend codebase.
               It needed a public course marketplace, learner profiles and progress, practice
               booking, instructor operations, secure educational media, and a reliable path to production.
             </p>
             <p>
-              I owned the frontend end to end: system shape, product implementation, API orchestration,
+              I owned the frontend and its delivery path: system shape, product implementation, server-side API orchestration,
               validation, delivery infrastructure, deployment, and the migration of existing content.
             </p>
             <dl class="case-brief">
@@ -186,19 +196,19 @@
             </p>
             <div class="case-results" aria-label="Project outcomes">
               <div class="case-result"><strong>≈5 mo.</strong><span>from an empty repository to a live production MVP</span></div>
-              <div class="case-result"><strong>1 FE</strong><span>sole frontend ownership from architecture through deployment</span></div>
+              <div class="case-result"><strong>UI → BFF</strong><span>ownership across product interfaces and server-side orchestration</span></div>
               <div class="case-result"><strong>0 APIs</strong><span>migration APIs available from the previous service</span></div>
             </div>
-            <p class="case-note"><strong>Scope note.</strong> The delivery window refers to the first production MVP inside a seven-month engagement. This public case focuses on the frontend scope I owned and omits private customer and operational data.</p>
+            <p class="case-note"><strong>Scope note.</strong> The delivery window refers to the first production MVP inside a seven-month engagement. My ownership covered the frontend, BFF, integrations, and delivery; the backend/CMS was an existing surface. Private customer and operational data are omitted.</p>
           </div>
         </section>
 
         <section class="case-section reveal">
           <p class="case-section-label">05 / Scope</p>
           <div class="case-prose">
-            <h2>One frontend owner, from product behavior to the deployment path.</h2>
+            <h2>Ownership from product behavior to the deployment path.</h2>
             <p>
-              Working solo meant keeping architectural ambition proportional to the team while still
+              As the sole frontend engineer, I kept architectural ambition proportional to the team while still
               protecting the parts most likely to become expensive: product boundaries, API contracts,
               validation, access control, automated delivery, and migration repeatability.
             </p>
@@ -222,7 +232,7 @@
           </div>
           <div class="case-next-actions">
             <a href="/case/smartway/"><span>Read the Smartway case</span><span aria-hidden="true">→</span></a>
-            <a href="mailto:danigoshin@gmail.com?subject=Frontend%20engineering%20inquiry"><span>Discuss a role or project</span><span aria-hidden="true">↗</span></a>
+            <a href="mailto:danigoshin@gmail.com?subject=Product%20engineering%20role"><span>Discuss a role or project</span><span aria-hidden="true">↗</span></a>
           </div>
         </aside>
       </article>
@@ -232,7 +242,7 @@
       <footer class="footer section-shell">
         <p>© <span data-year>2026</span> Danila Igoshin</p>
         <p>Case study · Smart Online Institute · 2025</p>
-        <a href="/Danila_Igoshin_Senior_Frontend_Engineer_CV.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+        <a href="/Danila_Igoshin_Product_Engineer_CV.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
       </footer>
     </div>
   </body>

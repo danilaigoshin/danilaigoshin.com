@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Real-time support case study — Danila Igoshin</title>
+<meta name="description" content="Real-time support by Danila Igoshin. 70% faster rendering for conversations with more than 1,000 messages after list virtualization." />
+<meta name="theme-color" content="#f3f5f7" /><link rel="canonical" href="https://danilaigoshin.com/case/support/" />
+<meta property="og:site_name" content="Danila Igoshin" /><meta property="og:title" content="Real-time support that stays responsive." /><meta property="og:description" content="70% faster rendering for conversations with more than 1,000 messages after list virtualization." /><meta property="og:type" content="article" /><meta property="og:url" content="https://danilaigoshin.com/case/support/" />
+<link rel="icon" href="/public/favicon.svg" type="image/svg+xml" /><link rel="apple-touch-icon" href="/public/apple-touch-icon.png" />
+<link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/styles.css" /><link rel="stylesheet" href="/case/styles.css?v=fbfc7ecf" /><script src="/script.js" defer></script>
+</head><body class="case-page"><a class="skip-link" href="#main-content">Skip to content</a><div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <header class="site-header" data-header>
+      <div class="nav-shell">
+        <a class="brand" href="/" aria-label="Danila Igoshin — home">
+          <span class="brand-mark" aria-hidden="true">D/I</span>
+          <span class="brand-copy">Danila Igoshin</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+          data-menu-toggle
+        >
+          <span></span><span></span>
+        </button>
+
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
+          <div class="nav-panel" data-nav-panel>
+            <a href="/#work" data-nav-link>Work</a>
+            <a href="/#experience" data-nav-link>Experience</a>
+            <a href="/#about" data-nav-link>About</a>
+            <a href="/cv/">Résumé</a>
+            <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+              <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="nav-actions">
+          <span class="availability"><i aria-hidden="true"></i> Open to remote roles</span>
+          <a class="nav-email" href="mailto:danigoshin@gmail.com">
+            Email <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </header>
+<main class="case-main" id="main-content" tabindex="-1">
+<header class="case-hero section-shell"><a class="case-back" href="/case/">← All case studies</a><p class="case-eyebrow">Smartway · Real-time support</p><h1 class="case-title">Real-time support that stays responsive.</h1><p class="case-deck">An embeddable support widget and ticket-management workspace for
+                      third-party integrations and high-volume corporate travel operations.</p><dl class="case-meta"><div><dt>Company</dt><dd>Smartway</dd></div><div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div><div><dt>Period</dt><dd>Aug 2025—Jan 2026</dd></div><div><dt>Scope</dt><dd>Product frontend &amp; integrations</dd></div></dl></header>
+<section class="case-cover section-shell" aria-label="Product interface"><figure><a class="case-cover-link" href="/public/chat.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size product screenshot in a new tab"><img src="/public/optimized/v1/chat-1440.webp" width="1672" height="941" fetchpriority="high" alt="Support workspace showing a ticket queue, conversation, and request details" /></a><figcaption><span>Real-time support · production interface</span><span>Open full size ↗</span></figcaption></figure></section>
+<article class="case-article section-shell"><section class="case-section"><p class="case-section-label">01 / Problem &amp; ownership</p><div class="case-prose"><h2>The product context and my responsibility.</h2><dl class="case-facts"><div>
+                        <dt>Product context</dt>
+                        <dd>Real-time customer communication, ticket routing, uploads, and operational request handling.</dd>
+                      </div>
+                      <div>
+                        <dt>Constraint</dt>
+                        <dd>Long threads had to stay smooth while public integrations and existing authentication continued to work.</dd>
+                      </div>
+                      <div>
+                        <dt>My ownership</dt>
+                        <dd>Widget architecture, public integration API, performance work, HMAC migration, uploads, and routing.</dd>
+                      </div>
+                      <div>
+                        <dt>Key decision</dt>
+                        <dd>Virtualize long threads and move authentication to HMAC without breaking existing integrations.</dd>
+                      </div>
+                      <div>
+                        <dt>Measured outcome</dt>
+                        <dd>70% faster chat rendering; threads with more than 1,000 messages scroll smoothly.</dd>
+                      </div></dl></div></section>
+ <section class="case-section"><p class="case-section-label">02 / Implementation</p><div class="case-prose"><h2>How the workflow came together.</h2><dl class="case-facts"><div>
+                          <dt>Architecture</dt>
+                          <dd>Embeddable widget with a public integration API, Feature-Sliced Design, and domain-driven modules.</dd>
+                        </div>
+                        <div>
+                          <dt>Performance</dt>
+                          <dd>List virtualization reduced render work in operational threads of more than 1,000 messages.</dd>
+                        </div>
+                        <div>
+                          <dt>Integration safety</dt>
+                          <dd>HMAC authentication was introduced with backward compatibility for existing consumers.</dd>
+                        </div>
+                        <div>
+                          <dt>Operational scope</dt>
+                          <dd>Validated drag-and-drop upload for 15+ formats plus ticket categorization and routing by travel team.</dd>
+                        </div></dl></div></section>
+ <section class="case-section"><p class="case-section-label">03 / Result</p><div class="case-prose"><h2>70% faster rendering for conversations with more than 1,000 messages after list virtualization.</h2><p class="case-note">The performance result refers to rendering long conversations, not a general application-speed or business-impact measurement.</p><p class="case-stack-label">Technology used</p><ul class="case-stack" aria-label="Technology stack">
+                      <li>Preact</li><li>TypeScript</li><li>Vite</li><li>Redux Toolkit</li>
+                      <li>WebSocket</li><li>SCSS Modules</li><li>OpenAPI</li>
+                    </ul></div></section>
+<aside class="case-next" aria-label="Next steps"><div><p class="case-eyebrow">Next case · Zero-to-one delivery</p><h2>A learning product, from an empty repository to production.</h2></div><div class="case-next-actions"><a href="/case/edtech/"><span>Read the EdTech case</span><span aria-hidden="true">→</span></a><a href="mailto:danigoshin@gmail.com"><span>Get in touch</span><span aria-hidden="true">↗</span></a></div></aside>
+</article></main>
+<div class="page-finale"><footer class="footer section-shell"><p>© <span data-year>2026</span> Danila Igoshin</p><p>Product engineering · Full-stack TypeScript</p><a href="/cv/">Résumé →</a></footer></div></body></html>

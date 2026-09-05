@@ -2,27 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://danilaigoshin.com/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-09-05</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://danilaigoshin.com/case/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-09-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://danilaigoshin.com/case/smartway/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-09-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://danilaigoshin.com/case/edtech/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-09-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://danilaigoshin.com/cv/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danilaigoshin.com/case/research/</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danilaigoshin.com/case/support/</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danilaigoshin.com/cv/full-stack/</loc>
+    <lastmod>2026-09-05</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>
