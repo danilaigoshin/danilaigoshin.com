@@ -2271,10 +2271,9 @@ html:not(.js) .contact-email-row button {
   --nav-drawer-width: clamp(30rem, 42vw, 35rem);
 }
 
-/* Above this width the header has room for the sections themselves, so the
-   drawer — and the unlabelled toggle sitting next to a labelled button — is
-   only used where the space actually runs out. */
-@media (max-width: 1280px) {
+/* Four links and one button fit inline on any laptop or landscape tablet, so
+   the drawer — and the unlabelled toggle — is kept for narrow screens only. */
+@media (max-width: 900px) {
   body.menu-open .site-header {
     z-index: 200;
     border-color: transparent;
@@ -2476,9 +2475,13 @@ html:not(.js) .contact-email-row button {
   }
 }
 
-@media (min-width: 1281px) {
+@media (min-width: 901px) {
   .nav-shell {
     grid-template-columns: 1fr auto auto;
+  }
+
+  .nav-actions {
+    display: flex;
   }
 
   .site-nav {
@@ -2493,7 +2496,7 @@ html:not(.js) .contact-email-row button {
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 900px) {
   :root {
     --nav-drawer-width: 100vw;
   }
@@ -2523,27 +2526,6 @@ html:not(.js) .contact-email-row button {
 
   .js .site-nav.is-open .nav-panel {
     transform: translateY(0);
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1280px) {
-  .nav-shell {
-    grid-template-columns: 1fr auto auto;
-  }
-
-  .nav-actions {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .js .menu-toggle {
-    grid-column: 3;
-  }
-
-  body.menu-open .menu-toggle {
-    position: fixed;
-    top: 13px;
-    right: 28px;
   }
 }
 
@@ -2984,3 +2966,385 @@ html:not(.js) .contact-email-row button {
     opacity: 1 !important;
   }
 }
+
+/* ==========================================================================
+   Site system — the shared layer for the home and case pages. It comes after
+   the legacy rules above and wins where they overlap. Page-specific layout
+   lives in /home.css and /case/styles.css.
+   ========================================================================== */
+
+.portfolio-page,
+.case-page {
+  --shell: min(1240px, calc(100% - 96px));
+  --gap: 32px;
+  --panel-pad: clamp(24px, 3.2vw, 44px);
+  background: var(--canvas);
+}
+
+.portfolio-page h1,
+.portfolio-page h2,
+.portfolio-page h3,
+.case-page h1,
+.case-page h2,
+.case-page h3 {
+  font-weight: 560;
+}
+
+/* Header */
+
+.site-header { background: rgba(243, 245, 247, 0.9); }
+.site-header.is-scrolled { background: rgba(243, 245, 247, 0.97); }
+.nav-shell { min-height: 72px; }
+.brand-copy { font-size: 15px; font-weight: 650; letter-spacing: -0.015em; }
+.site-nav a { font-size: 14px; font-weight: 550; }
+.nav-email { gap: 14px; min-height: 40px; padding: 0 16px; font-size: 14px; font-weight: 600; }
+
+/* Actions */
+
+.button {
+  display: inline-flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 22px;
+  border: 1px solid var(--line-control);
+  background: var(--surface);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.button:hover { border-color: var(--ink); }
+.button-primary { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+.button-primary:hover { border-color: var(--accent-dark); background: var(--accent-dark); }
+
+.text-link,
+.arrow-link {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent-dark);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.text-link:hover,
+.arrow-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.button span[aria-hidden],
+.text-link span[aria-hidden],
+.arrow-link span[aria-hidden] {
+  display: inline-block;
+  transition: transform 180ms var(--ease);
+}
+
+.button:hover span[aria-hidden],
+.text-link:hover span[aria-hidden] { transform: translate(2px, -1px); }
+.button-primary:hover span[aria-hidden] { transform: translateY(2px); }
+.arrow-link:hover span[aria-hidden] { transform: translateX(3px); }
+
+/* Text blocks */
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(2rem, 1.25rem + 2vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.section-head p { max-width: 52ch; margin: 0 0 4px; color: var(--muted); font-size: 16px; }
+
+.meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.meta-line span:first-child { color: var(--accent); font-weight: 600; }
+.meta-line span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.status {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.status i {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.status i::after {
+  position: absolute;
+  inset: -3px;
+  border: 1px solid rgba(63, 93, 126, 0.45);
+  border-radius: 50%;
+  content: "";
+  animation: availability-pulse 2.6s var(--ease) infinite;
+}
+
+/* Label/value rows, used for the profile card and every case fact sheet. */
+
+.fact-list { margin: 0; }
+
+.fact-list > div {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 16px;
+  padding-block: 11px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.fact-list > div:last-child { border-bottom: 0; }
+.fact-list dt { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.fact-list dd { margin: 0; font-size: 14px; line-height: 1.5; }
+
+/* One measured outcome: the figure, what it means, and where it came from. */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 26px 28px 24px;
+}
+
+.stat strong {
+  font-size: clamp(2.25rem, 1.6rem + 1.4vw, 2.875rem);
+  font-weight: 560;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat strong small { font-size: 0.42em; font-weight: 600; letter-spacing: -0.01em; }
+.stat p { max-width: 26ch; margin: 0; color: var(--ink); font-size: 15px; line-height: 1.45; }
+.stat .stat-source { margin-top: auto; padding-top: 6px; color: var(--muted); font-size: 13px; }
+
+/* Product screenshots sit on a gray matte so other companies' interfaces
+   always read as quoted material; the whole image opens the viewer. */
+
+.media-frame {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(24px, 3vw, 40px);
+  place-items: center;
+  background: var(--surface-muted);
+}
+
+.media-frame .project-media-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: auto;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.media-frame img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(21, 24, 29, 0.05), 0 18px 40px -22px rgba(21, 24, 29, 0.3);
+  transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
+}
+
+.media-zoom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.media-zoom svg { width: 16px; height: 16px; }
+.project-media-link:is(:hover, :focus-visible) .media-zoom { opacity: 1; }
+
+@media (hover: hover) {
+  .media-frame .project-media-link:hover img {
+    transform: translateY(-3px);
+    box-shadow: 0 1px 2px rgba(21, 24, 29, 0.05), 0 26px 48px -24px rgba(21, 24, 29, 0.36);
+  }
+}
+
+@media (hover: none) {
+  .media-zoom { opacity: 1; }
+}
+
+/* Contact close: the one dark block, shared by every page. */
+
+.page-finale { margin-top: 0; }
+.page-finale a:focus-visible,
+.page-finale button:focus-visible { outline-color: var(--focus-inverse); }
+
+.site-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px var(--gap);
+  align-items: end;
+  padding-block: clamp(72px, 8vw, 112px) clamp(56px, 6vw, 80px);
+}
+
+.site-contact h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(2.25rem, 1.2rem + 2.8vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.contact-intro p { max-width: 30em; margin: 0; color: var(--muted-inverse); font-size: 17px; line-height: 1.6; }
+
+.site-contact .contact-email-row { border-block: 1px solid var(--line-inverse); }
+
+.site-contact .contact-email-row a {
+  min-height: 72px;
+  padding: 0;
+  font-size: clamp(1.375rem, 1rem + 1vw, 1.875rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.site-contact .contact-email-row button {
+  min-width: 84px;
+  min-height: 44px;
+  align-self: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--text-inverse);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.site-contact .contact-email-row a:hover,
+.site-contact .contact-email-row a:focus-visible {
+  background: transparent;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+.site-contact .contact-email-row button:hover,
+.site-contact .contact-email-row button:focus-visible {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.site-contact .contact-links { display: flex; flex-wrap: wrap; column-gap: 32px; }
+
+.site-contact .contact-links a {
+  gap: 10px;
+  justify-content: flex-start;
+  min-height: 52px;
+  padding: 14px 0;
+  border: 0;
+  color: var(--text-inverse);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.site-contact .contact-links a:hover,
+.site-contact .contact-links a:focus-visible {
+  background: transparent;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.contact-response { margin: 6px 0 0; color: var(--muted-inverse); font-size: 14px; }
+
+.footer {
+  flex-direction: row;
+  align-items: center;
+  padding-block: 20px 28px;
+  border-top: 1px solid var(--line-inverse);
+  color: var(--muted-inverse);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.footer a { gap: 8px; }
+
+/* Responsive */
+
+@media (min-width: 1181px) {
+  .nav-shell { grid-template-columns: 1fr auto 1fr; }
+}
+
+@media (max-width: 1100px) {
+  .portfolio-page,
+  .case-page { --shell: calc(100% - 64px); --gap: 24px; }
+}
+
+@media (max-width: 900px) {
+  .site-contact { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .portfolio-page,
+  .case-page { --shell: calc(100% - 40px); --gap: 20px; --panel-pad: 22px; }
+  .nav-shell { min-height: 64px; }
+  .button { gap: 12px; padding-inline: 14px; }
+  .section-head { margin-bottom: 24px; }
+  .section-head p { font-size: 15px; }
+  .fact-list > div { grid-template-columns: 84px minmax(0, 1fr); gap: 12px; }
+  .stat { gap: 6px; padding: 20px 18px 18px; }
+  .stat p { font-size: 14px; }
+  .stat .stat-source { font-size: 12px; }
+  .media-frame { padding: 18px; }
+  .site-contact { gap: 36px; padding-block: 64px 44px; }
+  .site-contact .contact-email-row a { min-height: 64px; font-size: clamp(1.2rem, 0.9rem + 1.6vw, 1.5rem); }
+  .site-contact .contact-email-row button { min-width: 72px; }
+  .site-contact .contact-links { column-gap: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status i::after { animation: none; }
+  .media-frame img,
+  .button span[aria-hidden],
+  .text-link span[aria-hidden],
+  .arrow-link span[aria-hidden] { transition: none; }
+}
+
+.button-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }

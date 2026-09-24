@@ -24,7 +24,7 @@
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/case/styles.css?v=fbfc7ecf" />
+    <link rel="stylesheet" href="/case/styles.css?v=20260924" />
     <script src="/script.js" defer></script>
   </head>
   <body class="case-page">
@@ -68,7 +68,6 @@
         </nav>
 
         <div class="nav-actions">
-          <span class="availability"><i aria-hidden="true"></i> Open to remote roles</span>
           <a class="nav-email" href="mailto:danigoshin@gmail.com">
             Email <span aria-hidden="true">↗</span>
           </a>
@@ -77,58 +76,108 @@
     </header>
 
     <main class="case-main" id="main-content" tabindex="-1">
-      <section class="case-index-hero section-shell reveal">
+      <header class="case-index-hero section-shell" id="top">
         <a class="case-back" href="/"><span aria-hidden="true">←</span> Portfolio</a>
-        <p class="case-eyebrow">Selected case studies · 04</p>
-        <h1 class="case-index-title">The decisions behind the products.</h1>
-        <p class="case-index-deck">
-          Four accounts of product work: the operating constraint, what I owned,
-          why the implementation took its shape, and what changed in production.
-        </p>
-      </section>
+        <h1>The decisions behind the products.</h1>
+        <p class="case-deck">Four accounts of product work: the operating constraint, what I owned, why the implementation took its shape, and what changed in production.</p>
+      </header>
 
       <section class="case-grid section-shell" aria-label="Case studies">
-        <article class="case-card reveal">
+        <article class="case-card">
           <a href="/case/edtech/">
-            <div class="case-card-media">
-              <img src="/public/online-institute.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Smart Online Institute course marketplace" />
+            <div class="media-frame"><img src="/public/optimized/v1/online-institute-1080.webp" srcset="/public/optimized/v1/online-institute-720.webp 720w, /public/optimized/v1/online-institute-1080.webp 1080w" sizes="(max-width: 900px) calc(100vw - 78px), 540px" width="1672" height="941" loading="lazy" decoding="async" alt="Smart Online Institute course marketplace" /></div>
+            <div class="case-card-body">
+              <p class="meta-line"><span>Smart Online Institute</span><span>2025</span></p>
+              <h2>From an empty repository to a production learning product.</h2>
+              <p>Product interfaces, a Next.js BFF, secure media, legacy migration, CI/CD, and deployment — live in ≈5 months.</p>
+              <span class="arrow-link">Read the case study <span aria-hidden="true">→</span></span>
             </div>
-            <div class="case-card-meta"><span>Zero-to-one delivery</span><span>2025</span></div>
-            <h2>From an empty repository to a production learning product.</h2>
-            <p>Product interfaces, a Next.js BFF, secure media, legacy migration, CI/CD, and deployment.</p>
-            <span class="case-card-result"><strong>≈5 mo.</strong> empty repository → production MVP</span>
           </a>
         </article>
-<article class="case-card"><a href="/case/research/"><div class="case-card-media"><img src="/public/optimized/v1/ai4s-1080.webp" width="3024" height="1472" loading="lazy" decoding="async" alt="Scientific research workspace showing source editing, compiled document preview, and AI review" /></div><div class="case-card-meta"><span>Morizo Digital</span><span>Feb 2026—present</span></div><h2>One workspace for scientific research.</h2><p>Scientists can edit source, review compiled output, and act on AI feedback without switching tools.</p><span class="case-card-result">Read the case study →</span></a></article>
-        <article class="case-card reveal">
+        <article class="case-card">
+          <a href="/case/research/">
+            <div class="media-frame"><img src="/public/optimized/v1/ai4s-1080.webp" srcset="/public/optimized/v1/ai4s-720.webp 720w, /public/optimized/v1/ai4s-1080.webp 1080w" sizes="(max-width: 900px) calc(100vw - 78px), 540px" width="3024" height="1472" loading="lazy" decoding="async" alt="Research workspace with source editing, compiled preview, and AI review" /></div>
+            <div class="case-card-body">
+              <p class="meta-line"><span>Morizo Digital</span><span>2026—present</span></p>
+              <h2>One workspace for scientific research.</h2>
+              <p>Scientists can edit source, review compiled output, and act on AI feedback without switching tools.</p>
+              <span class="arrow-link">Read the case study <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="case-card">
           <a href="/case/smartway/">
-            <div class="case-card-media">
-              <img src="/public/smartway.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Smartway corporate travel product interface" />
+            <div class="media-frame"><img src="/public/optimized/v1/smartway-1080.webp" srcset="/public/optimized/v1/smartway-720.webp 720w, /public/optimized/v1/smartway-1080.webp 1080w" sizes="(max-width: 900px) calc(100vw - 78px), 540px" width="1672" height="941" loading="lazy" decoding="async" alt="Smartway corporate travel dashboard" /></div>
+            <div class="case-card-body">
+              <p class="meta-line"><span>Smartway</span><span>2021—2024</span></p>
+              <h2>Changing the foundation while delivery continued.</h2>
+              <p>TypeScript adoption, Webpack to Vite, cart performance, and technical leadership: ≈10× faster builds and ≈3× faster cart interactions.</p>
+              <span class="arrow-link">Read the case study <span aria-hidden="true">→</span></span>
             </div>
-            <div class="case-card-meta"><span>Platform modernization</span><span>2021—2024</span></div>
-            <h2>Changing the frontend foundation while delivery continued.</h2>
-            <p>TypeScript adoption, Webpack-to-Vite, cart performance, analytics, standards, and technical leadership across a live travel platform.</p>
-            <span class="case-card-result"><strong>≈10×</strong> faster builds · <strong>≈3×</strong> faster cart interactions</span>
           </a>
         </article>
-<article class="case-card"><a href="/case/support/"><div class="case-card-media"><img src="/public/optimized/v1/chat-1080.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Support workspace showing a ticket queue, conversation, and request details" /></div><div class="case-card-meta"><span>Smartway</span><span>Aug 2025—Jan 2026</span></div><h2>Real-time support that stays responsive.</h2><p>70% faster rendering for conversations with more than 1,000 messages after list virtualization.</p><span class="case-card-result">Read the case study →</span></a></article>
-</section>
-
-      <section class="case-index-note section-shell reveal">
-        <div>
-          <h2>The experience behind the work.</h2>
-          <p>From solo full-stack development to technical leadership, explore the roles and responsibilities behind these products.</p>
-        </div>
-        <a class="secondary-link" href="/#experience">View experience <span aria-hidden="true">→</span></a>
+        <article class="case-card">
+          <a href="/case/support/">
+            <div class="media-frame"><img src="/public/optimized/v1/chat-1080.webp" srcset="/public/optimized/v1/chat-720.webp 720w, /public/optimized/v1/chat-1080.webp 1080w" sizes="(max-width: 900px) calc(100vw - 78px), 540px" width="1672" height="941" loading="lazy" decoding="async" alt="Support workspace with a ticket queue and conversation" /></div>
+            <div class="case-card-body">
+              <p class="meta-line"><span>Smartway</span><span>2025—2026</span></p>
+              <h2>Real-time support that stays responsive.</h2>
+              <p>70% faster rendering for conversations with more than 1,000 messages after list virtualization.</p>
+              <span class="arrow-link">Read the case study <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>
       </section>
     </main>
 
     <div class="page-finale">
-      <footer class="footer section-shell">
-        <p>© <span data-year>2026</span> Danila Igoshin</p>
-        <p>Product engineering · Full-stack TypeScript</p>
-        <a href="/#contact">Discuss a role or project <span aria-hidden="true">↗</span></a>
-      </footer>
+      <section class="site-contact section-shell" id="contact" aria-labelledby="contact-title">
+        <div class="contact-intro">
+          <h2 id="contact-title">Building something useful?</h2>
+          <p>I’m looking for Product Engineer and Full-stack roles on remote product teams. Tell me what you’re working on.</p>
+        </div>
+        <div class="contact-action">
+          <div class="contact-email-row"><a href="mailto:danigoshin@gmail.com">danigoshin@gmail.com</a><button type="button" data-copy-email aria-label="Copy email address" aria-controls="copy-status">Copy</button></div>
+          <nav class="contact-links" aria-label="Contact and résumé links">
+            <a href="/cv/"><span class="contact-link-label">Résumé</span><span aria-hidden="true">→</span></a>
+            <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">LinkedIn</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+            <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">GitHub</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+          </nav>
+          <p class="contact-response">I usually reply within one business day.</p>
+        </div>
+      </section>
+      <footer class="footer section-shell"><p>© <span data-year>2026</span> Danila Igoshin</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
     </div>
+
+    <div
+      class="copy-toast"
+      id="copy-status"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      data-copy-toast
+    ></div>
+
+    <dialog
+      class="project-lightbox"
+      aria-label="Project image viewer"
+      aria-describedby="project-lightbox-caption"
+      data-project-lightbox
+    >
+      <div class="project-lightbox-shell">
+        <button
+          class="project-lightbox-close"
+          type="button"
+          aria-label="Close full-size image"
+          data-project-lightbox-close
+        >
+          <span>Close</span><span aria-hidden="true">×</span>
+        </button>
+        <figure>
+          <img alt="" data-project-lightbox-image />
+          <figcaption id="project-lightbox-caption" data-project-lightbox-caption></figcaption>
+        </figure>
+      </div>
+    </dialog>
   </body>
 </html>

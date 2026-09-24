@@ -20,9 +20,8 @@
     <link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" as="image" href="/public/online-institute.webp" fetchpriority="high" />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/case/styles.css?v=fbfc7ecf" />
+    <link rel="stylesheet" href="/case/styles.css?v=20260924" />
     <script src="/script.js" defer></script>
     <script type="application/ld+json">
       {
@@ -30,7 +29,7 @@
         "@type": "Article",
         "headline": "An EdTech product from empty repository to production",
         "author": { "@type": "Person", "name": "Danila Igoshin", "url": "https://danilaigoshin.com/" },
-        "dateModified": "2026-09-05",
+        "dateModified": "2026-09-24",
         "mainEntityOfPage": "https://danilaigoshin.com/case/edtech/",
         "image": "https://danilaigoshin.com/public/online-institute.webp"
       }
@@ -77,7 +76,6 @@
         </nav>
 
         <div class="nav-actions">
-          <span class="availability"><i aria-hidden="true"></i> Open to remote roles</span>
           <a class="nav-email" href="mailto:danigoshin@gmail.com">
             Email <span aria-hidden="true">↗</span>
           </a>
@@ -86,164 +84,191 @@
     </header>
 
     <main class="case-main" id="main-content" tabindex="-1">
-      <header class="case-hero section-shell reveal">
-        <a class="case-back" href="/case/"><span aria-hidden="true">←</span> All case studies</a>
-        <p class="case-eyebrow">Case study · Zero-to-one delivery · Smart Online Institute</p>
-        <h1 class="case-title">From an empty repository to a production learning product.</h1>
-        <p class="case-deck">
-          Ownership across the frontend, Next.js BFF, learner and instructor workflows,
-          protected media, migration, and production delivery.
-        </p>
-        <dl class="case-meta">
-          <div><dt>Company</dt><dd>Smart Online Institute</dd></div>
-          <div><dt>Role</dt><dd>Sole Frontend Engineer</dd></div>
-          <div><dt>Period</dt><dd>Feb—Aug 2025</dd></div>
-          <div><dt>Delivery</dt><dd>≈5 months to live MVP</dd></div>
-        </dl>
+      <header class="case-hero section-shell" id="top" data-section>
+        <div class="case-hero-copy">
+          <a class="case-back" href="/case/"><span aria-hidden="true">←</span> All case studies</a>
+          <p class="meta-line"><span>Smart Online Institute</span><span>2025</span></p>
+          <h1>From an empty repository to a production learning product.</h1>
+          <p class="case-deck">Ownership across the frontend, Next.js BFF, learner and instructor workflows, protected media, migration, and production delivery.</p>
+        </div>
+        <aside class="case-glance" aria-label="Project facts">
+          <dl class="fact-list">
+            <div><dt>Role</dt><dd>Sole Frontend Engineer</dd></div>
+            <div><dt>Period</dt><dd>Feb—Aug 2025</dd></div>
+            <div><dt>Product</dt><dd>Psychology-education platform</dd></div>
+            <div><dt>Users</dt><dd>Learners, instructors, and product administrators</dd></div>
+            <div><dt>Stack</dt><dd>Next.js · TypeScript · Strapi · AWS S3 · Docker</dd></div>
+          </dl>
+        </aside>
+        <div class="case-outcomes" data-stats="1" role="group" aria-label="Outcomes">
+          <div class="stat"><strong>≈5<small> months</small></strong><p>from an empty repository to a live production MVP</p><p class="stat-source">First release, inside a seven-month engagement</p></div>
+          <div class="shipped">
+            <h2>Shipped in the first release</h2>
+            <ul>
+              <li>Course marketplace and discovery</li>
+              <li>Learner profiles and progress</li>
+              <li>Practice booking with call links</li>
+              <li>Instructor schedules and progress views</li>
+              <li>Protected video, audio, and PDF delivery</li>
+              <li>Content migrated without a source API</li>
+              <li>GitLab CI/CD and Docker deployment</li>
+            </ul>
+          </div>
+        </div>
       </header>
 
-      <section class="case-cover section-shell reveal" aria-label="Product interface">
-        <figure>
-          <a class="case-cover-link" href="/public/online-institute.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Smart Online Institute screenshot in a new tab">
-            <img src="/public/online-institute.webp" width="1672" height="941" fetchpriority="high" alt="Smart Online Institute course marketplace with a featured event and course catalog" />
+      <div class="section-shell">
+        <figure class="case-cover media-frame">
+          <a class="project-media-link" href="/public/online-institute.webp" aria-label="Enlarge the Smart Online Institute screenshot">
+            <img src="/public/optimized/v1/online-institute-1440.webp" srcset="/public/optimized/v1/online-institute-720.webp 720w, /public/optimized/v1/online-institute-1080.webp 1080w, /public/optimized/v1/online-institute-1440.webp 1440w, /public/online-institute.webp 1672w" sizes="(max-width: 760px) calc(100vw - 78px), min(1160px, calc(100vw - 178px))" width="1672" height="941" decoding="async" alt="Smart Online Institute course marketplace with a featured event and course catalog" />
+            <span class="media-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg></span>
           </a>
-          <figcaption><span>Production product interface</span><span>Marketplace · learning · booking · open full size ↗</span></figcaption>
+          <figcaption><span>Course marketplace in production</span></figcaption>
         </figure>
-      </section>
+      </div>
 
-      <article class="case-article section-shell">
-        <section class="case-section reveal">
-          <p class="case-section-label">01 / Brief</p>
-          <div class="case-prose">
-            <h2>A complete learning journey, ready for launch.</h2>
-            <p>
-              The new psychology-education platform started without a frontend codebase.
-              It needed a public course marketplace, learner profiles and progress, practice
-              booking, instructor operations, secure educational media, and a reliable path to production.
-            </p>
-            <p>
-              I owned the frontend and its delivery path: system shape, product implementation, server-side API orchestration,
-              validation, delivery infrastructure, deployment, and the migration of existing content.
-            </p>
+      <div class="case-body section-shell">
+        <nav class="case-toc" aria-label="On this page">
+          <p>On this page</p>
+          <a href="#brief" data-nav-link>Brief</a>
+          <a href="#constraints" data-nav-link>Constraints</a>
+          <a href="#decisions" data-nav-link>Decisions</a>
+          <a href="#shipped" data-nav-link>What shipped</a>
+          <a href="#scope" data-nav-link>Scope &amp; stack</a>
+        </nav>
+        <article class="case-article">
+          <section class="case-section" id="brief" aria-labelledby="brief-title" data-section>
+            <p class="case-label">Brief</p>
+            <h2 id="brief-title">A complete learning journey, ready for launch.</h2>
+            <p>The new psychology-education platform started without a frontend codebase. It needed a public course marketplace, learner profiles and progress, practice booking, instructor operations, secure educational media, and a reliable path to production.</p>
+            <p>I owned the frontend and its delivery path: system shape, product implementation, server-side API orchestration, validation, delivery infrastructure, deployment, and the migration of existing content.</p>
             <dl class="case-brief">
               <div><dt>Operating constraint</dt><dd>Move from zero to real learners quickly without producing a disposable prototype.</dd></div>
               <div><dt>My ownership</dt><dd>All frontend product surfaces, Next.js BFF, CI/CD, Docker deployment, and legacy migration.</dd></div>
               <div><dt>Primary users</dt><dd>Prospective learners, enrolled students, instructors, and product administrators.</dd></div>
               <div><dt>Launch target</dt><dd>A maintainable production MVP with real content and operational workflows.</dd></div>
             </dl>
-          </div>
-        </section>
-
-        <section class="case-section reveal">
-          <p class="case-section-label">02 / Constraints</p>
-          <div class="case-prose">
-            <h2>Product scope, delivery infrastructure, and migration arrived together.</h2>
-            <p>
-              The product could not launch as a set of disconnected screens. Booking had to create
-              the right call links, permissions had to protect paid media, instructor tooling had to
-              support daily operations, and existing content had to arrive from a service with no API.
-            </p>
-            <dl class="case-facts">
+          </section>
+          <section class="case-section" id="constraints" aria-labelledby="constraints-title" data-section>
+            <p class="case-label">Constraints</p>
+            <h2 id="constraints-title">Product scope, delivery infrastructure, and migration arrived together.</h2>
+            <p>The product could not launch as a set of disconnected screens. Booking had to create the right call links, permissions had to protect paid media, instructor tooling had to support daily operations, and existing content had to arrive from a service with no API.</p>
+            <dl class="fact-list case-facts">
               <div><dt>Starting point</dt><dd>An empty frontend repository and a backend/CMS surface that needed product-facing orchestration.</dd></div>
               <div><dt>Legacy data</dt><dd>The previous service exposed no API suitable for content migration.</dd></div>
               <div><dt>Media</dt><dd>Video, audio, PDF, and document content required secure delivery from AWS S3.</dd></div>
               <div><dt>Operations</dt><dd>Instructors needed schedules, session management, and learning-progress visualization.</dd></div>
             </dl>
-          </div>
-        </section>
-
-        <section class="case-section reveal">
-          <p class="case-section-label">03 / Decisions</p>
-          <div class="case-prose">
-            <h2>A small architecture with explicit boundaries around external complexity.</h2>
-            <p>
-              The frontend was organized around product workflows, with a BFF layer absorbing API
-              orchestration and infrastructure details that did not belong in page components.
-            </p>
+          </section>
+          <section class="case-section" id="decisions" aria-labelledby="decisions-title" data-section>
+            <p class="case-label">Decisions</p>
+            <h2 id="decisions-title">A small architecture with explicit boundaries around external complexity.</h2>
+            <p>The frontend was organized around product workflows, with a BFF layer absorbing API orchestration and infrastructure details that did not belong in page components.</p>
             <div class="case-decisions">
               <article class="case-decision">
-                <span>01 · Product surface</span>
+                <span>Product surface</span>
                 <h3>Build learner and instructor workflows as one product system.</h3>
                 <p>Delivered the marketplace, profiles, progress, practice booking, schedule management, and instructor progress views on shared domain rules.</p>
               </article>
               <article class="case-decision">
-                <span>02 · API boundary</span>
+                <span>API boundary</span>
                 <h3>Use a Next.js BFF for orchestration and stable client contracts.</h3>
                 <p>Kept backend composition, validation, and integration-specific behavior behind a server boundary instead of spreading it through UI code.</p>
               </article>
               <article class="case-decision">
-                <span>03 · Content delivery</span>
+                <span>Content delivery</span>
                 <h3>Keep access control attached to media delivery.</h3>
                 <p>Implemented secure viewing for video, audio, PDFs, and documents stored in S3, with product permissions governing access.</p>
               </article>
               <article class="case-decision">
-                <span>04 · Migration</span>
+                <span>Migration</span>
                 <h3>Automate extraction when no migration API exists.</h3>
                 <p>Used Playwright-based scraping to move existing courses and content without manual re-entry, then put deployment behind GitLab CI/CD and Docker.</p>
               </article>
             </div>
-          </div>
-        </section>
-
-        <section class="case-section reveal">
-          <p class="case-section-label">04 / What shipped</p>
-          <div class="case-prose">
-            <h2>A production MVP that covered both customer experience and daily operations.</h2>
-            <p>
-              The first release was not only a marketing shell. Learners could discover courses,
-              manage their learning, book practice, and consume protected content; instructors could
-              operate schedules and follow progress; the team had a repeatable route to deployment.
-            </p>
-            <div class="case-results" aria-label="Project outcomes">
-              <div class="case-result"><strong>≈5 mo.</strong><span>from an empty repository to a live production MVP</span></div>
-              <div class="case-result"><strong>UI → BFF</strong><span>ownership across product interfaces and server-side orchestration</span></div>
-              <div class="case-result"><strong>0 APIs</strong><span>migration APIs available from the previous service</span></div>
-            </div>
+          </section>
+          <section class="case-section" id="shipped" aria-labelledby="shipped-title" data-section>
+            <p class="case-label">What shipped</p>
+            <h2 id="shipped-title">A production MVP that covered both customer experience and daily operations.</h2>
+            <p>The first release was not only a marketing shell. Learners could discover courses, manage their learning, book practice, and consume protected content; instructors could operate schedules and follow progress; the team had a repeatable route to deployment.</p>
             <p class="case-note"><strong>Scope note.</strong> The delivery window refers to the first production MVP inside a seven-month engagement. My ownership covered the frontend, BFF, integrations, and delivery; the backend/CMS was an existing surface. Private customer and operational data are omitted.</p>
-          </div>
-        </section>
-
-        <section class="case-section reveal">
-          <p class="case-section-label">05 / Scope</p>
-          <div class="case-prose">
-            <h2>Ownership from product behavior to the deployment path.</h2>
-            <p>
-              As the sole frontend engineer, I kept architectural ambition proportional to the team while still
-              protecting the parts most likely to become expensive: product boundaries, API contracts,
-              validation, access control, automated delivery, and migration repeatability.
-            </p>
-            <dl class="case-facts">
+          </section>
+          <section class="case-section" id="scope" aria-labelledby="scope-title" data-section>
+            <p class="case-label">Scope &amp; stack</p>
+            <h2 id="scope-title">Ownership from product behavior to the deployment path.</h2>
+            <p>As the sole frontend engineer, I kept architectural ambition proportional to the team while still protecting the parts most likely to become expensive: product boundaries, API contracts, validation, access control, automated delivery, and migration repeatability.</p>
+            <dl class="fact-list case-facts">
               <div><dt>Learner product</dt><dd>Course discovery, profiles, progress, booking, schedules, and protected educational content.</dd></div>
               <div><dt>Instructor product</dt><dd>Session management, schedule workflows, and progress visualization with Recharts.</dd></div>
               <div><dt>Delivery</dt><dd>GitLab CI/CD and Docker-based deployment created from scratch for the new frontend.</dd></div>
             </dl>
             <p class="case-stack-label">Technology used</p>
-            <ul class="case-stack" aria-label="Technology stack">
-              <li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>shadcn/ui</li><li>React Query</li>
-              <li>Zod</li><li>Strapi</li><li>Recharts</li><li>Playwright</li><li>AWS S3</li><li>Docker</li><li>GitLab CI/CD</li>
-            </ul>
-          </div>
-        </section>
+            <ul class="case-stack" aria-label="Technology stack"><li>Next.js</li><li>TypeScript</li><li>Tailwind</li><li>shadcn/ui</li><li>React Query</li><li>Zod</li><li>Strapi</li><li>Recharts</li><li>Playwright</li><li>AWS S3</li><li>Docker</li><li>GitLab CI/CD</li></ul>
+          </section>
+        </article>
+      </div>
 
-        <aside class="case-next reveal" aria-label="Next steps">
-          <div>
-            <p class="case-eyebrow">Related case · Platform modernization</p>
-            <h2>A live travel product modernized without stopping delivery.</h2>
-          </div>
-          <div class="case-next-actions">
-            <a href="/case/smartway/"><span>Read the Smartway case</span><span aria-hidden="true">→</span></a>
-            <a href="mailto:danigoshin@gmail.com?subject=Product%20engineering%20role"><span>Discuss a role or project</span><span aria-hidden="true">↗</span></a>
-          </div>
-        </aside>
-      </article>
+      <nav class="case-next section-shell" aria-label="Next case study">
+        <a href="/case/research/">
+          <span class="case-next-copy">
+            <span class="case-next-label">Next case study</span>
+            <span class="meta-line"><span>Morizo Digital</span><span>2026—present</span></span>
+            <span class="case-next-title">One workspace for scientific research.</span>
+            <span class="arrow-link">Read the case study <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="media-frame"><img src="/public/optimized/v1/ai4s-720.webp" srcset="/public/optimized/v1/ai4s-720.webp 720w, /public/optimized/v1/ai4s-1080.webp 1080w" sizes="(max-width: 900px) calc(100vw - 78px), 600px" width="3024" height="1472" loading="lazy" decoding="async" alt="Research workspace with source editing, compiled preview, and AI review" /></span>
+        </a>
+      </nav>
     </main>
 
     <div class="page-finale">
-      <footer class="footer section-shell">
-        <p>© <span data-year>2026</span> Danila Igoshin</p>
-        <p>Case study · Smart Online Institute · 2025</p>
-        <a href="/Danila_Igoshin_Product_Engineer_CV.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
-      </footer>
+      <section class="site-contact section-shell" id="contact" aria-labelledby="contact-title">
+        <div class="contact-intro">
+          <h2 id="contact-title">Building something useful?</h2>
+          <p>I’m looking for Product Engineer and Full-stack roles on remote product teams. Tell me what you’re working on.</p>
+        </div>
+        <div class="contact-action">
+          <div class="contact-email-row"><a href="mailto:danigoshin@gmail.com">danigoshin@gmail.com</a><button type="button" data-copy-email aria-label="Copy email address" aria-controls="copy-status">Copy</button></div>
+          <nav class="contact-links" aria-label="Contact and résumé links">
+            <a href="/cv/"><span class="contact-link-label">Résumé</span><span aria-hidden="true">→</span></a>
+            <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">LinkedIn</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+            <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">GitHub</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+          </nav>
+          <p class="contact-response">I usually reply within one business day.</p>
+        </div>
+      </section>
+      <footer class="footer section-shell"><p>© <span data-year>2026</span> Danila Igoshin</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
     </div>
+
+    <div
+      class="copy-toast"
+      id="copy-status"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      data-copy-toast
+    ></div>
+
+    <dialog
+      class="project-lightbox"
+      aria-label="Project image viewer"
+      aria-describedby="project-lightbox-caption"
+      data-project-lightbox
+    >
+      <div class="project-lightbox-shell">
+        <button
+          class="project-lightbox-close"
+          type="button"
+          aria-label="Close full-size image"
+          data-project-lightbox-close
+        >
+          <span>Close</span><span aria-hidden="true">×</span>
+        </button>
+        <figure>
+          <img alt="" data-project-lightbox-image />
+          <figcaption id="project-lightbox-caption" data-project-lightbox-caption></figcaption>
+        </figure>
+      </div>
+    </dialog>
   </body>
 </html>

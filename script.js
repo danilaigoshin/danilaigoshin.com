@@ -88,7 +88,7 @@
 
       // Past this width the toggle is hidden and the nav is inline, so an open
       // drawer would leave the page inert with no way to dismiss it.
-      const inlineNav = window.matchMedia("(min-width: 1281px)");
+      const inlineNav = window.matchMedia("(min-width: 901px)");
       const syncNavMode = () => {
         // Do not animate the desktop navigation into a closed mobile drawer.
         document.documentElement.classList.remove("js-ready");

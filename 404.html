@@ -13,20 +13,51 @@
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/case/styles.css?v=20260924" />
+    <script src="/script.js" defer></script>
   </head>
 
-  <body>
+  <body class="case-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-    <header class="site-header">
+    <header class="site-header" data-header>
       <div class="nav-shell">
-        <a class="brand" href="/" aria-label="Danila Igoshin — go to the homepage">
+        <a class="brand" href="/" aria-label="Danila Igoshin — home">
           <span class="brand-mark" aria-hidden="true">D/I</span>
           <span class="brand-copy">Danila Igoshin</span>
         </a>
 
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+          data-menu-toggle
+        >
+          <span></span><span></span>
+        </button>
+
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
+          <div class="nav-panel" data-nav-panel>
+            <a href="/#work" data-nav-link>Work</a>
+            <a href="/#experience" data-nav-link>Experience</a>
+            <a href="/#about" data-nav-link>About</a>
+            <a href="/cv/">Résumé</a>
+            <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+              <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+
         <div class="nav-actions">
-          <span class="availability"><i aria-hidden="true"></i> Open to remote work · Yerevan, Armenia</span>
           <a class="nav-email" href="mailto:danigoshin@gmail.com">
             Email <span aria-hidden="true">↗</span>
           </a>
@@ -34,37 +65,44 @@
       </div>
     </header>
 
-    <main class="not-found section-shell" id="main-content" tabindex="-1">
-      <p class="section-label">Error 404</p>
-      <h1>This page<br />isn’t here.</h1>
-      <p class="not-found-lede">
-        The address is wrong, or the page has moved. Everything on this site is one
-        step away from here.
-      </p>
-
-      <div class="intro-actions">
-        <a class="primary-link" href="/">
-          Back to the homepage <span aria-hidden="true">→</span>
-        </a>
-        <a href="mailto:danigoshin@gmail.com">
-          Email me <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-
-      <dl class="intro-facts">
-        <div><dt>Selected work</dt><dd><a href="/#work">Selected production projects</a></dd></div>
-        <div><dt>Experience</dt><dd><a href="/#experience">Roles and timeline</a></dd></div>
-        <div><dt>Case studies</dt><dd><a href="/case/smartway/">Smartway</a> · <a href="/case/edtech/">EdTech</a></dd></div>
-        <div><dt>Résumé</dt><dd><a href="/cv/">Full résumé and PDF</a></dd></div>
-      </dl>
+    <main class="case-main" id="main-content" tabindex="-1">
+      <header class="case-index-hero section-shell" id="top">
+        <p class="case-label">Error 404</p>
+        <h1>This page isn’t here.</h1>
+        <p class="case-deck">The address is wrong, or the page has moved. Everything on this site is one step away from here.</p>
+        <div class="button-row">
+          <a class="button button-primary" href="/">Back to the homepage <span aria-hidden="true">→</span></a>
+          <a class="button" href="/case/">Case studies <span aria-hidden="true">→</span></a>
+        </div>
+      </header>
     </main>
 
     <div class="page-finale">
-      <footer class="footer section-shell">
-        <p>© 2026 Danila Igoshin</p>
-        <p>Product engineering · Full-stack TypeScript</p>
-        <a href="/">Homepage <span aria-hidden="true">→</span></a>
-      </footer>
+      <section class="site-contact section-shell" id="contact" aria-labelledby="contact-title">
+        <div class="contact-intro">
+          <h2 id="contact-title">Building something useful?</h2>
+          <p>I’m looking for Product Engineer and Full-stack roles on remote product teams. Tell me what you’re working on.</p>
+        </div>
+        <div class="contact-action">
+          <div class="contact-email-row"><a href="mailto:danigoshin@gmail.com">danigoshin@gmail.com</a><button type="button" data-copy-email aria-label="Copy email address" aria-controls="copy-status">Copy</button></div>
+          <nav class="contact-links" aria-label="Contact and résumé links">
+            <a href="/cv/"><span class="contact-link-label">Résumé</span><span aria-hidden="true">→</span></a>
+            <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">LinkedIn</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+            <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">GitHub</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+          </nav>
+          <p class="contact-response">I usually reply within one business day.</p>
+        </div>
+      </section>
+      <footer class="footer section-shell"><p>© <span data-year>2026</span> Danila Igoshin</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
     </div>
+
+    <div
+      class="copy-toast"
+      id="copy-status"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      data-copy-toast
+    ></div>
   </body>
 </html>
