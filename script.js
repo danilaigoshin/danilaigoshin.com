@@ -2,8 +2,11 @@
   "use strict";
 
   const initializeEnhancements = () => {
+    // Switch to the scripted layout first (the mobile nav leaves the header
+    // for its drawer), so every measurement below sees the final geometry.
+    document.documentElement.classList.add("js");
+
     const header = document.querySelector("[data-header]");
-    const progress = document.querySelector(".scroll-progress span");
     const menuButton = document.querySelector("[data-menu-toggle]");
     const navigation = document.querySelector("[data-nav]");
     const navigationPanel = navigation?.querySelector("[data-nav-panel]");
@@ -145,78 +148,130 @@
 
     }
 
+    // Scroll-dependent UI is driven by IntersectionObserver rather than a
+    // scroll listener: the browser reports when a boundary is crossed and
+    // nothing runs while the reader simply scrolls inside one section. The
+    // progress bar is a CSS scroll-driven animation (see styles.css).
+    const hasObserver = "IntersectionObserver" in window;
+
+    if (header && hasObserver) {
+      const topMarker = document.createElement("div");
+      topMarker.className = "scroll-sentinel";
+      topMarker.setAttribute("aria-hidden", "true");
+      document.body.prepend(topMarker);
+      new IntersectionObserver(([entry]) => {
+        header.classList.toggle("is-scrolled", !entry.isIntersecting);
+      }).observe(topMarker);
+    }
+
     const sections = Array.from(document.querySelectorAll("[data-section]"));
     let activeSectionId;
 
-    const updateScrollUI = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const updateActiveSection = () => {
+      if (!sections.length) return;
+
+      // Read all section positions, rather than only the intersections that
+      // changed. This also covers long sections, gaps, and upward scrolling.
+      // The same one-pixel band the observer below watches: a section counts
+      // as reached as soon as its top enters the band, not a pixel later.
+      const activationLine = (header?.offsetHeight || 0) + 24;
+      let activeSection = sections[0];
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top >= activationLine + 1) break;
+        activeSection = section;
+      }
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-      if (header) header.classList.toggle("is-scrolled", scrollTop > 12);
-      if (progress) {
-        const ratio = maxScroll > 0 ? Math.min(1, scrollTop / maxScroll) : 0;
-        progress.style.transform = `scaleX(${ratio})`;
+      if (maxScroll > 0 && window.scrollY >= maxScroll - 1) {
+        activeSection = sections[sections.length - 1];
       }
 
-      if (sections.length) {
-        // Read all section positions, rather than only the intersections that
-        // changed. This also covers long sections, gaps, and upward scrolling.
-        const activationLine = (header?.offsetHeight || 0) + 24;
-        let activeSection = sections[0];
-        for (const section of sections) {
-          if (section.getBoundingClientRect().top > activationLine) break;
-          activeSection = section;
-        }
-        if (maxScroll > 0 && scrollTop >= maxScroll - 1) {
-          activeSection = sections[sections.length - 1];
-        }
-
-        if (activeSection.id !== activeSectionId) {
-          activeSectionId = activeSection.id;
-          navLinks.forEach((link) => {
-            const isActive = link.getAttribute("href") === `#${activeSectionId}`;
-            link.classList.toggle("is-active", isActive);
-            if (isActive) link.setAttribute("aria-current", "location");
-            else link.removeAttribute("aria-current");
-          });
-        }
-      }
-    };
-
-    let scrollUpdatePending = false;
-    const scheduleScrollUpdate = () => {
-      if (scrollUpdatePending) return;
-      scrollUpdatePending = true;
-      window.requestAnimationFrame(() => {
-        scrollUpdatePending = false;
-        updateScrollUI();
+      if (activeSection.id === activeSectionId) return;
+      activeSectionId = activeSection.id;
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute("href") === `#${activeSectionId}`;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       });
     };
 
-    updateScrollUI();
-    window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
-    window.addEventListener("resize", scheduleScrollUpdate);
-    window.addEventListener("load", scheduleScrollUpdate);
-    window.addEventListener("pageshow", scheduleScrollUpdate);
+    if (sections.length && hasObserver) {
+      // A one-pixel band at the activation line: a section crossing it is the
+      // only moment the answer can change. The end marker covers the last,
+      // shorter sections that never reach the line before the page ends.
+      const endMarker = document.createElement("div");
+      endMarker.className = "scroll-sentinel-end";
+      endMarker.setAttribute("aria-hidden", "true");
+      document.body.append(endMarker);
 
-    const revealItems = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window && !reducedMotion.matches) {
+      let sectionObserver;
+      const observeSections = () => {
+        sectionObserver?.disconnect();
+        const line = (header?.offsetHeight || 0) + 24;
+        const below = Math.max(0, window.innerHeight - line - 1);
+        sectionObserver = new IntersectionObserver(updateActiveSection, {
+          rootMargin: `-${line}px 0px -${below}px 0px`,
+        });
+        sections.forEach((section) => sectionObserver.observe(section));
+      };
+
+      observeSections();
+      new IntersectionObserver(updateActiveSection).observe(endMarker);
+
+      let resizePending = false;
+      window.addEventListener("resize", () => {
+        if (resizePending) return;
+        resizePending = true;
+        window.requestAnimationFrame(() => {
+          resizePending = false;
+          observeSections();
+          updateActiveSection();
+        });
+      });
+      window.addEventListener("pageshow", updateActiveSection);
+      window.addEventListener("hashchange", updateActiveSection);
+    }
+
+    updateActiveSection();
+
+    const revealItems = Array.from(document.querySelectorAll(".reveal"));
+    if (hasObserver && !reducedMotion.matches) {
+      const settle = (item) => {
+        item.classList.remove("will-reveal", "is-visible");
+        item.style.removeProperty("--reveal-delay");
+      };
+
       const revealObserver = new IntersectionObserver(
         (entries, observer) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          });
+          // Blocks that arrive in the same frame cascade in document order.
+          entries
+            .filter((entry) => entry.isIntersecting)
+            .forEach((entry, index) => {
+              const item = entry.target;
+              observer.unobserve(item);
+              item.style.setProperty("--reveal-delay", `${Math.min(index, 5) * 70}ms`);
+              item.classList.add("is-visible");
+              item.addEventListener(
+                "transitionend",
+                function onEnd(event) {
+                  if (event.target !== item || event.propertyName !== "transform") return;
+                  item.removeEventListener("transitionend", onEnd);
+                  settle(item);
+                },
+              );
+            });
         },
         { rootMargin: "0px 0px -8%", threshold: 0.08 },
       );
+
+      // Anything already on screen stays put; only what starts below the fold
+      // is held back, so the first paint never blinks.
+      const fold = window.innerHeight;
       revealItems.forEach((item) => {
+        if (item.getBoundingClientRect().top < fold) return;
         item.classList.add("will-reveal");
         revealObserver.observe(item);
       });
-    } else {
-      revealItems.forEach((item) => item.classList.add("is-visible"));
     }
 
     const projectMediaLinks = Array.from(document.querySelectorAll(".project-media-link"));
@@ -340,7 +395,7 @@
       }
 
       showCopyStatus(
-        copied ? "Email copied" : "Could not copy — select the email address",
+        copied ? "Email copied" : "Could not copy. Select the email address.",
         copied ? 2200 : 3200,
       );
 
@@ -366,7 +421,6 @@
     if (year) year.textContent = String(new Date().getFullYear());
 
     // Keep the drawer closed from the first render, then enable user-triggered motion.
-    document.documentElement.classList.add("js");
     window.requestAnimationFrame(() => {
       document.documentElement.classList.add("js-ready");
     });

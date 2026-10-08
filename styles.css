@@ -34,6 +34,10 @@
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", Consolas, "Liberation Mono", monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Long settle for entrances; --ease stays the curve for hover feedback. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Shadows carry the ink hue and stay under 0.2 alpha: lift, not drop. */
+  --shadow-soft: 0 1px 2px rgba(21, 24, 29, 0.04), 0 14px 36px -20px rgba(21, 24, 29, 0.2);
 }
 
 * {
@@ -61,6 +65,11 @@ h1,
 h2,
 h3 {
   text-wrap: balance;
+}
+
+p,
+dd {
+  text-wrap: pretty;
 }
 
 html.menu-open,
@@ -156,6 +165,42 @@ p {
   transform: scaleX(0);
   transform-origin: left;
   background: var(--accent);
+}
+
+/* Driven by the document's own scroll timeline, so no script listens to
+   scrolling. Browsers without scroll-driven animations simply omit the bar. */
+@supports not (animation-timeline: scroll()) {
+  .scroll-progress { display: none; }
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress span {
+    animation: scroll-progress linear both;
+    animation-duration: auto;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes scroll-progress {
+  to { transform: scaleX(1); }
+}
+
+/* Header state is read from this marker leaving the viewport. */
+.scroll-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 12px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Last thing in the document flow: visible only once the page has ended. */
+.scroll-sentinel-end {
+  height: 1px;
+  margin-top: -1px;
+  pointer-events: none;
 }
 
 /* Header */
@@ -1075,6 +1120,11 @@ html:not(.js) .contact-email-row button {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+
+  /* Scroll-linked, not autonomous: it moves only as fast as the reader. */
+  .scroll-progress span {
+    animation-duration: auto !important;
+  }
 }
 
 /* ==========================================================================
@@ -1111,21 +1161,24 @@ html:not(.js) .contact-email-row button {
 
 /* Actions */
 
+/* The trailing arrow sits in its own square inset, flush with the button's
+   inner edge, so the label and the direction read as two parts. */
 .button {
   display: inline-flex;
-  gap: 20px;
+  gap: 18px;
   align-items: center;
   justify-content: center;
   min-height: 50px;
-  padding: 0 22px;
+  padding: 0 8px 0 22px;
   border: 1px solid var(--line-control);
   background: var(--surface);
   font-size: 15px;
   font-weight: 600;
-  transition: background-color 160ms ease, border-color 160ms ease;
+  transition: background-color 200ms var(--ease), border-color 200ms var(--ease), transform 160ms var(--ease);
 }
 
 .button:hover { border-color: var(--ink); }
+.button:active { transform: translateY(1px); }
 .button-primary { border-color: var(--ink); background: var(--ink); color: var(--surface); }
 .button-primary:hover { border-color: var(--accent-dark); background: var(--accent-dark); }
 
@@ -1147,27 +1200,38 @@ html:not(.js) .contact-email-row button {
   text-underline-offset: 4px;
 }
 
-.button span[aria-hidden],
 .text-link span[aria-hidden],
 .arrow-link span[aria-hidden] {
   display: inline-block;
   transition: transform 180ms var(--ease);
 }
 
-.button:hover span[aria-hidden],
+.button span[aria-hidden] {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  place-items: center;
+  background: var(--surface-muted);
+  transition: transform 240ms var(--ease), background-color 200ms var(--ease);
+}
+
+.button-primary span[aria-hidden] { background: rgba(255, 255, 255, 0.12); }
+.button:hover span[aria-hidden] { background: #e2e6ea; transform: translate(2px, -2px); }
+.button-primary:hover span[aria-hidden] { background: rgba(255, 255, 255, 0.16); transform: translateY(2px); }
 .text-link:hover span[aria-hidden] { transform: translate(2px, -1px); }
-.button-primary:hover span[aria-hidden] { transform: translateY(2px); }
 .arrow-link:hover span[aria-hidden] { transform: translateX(3px); }
+.text-link:active,
+.arrow-link:active { transform: translateY(1px); }
 
 /* Text blocks */
 
 .section-head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 32px;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: clamp(28px, 3.4vw, 44px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px 32px;
+  align-items: end;
+  margin-bottom: clamp(32px, 4vw, 52px);
 }
 
 .section-head h2 {
@@ -1177,7 +1241,9 @@ html:not(.js) .contact-email-row button {
   letter-spacing: -0.04em;
 }
 
-.section-head p { max-width: 52ch; margin: 0 0 4px; color: var(--muted); font-size: 16px; }
+/* A supporting line sits under the heading it supports, never in the far
+   corner; a link (the résumé) may still share the heading's row. */
+.section-head p { grid-column: 1 / -1; max-width: 52ch; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.55; }
 
 .meta-line {
   display: flex;
@@ -1248,7 +1314,7 @@ html:not(.js) .contact-email-row button {
 
 .stat strong {
   font-size: clamp(2.25rem, 1.6rem + 1.4vw, 2.875rem);
-  font-weight: 560;
+  font-weight: 520;
   line-height: 1;
   letter-spacing: -0.045em;
   font-variant-numeric: tabular-nums;
@@ -1435,9 +1501,9 @@ html:not(.js) .contact-email-row button {
   .portfolio-page,
   .case-page { --shell: calc(100% - 40px); --gap: 20px; --panel-pad: 22px; }
   .nav-shell { min-height: 64px; }
-  .button { gap: 12px; padding-inline: 14px; }
+  .button { gap: 14px; padding: 0 8px 0 18px; }
   .section-head { margin-bottom: 24px; }
-  .section-head p { font-size: 15px; }
+  .section-head p { font-size: 16px; }
   .fact-list > div { grid-template-columns: 84px minmax(0, 1fr); gap: 12px; }
   .stat { gap: 6px; padding: 20px 18px 18px; }
   .stat p { font-size: 14px; }
@@ -1451,6 +1517,7 @@ html:not(.js) .contact-email-row button {
 
 @media (prefers-reduced-motion: reduce) {
   .status i::after { animation: none; }
+  .will-reveal { opacity: 1; transform: none; }
   .media-frame img,
   .button span[aria-hidden],
   .text-link span[aria-hidden],
@@ -1458,3 +1525,44 @@ html:not(.js) .contact-email-row button {
 }
 
 .button-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* Motion: entrances only, each telling the reader where to look next.
+   Content below the first screen rises in as it arrives (script.js adds
+   .will-reveal only to blocks that start off-screen, so nothing visible on
+   load ever blinks out); siblings that arrive together are staggered. */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+.will-reveal { opacity: 0; transform: translateY(18px); }
+
+.will-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 700ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 900ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+@media print {
+  .will-reveal { opacity: 1; transform: none; }
+}
+
+/* The drawer's links settle in one after another as it opens. */
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .js .nav-panel > a,
+  .js .mobile-nav-utilities {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 280ms var(--ease-out), transform 420ms var(--ease-out), color 160ms ease;
+  }
+
+  .js .site-nav.is-open .nav-panel > a,
+  .js .site-nav.is-open .mobile-nav-utilities { opacity: 1; transform: none; }
+
+  .js .site-nav.is-open .nav-panel > a:nth-child(2) { transition-delay: 40ms; }
+  .js .site-nav.is-open .nav-panel > a:nth-child(3) { transition-delay: 80ms; }
+  .js .site-nav.is-open .nav-panel > a:nth-child(4) { transition-delay: 120ms; }
+  .js .site-nav.is-open .mobile-nav-utilities { transition-delay: 170ms; }
+}
