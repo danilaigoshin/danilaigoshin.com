@@ -713,6 +713,10 @@ html:not(.js) .contact-email-row button {
   transform: translateY(-2px);
 }
 
+.contact-links a[download]:hover span[aria-hidden] {
+  transform: translateY(2px);
+}
+
 :focus-visible {
   outline: 2px solid var(--accent-dark);
   outline-offset: 3px;
@@ -841,7 +845,7 @@ html:not(.js) .contact-email-row button {
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
-    padding: 90px 28px max(24px, env(safe-area-inset-bottom));
+    padding: 90px 32px max(24px, env(safe-area-inset-bottom));
     overflow-x: hidden;
     overflow-y: auto;
     transform: translateX(100%);
@@ -862,8 +866,8 @@ html:not(.js) .contact-email-row button {
   .js .nav-panel::before {
     position: absolute;
     top: 70px;
-    right: 28px;
-    left: 28px;
+    right: 32px;
+    left: 32px;
     height: 1px;
     background: var(--line);
     content: "";
@@ -876,7 +880,7 @@ html:not(.js) .contact-email-row button {
     align-items: center;
     min-width: 0;
     min-height: 60px;
-    padding: 0 8px 0 10px;
+    padding: 0 8px 0 0;
     overflow-wrap: anywhere;
     border-bottom: 1px solid var(--line);
     background: transparent;
@@ -887,9 +891,10 @@ html:not(.js) .contact-email-row button {
     letter-spacing: -0.045em;
   }
 
+  /* The current-page bar sits in the gutter, so the label stays on it. */
   .js .nav-panel > a::before {
     position: absolute;
-    left: 0;
+    left: -14px;
     width: 2px;
     height: 18px;
     transform: scaleY(0);
@@ -940,7 +945,12 @@ html:not(.js) .contact-email-row button {
   }
 
   .js .mobile-nav-utilities a:nth-child(2n) {
+    padding-left: 14px;
     border-right: 0;
+  }
+
+  .js .mobile-nav-utilities a:nth-child(2n + 1) {
+    padding-left: 0;
   }
 
   .js .mobile-nav-utilities a:hover,
@@ -1043,7 +1053,7 @@ html:not(.js) .contact-email-row button {
 
   .js .nav-panel {
     width: 100%;
-    padding: 78px 14px max(18px, env(safe-area-inset-bottom));
+    padding: 78px 32px max(18px, env(safe-area-inset-bottom));
     transform: translateY(-8px);
     border-left: 0;
   }
@@ -1054,8 +1064,8 @@ html:not(.js) .contact-email-row button {
 
   .js .nav-panel::before {
     top: 62px;
-    right: 14px;
-    left: 14px;
+    right: 32px;
+    left: 32px;
   }
 
   .js .nav-panel > a {
@@ -1067,6 +1077,12 @@ html:not(.js) .contact-email-row button {
     margin-top: 22px;
   }
 
+}
+
+@media (max-width: 760px) {
+  .js .nav-panel { padding-inline: 20px; }
+  .js .nav-panel::before { right: 20px; left: 20px; }
+  .js .nav-panel > a::before { left: -12px; }
 }
 
 @media (max-width: 760px) {
@@ -1159,6 +1175,24 @@ html:not(.js) .contact-email-row button {
 .site-nav a { font-size: 14px; font-weight: 550; }
 .nav-email { gap: 14px; min-height: 40px; padding: 0 16px; font-size: 14px; font-weight: 600; }
 
+/* Most recruiters arrive from LinkedIn, so the profile sits one step from
+   the Email button, quieter than it. */
+.nav-quiet {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 40px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 550;
+  transition: color 160ms ease;
+}
+
+.nav-quiet:hover,
+.nav-quiet:focus-visible { color: var(--ink); }
+.nav-quiet span[aria-hidden] { display: inline-block; transition: transform 180ms var(--ease); }
+.nav-quiet:hover span[aria-hidden] { transform: translate(2px, -1px); }
+
 /* Actions */
 
 /* The trailing arrow sits in its own square inset, flush with the button's
@@ -1216,6 +1250,7 @@ html:not(.js) .contact-email-row button {
   transition: transform 240ms var(--ease), background-color 200ms var(--ease);
 }
 
+.button span[aria-hidden] svg { width: 16px; height: 16px; }
 .button-primary span[aria-hidden] { background: rgba(255, 255, 255, 0.12); }
 .button:hover span[aria-hidden] { background: #e2e6ea; transform: translate(2px, -2px); }
 .button-primary:hover span[aria-hidden] { background: rgba(255, 255, 255, 0.16); transform: translateY(2px); }
@@ -1367,22 +1402,24 @@ html:not(.js) .contact-email-row button {
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.94);
   color: var(--ink);
-  opacity: 0;
-  transition: opacity 180ms ease;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .media-zoom svg { width: 16px; height: 16px; }
-.project-media-link:is(:hover, :focus-visible) .media-zoom { opacity: 1; }
+
+/* Always shown, so a reader with a mouse also knows the image opens; the
+   hover only strengthens it. */
+.project-media-link:is(:hover, :focus-visible) .media-zoom {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--surface);
+}
 
 @media (hover: hover) {
   .media-frame .project-media-link:hover img {
     transform: translateY(-3px);
     box-shadow: 0 1px 2px rgba(21, 24, 29, 0.05), 0 26px 48px -24px rgba(21, 24, 29, 0.36);
   }
-}
-
-@media (hover: none) {
-  .media-zoom { opacity: 1; }
 }
 
 /* Contact close: the one dark block, shared by every page. */
@@ -1445,7 +1482,8 @@ html:not(.js) .contact-email-row button {
   background: rgba(255, 255, 255, 0.06);
 }
 
-.site-contact .contact-links { display: flex; flex-wrap: wrap; column-gap: 32px; }
+/* Two résumé editions on one row, the profiles on the next. */
+.site-contact .contact-links { display: grid; grid-template-columns: repeat(2, max-content); column-gap: 36px; }
 
 .site-contact .contact-links a {
   gap: 10px;
@@ -1513,6 +1551,11 @@ html:not(.js) .contact-email-row button {
   .site-contact .contact-email-row a { min-height: 64px; font-size: clamp(1.2rem, 0.9rem + 1.6vw, 1.5rem); }
   .site-contact .contact-email-row button { min-width: 72px; }
   .site-contact .contact-links { column-gap: 28px; }
+}
+
+@media (max-width: 480px) {
+  .site-contact .contact-links { grid-template-columns: minmax(0, 1fr); }
+  .site-contact .contact-links a { min-height: 48px; padding-block: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

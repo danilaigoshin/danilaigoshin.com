@@ -25,12 +25,90 @@
 
 .hero-role { margin-bottom: 22px; color: var(--accent); font-size: 16px; font-weight: 600; }
 
+/* The role being hired for picks the summary, the core stack and which
+   résumé the main button downloads; ?role=full-stack opens on that edition.
+   Without script the plain role line above stands in for it. */
+.edition { min-inline-size: 0; margin: 0 0 26px; padding: 0; border: 0; }
+.edition::after { display: block; clear: both; content: ""; }
+
+.edition legend {
+  float: left;
+  margin: 0 16px 0 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 46px;
+}
+
+.edition-track {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 3px;
+  background: var(--surface-muted);
+}
+
+/* One white thumb slides under the chosen role. */
+.edition-track::before {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(21, 24, 29, 0.06);
+  content: "";
+  transition: transform 280ms var(--ease);
+}
+
+html[data-edition="full-stack"] .edition-track::before { transform: translateX(100%); }
+
+.edition label { position: relative; display: grid; min-height: 40px; place-items: center; cursor: pointer; }
+
+.edition input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.edition label span {
+  position: relative;
+  padding: 0 18px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 160ms ease;
+}
+
+.edition input:checked + span,
+.edition label:hover span { color: var(--ink); }
+.edition label:has(input:focus-visible) { outline: 2px solid var(--accent-dark); outline-offset: 2px; }
+
+/* The value that just changed settles in, so the eye finds what moved. */
+@keyframes edition-in {
+  from { opacity: 0; transform: translateY(4px); }
+}
+
+[data-edition].is-entering { display: inline-block; animation: edition-in 360ms var(--ease-out) both; }
+
+/* Both editions share one grid cell and the inactive one only turns
+   invisible, so the block keeps the taller text's height and the switch
+   never jumps out from under the pointer. */
+.js .edition-stack { display: grid; }
+.js .edition-stack > [data-edition] { grid-area: 1 / 1; }
+.js .edition-stack > [data-edition][hidden] { display: block !important; visibility: hidden; }
+
 .home-hero h1 {
   max-width: 13em;
   margin-bottom: 26px;
-  font-size: clamp(2.5rem, 1.05rem + 3.6vw, 4.25rem);
-  line-height: 1.02;
-  letter-spacing: -0.048em;
+  font-size: clamp(2.5rem, 1.05rem + 3.4vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.046em;
   text-wrap: initial;
 }
 
@@ -49,9 +127,13 @@
 }
 
 /* Square, like every other corner on the site. */
-.profile-head img { width: 64px; height: 64px; flex: none; object-fit: cover; background: var(--surface-muted); }
+.profile-head img { width: 96px; height: 96px; flex: none; object-fit: cover; background: var(--surface-muted); }
 .profile-name { margin: 0 0 4px; font-size: 18px; font-weight: 620; letter-spacing: -0.02em; }
 .profile-facts { padding: 6px 24px 10px; }
+
+/* Filled in by script.js: the time in Yerevan and its distance from the
+   visitor's own clock, under the time zone it explains. */
+.local-time { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
 
 /* Outcomes: open figures under one strong rule rather than a fourth box. */
 
@@ -292,13 +374,17 @@
 @media (max-width: 760px) {
   .home-hero { gap: 32px; padding-top: 36px; }
   .hero-role { margin-bottom: 16px; font-size: 15px; }
+  .edition { margin-bottom: 22px; }
+  .edition legend { float: none; display: block; margin-bottom: 8px; line-height: 1.4; font-size: 14px; }
+  .edition-track { display: grid; width: 100%; }
+  .edition label span { padding: 0 10px; font-size: 14px; }
   .home-hero h1 { margin-bottom: 20px; font-size: clamp(2.25rem, 1.2rem + 5vw, 3rem); letter-spacing: -0.045em; }
   .desktop-break { display: none; }
   .hero-lede { margin-bottom: 28px; font-size: 17px; }
   .hero-actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .hero-actions .button { justify-content: space-between; }
   .profile-head { padding: 18px 20px; }
-  .profile-head img { width: 56px; height: 56px; }
+  .profile-head img { width: 72px; height: 72px; }
   .profile-facts { padding: 4px 20px 8px; }
   .proof-strip .stat { padding: 20px 0 0 18px; }
   .proof-strip .stat:nth-child(n + 3) { margin-top: 20px; }

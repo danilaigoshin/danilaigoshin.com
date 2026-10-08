@@ -295,7 +295,15 @@
 
           event.preventDefault();
           lightboxTrigger = link;
-          lightboxImage.src = link.href;
+          // Show the preview the page already loaded, then swap in the full
+          // file once it arrives, so a slow connection never shows an empty
+          // dark viewer.
+          lightboxImage.src = preview.currentSrc || preview.src;
+          const fullImage = new Image();
+          fullImage.addEventListener("load", () => {
+            if (lightbox.open && lightboxTrigger === link) lightboxImage.src = link.href;
+          });
+          fullImage.src = link.href;
           lightboxImage.alt = preview.alt;
           const previewCaption = link
             .closest("figure")
@@ -416,6 +424,103 @@
     };
 
     if (copyButton) copyButton.addEventListener("click", copyEmail);
+
+    // Edition switch: the role being hired for picks the summary, the stack
+    // and the résumé the main button downloads. A ?role=full-stack link opens
+    // the page on that edition, and switching keeps the address in step.
+    const editionSwitch = document.querySelector("[data-edition-switch]");
+    if (editionSwitch) {
+      const editions = {
+        product: {
+          resume: "/Danila_Igoshin_Product_Engineer_CV.pdf",
+          name: " (Product Engineer edition, PDF)",
+        },
+        "full-stack": {
+          resume: "/Danila_Igoshin_Full_Stack_Engineer_CV.pdf",
+          name: " (Full-stack edition, PDF)",
+        },
+      };
+      const resumeLink = document.querySelector("[data-edition-resume]");
+      const resumeName = document.querySelector("[data-edition-resume-name]");
+      const roleLine = document.querySelector("[data-hero-role]");
+      const editionItems = Array.from(document.querySelectorAll("[data-edition]"));
+      const radios = Array.from(editionSwitch.querySelectorAll('input[name="edition"]'));
+
+      const applyEdition = (edition, { animate = true } = {}) => {
+        if (!editions[edition]) return;
+        document.documentElement.dataset.edition = edition;
+        radios.forEach((radio) => {
+          radio.checked = radio.value === edition;
+        });
+        editionItems.forEach((item) => {
+          const isVisible = item.dataset.edition === edition;
+          const wasHidden = item.hidden;
+          item.hidden = !isVisible;
+          item.classList.remove("is-entering");
+          if (isVisible && wasHidden && animate && !reducedMotion.matches) {
+            // Restart the settle animation on the value that just appeared.
+            void item.offsetWidth;
+            item.classList.add("is-entering");
+          }
+        });
+        if (resumeLink) resumeLink.setAttribute("href", editions[edition].resume);
+        if (resumeName) resumeName.textContent = editions[edition].name;
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      applyEdition(params.get("role") === "full-stack" ? "full-stack" : "product", {
+        animate: false,
+      });
+      editionSwitch.hidden = false;
+      if (roleLine) roleLine.hidden = true;
+
+      radios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (!radio.checked) return;
+          applyEdition(radio.value);
+          const url = new URL(window.location.href);
+          if (radio.value === "full-stack") url.searchParams.set("role", "full-stack");
+          else url.searchParams.delete("role");
+          window.history.replaceState(window.history.state, "", url);
+        });
+      });
+    }
+
+    // Local time in Yerevan, and how far that is from the visitor's own clock.
+    // Armenia keeps UTC+4 all year (no daylight saving), so the offset is fixed.
+    const localTime = document.querySelector("[data-local-time]");
+    if (localTime && typeof Intl !== "undefined") {
+      const yerevanOffsetMinutes = 4 * 60;
+
+      const describeDifference = () => {
+        const difference = yerevanOffsetMinutes + new Date().getTimezoneOffset();
+        if (difference === 0) return "same time as you";
+        const hours = Math.floor(Math.abs(difference) / 60);
+        const minutes = Math.abs(difference) % 60;
+        const amount = [hours && `${hours} h`, minutes && `${minutes} min`].filter(Boolean).join(" ");
+        return `${amount} ${difference > 0 ? "ahead of" : "behind"} you`;
+      };
+
+      try {
+        const timeFormat = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Yerevan",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const renderTime = () => {
+          localTime.textContent = `${timeFormat.format(new Date())} in Yerevan, ${describeDifference()}`;
+        };
+
+        renderTime();
+        localTime.hidden = false;
+        window.setTimeout(() => {
+          renderTime();
+          window.setInterval(renderTime, 60000);
+        }, 60000 - (Date.now() % 60000));
+      } catch (_error) {
+        localTime.hidden = true;
+      }
+    }
 
     const year = document.querySelector("[data-year]");
     if (year) year.textContent = String(new Date().getFullYear());
