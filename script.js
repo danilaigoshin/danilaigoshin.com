@@ -2,8 +2,11 @@
   "use strict";
 
   const initializeEnhancements = () => {
+    // Switch to the scripted layout first (the mobile nav leaves the header
+    // for its drawer), so every measurement below sees the final geometry.
+    document.documentElement.classList.add("js");
+
     const header = document.querySelector("[data-header]");
-    const progress = document.querySelector(".scroll-progress span");
     const menuButton = document.querySelector("[data-menu-toggle]");
     const navigation = document.querySelector("[data-nav]");
     const navigationPanel = navigation?.querySelector("[data-nav-panel]");
@@ -145,78 +148,130 @@
 
     }
 
+    // Scroll-dependent UI is driven by IntersectionObserver rather than a
+    // scroll listener: the browser reports when a boundary is crossed and
+    // nothing runs while the reader simply scrolls inside one section. The
+    // progress bar is a CSS scroll-driven animation (see styles.css).
+    const hasObserver = "IntersectionObserver" in window;
+
+    if (header && hasObserver) {
+      const topMarker = document.createElement("div");
+      topMarker.className = "scroll-sentinel";
+      topMarker.setAttribute("aria-hidden", "true");
+      document.body.prepend(topMarker);
+      new IntersectionObserver(([entry]) => {
+        header.classList.toggle("is-scrolled", !entry.isIntersecting);
+      }).observe(topMarker);
+    }
+
     const sections = Array.from(document.querySelectorAll("[data-section]"));
     let activeSectionId;
 
-    const updateScrollUI = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const updateActiveSection = () => {
+      if (!sections.length) return;
+
+      // Read all section positions, rather than only the intersections that
+      // changed. This also covers long sections, gaps, and upward scrolling.
+      // The same one-pixel band the observer below watches: a section counts
+      // as reached as soon as its top enters the band, not a pixel later.
+      const activationLine = (header?.offsetHeight || 0) + 24;
+      let activeSection = sections[0];
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top >= activationLine + 1) break;
+        activeSection = section;
+      }
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-      if (header) header.classList.toggle("is-scrolled", scrollTop > 12);
-      if (progress) {
-        const ratio = maxScroll > 0 ? Math.min(1, scrollTop / maxScroll) : 0;
-        progress.style.transform = `scaleX(${ratio})`;
+      if (maxScroll > 0 && window.scrollY >= maxScroll - 1) {
+        activeSection = sections[sections.length - 1];
       }
 
-      if (sections.length) {
-        // Read all section positions, rather than only the intersections that
-        // changed. This also covers long sections, gaps, and upward scrolling.
-        const activationLine = (header?.offsetHeight || 0) + 24;
-        let activeSection = sections[0];
-        for (const section of sections) {
-          if (section.getBoundingClientRect().top > activationLine) break;
-          activeSection = section;
-        }
-        if (maxScroll > 0 && scrollTop >= maxScroll - 1) {
-          activeSection = sections[sections.length - 1];
-        }
-
-        if (activeSection.id !== activeSectionId) {
-          activeSectionId = activeSection.id;
-          navLinks.forEach((link) => {
-            const isActive = link.getAttribute("href") === `#${activeSectionId}`;
-            link.classList.toggle("is-active", isActive);
-            if (isActive) link.setAttribute("aria-current", "location");
-            else link.removeAttribute("aria-current");
-          });
-        }
-      }
-    };
-
-    let scrollUpdatePending = false;
-    const scheduleScrollUpdate = () => {
-      if (scrollUpdatePending) return;
-      scrollUpdatePending = true;
-      window.requestAnimationFrame(() => {
-        scrollUpdatePending = false;
-        updateScrollUI();
+      if (activeSection.id === activeSectionId) return;
+      activeSectionId = activeSection.id;
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute("href") === `#${activeSectionId}`;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       });
     };
 
-    updateScrollUI();
-    window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
-    window.addEventListener("resize", scheduleScrollUpdate);
-    window.addEventListener("load", scheduleScrollUpdate);
-    window.addEventListener("pageshow", scheduleScrollUpdate);
+    if (sections.length && hasObserver) {
+      // A one-pixel band at the activation line: a section crossing it is the
+      // only moment the answer can change. The end marker covers the last,
+      // shorter sections that never reach the line before the page ends.
+      const endMarker = document.createElement("div");
+      endMarker.className = "scroll-sentinel-end";
+      endMarker.setAttribute("aria-hidden", "true");
+      document.body.append(endMarker);
 
-    const revealItems = document.querySelectorAll(".reveal");
-    if ("IntersectionObserver" in window && !reducedMotion.matches) {
+      let sectionObserver;
+      const observeSections = () => {
+        sectionObserver?.disconnect();
+        const line = (header?.offsetHeight || 0) + 24;
+        const below = Math.max(0, window.innerHeight - line - 1);
+        sectionObserver = new IntersectionObserver(updateActiveSection, {
+          rootMargin: `-${line}px 0px -${below}px 0px`,
+        });
+        sections.forEach((section) => sectionObserver.observe(section));
+      };
+
+      observeSections();
+      new IntersectionObserver(updateActiveSection).observe(endMarker);
+
+      let resizePending = false;
+      window.addEventListener("resize", () => {
+        if (resizePending) return;
+        resizePending = true;
+        window.requestAnimationFrame(() => {
+          resizePending = false;
+          observeSections();
+          updateActiveSection();
+        });
+      });
+      window.addEventListener("pageshow", updateActiveSection);
+      window.addEventListener("hashchange", updateActiveSection);
+    }
+
+    updateActiveSection();
+
+    const revealItems = Array.from(document.querySelectorAll(".reveal"));
+    if (hasObserver && !reducedMotion.matches) {
+      const settle = (item) => {
+        item.classList.remove("will-reveal", "is-visible");
+        item.style.removeProperty("--reveal-delay");
+      };
+
       const revealObserver = new IntersectionObserver(
         (entries, observer) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          });
+          // Blocks that arrive in the same frame cascade in document order.
+          entries
+            .filter((entry) => entry.isIntersecting)
+            .forEach((entry, index) => {
+              const item = entry.target;
+              observer.unobserve(item);
+              item.style.setProperty("--reveal-delay", `${Math.min(index, 5) * 70}ms`);
+              item.classList.add("is-visible");
+              item.addEventListener(
+                "transitionend",
+                function onEnd(event) {
+                  if (event.target !== item || event.propertyName !== "transform") return;
+                  item.removeEventListener("transitionend", onEnd);
+                  settle(item);
+                },
+              );
+            });
         },
         { rootMargin: "0px 0px -8%", threshold: 0.08 },
       );
+
+      // Anything already on screen stays put; only what starts below the fold
+      // is held back, so the first paint never blinks.
+      const fold = window.innerHeight;
       revealItems.forEach((item) => {
+        if (item.getBoundingClientRect().top < fold) return;
         item.classList.add("will-reveal");
         revealObserver.observe(item);
       });
-    } else {
-      revealItems.forEach((item) => item.classList.add("is-visible"));
     }
 
     const projectMediaLinks = Array.from(document.querySelectorAll(".project-media-link"));
@@ -240,7 +295,15 @@
 
           event.preventDefault();
           lightboxTrigger = link;
-          lightboxImage.src = link.href;
+          // Show the preview the page already loaded, then swap in the full
+          // file once it arrives, so a slow connection never shows an empty
+          // dark viewer.
+          lightboxImage.src = preview.currentSrc || preview.src;
+          const fullImage = new Image();
+          fullImage.addEventListener("load", () => {
+            if (lightbox.open && lightboxTrigger === link) lightboxImage.src = link.href;
+          });
+          fullImage.src = link.href;
           lightboxImage.alt = preview.alt;
           const previewCaption = link
             .closest("figure")
@@ -340,7 +403,7 @@
       }
 
       showCopyStatus(
-        copied ? "Email copied" : "Could not copy — select the email address",
+        copied ? "Email copied" : "Could not copy. Select the email address.",
         copied ? 2200 : 3200,
       );
 
@@ -362,11 +425,107 @@
 
     if (copyButton) copyButton.addEventListener("click", copyEmail);
 
+    // Edition switch: the role being hired for picks the summary, the stack
+    // and the résumé the main button downloads. A ?role=full-stack link opens
+    // the page on that edition, and switching keeps the address in step.
+    const editionSwitch = document.querySelector("[data-edition-switch]");
+    if (editionSwitch) {
+      const editions = {
+        product: {
+          resume: "/Danila_Igoshin_Product_Engineer_CV.pdf",
+          name: " (Product Engineer edition, PDF)",
+        },
+        "full-stack": {
+          resume: "/Danila_Igoshin_Full_Stack_Engineer_CV.pdf",
+          name: " (Full-stack edition, PDF)",
+        },
+      };
+      const resumeLink = document.querySelector("[data-edition-resume]");
+      const resumeName = document.querySelector("[data-edition-resume-name]");
+      const roleLine = document.querySelector("[data-hero-role]");
+      const editionItems = Array.from(document.querySelectorAll("[data-edition]"));
+      const radios = Array.from(editionSwitch.querySelectorAll('input[name="edition"]'));
+
+      const applyEdition = (edition, { animate = true } = {}) => {
+        if (!editions[edition]) return;
+        document.documentElement.dataset.edition = edition;
+        radios.forEach((radio) => {
+          radio.checked = radio.value === edition;
+        });
+        editionItems.forEach((item) => {
+          const isVisible = item.dataset.edition === edition;
+          const wasHidden = item.hidden;
+          item.hidden = !isVisible;
+          item.classList.remove("is-entering");
+          if (isVisible && wasHidden && animate && !reducedMotion.matches) {
+            // Restart the settle animation on the value that just appeared.
+            void item.offsetWidth;
+            item.classList.add("is-entering");
+          }
+        });
+        if (resumeLink) resumeLink.setAttribute("href", editions[edition].resume);
+        if (resumeName) resumeName.textContent = editions[edition].name;
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      applyEdition(params.get("role") === "full-stack" ? "full-stack" : "product", {
+        animate: false,
+      });
+      editionSwitch.hidden = false;
+      if (roleLine) roleLine.hidden = true;
+
+      radios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (!radio.checked) return;
+          applyEdition(radio.value);
+          const url = new URL(window.location.href);
+          if (radio.value === "full-stack") url.searchParams.set("role", "full-stack");
+          else url.searchParams.delete("role");
+          window.history.replaceState(window.history.state, "", url);
+        });
+      });
+    }
+
+    // Local time in Yerevan, and how far that is from the visitor's own clock.
+    // Armenia keeps UTC+4 all year (no daylight saving), so the offset is fixed.
+    const localTime = document.querySelector("[data-local-time]");
+    if (localTime && typeof Intl !== "undefined") {
+      const yerevanOffsetMinutes = 4 * 60;
+
+      const describeDifference = () => {
+        const difference = yerevanOffsetMinutes + new Date().getTimezoneOffset();
+        if (difference === 0) return "same time as you";
+        const hours = Math.floor(Math.abs(difference) / 60);
+        const minutes = Math.abs(difference) % 60;
+        const amount = [hours && `${hours} h`, minutes && `${minutes} min`].filter(Boolean).join(" ");
+        return `${amount} ${difference > 0 ? "ahead of" : "behind"} you`;
+      };
+
+      try {
+        const timeFormat = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Yerevan",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const renderTime = () => {
+          localTime.textContent = `${timeFormat.format(new Date())} in Yerevan, ${describeDifference()}`;
+        };
+
+        renderTime();
+        localTime.hidden = false;
+        window.setTimeout(() => {
+          renderTime();
+          window.setInterval(renderTime, 60000);
+        }, 60000 - (Date.now() % 60000));
+      } catch (_error) {
+        localTime.hidden = true;
+      }
+    }
+
     const year = document.querySelector("[data-year]");
     if (year) year.textContent = String(new Date().getFullYear());
 
     // Keep the drawer closed from the first render, then enable user-triggered motion.
-    document.documentElement.classList.add("js");
     window.requestAnimationFrame(() => {
       document.documentElement.classList.add("js-ready");
     });

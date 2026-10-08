@@ -25,7 +25,7 @@
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/case/styles.css?v=20260924" />
+    <link rel="stylesheet" href="/case/styles.css?v=20261008" />
     <script src="/script.js" defer></script>
     <script type="application/ld+json">
       {
@@ -45,7 +45,7 @@
 
     <header class="site-header" data-header>
       <div class="nav-shell">
-        <a class="brand" href="/" aria-label="Danila Igoshin — home">
+        <a class="brand" href="/" aria-label="Danila Igoshin, home">
           <span class="brand-mark" aria-hidden="true">D/I</span>
           <span class="brand-copy">Danila Igoshin</span>
         </a>
@@ -80,6 +80,9 @@
         </nav>
 
         <div class="nav-actions">
+          <a class="nav-quiet" href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
+            LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+          </a>
           <a class="nav-email" href="mailto:danigoshin@gmail.com">
             Email <span aria-hidden="true">↗</span>
           </a>
@@ -91,24 +94,24 @@
       <header class="case-hero section-shell" id="top" data-section>
         <div class="case-hero-copy">
           <a class="case-back" href="/case/"><span aria-hidden="true">←</span> All case studies</a>
-          <p class="meta-line"><span>Smartway</span><span>2021—2024</span></p>
+          <p class="meta-line"><span>Smartway</span><span>2021-2024</span></p>
           <h1>Changing the foundation while delivery continued.</h1>
           <p class="case-deck">Three years of hands-on frontend ownership across a live corporate travel product: migration, build tooling, runtime performance, product modules, and team practices.</p>
         </div>
         <aside class="case-glance" aria-label="Project facts">
           <dl class="fact-list">
             <div><dt>Role</dt><dd>Senior Frontend Engineer → Tech Lead</dd></div>
-            <div><dt>Period</dt><dd>Mar 2021—Feb 2024</dd></div>
+            <div><dt>Period</dt><dd>Mar 2021 - Feb 2024</dd></div>
             <div><dt>Product</dt><dd>Corporate travel platform</dd></div>
             <div><dt>Users</dt><dd>Travelers, approvers, travel managers, and operations teams</dd></div>
-            <div><dt>Stack</dt><dd>React · TypeScript · Vite · React Native</dd></div>
+            <div><dt>Stack</dt><dd>React, TypeScript, Vite, React Native</dd></div>
           </dl>
         </aside>
         <div class="case-outcomes" data-stats="4" role="group" aria-label="Outcomes">
           <div class="stat"><strong>≈10×</strong><p>faster builds after moving from Webpack to Vite</p><p class="stat-source">Internal build timings</p></div>
           <div class="stat"><strong>≈3×</strong><p>faster shopping-cart interactions after state and render restructuring</p><p class="stat-source">Production profiling</p></div>
           <div class="stat"><strong>100%</strong><p>TypeScript migration, including the custom UI library</p><p class="stat-source">Completed within one year</p></div>
-          <div class="stat"><strong>3</strong><p>developers mentored through regular code review</p><p class="stat-source">Alongside standards and technical talks</p></div>
+          <div class="stat"><strong>3<small> developers</small></strong><p>mentored through regular code review</p><p class="stat-source">Alongside standards and technical talks</p></div>
         </div>
       </header>
 
@@ -132,7 +135,7 @@
           <a href="#scope" data-nav-link>Scope &amp; stack</a>
         </nav>
         <article class="case-article">
-          <section class="case-section" id="situation" aria-labelledby="situation-title" data-section>
+          <section class="case-section reveal" id="situation" aria-labelledby="situation-title" data-section>
             <p class="case-label">Situation</p>
             <h2 id="situation-title">A growing product on a frontend foundation that needed to grow with it.</h2>
             <p>Smartway brings flights, rail, hotels, taxis, transfers, approvals, trip management, and expense analytics into one product. The frontend was already business-critical, but its JavaScript codebase, Webpack feedback loop, and expanding state surface made every new workflow more expensive to change.</p>
@@ -144,7 +147,7 @@
               <div><dt>Evidence</dt><dd>Build timings, production profiling, completed migration scope, and shipped product behavior.</dd></div>
             </dl>
           </section>
-          <section class="case-section" id="constraint" aria-labelledby="constraint-title" data-section>
+          <section class="case-section reveal" id="constraint" aria-labelledby="constraint-title" data-section>
             <p class="case-label">Constraint</p>
             <h2 id="constraint-title">The system had several bottlenecks, but only one delivery calendar.</h2>
             <p>Type safety, build performance, cart rendering, internationalization, analytics, mobile work, and team conventions were connected problems. Treating any one of them as an isolated rewrite would have moved risk elsewhere.</p>
@@ -155,40 +158,40 @@
               <div><dt>Team</dt><dd>More contributors required clearer boundaries, review standards, documentation, and shared ownership.</dd></div>
             </dl>
           </section>
-          <section class="case-section" id="decisions" aria-labelledby="decisions-title" data-section>
+          <section class="case-section reveal" id="decisions" aria-labelledby="decisions-title" data-section>
             <p class="case-label">Decisions</p>
             <h2 id="decisions-title">Incremental changes, each useful before the migration was complete.</h2>
             <p>The modernization was structured so feature teams could keep shipping. Each change reduced an immediate constraint while making the next change safer.</p>
             <div class="case-decisions">
-              <article class="case-decision">
+              <article class="case-decision reveal">
                 <span>Migration</span>
                 <h3>Move the full codebase and UI library to TypeScript in slices.</h3>
                 <p>Introduced TypeScript, established usable boundaries, and completed the product-wide migration within one year without a stop-the-world rewrite.</p>
               </article>
-              <article class="case-decision">
+              <article class="case-decision reveal">
                 <span>Build system</span>
                 <h3>Replace Webpack with Vite around active delivery.</h3>
                 <p>Changed the build pipeline while preserving the team's working product surface and integrations, then validated the improvement against real build timings.</p>
               </article>
-              <article class="case-decision">
+              <article class="case-decision reveal">
                 <span>Runtime</span>
                 <h3>Narrow state ownership and render boundaries in the cart.</h3>
                 <p>Profiled the shopping flow, reduced the work triggered by common actions, and kept the optimization attached to the real user workload.</p>
               </article>
-              <article class="case-decision">
+              <article class="case-decision reveal">
                 <span>Team system</span>
                 <h3>Make quality repeatable beyond one contributor.</h3>
                 <p>Established review and CI/CD practices, documented decisions, ran technical talks, and mentored three developers through regular code review.</p>
               </article>
             </div>
           </section>
-          <section class="case-section" id="outcomes" aria-labelledby="outcomes-title" data-section>
+          <section class="case-section reveal" id="outcomes" aria-labelledby="outcomes-title" data-section>
             <p class="case-label">Outcomes</p>
             <h2 id="outcomes-title">Faster feedback for the team and faster behavior for the customer.</h2>
             <p>The visible output included analytics, English-language support, and ongoing product delivery. The deeper result was a frontend foundation that was easier to change and a team with shared practices for keeping it that way.</p>
             <p class="case-note"><strong>Measurement note.</strong> The performance figures come from internal build timings and production profiling. Smartway is a private product, so this public case describes scope, decisions, and outcomes without exposing internal code or customer data.</p>
           </section>
-          <section class="case-section" id="scope" aria-labelledby="scope-title" data-section>
+          <section class="case-section reveal" id="scope" aria-labelledby="scope-title" data-section>
             <p class="case-label">Scope &amp; stack</p>
             <h2 id="scope-title">Hands-on engineering with technical leadership attached.</h2>
             <p>I remained hands-on in implementation while taking responsibility for migration direction, standards, documentation, technical talks, and mentoring. Product work included booking, analytics, internationalization, and React Native surfaces.</p>
@@ -203,11 +206,11 @@
         </article>
       </div>
 
-      <nav class="case-next section-shell" aria-label="Next case study">
+      <nav class="case-next section-shell reveal" aria-label="Next case study">
         <a href="/case/support/">
           <span class="case-next-copy">
             <span class="case-next-label">Next case study</span>
-            <span class="meta-line"><span>Smartway</span><span>2025—2026</span></span>
+            <span class="meta-line"><span>Smartway</span><span>2025-2026</span></span>
             <span class="case-next-title">Real-time support that stays responsive.</span>
             <span class="arrow-link">Read the case study <span aria-hidden="true">→</span></span>
           </span>
@@ -219,13 +222,14 @@
     <div class="page-finale">
       <section class="site-contact section-shell" id="contact" aria-labelledby="contact-title">
         <div class="contact-intro">
-          <h2 id="contact-title">Building something useful?</h2>
-          <p>I’m looking for Product Engineer and Full-stack roles on remote product teams. Tell me what you’re working on.</p>
+          <h2 id="contact-title">Hiring for a product or full-stack role?</h2>
+          <p>I’m open to remote roles, full-time or long-term contract. Send me the role and a little about the team.</p>
         </div>
         <div class="contact-action">
           <div class="contact-email-row"><a href="mailto:danigoshin@gmail.com">danigoshin@gmail.com</a><button type="button" data-copy-email aria-label="Copy email address" aria-controls="copy-status">Copy</button></div>
           <nav class="contact-links" aria-label="Contact and résumé links">
-            <a href="/cv/"><span class="contact-link-label">Résumé</span><span aria-hidden="true">→</span></a>
+            <a href="/Danila_Igoshin_Product_Engineer_CV.pdf" download><span class="contact-link-label">Product Engineer résumé<span class="sr-only"> (PDF)</span></span><span aria-hidden="true">↓</span></a>
+            <a href="/Danila_Igoshin_Full_Stack_Engineer_CV.pdf" download><span class="contact-link-label">Full-stack résumé<span class="sr-only"> (PDF)</span></span><span aria-hidden="true">↓</span></a>
             <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">LinkedIn</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
             <a href="https://github.com/danilaigoshin" target="_blank" rel="noopener noreferrer"><span class="contact-link-label">GitHub</span><span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
           </nav>

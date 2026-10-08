@@ -1,7 +1,10 @@
-/* Case studies: the same order on every case — claim and facts, measured
+/* Case studies: the same order on every case. Claim and facts, measured
    outcomes, the product itself, then the reasoning with a contents rail.
    Shared components (fact lists, stats, screenshot frames, the contact close)
-   live in the site-system layer at the end of /styles.css. */
+   live in the site-system layer at the end of /styles.css.
+
+   Inside the reading column only the decisions are cards; briefs and fact
+   lists are open lists under a strong rule, like a well-set document. */
 
 .case-page { font-size: 16px; }
 
@@ -43,24 +46,24 @@
 
 .case-deck { max-width: 36em; margin: 0; color: var(--muted); font-size: clamp(17px, 0.95rem + 0.3vw, 19px); line-height: 1.6; }
 
-.case-glance { padding: 8px 24px; border: 1px solid var(--line); background: var(--surface); }
+.case-glance { padding: 8px 24px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-soft); }
 
 .case-outcomes {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border-top: 1px solid var(--line-strong);
 }
 
-.case-outcomes > * { border-left: 1px solid var(--line-soft); }
-.case-outcomes > :first-child { border-left: 0; }
+.case-outcomes .stat { padding: 26px 28px 0; }
+.case-outcomes > * { border-left: 1px solid var(--line); }
+.case-outcomes > :first-child { padding-left: 0; border-left: 0; }
 
 .case-outcomes[data-stats="0"] .shipped { grid-column: 1 / -1; }
 .case-outcomes[data-stats="1"] .shipped { grid-column: 2 / -1; }
 .case-outcomes[data-stats="2"] .shipped { grid-column: 3 / -1; }
 
-.shipped { min-width: 0; padding: 26px 28px 24px; }
+.shipped { min-width: 0; padding: 26px 28px 0; }
 .shipped h2 { margin: 0 0 14px; font-size: 15px; font-weight: 620; letter-spacing: -0.01em; }
 
 .shipped ul {
@@ -90,7 +93,7 @@
 
 /* The product */
 
-.case-cover { margin-top: 24px; border: 1px solid var(--line); }
+.case-cover { margin-top: clamp(36px, 4vw, 56px); border: 1px solid var(--line); }
 
 .case-cover figcaption {
   justify-self: start;
@@ -140,6 +143,12 @@
 
 .case-label { margin-bottom: 14px; color: var(--accent); font-size: 14px; font-weight: 600; }
 
+/* Where the contents rail is on screen it already names every section, so
+   the in-column label would only repeat it. */
+@media (min-width: 1101px) {
+  .case-section > .case-label { display: none; }
+}
+
 .case-section h2 {
   max-width: 22em;
   margin-bottom: 22px;
@@ -159,18 +168,17 @@
 .case-brief {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 32px 0 0;
-  border: 1px solid var(--line);
-  background: var(--surface);
+  gap: 0 40px;
+  margin: 36px 0 0;
+  border-top: 1px solid var(--line-strong);
 }
 
-.case-brief > div { min-width: 0; padding: 22px 26px 24px; border-top: 1px solid var(--line-soft); }
+.case-brief > div { min-width: 0; padding: 20px 0 22px; border-top: 1px solid var(--line-soft); }
 .case-brief > div:nth-child(-n + 2) { border-top: 0; }
-.case-brief > div:nth-child(2n) { border-left: 1px solid var(--line-soft); }
 .case-brief dt { margin-bottom: 8px; color: var(--muted); font-size: 13px; }
 .case-brief dd { margin: 0; font-size: 15px; line-height: 1.6; }
 
-.case-facts { margin-top: 32px; padding: 6px 26px; border: 1px solid var(--line); background: var(--surface); }
+.case-facts { margin-top: 36px; border-top: 1px solid var(--line-strong); }
 .case-facts > div { grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding-block: 15px; }
 .case-facts dt { font-size: 14px; line-height: 1.6; }
 .case-facts dd { color: #3d454e; font-size: 15px; line-height: 1.6; }
@@ -182,7 +190,8 @@
   margin-top: 32px;
 }
 
-.case-decision { padding: 26px 26px 28px; border: 1px solid var(--line); background: var(--surface); }
+.case-decision { padding: 26px 26px 28px; border: 1px solid var(--line); background: var(--surface); transition: border-color 200ms var(--ease); }
+.case-decision:hover { border-color: var(--line-strong); }
 .case-decision > span { display: block; margin-bottom: 14px; color: var(--accent); font-size: 13px; font-weight: 600; }
 
 .case-page .case-decision h3 {
@@ -229,10 +238,11 @@
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   border: 1px solid var(--line);
   background: var(--surface);
-  transition: border-color 160ms ease;
+  transition: border-color 200ms var(--ease), box-shadow 300ms var(--ease);
 }
 
-.case-next > a:hover { border-color: var(--line-control); }
+.case-next > a:hover { border-color: var(--line-control); box-shadow: var(--shadow-soft); }
+.case-next > a:active { transform: translateY(1px); }
 
 .case-next-copy { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: var(--panel-pad); }
 .case-next-label { margin-bottom: 18px; color: var(--muted); font-size: 14px; }
@@ -250,6 +260,20 @@
 .case-next > a:hover .arrow-link span[aria-hidden] { transform: translateX(3px); }
 .case-next .media-frame { border-left: 1px solid var(--line-soft); }
 
+@media (hover: hover) {
+  .case-next > a:hover .media-frame img,
+  .case-card > a:hover .media-frame img {
+    transform: translateY(-3px);
+    box-shadow: 0 1px 2px rgba(21, 24, 29, 0.05), 0 26px 48px -24px rgba(21, 24, 29, 0.36);
+  }
+}
+
+/* Error page: short content, so the main area takes the spare height and
+   the dark close still reaches the bottom of the window. */
+
+.error-page { display: flex; min-height: 100dvh; flex-direction: column; }
+.error-page main { flex: 1 0 auto; }
+
 /* Case index */
 
 .case-index-hero { padding-block: clamp(24px, 3.4vw, 48px) clamp(32px, 4vw, 56px); }
@@ -262,25 +286,43 @@
   letter-spacing: -0.048em;
 }
 
+/* Each card spans five shared row tracks (image, meta, title, summary,
+   link) through subgrid, so the cards in a row line up line for line. */
 .case-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 0 24px;
   padding-bottom: clamp(80px, 9vw, 128px);
 }
 
-.case-card > a {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  transition: border-color 160ms ease;
+.case-card {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  margin-bottom: 24px;
 }
 
-.case-card > a:hover { border-color: var(--line-control); }
+.case-card > a {
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: border-color 200ms var(--ease), box-shadow 300ms var(--ease);
+}
+
+.case-card > a:hover { border-color: var(--line-control); box-shadow: var(--shadow-soft); }
+.case-card > a:active { transform: translateY(1px); }
 .case-card .media-frame { aspect-ratio: 16 / 10; border-bottom: 1px solid var(--line-soft); }
-.case-card-body { display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: var(--panel-pad); }
+.case-card .media-frame img { transition: transform 400ms var(--ease), box-shadow 400ms var(--ease); }
+
+.case-card-body {
+  display: grid;
+  grid-row: 2 / -1;
+  grid-template-rows: subgrid;
+  justify-items: start;
+  padding: var(--panel-pad);
+}
 
 .case-card h2 {
   margin-bottom: 14px;
@@ -290,7 +332,7 @@
 }
 
 .case-card p { margin-bottom: 24px; color: var(--muted); font-size: 16px; line-height: 1.6; }
-.case-card .arrow-link { margin-top: auto; }
+.case-card .arrow-link { align-self: end; }
 .case-card > a:hover .arrow-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .case-card > a:hover .arrow-link span[aria-hidden] { transform: translateX(3px); }
 
@@ -299,10 +341,10 @@
 @media (max-width: 1100px) {
   .case-hero { grid-template-columns: minmax(0, 1fr) 320px; }
   .case-outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .case-outcomes > :nth-child(odd) { border-left: 0; }
-  .case-outcomes > :nth-child(n + 3) { border-top: 1px solid var(--line-soft); }
-  .case-outcomes[data-stats] .shipped { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line-soft); }
-  .case-outcomes[data-stats="0"] .shipped { border-top: 0; }
+  .case-outcomes > :nth-child(odd) { padding-left: 0; border-left: 0; }
+  .case-outcomes > :nth-child(n + 3) { margin-top: 26px; border-top: 1px solid var(--line-soft); }
+  .case-outcomes[data-stats] .shipped { grid-column: 1 / -1; margin-top: 26px; padding-left: 0; border-left: 0; border-top: 1px solid var(--line-soft); }
+  .case-outcomes[data-stats="0"] .shipped { margin-top: 0; border-top: 0; }
   .case-outcomes[data-stats="1"] .stat { grid-column: 1 / -1; }
   .case-body { grid-template-columns: minmax(0, 1fr); }
   .case-toc { display: none; }
@@ -327,23 +369,46 @@
   .case-hero h1 { margin-bottom: 18px; font-size: clamp(2rem, 1.2rem + 3.6vw, 2.5rem); }
   .case-deck { font-size: 17px; }
   .case-glance { padding: 4px 20px; }
-  .shipped { padding: 20px 18px; }
+  .case-outcomes .stat { padding: 20px 0 0 18px; }
+  .case-outcomes > :nth-child(odd) { padding-left: 0; }
+  .shipped { padding: 20px 0 0; }
   .shipped li { font-size: 14px; }
   .case-outcomes[data-stats] .shipped ul { grid-template-columns: minmax(0, 1fr); }
-  .case-cover { margin-top: 16px; }
+  .case-cover { margin-top: 32px; }
   .case-cover figcaption { margin-top: 12px; font-size: 13px; }
   .case-section { padding-block: 44px; }
   .case-section > p:not([class]) { font-size: 16px; }
   .case-brief { grid-template-columns: minmax(0, 1fr); }
-  .case-brief > div { padding: 18px 20px 20px; }
+  .case-brief > div { padding-block: 18px 20px; }
   .case-brief > div:nth-child(2) { border-top: 1px solid var(--line-soft); }
-  .case-brief > div:nth-child(2n) { border-left: 0; }
-  .case-facts { padding: 4px 20px; }
   .case-facts > div { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-block: 14px; }
   .case-decisions { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .case-decision { padding: 20px 20px 22px; }
   .case-page .case-decision h3 { font-size: 18px; }
   .case-next { padding-bottom: 72px; }
   .case-index-hero h1 { font-size: clamp(2.25rem, 1.2rem + 5vw, 3rem); }
-  .case-grid { gap: 16px; padding-bottom: 72px; }
+  .case-grid { padding-bottom: 56px; }
+  .case-card { margin-bottom: 16px; }
+}
+
+/* First paint: the case hero assembles in reading order, once. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .case-hero-copy > *,
+  .case-glance,
+  .case-outcomes > *,
+  .case-index-hero > * { animation: rise-in 900ms var(--ease-out) both; }
+
+  .case-hero-copy > :nth-child(2),
+  .case-index-hero > :nth-child(2) { animation-delay: 50ms; }
+  .case-hero-copy > :nth-child(3),
+  .case-index-hero > :nth-child(3) { animation-delay: 100ms; }
+  .case-hero-copy > :nth-child(4),
+  .case-index-hero > :nth-child(4) { animation-delay: 170ms; }
+  .case-glance { animation-delay: 160ms; }
+  .case-outcomes > :nth-child(1) { animation-delay: 260ms; }
+  .case-outcomes > :nth-child(2) { animation-delay: 320ms; }
+  .case-outcomes > :nth-child(3) { animation-delay: 380ms; }
+  .case-outcomes > :nth-child(4) { animation-delay: 440ms; }
+  .case-outcomes > :nth-child(5) { animation-delay: 500ms; }
 }
