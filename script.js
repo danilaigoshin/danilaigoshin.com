@@ -334,6 +334,47 @@
       });
     }
 
+    const introLinks = Array.from(document.querySelectorAll("[data-intro-open]"));
+    const introBox = document.querySelector("[data-intro-lightbox]");
+    const introVideo = introBox?.querySelector("[data-intro-video]");
+    const introClose = introBox?.querySelector("[data-intro-close]");
+    const prefersStill = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let introTrigger;
+
+    // Without dialog support the links still open the MP4 itself.
+    if (introLinks.length && introBox && introVideo && introClose && typeof introBox.showModal === "function") {
+      introLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          introTrigger = link;
+          document.documentElement.classList.add("lightbox-open");
+          document.body.classList.add("lightbox-open");
+          introBox.showModal();
+          introVideo.focus({ preventScroll: true });
+          // The click that opened the viewer starts the video, unless the
+          // visitor asked for less motion; then it waits for play.
+          if (!prefersStill.matches) {
+            introVideo.play().catch(() => {});
+          }
+        });
+      });
+
+      introClose.addEventListener("click", () => introBox.close());
+      introBox.addEventListener("click", (event) => {
+        if (event.target instanceof Element && !event.target.closest("video, button")) {
+          introBox.close();
+        }
+      });
+      introBox.addEventListener("close", () => {
+        introVideo.pause();
+        introVideo.currentTime = 0;
+        document.documentElement.classList.remove("lightbox-open");
+        document.body.classList.remove("lightbox-open");
+        introTrigger?.focus({ preventScroll: true });
+        introTrigger = undefined;
+      });
+    }
+
     const copyButton = document.querySelector("[data-copy-email]");
     const copyToast = document.querySelector("[data-copy-toast]");
     const emailLink = copyButton

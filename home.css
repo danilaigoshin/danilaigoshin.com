@@ -131,6 +131,40 @@ html[data-edition="full-stack"] .edition-track::before { transform: translateX(1
 .profile-name { margin: 0 0 4px; font-size: 18px; font-weight: 620; letter-spacing: -0.02em; }
 .profile-facts { padding: 6px 24px 10px; }
 
+/* Intro video. The square play chip is the buttons' arrow inset, reused. */
+.play-chip {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  place-items: center;
+  background: var(--surface-muted);
+  color: var(--accent-dark);
+  transition: background-color 200ms var(--ease), color 200ms var(--ease);
+}
+.play-chip svg { width: 16px; height: 16px; }
+
+.intro-link {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 50px;
+  padding-right: 4px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.intro-link:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.intro-link:hover .play-chip { background: var(--ink); color: var(--surface); }
+
+.intro-lightbox video {
+  display: block;
+  width: min(100%, calc((100dvh - clamp(110px, 12vw, 156px)) * 16 / 9));
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--ink-900);
+  box-shadow: var(--shadow-pop);
+}
+
 /* Filled in by script.js: the time in Yerevan and its distance from the
    visitor's own clock, under the time zone it explains. */
 .local-time { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
@@ -386,6 +420,10 @@ html[data-edition="full-stack"] .edition-track::before { transform: translateX(1
   .profile-head { padding: 18px 20px; }
   .profile-head img { width: 72px; height: 72px; }
   .profile-facts { padding: 4px 20px 8px; }
+  .hero-actions .intro-link { justify-self: start; }
+  /* The image viewer pans a large raster on phones; the video just fits the width. */
+  .intro-lightbox[open] { place-items: center; }
+  .intro-lightbox .project-lightbox-shell { width: 100%; min-width: 0; padding-top: 0; place-items: center; }
   .proof-strip .stat { padding: 20px 0 0 18px; }
   .proof-strip .stat:nth-child(n + 3) { margin-top: 20px; }
   .proof-strip .stat strong { font-size: 2.375rem; }
