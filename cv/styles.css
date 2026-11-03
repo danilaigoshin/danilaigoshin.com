@@ -17,6 +17,7 @@
   --line-control: #868f9a;
   --accent: #3f5d7e;
   --accent-dark: #263749;
+  --radius-control: 3px;
   --soft: #e4eaf0;
   --sans: "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -639,7 +640,21 @@ a {
 .resume-toolbar .resume-versions a[aria-current="page"] { background: var(--ink); color: var(--paper); }
 .resume-toolbar a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media screen {
-  .resume-toolbar { flex-wrap: wrap; padding-block: 10px; gap: 10px; }
+  /* Match the portfolio on screen while preserving the existing PDF layout. */
+  :root {
+    --canvas: #f8f8f6;
+    --ink: #20221f;
+    --muted: #646660;
+    --faint: #6b6d66;
+    --line: #d8dad4;
+    --line-strong: #bec0b8;
+    --line-control: #8f918a;
+    --accent: #b2472c;
+    --accent-dark: #873720;
+    --soft: #eeefeb;
+  }
+  .resume-toolbar { flex-wrap: wrap; padding-block: 10px; gap: 10px; background: rgba(248, 248, 246, 0.96); }
+  .resume-toolbar a { border-radius: var(--radius-control); }
 }
 @media screen and (max-width: 850px) {
   .resume-toolbar { position: static; }

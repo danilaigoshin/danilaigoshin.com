@@ -54,9 +54,10 @@ Other candidates can list the same stack. They can't truthfully claim this recor
 ## Brand Commitments
 
 - Name and mark: Danila Igoshin, "D/I".
+- All buttons and button-like controls use the same subtle 3px corner radius, including image and video close buttons, screenshot zoom controls, and résumé actions.
 - Voice: plain, first-person, and factual. It should read as precise rather than promotional, and be understandable to a non-engineer recruiter.
 - No self-referential chrome: no internal design codenames, fake edition or version numbers, or invented labels a recruiter can't decode.
-- Binding visual constraints from the owner (recorded, not expanded): white and gray tones in a semi-strict register; no dark page theme (a single dark closing contact block is accepted); hero display type stays moderate.
+- Visual direction from the owner's November 2026 reference: a light white-and-gray canvas, bold editorial sans-serif typography, thin rules, restrained terracotta accents, and large real project screenshots. The three-line hero and numbered project captions follow that reference. Product Engineer and Full-stack Engineer remain the primary roles, including in the header and the résumé selector. Keep the whole page light.
 
 ## Evidence on Hand
 
