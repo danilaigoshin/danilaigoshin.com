@@ -11,7 +11,7 @@
   --surface: #ffffff;
   --surface-muted: #eeefeb;
   --ink: #20221f;
-  --muted: #646660;
+  --muted: #5b5e58;
   /* Four visible steps: internal divider, module border, structural emphasis,
      and control boundary. The last one clears 3:1 on both canvas and white so
      a button reads as a button without leaning on its label alone. */
@@ -1250,13 +1250,11 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
     transform: translate(calc(-1 * var(--header-side-shift)), var(--header-y-shift));
     transition: transform 240ms var(--ease);
   }
-  .site-nav .nav-resume { display: inline-flex; gap: 14px; align-items: center; min-height: 40px; margin-left: 16px; padding: 6px 16px; border: 1px solid var(--line-control); border-radius: var(--radius-control); color: var(--ink); }
-  .site-nav .nav-resume::after { display: none; }
-  .site-nav .nav-resume:hover { border-color: var(--accent); color: var(--accent); }
+  .site-nav .nav-email { display: inline-flex; gap: 12px; align-items: center; min-height: 40px; margin-left: 8px; padding: 6px 14px; border: 1px solid var(--line-control); border-radius: var(--radius-control); background: transparent; color: var(--ink); font-weight: 500; }
+  .site-nav .nav-email::after { display: none; }
+  .site-nav .nav-email:hover,
+  .site-nav .nav-email:focus-visible { border-color: var(--accent); color: var(--accent); }
   body:not(.menu-open) .site-header.is-scrolled .site-nav { pointer-events: auto; }
-  .site-header.is-scrolled .nav-resume { border-color: var(--ink); background: var(--ink); color: var(--surface); }
-  .site-header.is-scrolled .nav-resume:hover,
-  .site-header.is-scrolled .nav-resume:focus-visible { border-color: var(--accent-dark); background: var(--accent-dark); color: var(--surface); }
 }
 
 /* Most recruiters arrive from LinkedIn, so the profile sits one step from
@@ -1507,11 +1505,11 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
 .site-contact .contact-email-row button:hover,
 .site-contact .contact-email-row button:focus-visible { border-color: var(--accent); background: var(--surface-muted); }
 .site-contact .contact-links { display: grid; grid-template-columns: repeat(2, max-content); column-gap: 32px; }
-.site-contact .contact-links a { gap: 10px; justify-content: flex-start; min-height: 48px; padding: 12px 0; border: 0; color: var(--ink); font-size: 13px; font-weight: 500; }
+.site-contact .contact-links a { gap: 10px; justify-content: flex-start; min-height: 48px; padding: 12px 0; border: 0; color: var(--ink); font-size: 14px; font-weight: 500; }
 .site-contact .contact-links a:hover,
 .site-contact .contact-links a:focus-visible { background: transparent; color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .contact-response { margin: 10px 0 0; color: var(--muted); font-size: 12px; }
-.footer { flex-direction: row; align-items: center; padding-block: 20px 28px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0; text-transform: none; }
+.footer { flex-direction: row; align-items: center; padding-block: 20px 28px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0; text-transform: none; }
 .footer a { gap: 8px; }
 .footer a:hover,
 .footer a:focus-visible { color: var(--accent); }
@@ -1546,6 +1544,9 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
   body.menu-open .brand-name,
   body.menu-open .brand-role,
   body.menu-open .menu-toggle { transition: none; }
+  .js .nav-panel > .nav-email { justify-content: space-between; min-height: 48px; margin-top: 20px; padding: 12px 16px; border: 1px solid var(--line-control); border-radius: var(--radius-control); background: transparent; color: var(--ink); font-size: 16px; font-weight: 500; letter-spacing: 0; }
+  .js .nav-panel > .nav-email:hover,
+  .js .nav-panel > .nav-email:focus-visible { border-color: var(--accent); color: var(--accent-dark); }
   .site-contact { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -1564,7 +1565,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
   body:not(.menu-open) .site-header.is-scrolled {
     --header-logo-scale: 0.8888889;
     --header-copy-shift: -4px;
-    --header-name-shift: 7.5px;
+    --header-name-shift: 8.7px;
     --header-name-size: 14px;
   }
   .scroll-sentinel { height: 72px; }
@@ -1572,7 +1573,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
   .brand { gap: 10px; min-width: 0; }
   .brand-mark { width: 36px; height: 36px; }
   .brand-copy { font-size: 14px; }
-  .brand-role { font-size: 10px; }
+  .brand-role { font-size: 12px; }
   .button { gap: 14px; padding: 0 18px; }
   .section-head { margin-bottom: 24px; }
   .section-head p { font-size: 16px; }
@@ -1640,5 +1641,6 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
   .js .site-nav.is-open .nav-panel > a:nth-child(2) { transition-delay: 40ms; }
   .js .site-nav.is-open .nav-panel > a:nth-child(3) { transition-delay: 80ms; }
   .js .site-nav.is-open .nav-panel > a:nth-child(4) { transition-delay: 120ms; }
-  .js .site-nav.is-open .mobile-nav-utilities { transition-delay: 170ms; }
+  .js .site-nav.is-open .nav-panel > a:nth-child(5) { transition-delay: 160ms; }
+  .js .site-nav.is-open .mobile-nav-utilities { transition-delay: 200ms; }
 }

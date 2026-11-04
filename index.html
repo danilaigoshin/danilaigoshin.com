@@ -30,9 +30,9 @@
     <link rel="icon" href="public/favicon.svg?v=20261104-di-precision" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="public/apple-touch-icon.png?v=20261104-di-precision" />
     <link rel="preload" href="public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20261104-floating-menu" />
-    <link rel="stylesheet" href="/home.css?v=20261104-experience-grid" />
-    <script src="script.js?v=20261104-floating-menu" defer data-enhancements></script>
+    <link rel="stylesheet" href="styles.css?v=20261104-hero-results" />
+    <link rel="stylesheet" href="/home.css?v=20261104-portrait-responsive" />
+    <script src="script.js?v=20261104-hero-results" defer data-enhancements></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -101,9 +101,9 @@
             <a href="#work" data-nav-link>Work</a>
             <a href="#experience" data-nav-link>Experience</a>
             <a href="#about" data-nav-link>About</a>
-            <a class="nav-resume" href="/cv/">Résumé <span aria-hidden="true">↗</span></a>
+            <a class="nav-resume" href="/cv/">Résumé</a>
+            <a class="nav-email" href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
             <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
-              <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
               <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
                 LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
               </a>
@@ -125,36 +125,48 @@
 
         <div class="hero-heading">
           <h1 id="intro-title"><span>B2B products.</span> <span>From zero to</span> <span class="hero-title-last">production.</span></h1>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
-            <a class="hero-resume" href="/Danila_Igoshin_Product_Engineer_CV.pdf" download data-edition-resume>Download résumé<span class="sr-only" data-edition-resume-name> (Product Engineer edition, PDF)</span> <span aria-hidden="true">↗</span></a>
-          </div>
         </div>
 
         <div class="hero-description">
-          <p class="hero-lede edition-stack" aria-live="polite">
-            <span data-edition="product">I’m Danila, a product engineer and former tech lead, taking complex B2B products from an empty repository to production.</span>
-            <span data-edition="full-stack" hidden>I’m Danila, a full-stack engineer and former tech lead, building B2B products across interfaces, APIs, data, and deployment.</span>
-          </p>
-          <p class="hero-note">Frontend first. Full-stack when needed.</p>
-          <p class="hero-location">Yerevan, Armenia <span>UTC+4</span></p>
+          <div class="hero-identity">
+            <div class="hero-portrait">
+              <img src="/public/optimized/v1/my_photo-320.webp" srcset="/public/optimized/v1/my_photo-320.webp 1x, /public/optimized/v1/my_photo-640.webp 2x" width="112" height="112" alt="Portrait of Danila Igoshin" loading="eager" decoding="async" />
+            </div>
+            <div class="hero-identity-copy">
+              <p class="hero-name">I’m Danila.</p>
+              <p class="hero-identity-role">Product engineer &amp; former tech lead.</p>
+            </div>
+          </div>
+          <p class="hero-lede">6 years building and shipping B2B products.</p>
+          <p class="hero-note">Frontend first. Full-stack when the product needs it.</p>
           <p class="hero-engagement">
             <strong>Open to full-time roles &amp; long-term contracts</strong>
-            <span>Remote · EOR / B2B · EU working-day overlap</span>
+            <span>Yerevan · UTC+4 · EU working-day overlap</span>
+            <span>Remote · EOR / B2B</span>
           </p>
-          <fieldset class="edition" data-edition-switch hidden>
-            <legend>Résumé for</legend>
-            <div class="edition-track">
-              <label><input type="radio" name="edition" value="product" checked /><span>Product Engineer</span></label>
-              <label><input type="radio" name="edition" value="full-stack" /><span>Full-stack Engineer</span></label>
-            </div>
-          </fieldset>
         </div>
 
-        <ul class="hero-proof" aria-label="Experience and core stack">
-          <li><strong>6 years</strong> in B2B products</li>
-          <li>Frontend / APIs / Delivery</li>
-          <li class="edition-stack"><span data-edition="product">React / Next.js / TypeScript</span><span data-edition="full-stack" hidden>React / Node.js / PostgreSQL</span></li>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+          <a class="hero-resume" href="/Danila_Igoshin_Product_Engineer_CV.pdf" download>Download résumé<span class="sr-only"> (Product Engineer edition, PDF)</span> <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <ul class="hero-proof" aria-label="Selected product results">
+          <li>
+            <strong>≈5 <span>months</span></strong>
+            <p>From empty frontend repo to live learning product</p>
+            <p class="hero-proof-project">Smart Online Institute</p>
+          </li>
+          <li>
+            <strong>≈10×</strong>
+            <p>Faster builds on a live travel platform</p>
+            <p class="hero-proof-project">Smartway</p>
+          </li>
+          <li>
+            <strong>70%</strong>
+            <p>Faster rendering in threads with 1,000+ messages</p>
+            <p class="hero-proof-project">Smartway Support</p>
+          </li>
         </ul>
       </section>
 
@@ -176,17 +188,16 @@
               <div class="project-description">
                 <p class="project-client">Smart Online Institute</p>
                 <h3 id="edtech-title">A learning product.<br />From first commit to launch.</h3>
-                <p class="project-summary">From an empty frontend repository to a live marketplace, learning experience, and instructor workspace.</p>
+                <p class="project-summary">From an empty frontend repository to a live learning product.</p>
               </div>
               <div class="project-scope">
-                <p class="project-scope-label">Role / scope</p>
-                <p class="project-scope-role">Sole Frontend Engineer</p>
-                <p class="project-scope-detail">Frontend architecture, Next.js BFF, protected S3 media, migration, and deployment.</p>
+                <p class="project-scope-label">Role</p>
+                <p class="project-scope-role">Solo Frontend Engineer</p>
                 <p class="project-stack">Next.js / TypeScript / AWS S3 / Docker</p>
               </div>
               <div class="project-outcome">
                 <strong>≈5 <small>months</small></strong>
-                <p>From empty repo to live product</p>
+                <p>From empty frontend repo to live product</p>
                 <a class="arrow-link project-link" href="/case/edtech/">Read the case study <span aria-hidden="true">↗</span></a>
               </div>
             </div>
@@ -202,10 +213,9 @@
             </figure>
               <div class="project-body">
                 <h3 id="research-title">One workspace for scientific research.</h3>
-                <p class="project-summary">Source editing, compiled documents, and AI feedback brought into a connected authoring workflow.</p>
+                <p class="project-summary">Connected source editing, PDF review, and AI feedback in one authoring workflow.</p>
                 <dl class="project-facts">
                 <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
-                <div><dt>Owned</dt><dd>Frontend across the editor, PDF review, AI chat, analytics, and admin tools.</dd></div>
               </dl>
                 <p class="project-stack">React, TypeScript, Monaco, PDF.js, Yjs</p>
                 <a class="arrow-link project-link" href="/case/research/">Read the case study <span aria-hidden="true">↗</span></a>
@@ -221,10 +231,10 @@
               </figure>
               <div class="project-body">
                 <h3 id="travel-title">A faster platform.<br />Without pausing delivery.</h3>
-                <p class="project-summary"><strong>≈10×</strong> faster builds and <strong>≈3×</strong> faster measured shopping-cart interactions in a live travel product.</p>
+                <p class="project-results">≈10× faster builds · ≈3× faster cart interactions</p>
+                <p class="project-summary">Modernized the frontend foundation while the travel platform stayed live.</p>
                 <dl class="project-facts">
                   <div><dt>Role</dt><dd>Senior Frontend Engineer → Tech Lead</dd></div>
-                  <div><dt>Owned</dt><dd>Webpack-to-Vite and TypeScript migrations, performance, analytics, mobile, CI/CD standards, and mentoring.</dd></div>
                 </dl>
                 <p class="project-stack">React, TypeScript, Vite, React Native</p>
                 <a class="arrow-link project-link" href="/case/smartway/">Read the case study <span aria-hidden="true">↗</span></a>
@@ -243,14 +253,16 @@
               <div class="project-description">
                 <p class="project-client">Smartway / Customer support</p>
                 <h3 id="support-title">Real-time support that stays responsive.</h3>
-                <p class="project-summary">An embeddable widget and ticket workspace for real-time conversations and complex support requests.</p>
+                <div class="project-outcome support-outcome">
+                  <strong>70% <small>faster rendering</small></strong>
+                  <p>Threads with 1,000+ messages</p>
+                </div>
+                <p class="project-summary">Built a real-time widget and ticket workspace for complex support conversations.</p>
               </div>
               <dl class="project-facts">
                   <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
-                  <div><dt>Owned</dt><dd>Public integration API, HMAC authentication, real-time messaging, validated uploads, and performance.</dd></div>
                 </dl>
               <p class="project-stack">Preact, TypeScript, Redux Toolkit, WebSocket</p>
-              <div class="project-outcome"><strong>70%</strong><p>faster rendering for threads<br />with 1,000+ messages</p></div>
               <a class="arrow-link project-link" href="/case/support/">Read the case study <span aria-hidden="true">↗</span></a>
             </div>
           </article>
@@ -258,7 +270,8 @@
             <p class="meta-line"><span>Germo-S</span><span>2020</span></p>
             <div>
               <h3 id="commerce-title">Full-stack e-commerce, built solo</h3>
-              <p>Built and shipped the complete product: catalog, cart, orders, custom CMS, REST API, and production deployment.</p>
+              <p class="project-compact-role">Full Stack Engineer · Sole developer</p>
+              <p>Built a B2B e-commerce product from storefront and API to production.</p>
             </div>
             <p class="project-compact-stack">Nuxt.js, Vue, Express, MongoDB</p>
           </article>
@@ -286,7 +299,6 @@
         <div class="about-head reveal">
           <h2 id="about-title">Frontend first.<br />Full-stack when the product needs&nbsp;it.</h2>
           <div class="about-profile">
-            <img src="/public/optimized/v1/my_photo-320.webp" srcset="/public/optimized/v1/my_photo-160.webp 160w, /public/optimized/v1/my_photo-320.webp 320w" sizes="88px" width="88" height="104" alt="Portrait of Danila Igoshin" loading="lazy" decoding="async" />
             <p><strong>Danila Igoshin</strong><span>English (professional)</span><span>Russian (native)</span></p>
           </div>
           <a class="intro-link" href="/public/video/intro-1080.mp4" data-intro-open><span class="play-chip" aria-hidden="true">▶</span>Watch the 47-second intro</a>
