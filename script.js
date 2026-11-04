@@ -31,7 +31,7 @@
 
     const closeMenu = ({ restoreFocus = false } = {}) => {
       setMenuOpen(false);
-      if (restoreFocus) window.requestAnimationFrame(() => menuButton?.focus());
+      if (restoreFocus) window.requestAnimationFrame(() => menuButton?.focus({ preventScroll: true }));
     };
 
     const focusSection = (link) => {
@@ -82,7 +82,7 @@
             link.target === "_blank" ||
             link.getAttribute("href")?.startsWith("mailto:")
           ) {
-            window.requestAnimationFrame(() => menuButton.focus());
+            window.requestAnimationFrame(() => menuButton.focus({ preventScroll: true }));
           }
         });
       });
@@ -136,13 +136,13 @@
 
         if (event.shiftKey && document.activeElement === firstItem) {
           event.preventDefault();
-          lastItem.focus();
+          lastItem.focus({ preventScroll: true });
         } else if (!event.shiftKey && document.activeElement === lastItem) {
           event.preventDefault();
-          firstItem.focus();
+          firstItem.focus({ preventScroll: true });
         } else if (!focusableItems.includes(document.activeElement)) {
           event.preventDefault();
-          navLinks[0]?.focus();
+          navLinks[0]?.focus({ preventScroll: true });
         }
       });
 
@@ -155,6 +155,24 @@
     const hasObserver = "IntersectionObserver" in window;
 
     if (header && hasObserver) {
+      const headerShell = header.querySelector(".nav-shell");
+      const syncHeaderGeometry = () => {
+        if (!headerShell) return;
+        // Measure the unchanged layout boxes, not the animated child controls.
+        // The floating panel therefore stays centered even with scrollbars.
+        header.style.setProperty("--header-content-width", `${headerShell.getBoundingClientRect().width}px`);
+        header.style.setProperty("--header-viewport-width", `${header.getBoundingClientRect().width}px`);
+        header.style.setProperty("--header-base-height", `${header.offsetHeight}px`);
+      };
+      syncHeaderGeometry();
+      if ("ResizeObserver" in window) {
+        const headerGeometryObserver = new ResizeObserver(syncHeaderGeometry);
+        headerGeometryObserver.observe(header);
+        if (headerShell) headerGeometryObserver.observe(headerShell);
+      } else {
+        window.addEventListener("resize", syncHeaderGeometry, { passive: true });
+      }
+
       const topMarker = document.createElement("div");
       topMarker.className = "scroll-sentinel";
       topMarker.setAttribute("aria-hidden", "true");

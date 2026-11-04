@@ -74,11 +74,14 @@ dd {
 }
 
 html.menu-open,
-body.menu-open,
 html.lightbox-open,
 body.lightbox-open {
   overflow: hidden;
 }
+
+/* Clip the page without creating a second scroll container: sticky header
+   controls must stay on screen while the viewport-sized drawer is open. */
+body.menu-open { overflow: clip; }
 
 ::selection {
   background: #eddbd2;
@@ -193,7 +196,7 @@ p {
   top: 0;
   left: 0;
   width: 1px;
-  height: 12px;
+  height: 80px;
   opacity: 0;
   pointer-events: none;
 }
@@ -208,6 +211,20 @@ p {
 /* Header */
 
 .site-header {
+  --header-content-width: min(1240px, calc(100vw - 96px));
+  --header-viewport-width: 100vw;
+  --header-base-height: 80px;
+  --header-float-width: min(1040px, var(--header-content-width));
+  --header-float-height: 60px;
+  --header-float-top: 14px;
+  --header-float-pad: 18px;
+  --header-side-shift: 0px;
+  --header-y-shift: 0px;
+  --header-logo-scale: 1;
+  --header-copy-shift: 0px;
+  --header-name-shift: 0px;
+  --header-name-size: 16px;
+  --header-role-opacity: 1;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -217,11 +234,28 @@ p {
   backdrop-filter: blur(16px);
 }
 
-.site-header.is-scrolled {
-  background: rgba(248, 248, 246, 0.96);
+/* The original header keeps its layout footprint while its controls move
+   into the floating surface. The fixed mobile drawer stays viewport-sized. */
+.site-header::before {
+  box-sizing: border-box;
+  position: absolute;
+  top: var(--header-float-top);
+  left: 50%;
+  z-index: -1;
+  width: var(--header-float-width);
+  height: var(--header-float-height);
+  transform: translate(-50%, -6px) scale(0.98);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--canvas);
+  box-shadow: 0 2px 6px rgba(32, 34, 31, 0.04), 0 12px 28px -12px rgba(32, 34, 31, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  content: "";
+  transition: opacity 240ms var(--ease), transform 240ms var(--ease);
 }
 
-/* One divider: inset at the top of the page, full width while scrolling. */
+/* One inset divider at the page top; the floating panel has its own border. */
 .site-header::after {
   position: absolute;
   right: 0;
@@ -233,9 +267,8 @@ p {
   background: var(--line);
   pointer-events: none;
   content: "";
+  transition: opacity 160ms ease;
 }
-
-.site-header.is-scrolled::after { width: 100%; }
 
 .nav-shell {
   display: grid;
@@ -252,25 +285,38 @@ p {
   gap: 12px;
   align-items: center;
   width: max-content;
+  transform: translate(var(--header-side-shift), var(--header-y-shift));
+  transition: transform 240ms var(--ease);
 }
 
 .brand-mark {
+  --brand-hover-y: 0px;
   display: block;
   width: 36px;
   height: 36px;
   flex: none;
+  transform: translateY(var(--brand-hover-y)) scale(var(--header-logo-scale));
+  transform-origin: left center;
   transition: transform 180ms var(--ease);
 }
 
 .brand:hover .brand-mark,
 .brand:focus-visible .brand-mark {
-  transform: translateY(-1px);
+  --brand-hover-y: -1px;
 }
 
 .brand-copy {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: -0.01em;
+  transform: translateX(var(--header-copy-shift));
+  transition: transform 240ms var(--ease);
+}
+
+.brand-name {
+  font-size: var(--header-name-size);
+  transform: translateY(var(--header-name-shift));
+  transition: transform 240ms var(--ease);
 }
 
 .site-nav {
@@ -337,18 +383,6 @@ p {
   gap: 18px;
   align-items: center;
   justify-content: flex-end;
-}
-
-@keyframes availability-pulse {
-  0% {
-    transform: scale(0.6);
-    opacity: 0.9;
-  }
-  70%,
-  100% {
-    transform: scale(2.1);
-    opacity: 0;
-  }
 }
 
 .nav-email {
@@ -1177,21 +1211,52 @@ html:not(.js) .contact-email-row button {
 /* Header: one name, the two target roles, and the existing navigation. */
 
 .site-header { background: rgba(248, 248, 246, 0.94); }
-.site-header.is-scrolled { background: rgba(248, 248, 246, 0.98); }
 .nav-shell { min-height: 80px; }
 .brand-mark { width: 42px; height: 42px; border-radius: var(--radius-control); }
 .brand-copy { display: grid; gap: 3px; font-size: 16px; font-weight: 650; letter-spacing: -0.025em; line-height: 1.2; }
-.brand-role { color: var(--muted); font-size: 12px; font-weight: 400; letter-spacing: 0; }
+.brand-role { color: var(--muted); font-size: 12px; font-weight: 400; letter-spacing: 0; opacity: var(--header-role-opacity); transition: opacity 160ms ease; }
 .site-nav { gap: 20px; }
 .site-nav a { padding-inline: 0; font-size: 14px; font-weight: 450; }
 .site-nav a::after { right: 0; left: 0; height: 1px; }
 .site-nav a.is-active::after { background: var(--accent); }
 .nav-email { gap: 14px; min-height: 40px; padding: 0 16px; font-size: 14px; font-weight: 600; }
 
+body:not(.menu-open) .site-header.is-scrolled {
+  --header-side-shift: calc((var(--header-content-width) - var(--header-float-width)) / 2 + var(--header-float-pad));
+  --header-y-shift: calc(var(--header-float-top) + (var(--header-float-height) - var(--header-base-height)) / 2);
+  --header-logo-scale: 0.8095238;
+  --header-copy-shift: -8px;
+  --header-name-shift: 8.7px;
+  --header-name-size: 15px;
+  --header-role-opacity: 0;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+
+body:not(.menu-open) .site-header.is-scrolled::before {
+  transform: translateX(-50%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body:not(.menu-open) .site-header.is-scrolled::after { opacity: 0; }
+body:not(.menu-open) .site-header.is-scrolled .brand,
+body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: auto; }
+
 @media (min-width: 901px) {
+  .site-nav {
+    transform: translate(calc(-1 * var(--header-side-shift)), var(--header-y-shift));
+    transition: transform 240ms var(--ease);
+  }
   .site-nav .nav-resume { display: inline-flex; gap: 14px; align-items: center; min-height: 40px; margin-left: 16px; padding: 6px 16px; border: 1px solid var(--line-control); border-radius: var(--radius-control); color: var(--ink); }
   .site-nav .nav-resume::after { display: none; }
   .site-nav .nav-resume:hover { border-color: var(--accent); color: var(--accent); }
+  body:not(.menu-open) .site-header.is-scrolled .site-nav { pointer-events: auto; }
+  .site-header.is-scrolled .nav-resume { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+  .site-header.is-scrolled .nav-resume:hover,
+  .site-header.is-scrolled .nav-resume:focus-visible { border-color: var(--accent-dark); background: var(--accent-dark); color: var(--surface); }
 }
 
 /* Most recruiters arrive from LinkedIn, so the profile sits one step from
@@ -1312,26 +1377,6 @@ html:not(.js) .contact-email-row button {
 
 .meta-line span:first-child { color: var(--accent); font-weight: 600; }
 .meta-line span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
-
-.status {
-  display: inline-flex;
-  gap: 9px;
-  align-items: center;
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.status i {
-  position: relative;
-  width: 7px;
-  height: 7px;
-  flex: none;
-  border-radius: 50%;
-  background: #32823e;
-}
-
-.status i::after { display: none; }
 
 /* Label/value rows, used for the profile card and every case fact sheet. */
 
@@ -1485,12 +1530,44 @@ html:not(.js) .contact-email-row button {
 @media (max-width: 900px) {
   .portfolio-page,
   .case-page { --shell: calc(100% - 64px); }
+  .site-header {
+    --header-content-width: calc(100vw - 64px);
+    --header-float-width: calc(var(--header-viewport-width) - 32px);
+    --header-float-top: 12px;
+    --header-float-pad: 16px;
+  }
+  .js .menu-toggle {
+    transform: translate(calc(-1 * var(--header-side-shift)), var(--header-y-shift));
+    transition: transform 240ms var(--ease), background-color 160ms ease;
+  }
+  body.menu-open .brand,
+  body.menu-open .brand-mark,
+  body.menu-open .brand-copy,
+  body.menu-open .brand-name,
+  body.menu-open .brand-role,
+  body.menu-open .menu-toggle { transition: none; }
   .site-contact { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 760px) {
   .portfolio-page,
   .case-page { --shell: calc(100% - 40px); --gap: 20px; --panel-pad: 22px; }
+  .site-header {
+    --header-content-width: calc(100vw - 40px);
+    --header-base-height: 72px;
+    --header-float-width: calc(var(--header-viewport-width) - 24px);
+    --header-float-height: 56px;
+    --header-float-top: 8px;
+    --header-float-pad: 12px;
+    --header-name-size: 14px;
+  }
+  body:not(.menu-open) .site-header.is-scrolled {
+    --header-logo-scale: 0.8888889;
+    --header-copy-shift: -4px;
+    --header-name-shift: 7.5px;
+    --header-name-size: 14px;
+  }
+  .scroll-sentinel { height: 72px; }
   .nav-shell { min-height: 72px; gap: 14px; }
   .brand { gap: 10px; min-width: 0; }
   .brand-mark { width: 36px; height: 36px; }
@@ -1516,7 +1593,6 @@ html:not(.js) .contact-email-row button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .status i::after { animation: none; }
   .will-reveal { opacity: 1; transform: none; }
   .media-frame img,
   .button span[aria-hidden],

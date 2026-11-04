@@ -5,7 +5,7 @@
 
 .portfolio-page { font-size: 16px; }
 .home-hero { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 34px 64px; padding-top: clamp(40px, 4.2vw, 62px); }
-.hero-top { display: flex; grid-column: 1 / -1; gap: 16px 24px; align-items: center; justify-content: space-between; }
+.hero-top { grid-column: 1 / -1; }
 .hero-role { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; line-height: 1.6; text-transform: uppercase; }
 .hero-heading { min-width: 0; }
 .home-hero h1 { margin: 0; font-size: clamp(62px, 8vw, 110px); font-weight: 720; letter-spacing: -0.065em; line-height: 0.99; text-wrap: initial; }
@@ -23,7 +23,8 @@
 .hero-note { margin: 0 0 9px; color: var(--muted); font-size: 16px; }
 .hero-location { display: flex; gap: 12px; align-items: baseline; margin: 0 0 12px; color: var(--muted); font-family: var(--font-mono); font-size: 12px; line-height: 1.6; }
 .hero-location span { padding-left: 12px; border-left: 1px solid var(--line-strong); }
-.hero-engagement { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.hero-engagement { display: grid; gap: 4px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.hero-engagement strong { color: var(--ink); font-weight: 550; }
 
 /* Native radios choose the summary, stack, and downloadable résumé. */
 .edition { min-inline-size: 0; margin: 24px 0 0; padding: 0; border: 0; }
@@ -112,8 +113,9 @@
 
 /* A compact employment record on the same canvas. */
 .home-experience { margin-top: clamp(80px, 8vw, 112px); }
-.timeline { margin: 0; padding: 0; border-top: 1px solid var(--line-strong); list-style: none; }
-.timeline li { display: grid; grid-template-columns: 156px minmax(0, 1.05fr) minmax(0, 1.15fr) auto; gap: 12px 28px; align-items: baseline; padding-block: 28px; border-bottom: 1px solid var(--line); }
+/* Shared columns keep descriptions aligned even when a row has no case link. */
+.timeline { display: grid; grid-template-columns: 156px minmax(0, 1.05fr) minmax(0, 1.15fr) auto; column-gap: 28px; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); list-style: none; }
+.timeline li { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; gap: 12px 28px; align-items: baseline; padding-block: 28px; border-bottom: 1px solid var(--line); }
 .timeline-date { margin: 0; color: var(--muted); font-family: var(--font-mono); font-size: 11px; line-height: 1.7; white-space: nowrap; }
 .timeline-role h3 { margin: 0 0 5px; font-size: 19px; font-weight: 600; letter-spacing: -0.025em; }
 .timeline-role p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
@@ -162,14 +164,14 @@
   .project-featured .project-body { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
   .project-scope, .project-outcome { padding-left: 20px; }
   .project-pair { gap: 28px; }
-  .timeline li { grid-template-columns: 140px minmax(0, 1fr) minmax(0, 1.1fr); gap: 8px 24px; }
+  .timeline { grid-template-columns: 140px minmax(0, 1fr) minmax(0, 1.1fr); column-gap: 24px; }
+  .timeline li { gap: 8px 24px; }
   .timeline-link { grid-column: 3; justify-self: start; }
   .timeline-education { grid-template-columns: 140px minmax(0, 1fr); gap: 24px; }
 }
 @media (max-width: 900px) {
   .home-hero { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 28px; padding-top: 38px; }
   .hero-role { font-size: 10px; letter-spacing: 0.1em; }
-  .hero-top .status { font-size: 12px; }
   .home-hero h1 { font-size: clamp(50px, 7.4vw, 68px); }
   .hero-description { padding-top: 2px; }
   .hero-lede { margin-bottom: 18px; font-size: 18px; }
@@ -203,15 +205,13 @@
   .project-compact { grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr); }
   .project-compact .project-compact-stack { grid-column: 2; max-width: none; justify-self: start; text-align: left; }
   .home-about { gap: 40px; }
-  .timeline li { grid-template-columns: 130px minmax(0, 1fr); }
+  .timeline { grid-template-columns: 130px minmax(0, 1fr); }
   .timeline-scope, .timeline-link { grid-column: 2; }
   .timeline-education { grid-template-columns: 130px minmax(0, 1fr); }
 }
 @media (max-width: 767px) {
   .home-hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-top: 32px; }
-  .hero-top { align-items: flex-start; flex-direction: column; gap: 14px; }
   .hero-role { font-size: 10px; letter-spacing: 0.09em; }
-  .hero-top .status { font-size: 12px; }
   .home-hero h1 { font-size: clamp(42px, 12.1vw, 76px); letter-spacing: -0.06em; }
   .hero-actions { gap: 24px; margin-top: 26px; }
   .hero-actions .button { gap: 18px; min-height: 48px; padding-inline: 18px; font-size: 13px; }
@@ -264,7 +264,8 @@
   .project-compact h3 { font-size: 20px; }
   .project-compact .project-compact-stack { grid-column: 1; }
   .home-experience { margin-top: 64px; }
-  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 24px; }
+  .timeline { grid-template-columns: minmax(0, 1fr); column-gap: 8px; }
+  .timeline li { gap: 8px; padding-block: 24px; }
   .timeline-role, .timeline-scope, .timeline-link { grid-column: 1; }
   .timeline-date { margin-bottom: 3px; }
   .timeline-role h3 { font-size: 20px; }
