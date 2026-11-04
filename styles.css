@@ -255,24 +255,16 @@ p {
 }
 
 .brand-mark {
-  display: grid;
+  display: block;
   width: 36px;
   height: 36px;
-  place-items: center;
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--surface);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  transition: background-color 160ms ease, color 160ms ease;
+  flex: none;
+  transition: transform 180ms var(--ease);
 }
 
 .brand:hover .brand-mark,
 .brand:focus-visible .brand-mark {
-  background: var(--surface);
-  color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .brand-copy {
@@ -1187,7 +1179,7 @@ html:not(.js) .contact-email-row button {
 .site-header { background: rgba(248, 248, 246, 0.94); }
 .site-header.is-scrolled { background: rgba(248, 248, 246, 0.98); }
 .nav-shell { min-height: 80px; }
-.brand-mark { width: 42px; height: 42px; border-radius: 2px; font-size: 11px; }
+.brand-mark { width: 42px; height: 42px; border-radius: var(--radius-control); }
 .brand-copy { display: grid; gap: 3px; font-size: 16px; font-weight: 650; letter-spacing: -0.025em; line-height: 1.2; }
 .brand-role { color: var(--muted); font-size: 12px; font-weight: 400; letter-spacing: 0; }
 .site-nav { gap: 20px; }
@@ -1501,7 +1493,7 @@ html:not(.js) .contact-email-row button {
   .case-page { --shell: calc(100% - 40px); --gap: 20px; --panel-pad: 22px; }
   .nav-shell { min-height: 72px; gap: 14px; }
   .brand { gap: 10px; min-width: 0; }
-  .brand-mark { width: 36px; height: 36px; font-size: 10px; }
+  .brand-mark { width: 36px; height: 36px; }
   .brand-copy { font-size: 14px; }
   .brand-role { font-size: 10px; }
   .button { gap: 14px; padding: 0 18px; }

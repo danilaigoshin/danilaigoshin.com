@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="10" fill="#171b21"/>
-  <path d="M15 17h13c12 0 20 6 20 15s-8 15-20 15H15V17Zm12 22c7 0 11-2 11-7s-4-7-11-7h-2v14h2Z" fill="#fff"/>
-  <path d="m42 50 9-36h4l-9 36h-4Z" fill="#8fa2b6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <title>Danila Igoshin D/I monogram</title>
+  <rect width="64" height="64" rx="4.5" fill="#20221f"/>
+  <g transform="translate(9.5 20.586) scale(.0819672)" fill="#f8f8f6">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1h86.5C167 1 211.5 52.5 211.5 135S167 269 86.5 269H0V1ZM53.5 53v164h36c46 0 64.5-28.5 64.5-82S135.5 53 89.5 53h-36Z"/>
+    <path d="M340 0h49L273 278.5h-49L340 0Z"/>
+    <path d="M433 1h116v51h-31v168h31v49H433v-49h31V52h-31V1Z"/>
+  </g>
 </svg>

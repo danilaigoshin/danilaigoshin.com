@@ -53,7 +53,7 @@ Other candidates can list the same stack. They can't truthfully claim this recor
 
 ## Brand Commitments
 
-- Name and mark: Danila Igoshin, "D/I".
+- Name and mark: Danila Igoshin, "D/I". The owner selected `output/imagegen/logos-2026-11-04/refined-01-precision-d-i.png`: monochrome lettering with straight horizontal I terminals. Its production vector is `public/favicon.svg`, shared by website headers and browser icons. Derive the Apple touch icon with `scripts/build-assets.sh --icon-only`.
 - All buttons and button-like controls use the same subtle 3px corner radius, including image and video close buttons, screenshot zoom controls, and résumé actions.
 - Voice: plain, first-person, and factual. It should read as precise rather than promotional, and be understandable to a non-engineer recruiter.
 - No self-referential chrome: no internal design codenames, fake edition or version numbers, or invented labels a recruiter can't decode.
