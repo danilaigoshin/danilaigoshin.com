@@ -58,17 +58,27 @@
 .project h3 { margin: 0 0 14px; font-size: clamp(26px, 2.55vw, 36px); font-weight: 630; letter-spacing: -0.045em; line-height: 1.12; }
 .project-summary { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.6; }
 .project-results { margin: 0 0 18px; color: var(--ink); font-size: clamp(19px, 1.65vw, 24px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.35; }
-.project-featured .project-body { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr) minmax(0, 0.95fr); gap: 28px; }
-.project-featured .project-summary { max-width: 37ch; }
+.project-featured .project-body { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px clamp(40px, 5.6vw, 80px); }
+.project-featured .project-description { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; }
+.project-featured .project-summary { max-width: 44ch; font-size: 18px; }
+.project-featured .project-details { display: grid; min-width: 0; gap: 32px; align-content: start; }
 .project-scope { min-width: 0; padding-left: 26px; border-left: 1px solid var(--line); }
 .project-scope-label { margin: 0 0 10px; color: var(--muted); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
 .project-scope-role { margin: 0 0 14px; font-size: 14px; font-weight: 550; line-height: 1.5; }
 .project-stack { margin: 0; color: var(--muted); font-family: var(--font-mono); font-size: 12px; line-height: 1.7; }
 .project-outcome { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; padding-left: 26px; border-left: 1px solid var(--line); }
+.project-featured .project-scope,
+.project-featured .project-outcome { padding: 0; border: 0; }
 .project-outcome strong { display: block; margin-bottom: 7px; font-size: clamp(38px, 3.9vw, 56px); font-weight: 600; letter-spacing: -0.055em; line-height: 1.05; white-space: nowrap; }
 .project-outcome strong small { font-size: 0.66em; font-weight: 600; }
 .project-outcome > p { margin: 0 0 18px; color: var(--muted); font-size: 13px; }
 .project-link { gap: 8px; margin-top: auto; font-size: 14px; white-space: nowrap; }
+.project-featured .project-outcome strong { margin: 0 0 16px; font-size: 64px; }
+.project-featured .project-outcome small { font-size: 26px; font-weight: 500; letter-spacing: -0.025em; }
+.project-featured .project-outcome > p { max-width: 30ch; margin: 0; font-size: 16px; line-height: 1.6; }
+.project-featured .project-scope-role { font-size: 16px; }
+.project-featured .project-stack { display: grid; gap: 2px; font-size: 13px; }
+.project-featured .project-link { margin-top: 32px; font-size: 16px; }
 
 .project-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; padding-top: 40px; border-top: 1px solid var(--line); }
 .project-card { display: grid; grid-template-rows: auto 1fr; align-content: start; }
@@ -143,7 +153,6 @@
   .hero-actions .button { gap: 18px; padding-inline: 20px; }
   .hero-resume { gap: 8px; font-size: 14px; }
   .hero-proof li + li { padding-left: 20px; }
-  .project-featured .project-body { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
   .project-scope, .project-outcome { padding-left: 20px; }
   .project-pair { gap: 28px; }
   .timeline { grid-template-columns: 140px minmax(0, 1fr) minmax(0, 1.1fr); column-gap: 24px; }
@@ -162,10 +171,7 @@
   .hero-resume { min-height: 44px; font-size: 14px; }
   .hero-proof { gap: 20px; }
   .hero-proof li + li { padding-left: 20px; }
-  .project-featured .project-body { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
-  .project-featured .project-outcome { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: 6px 20px; align-items: center; padding: 22px 0 0; border-top: 1px solid var(--line); border-left: 0; }
-  .project-featured .project-outcome strong, .project-featured .project-outcome > p { margin: 0; }
-  .project-featured .project-link { margin-left: auto; }
+  .project-featured .project-outcome strong { font-size: 56px; }
   .project-figure-meta { gap: 12px; }
   .project-pair { gap: 24px; }
   .project-card .project-media-link { padding: 18px; }
@@ -203,15 +209,15 @@
   .project-number { margin-right: 4px; }
   .project-featured .project-media-link { width: 100%; }
   .project-figure .media-zoom { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 17px; }
-  .project-featured .project-body { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 22px; }
+  .project-featured .project-body { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 22px; }
   .project h3, .project-card h3 { max-width: none; font-size: 28px; }
   .project-summary { max-width: none; font-size: 16px; }
   .project-scope { padding: 18px 0 0; border-top: 1px solid var(--line); border-left: 0; }
   .project-scope-role { margin-bottom: 8px; }
-  .project-featured .project-outcome { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 18px; padding-top: 20px; }
-  .project-featured .project-outcome strong { font-size: 39px; }
-  .project-featured .project-outcome > p { font-size: 13px; }
-  .project-featured .project-link { grid-column: 1 / -1; justify-self: start; margin: 8px 0 0; }
+  .project-featured .project-details { gap: 24px; }
+  .project-featured .project-outcome strong { font-size: 52px; }
+  .project-featured .project-outcome small { font-size: 24px; }
+  .project-featured .project-link { margin-top: 24px; }
   .project-pair { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-top: 28px; }
   .project-card .project-figure { gap: 18px; }
   .project-card .project-media-link { aspect-ratio: 1.6; padding: 18px; }
@@ -251,8 +257,6 @@
   .hero-actions .button { gap: 12px; padding-inline: 14px; }
   .hero-resume { gap: 8px; }
   .hero-proof li:last-child { padding-left: 0; }
-  .project-featured .project-outcome { grid-template-columns: minmax(0, 1fr); }
-  .project-featured .project-outcome > p { margin-top: 0; }
   .capability-list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -20,7 +20,7 @@
     <link rel="icon" href="/public/favicon.svg?v=20261104-di-precision" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png?v=20261104-di-precision" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="../styles.css?v=20261103-4" />
+    <link rel="stylesheet" href="../styles.css?v=20261104-editorial-cv" />
   </head>
   <body>
     <!--
@@ -28,22 +28,22 @@
       Generate from the repository root with scripts/build-assets.sh.
     -->
     <nav class="resume-toolbar" aria-label="Resume actions">
-      <a href="/"><span aria-hidden="true"><-</span> Portfolio</a>
+      <a class="resume-back" href="/"><span aria-hidden="true">←</span> Portfolio</a>
       <div class="resume-versions" aria-label="Résumé version"><a href="/cv/">Product Engineer</a><a href="/cv/full-stack/" aria-current="page">Full-stack</a></div>
-      <a href="/Danila_Igoshin_Full_Stack_Engineer_CV.pdf" target="_blank" rel="noopener">Download PDF <span aria-hidden="true">-></span></a>
+      <a class="resume-download" href="/Danila_Igoshin_Full_Stack_Engineer_CV.pdf" download>Download PDF <span aria-hidden="true">↓</span></a>
     </nav>
 
     <main class="resume-document">
       <section class="resume-page" aria-label="Resume page 1 of 2">
         <div class="resume-mast">
-          <span class="resume-brand"><span class="resume-mark" aria-hidden="true">D/I</span> Danila Igoshin</span>
-          <span class="resume-edition">Full-stack engineering - page 1 / 2</span>
+          <span class="resume-brand"><img class="resume-mark" src="../../public/favicon.svg" width="28" height="28" alt="" aria-hidden="true" /> Danila Igoshin</span>
+          <span class="resume-edition">Full-stack engineering <span class="resume-page-number">01 / 02</span></span>
         </div>
 
         <header class="resume-header">
           <div>
             <h1 class="resume-name">Danila Igoshin</h1>
-            <p class="resume-role">Full-stack Engineer<br />TypeScript / React / Node.js</p>
+            <p class="resume-role"><strong>Full-stack Engineer</strong><span>TypeScript / React / Node.js</span></p>
           </div>
           <dl class="resume-contact">
             <div><dt>Web</dt><dd><a href="https://danilaigoshin.com/">danilaigoshin.com</a></dd></div>
@@ -73,7 +73,7 @@
 
           <article class="experience-item">
             <div class="experience-head">
-              <h3>Morizo Digital - <span>Senior Frontend Engineer, client engagement</span></h3>
+              <h3><span class="experience-company">Morizo Digital</span> <span class="experience-position">Senior Frontend Engineer, client engagement</span></h3>
               <time datetime="2026-02">Feb 2026 - present</time>
             </div>
             <p class="experience-context">AI-assisted scientific research platform - React 19 - TypeScript - Vite - Zustand - Monaco - PDF.js - Yjs - Amplitude</p>
@@ -87,7 +87,7 @@
 
           <article class="experience-item">
             <div class="experience-head">
-              <h3>Smartway - <span>Senior Frontend Engineer, second engagement</span></h3>
+              <h3><span class="experience-company">Smartway</span> <span class="experience-position">Senior Frontend Engineer, second engagement</span></h3>
               <time datetime="2025-08">Aug 2025 - Jan 2026</time>
             </div>
             <p class="experience-context">Real-time support automation - Preact - TypeScript - Vite - Redux Toolkit - WebSocket - OpenAPI</p>
@@ -101,7 +101,7 @@
 
           <article class="experience-item">
             <div class="experience-head">
-              <h3>Smart Online Institute - <span>Sole Frontend Engineer</span></h3>
+              <h3><span class="experience-company">Smart Online Institute</span> <span class="experience-position">Sole Frontend Engineer</span></h3>
               <time datetime="2025-02">Feb - Aug 2025</time>
             </div>
             <p class="experience-context">Production EdTech MVP - Next.js - TypeScript - React Query - Zod - Strapi - Playwright - AWS S3 - Docker</p>
@@ -122,8 +122,8 @@
 
       <section class="resume-page" aria-label="Resume page 2 of 2">
         <div class="resume-mast">
-          <span class="resume-brand"><span class="resume-mark" aria-hidden="true">D/I</span> Danila Igoshin</span>
-          <span class="resume-edition">Full-stack engineering - page 2 / 2</span>
+          <span class="resume-brand"><img class="resume-mark" src="../../public/favicon.svg" width="28" height="28" alt="" aria-hidden="true" /> Danila Igoshin</span>
+          <span class="resume-edition">Full-stack engineering <span class="resume-page-number">02 / 02</span></span>
         </div>
 
         <section class="resume-section">
@@ -131,7 +131,7 @@
 
           <article class="experience-item">
             <div class="experience-head">
-              <h3>Smartway - <span>Senior Frontend Engineer to Tech Lead</span></h3>
+              <h3><span class="experience-company">Smartway</span> <span class="experience-position">Senior Frontend Engineer to Tech Lead</span></h3>
               <time datetime="2021-03">Mar 2021 - Feb 2024</time>
             </div>
             <p class="experience-context">Corporate travel platform - React - TypeScript - Redux - MobX - React Query - Vite - React Native - Storybook - Jenkins</p>
@@ -145,7 +145,7 @@
 
           <article class="experience-item">
             <div class="experience-head">
-              <h3>Germo-S - <span>Full Stack Engineer, sole developer</span></h3>
+              <h3><span class="experience-company">Germo-S</span> <span class="experience-position">Full Stack Engineer, sole developer</span></h3>
               <time datetime="2020-01">Jan - Aug 2020</time>
             </div>
             <p class="experience-context">B2B e-commerce - Nuxt.js - Vue 2 - Vuex - Express - MongoDB</p>
@@ -192,7 +192,7 @@
 
         <footer class="resume-footer">
           <span>Portfolio and detailed case studies - <strong>danilaigoshin.com</strong></span>
-          <span>Updated September 2026</span>
+          <span>Updated November 2026</span>
           <span>Page 2 / 2</span>
         </footer>
       </section>

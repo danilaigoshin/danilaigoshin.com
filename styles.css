@@ -255,21 +255,6 @@ p {
   transition: opacity 240ms var(--ease), transform 240ms var(--ease);
 }
 
-/* One inset divider at the page top; the floating panel has its own border. */
-.site-header::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: var(--shell);
-  height: 1px;
-  margin-inline: auto;
-  background: var(--line);
-  pointer-events: none;
-  content: "";
-  transition: opacity 160ms ease;
-}
-
 .nav-shell {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -1241,7 +1226,6 @@ body:not(.menu-open) .site-header.is-scrolled::before {
   pointer-events: auto;
 }
 
-body:not(.menu-open) .site-header.is-scrolled::after { opacity: 0; }
 body:not(.menu-open) .site-header.is-scrolled .brand,
 body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: auto; }
 
