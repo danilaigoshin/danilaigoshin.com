@@ -2,6 +2,7 @@
 
 The HTML files in this directory are source files, not public landing pages.
 
+- `app-icon.html` renders `public/favicon.svg` into the 180x180 `public/apple-touch-icon.png`. Run `scripts/build-assets.sh --icon-only` to rebuild just the icon.
 - `og-image.html` produces a lossless `public/og-image.png` at 2400x1260.
 - `og-cv.html` produces a lossless `public/og-cv.png` at 2400x1260.
 - `og-smartway.html` produces a lossless `public/og-smartway.png` at 2400x1260.

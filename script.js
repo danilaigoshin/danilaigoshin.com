@@ -31,7 +31,7 @@
 
     const closeMenu = ({ restoreFocus = false } = {}) => {
       setMenuOpen(false);
-      if (restoreFocus) window.requestAnimationFrame(() => menuButton?.focus());
+      if (restoreFocus) window.requestAnimationFrame(() => menuButton?.focus({ preventScroll: true }));
     };
 
     const focusSection = (link) => {
@@ -82,7 +82,7 @@
             link.target === "_blank" ||
             link.getAttribute("href")?.startsWith("mailto:")
           ) {
-            window.requestAnimationFrame(() => menuButton.focus());
+            window.requestAnimationFrame(() => menuButton.focus({ preventScroll: true }));
           }
         });
       });
@@ -136,13 +136,13 @@
 
         if (event.shiftKey && document.activeElement === firstItem) {
           event.preventDefault();
-          lastItem.focus();
+          lastItem.focus({ preventScroll: true });
         } else if (!event.shiftKey && document.activeElement === lastItem) {
           event.preventDefault();
-          firstItem.focus();
+          firstItem.focus({ preventScroll: true });
         } else if (!focusableItems.includes(document.activeElement)) {
           event.preventDefault();
-          navLinks[0]?.focus();
+          navLinks[0]?.focus({ preventScroll: true });
         }
       });
 
@@ -155,6 +155,24 @@
     const hasObserver = "IntersectionObserver" in window;
 
     if (header && hasObserver) {
+      const headerShell = header.querySelector(".nav-shell");
+      const syncHeaderGeometry = () => {
+        if (!headerShell) return;
+        // Measure the unchanged layout boxes, not the animated child controls.
+        // The floating panel therefore stays centered even with scrollbars.
+        header.style.setProperty("--header-content-width", `${headerShell.getBoundingClientRect().width}px`);
+        header.style.setProperty("--header-viewport-width", `${header.getBoundingClientRect().width}px`);
+        header.style.setProperty("--header-base-height", `${header.offsetHeight}px`);
+      };
+      syncHeaderGeometry();
+      if ("ResizeObserver" in window) {
+        const headerGeometryObserver = new ResizeObserver(syncHeaderGeometry);
+        headerGeometryObserver.observe(header);
+        if (headerShell) headerGeometryObserver.observe(headerShell);
+      } else {
+        window.addEventListener("resize", syncHeaderGeometry, { passive: true });
+      }
+
       const topMarker = document.createElement("div");
       topMarker.className = "scroll-sentinel";
       topMarker.setAttribute("aria-hidden", "true");
@@ -465,67 +483,6 @@
     };
 
     if (copyButton) copyButton.addEventListener("click", copyEmail);
-
-    // Edition switch: the role being hired for picks the summary, the stack
-    // and the résumé the main button downloads. A ?role=full-stack link opens
-    // the page on that edition, and switching keeps the address in step.
-    const editionSwitch = document.querySelector("[data-edition-switch]");
-    if (editionSwitch) {
-      const editions = {
-        product: {
-          resume: "/Danila_Igoshin_Product_Engineer_CV.pdf",
-          name: " (Product Engineer edition, PDF)",
-        },
-        "full-stack": {
-          resume: "/Danila_Igoshin_Full_Stack_Engineer_CV.pdf",
-          name: " (Full-stack edition, PDF)",
-        },
-      };
-      const resumeLink = document.querySelector("[data-edition-resume]");
-      const resumeName = document.querySelector("[data-edition-resume-name]");
-      const roleLine = document.querySelector("[data-hero-role]");
-      const editionItems = Array.from(document.querySelectorAll("[data-edition]"));
-      const radios = Array.from(editionSwitch.querySelectorAll('input[name="edition"]'));
-
-      const applyEdition = (edition, { animate = true } = {}) => {
-        if (!editions[edition]) return;
-        document.documentElement.dataset.edition = edition;
-        radios.forEach((radio) => {
-          radio.checked = radio.value === edition;
-        });
-        editionItems.forEach((item) => {
-          const isVisible = item.dataset.edition === edition;
-          const wasHidden = item.hidden;
-          item.hidden = !isVisible;
-          item.classList.remove("is-entering");
-          if (isVisible && wasHidden && animate && !reducedMotion.matches) {
-            // Restart the settle animation on the value that just appeared.
-            void item.offsetWidth;
-            item.classList.add("is-entering");
-          }
-        });
-        if (resumeLink) resumeLink.setAttribute("href", editions[edition].resume);
-        if (resumeName) resumeName.textContent = editions[edition].name;
-      };
-
-      const params = new URLSearchParams(window.location.search);
-      applyEdition(params.get("role") === "full-stack" ? "full-stack" : "product", {
-        animate: false,
-      });
-      editionSwitch.hidden = false;
-      if (roleLine) roleLine.hidden = true;
-
-      radios.forEach((radio) => {
-        radio.addEventListener("change", () => {
-          if (!radio.checked) return;
-          applyEdition(radio.value);
-          const url = new URL(window.location.href);
-          if (radio.value === "full-stack") url.searchParams.set("role", "full-stack");
-          else url.searchParams.delete("role");
-          window.history.replaceState(window.history.state, "", url);
-        });
-      });
-    }
 
     // Local time in Yerevan, and how far that is from the visitor's own clock.
     // Armenia keeps UTC+4 all year (no daylight saving), so the offset is fixed.

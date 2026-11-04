@@ -66,6 +66,17 @@ chrome_to_file() {
   wait "$CHROME_PID" 2>/dev/null || true
 }
 
+if [ "${1:-}" != "--resumes-only" ]; then
+  chrome_to_file "$TMP_DIR/app-icon.png" 1 --window-size=720,720 --screenshot="$TMP_DIR/app-icon.png" "file://$ROOT/art/app-icon.html"
+  sips -z 180 180 "$TMP_DIR/app-icon.png" --out "$ROOT/public/apple-touch-icon.png" >/dev/null
+fi
+
+if [ "${1:-}" = "--icon-only" ]; then
+  rm -rf "$TMP_DIR"
+  echo "Built app icon from public/favicon.svg."
+  exit 0
+fi
+
 if [ "${1:-}" != "--social-only" ]; then
 for EDITION in Product Full_Stack; do
   if [ "$EDITION" = "Product" ]; then

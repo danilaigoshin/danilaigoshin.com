@@ -7,7 +7,7 @@
       name="description"
       content="Product engineer with 6 years shipping B2B products. React, TypeScript, Node.js, APIs, databases, and production delivery. Open to remote full-time and contract roles."
     />
-    <meta name="theme-color" content="#f3f5f7" />
+    <meta name="theme-color" content="#f8f8f6" />
 
     <link rel="canonical" href="https://danilaigoshin.com/" />
     <meta property="og:site_name" content="Danila Igoshin" />
@@ -27,12 +27,12 @@
 
     <title>Danila Igoshin — Product &amp; Full-stack Engineer</title>
 
-    <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="public/apple-touch-icon.png" />
+    <link rel="icon" href="public/favicon.svg?v=20261104-di-precision" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="public/apple-touch-icon.png?v=20261104-di-precision" />
     <link rel="preload" href="public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="/home.css" />
-    <script src="script.js" defer data-enhancements></script>
+    <link rel="stylesheet" href="styles.css?v=20261104-borderless-header" />
+    <link rel="stylesheet" href="/home.css?v=20261104-featured-details" />
+    <script src="script.js?v=20261104-hero-results" defer data-enhancements></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -80,9 +80,9 @@
 
     <header class="site-header" data-header>
       <div class="nav-shell">
-        <a class="brand" href="#top" aria-label="Danila Igoshin, back to top">
-          <span class="brand-mark" aria-hidden="true">D/I</span>
-          <span class="brand-copy">Danila Igoshin</span>
+        <a class="brand" href="#top" aria-label="D/I Danila Igoshin Product &amp; Full-stack Engineer, back to top">
+          <img class="brand-mark" src="/public/favicon.svg?v=20261104-di-precision" width="42" height="42" alt="" aria-hidden="true" />
+          <span class="brand-copy"><span class="brand-name">Danila Igoshin</span> <span class="brand-role">Product &amp; Full-stack Engineer</span></span>
         </a>
 
         <button
@@ -101,9 +101,9 @@
             <a href="#work" data-nav-link>Work</a>
             <a href="#experience" data-nav-link>Experience</a>
             <a href="#about" data-nav-link>About</a>
-            <a href="/cv/">Résumé</a>
+            <a class="nav-resume" href="/cv/">Résumé</a>
+            <a class="nav-email" href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
             <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
-              <a href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
               <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
                 LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
               </a>
@@ -114,159 +114,165 @@
           </div>
         </nav>
 
-        <div class="nav-actions">
-          <a class="nav-quiet" href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
-            LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
-          </a>
-          <a class="nav-email" href="mailto:danigoshin@gmail.com">
-            Email <span aria-hidden="true">↗</span>
-          </a>
-        </div>
       </div>
     </header>
 
     <main id="main-content" tabindex="-1">
       <section class="home-hero section-shell" id="top" aria-labelledby="intro-title" data-section>
-        <div class="hero-copy">
-          <fieldset class="edition" data-edition-switch hidden>
-            <legend>Hiring for</legend>
-            <div class="edition-track">
-              <label><input type="radio" name="edition" value="product" checked /><span>Product Engineer</span></label>
-              <label><input type="radio" name="edition" value="full-stack" /><span>Full-stack Engineer</span></label>
-            </div>
-          </fieldset>
-          <p class="hero-role" data-hero-role>Product Engineer · Full-stack Engineer</p>
-          <h1 id="intro-title">I take B2B products from<br class="desktop-break" /> an empty repo to&nbsp;production.</h1>
-          <p class="hero-lede edition-stack" aria-live="polite">
-            <span data-edition="product">Senior frontend engineer and former tech lead, with 6 years of shipping B2B products and hands-on work across APIs, data, and deployment.</span>
-            <span data-edition="full-stack" hidden>6 years building B2B web products, combining deep React and TypeScript expertise with Node.js, Express, Next.js BFFs, PostgreSQL, MongoDB, and containerized delivery.</span>
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="/Danila_Igoshin_Product_Engineer_CV.pdf" download data-edition-resume>Download résumé<span class="sr-only" data-edition-resume-name> (Product Engineer edition, PDF)</span> <span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14" /></svg></span></a>
-            <a class="button" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
-            <a class="intro-link" href="/public/video/intro-1080.mp4" data-intro-open><span class="play-chip" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 6.2v11.6L18 12z" fill="currentColor" /></svg></span>Watch the 47-second intro</a>
-          </div>
+        <div class="hero-top">
+          <p class="hero-role">Product Engineer / Full-stack Engineer</p>
         </div>
 
-        <aside class="profile-card" aria-label="Profile at a glance">
-          <div class="profile-head">
-            <img src="/public/optimized/v1/my_photo-320.webp" srcset="/public/optimized/v1/my_photo-160.webp 160w, /public/optimized/v1/my_photo-320.webp 320w" sizes="(max-width: 760px) 72px, 96px" width="96" height="96" alt="Portrait of Danila Igoshin" decoding="async" />
-            <div>
-              <p class="profile-name">Danila Igoshin</p>
-              <p class="status"><i aria-hidden="true"></i> Open to remote roles</p>
+        <div class="hero-heading">
+          <h1 id="intro-title"><span>B2B products.</span> <span>From zero to</span> <span class="hero-title-last">production.</span></h1>
+        </div>
+
+        <div class="hero-description">
+          <div class="hero-identity">
+            <div class="hero-portrait">
+              <img src="/public/optimized/v1/my_photo-320.webp" srcset="/public/optimized/v1/my_photo-320.webp 1x, /public/optimized/v1/my_photo-640.webp 2x" width="112" height="112" alt="Portrait of Danila Igoshin" loading="eager" decoding="async" />
+            </div>
+            <div class="hero-identity-copy">
+              <p class="hero-name">I’m Danila.</p>
+              <p class="hero-identity-role">Product engineer &amp; former tech lead.</p>
             </div>
           </div>
-          <dl class="fact-list profile-facts">
-            <div><dt>Based in</dt><dd>Yerevan, Armenia</dd></div>
-            <div><dt>Time zone</dt><dd>UTC+4 · EU working-day overlap<span class="local-time" data-local-time hidden></span></dd></div>
-            <div><dt>Engagement</dt><dd>Full-time or long-term contract · EOR / B2B</dd></div>
-            <div><dt>Languages</dt><dd>English (professional), Russian (native)</dd></div>
-            <div><dt>Core stack</dt><dd class="edition-stack"><span data-edition="product">React, Next.js, TypeScript, Node.js, PostgreSQL</span><span data-edition="full-stack" hidden>React, TypeScript, Node.js, Express, PostgreSQL, MongoDB, Docker</span></dd></div>
-          </dl>
-        </aside>
+          <p class="hero-lede">6 years building and shipping B2B products.</p>
+          <p class="hero-note">Frontend first. Full-stack when the product needs it.</p>
+          <p class="hero-engagement">
+            <strong>Open to full-time roles &amp; long-term contracts</strong>
+            <span>Yerevan · UTC+4 · EU working-day overlap</span>
+            <span>Remote · EOR / B2B</span>
+          </p>
+        </div>
 
-        <ul class="proof-strip" aria-label="Outcomes from shipped work">
-          <li class="stat"><strong>≈5<small> months</small></strong><p>from an empty repository to a live learning product</p><p class="stat-source">Smart Online Institute, 2025</p></li>
-          <li class="stat"><strong>≈10×</strong><p>faster builds on a live travel platform, without pausing delivery</p><p class="stat-source">Smartway, 2021-2024</p></li>
-          <li class="stat"><strong>70%</strong><p>faster rendering for support threads with 1,000+ messages</p><p class="stat-source">Smartway, 2025-2026</p></li>
-          <li class="stat"><strong>3<small> developers</small></strong><p>mentored through review, standards, and technical talks</p><p class="stat-source">Smartway, as Tech Lead</p></li>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+          <a class="hero-resume" href="/Danila_Igoshin_Product_Engineer_CV.pdf" download>Download résumé<span class="sr-only"> (Product Engineer edition, PDF)</span> <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <ul class="hero-proof" aria-label="Selected product results">
+          <li>
+            <strong>≈5 <span>months</span></strong>
+            <p>From empty frontend repo to live learning product</p>
+            <p class="hero-proof-project">Smart Online Institute</p>
+          </li>
+          <li>
+            <strong>≈10×</strong>
+            <p>Faster builds on a live travel platform</p>
+            <p class="hero-proof-project">Smartway</p>
+          </li>
+          <li>
+            <strong>70%</strong>
+            <p>Faster rendering in threads with 1,000+ messages</p>
+            <p class="hero-proof-project">Smartway Support</p>
+          </li>
         </ul>
       </section>
 
       <section class="home-work section-shell" id="work" aria-labelledby="work-title" data-section>
         <header class="section-head reveal">
           <h2 id="work-title">Selected work</h2>
-          <p>What I owned, how it was built, and what changed in production.</p>
+          <span class="work-count" aria-label="Four selected projects">01-04</span>
         </header>
-
         <div class="work-list">
-          <article class="project reveal" aria-labelledby="edtech-title">
-            <figure class="media-frame project-figure">
+          <article class="project project-featured reveal" aria-labelledby="edtech-title">
+            <figure class="project-figure">
+                <figcaption class="project-figure-meta"><span><span class="project-number">01 /</span> Smart Online Institute</span><span>2025</span></figcaption>
               <a class="project-media-link" href="/public/online-institute.webp" aria-label="Enlarge the Smart Online Institute product screenshot">
-                <img src="/public/optimized/v1/online-institute-1080.webp" srcset="/public/optimized/v1/online-institute-720.webp 720w, /public/optimized/v1/online-institute-1080.webp 1080w, /public/optimized/v1/online-institute-1440.webp 1440w" sizes="(max-width: 900px) calc(100vw - 80px), 640px" width="1672" height="941" loading="lazy" decoding="async" alt="Smart Online Institute marketplace with course discovery, navigation, and a featured event" />
-                <span class="media-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg></span>
+                <img src="/public/optimized/v1/online-institute-1080.webp" srcset="/public/optimized/v1/online-institute-720.webp 720w, /public/optimized/v1/online-institute-1080.webp 1080w, /public/optimized/v1/online-institute-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 72px), (max-width: 1340px) 76vw, 1000px" width="1672" height="941" loading="lazy" decoding="async" alt="Smart Online Institute marketplace with course discovery, navigation, and a featured event" />
+                <span class="media-zoom" aria-hidden="true">↗</span>
               </a>
             </figure>
             <div class="project-body">
-              <p class="meta-line"><span>Smart Online Institute</span><span>2025</span></p>
-              <h3 id="edtech-title">A learning product.<br />Live in ≈5 months.</h3>
-              <p class="project-summary">From an empty frontend repository to a live marketplace, learning experience, and instructor workspace.</p>
-              <dl class="project-facts">
-                <div><dt>Role</dt><dd>Sole Frontend Engineer</dd></div>
-                <div><dt>Owned</dt><dd>Server layer (Next.js BFF), protected S3 media, CI/CD and Docker deployment, frontend architecture, and legacy data migration.</dd></div>
-                <div><dt>Stack</dt><dd>Next.js, TypeScript, AWS S3, Docker</dd></div>
-              </dl>
-              <a class="arrow-link project-link" href="/case/edtech/">Read the case study <span aria-hidden="true">→</span></a>
+              <div class="project-description">
+                <p class="project-client">Smart Online Institute</p>
+                <h3 id="edtech-title">A learning product.<br />From first commit to launch.</h3>
+                <p class="project-summary">Marketplace, learning experience, and instructor workspace.</p>
+                <a class="arrow-link project-link" href="/case/edtech/">Read the case study <span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="project-details">
+                <div class="project-outcome">
+                  <strong>≈5 <small>months</small></strong>
+                  <p>From empty frontend repo to live product</p>
+                </div>
+                <div class="project-scope">
+                  <p class="project-scope-role">Solo Frontend Engineer</p>
+                  <p class="project-stack"><span>Next.js · TypeScript</span><span>AWS S3 · Docker</span></p>
+                </div>
+              </div>
             </div>
           </article>
-
-          <article class="project project-flip reveal" aria-labelledby="research-title">
-            <figure class="media-frame project-figure">
-              <a class="project-media-link" href="/public/ai4s.webp" aria-label="Enlarge the AI research workspace screenshot">
-                <img src="/public/optimized/v1/ai4s-1080.webp" srcset="/public/optimized/v1/ai4s-720.webp 720w, /public/optimized/v1/ai4s-1080.webp 1080w, /public/optimized/v1/ai4s-1440.webp 1440w" sizes="(max-width: 900px) calc(100vw - 80px), 640px" width="3024" height="1472" loading="lazy" decoding="async" alt="Research workspace connecting source editing, compiled document preview, and an AI assistant" />
-                <span class="media-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg></span>
-              </a>
-            </figure>
-            <div class="project-body">
-              <p class="meta-line"><span>Morizo Digital</span><span>2026-present</span></p>
-              <h3 id="research-title">One workspace for scientific research.</h3>
-              <p class="project-summary">Source editing, compiled documents, and AI feedback brought into a connected authoring workflow.</p>
-              <dl class="project-facts">
-                <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
-                <div><dt>Owned</dt><dd>Frontend across the editor, PDF review, AI chat, analytics, and admin tools.</dd></div>
-                <div><dt>Stack</dt><dd>React, TypeScript, Monaco, PDF.js, Yjs</dd></div>
-              </dl>
-              <a class="arrow-link project-link" href="/case/research/">Read the case study <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-
           <div class="project-pair">
-            <article class="project project-card reveal" aria-labelledby="support-title">
-              <figure class="media-frame project-figure">
-                <a class="project-media-link" href="/public/chat.webp" aria-label="Enlarge the support workspace screenshot">
-                  <img src="/public/optimized/v1/chat-1080.webp" srcset="/public/optimized/v1/chat-720.webp 720w, /public/optimized/v1/chat-1080.webp 1080w, /public/optimized/v1/chat-1440.webp 1440w" sizes="(max-width: 900px) calc(100vw - 80px), 540px" width="1672" height="941" loading="lazy" decoding="async" alt="Support workspace showing a ticket queue, conversation, and request details" />
-                  <span class="media-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg></span>
-                </a>
-              </figure>
+            <article class="project project-card reveal" aria-labelledby="research-title">
+              <figure class="project-figure">
+                <figcaption class="project-figure-meta"><span><span class="project-number">02 /</span> Morizo Digital</span><span>2026-present</span></figcaption>
+              <a class="project-media-link" href="/public/ai4s.webp" aria-label="Enlarge the AI research workspace screenshot">
+                <img src="/public/optimized/v1/ai4s-1080.webp" srcset="/public/optimized/v1/ai4s-720.webp 720w, /public/optimized/v1/ai4s-1080.webp 1080w, /public/optimized/v1/ai4s-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 76px), (max-width: 1340px) 42vw, 552px" width="3024" height="1472" loading="lazy" decoding="async" alt="Research workspace connecting source editing, compiled document preview, and an AI assistant" />
+                <span class="media-zoom" aria-hidden="true">↗</span>
+              </a>
+            </figure>
               <div class="project-body">
-                <p class="meta-line"><span>Smartway</span><span>2025-2026</span></p>
-                <h3 id="support-title">Real-time support that stays responsive.</h3>
-                <p class="project-summary">An embeddable widget and ticket workspace. 70% faster rendering for threads with 1,000+ messages.</p>
+                <h3 id="research-title">One workspace for scientific research.</h3>
+                <p class="project-summary">Connected source editing, PDF review, and AI feedback in one authoring workflow.</p>
                 <dl class="project-facts">
-                  <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
-                  <div><dt>Owned</dt><dd>Public integration API, HMAC authentication, real-time messaging, validated uploads, and performance.</dd></div>
-                  <div><dt>Stack</dt><dd>Preact, TypeScript, Redux Toolkit, WebSocket</dd></div>
-                </dl>
-                <a class="arrow-link project-link" href="/case/support/">Read the case study <span aria-hidden="true">→</span></a>
+                <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
+              </dl>
+                <p class="project-stack">React, TypeScript, Monaco, PDF.js, Yjs</p>
+                <a class="arrow-link project-link" href="/case/research/">Read the case study <span aria-hidden="true">↗</span></a>
               </div>
             </article>
-
             <article class="project project-card reveal" aria-labelledby="travel-title">
-              <figure class="media-frame project-figure">
+              <figure class="project-figure">
+                <figcaption class="project-figure-meta"><span><span class="project-number">03 /</span> Smartway</span><span>2021-2024</span></figcaption>
                 <a class="project-media-link" href="/public/smartway.webp" aria-label="Enlarge the Smartway corporate travel screenshot">
-                  <img src="/public/optimized/v1/smartway-1080.webp" srcset="/public/optimized/v1/smartway-720.webp 720w, /public/optimized/v1/smartway-1080.webp 1080w, /public/optimized/v1/smartway-1440.webp 1440w" sizes="(max-width: 900px) calc(100vw - 80px), 540px" width="1672" height="941" loading="lazy" decoding="async" alt="Smartway corporate travel platform with booking, approvals, and trip management" />
-                  <span class="media-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg></span>
+                  <img src="/public/optimized/v1/smartway-1080.webp" srcset="/public/optimized/v1/smartway-720.webp 720w, /public/optimized/v1/smartway-1080.webp 1080w, /public/optimized/v1/smartway-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 76px), (max-width: 1340px) 42vw, 552px" width="1672" height="941" loading="lazy" decoding="async" alt="Smartway corporate travel platform with booking, approvals, and trip management" />
+                  <span class="media-zoom" aria-hidden="true">↗</span>
                 </a>
               </figure>
               <div class="project-body">
-                <p class="meta-line"><span>Smartway</span><span>2021-2024</span></p>
                 <h3 id="travel-title">A faster platform.<br />Without pausing delivery.</h3>
-                <p class="project-summary">≈10× faster builds and ≈3× faster measured shopping-cart interactions in a live travel product.</p>
+                <p class="project-results">≈10× faster builds · ≈3× faster cart interactions</p>
+                <p class="project-summary">Modernized the frontend foundation while the travel platform stayed live.</p>
                 <dl class="project-facts">
                   <div><dt>Role</dt><dd>Senior Frontend Engineer → Tech Lead</dd></div>
-                  <div><dt>Owned</dt><dd>Webpack-to-Vite and TypeScript migrations, performance, analytics, mobile, CI/CD standards, and mentoring.</dd></div>
-                  <div><dt>Stack</dt><dd>React, TypeScript, Vite, React Native</dd></div>
                 </dl>
-                <a class="arrow-link project-link" href="/case/smartway/">Read the case study <span aria-hidden="true">→</span></a>
+                <p class="project-stack">React, TypeScript, Vite, React Native</p>
+                <a class="arrow-link project-link" href="/case/smartway/">Read the case study <span aria-hidden="true">↗</span></a>
               </div>
             </article>
           </div>
-
+          <article class="project project-wide reveal" aria-labelledby="support-title">
+            <figure class="project-figure">
+                <figcaption class="project-figure-meta"><span><span class="project-number">04 /</span> Smartway</span><span>2025-2026</span></figcaption>
+                <a class="project-media-link" href="/public/chat.webp" aria-label="Enlarge the support workspace screenshot">
+                  <img src="/public/optimized/v1/chat-1080.webp" srcset="/public/optimized/v1/chat-720.webp 720w, /public/optimized/v1/chat-1080.webp 1080w, /public/optimized/v1/chat-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 76px), (max-width: 1340px) 42vw, 552px" width="1672" height="941" loading="lazy" decoding="async" alt="Support workspace showing a ticket queue, conversation, and request details" />
+                  <span class="media-zoom" aria-hidden="true">↗</span>
+                </a>
+              </figure>
+            <div class="project-body">
+              <div class="project-description">
+                <p class="project-client">Smartway / Customer support</p>
+                <h3 id="support-title">Real-time support that stays responsive.</h3>
+                <div class="project-outcome support-outcome">
+                  <strong>70% <small>faster rendering</small></strong>
+                  <p>Threads with 1,000+ messages</p>
+                </div>
+                <p class="project-summary">Built a real-time widget and ticket workspace for complex support conversations.</p>
+              </div>
+              <dl class="project-facts">
+                  <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
+                </dl>
+              <p class="project-stack">Preact, TypeScript, Redux Toolkit, WebSocket</p>
+              <a class="arrow-link project-link" href="/case/support/">Read the case study <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
           <article class="project-compact reveal" aria-labelledby="commerce-title">
             <p class="meta-line"><span>Germo-S</span><span>2020</span></p>
             <div>
               <h3 id="commerce-title">Full-stack e-commerce, built solo</h3>
-              <p>Built and shipped the complete product: catalog, cart, orders, custom CMS, REST API, and production deployment.</p>
+              <p class="project-compact-role">Full Stack Engineer · Sole developer</p>
+              <p>Built a B2B e-commerce product from storefront and API to production.</p>
             </div>
             <p class="project-compact-stack">Nuxt.js, Vue, Express, MongoDB</p>
           </article>
@@ -293,6 +299,10 @@
       <section class="home-about section-shell" id="about" aria-labelledby="about-title" data-section>
         <div class="about-head reveal">
           <h2 id="about-title">Frontend first.<br />Full-stack when the product needs&nbsp;it.</h2>
+          <div class="about-profile">
+            <p><strong>Danila Igoshin</strong><span>English (professional)</span><span>Russian (native)</span></p>
+          </div>
+          <a class="intro-link" href="/public/video/intro-1080.mp4" data-intro-open><span class="play-chip" aria-hidden="true">▶</span>Watch the 47-second intro</a>
         </div>
         <div class="about-body">
           <div class="about-text reveal">
