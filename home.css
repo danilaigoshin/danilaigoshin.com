@@ -19,7 +19,7 @@
 .hero-resume > [aria-hidden] { transition: transform 180ms var(--ease); }
 .hero-resume:hover > [aria-hidden] { transform: translate(2px, -2px); }
 .hero-description { grid-area: description; min-width: 0; }
-.hero-identity { --portrait-size: 112px; display: grid; grid-template-columns: var(--portrait-size) minmax(0, 1fr); gap: 24px; align-items: center; margin-bottom: 24px; }
+.hero-identity { --portrait-size: 128px; display: grid; grid-template-columns: var(--portrait-size) minmax(0, 1fr); gap: 24px; align-items: center; margin-bottom: 24px; }
 .hero-portrait { width: var(--portrait-size); height: var(--portrait-size); overflow: hidden; border-radius: 6px; background: var(--surface-muted); }
 .hero-portrait img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.6); transform-origin: 50% 42%; }
 .hero-identity-copy { min-width: 0; }
