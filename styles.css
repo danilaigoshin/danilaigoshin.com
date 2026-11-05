@@ -788,13 +788,6 @@ html:not(.js) .contact-email-row button {
     backdrop-filter: none;
   }
 
-  body.menu-open .brand {
-    position: fixed;
-    z-index: 3;
-    top: 17px;
-    left: calc(100vw - var(--nav-drawer-width) + 28px);
-  }
-
   .js .menu-toggle {
     position: relative;
     z-index: 3;
@@ -892,7 +885,7 @@ html:not(.js) .contact-email-row button {
 
   .js .nav-panel::before {
     position: absolute;
-    top: 70px;
+    top: 82px;
     right: 32px;
     left: 32px;
     height: 1px;
@@ -1059,12 +1052,6 @@ html:not(.js) .contact-email-row button {
     height: 34px;
   }
 
-  body.menu-open .brand {
-    position: relative;
-    top: auto;
-    left: auto;
-  }
-
   .site-nav {
     grid-column: 1 / -1;
     grid-row: 2;
@@ -1090,7 +1077,7 @@ html:not(.js) .contact-email-row button {
   }
 
   .js .nav-panel::before {
-    top: 62px;
+    top: 74px;
     right: 32px;
     left: 32px;
   }
@@ -1517,6 +1504,14 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
     --header-float-width: calc(var(--header-viewport-width) - 32px);
     --header-float-top: 12px;
     --header-float-pad: 16px;
+    /* Keep the fixed drawer's containing block stable throughout its fade. */
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .brand {
+    /* The closing drawer remains visible briefly after menu-open is removed. */
+    position: relative;
+    z-index: 3;
   }
   .js .menu-toggle {
     transform: translate(calc(-1 * var(--header-side-shift)), var(--header-y-shift));

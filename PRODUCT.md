@@ -42,7 +42,7 @@ Other candidates can list the same stack. They can't truthfully claim this recor
 - **Pages:** home (`/`), case index (`/case/`), four case studies (`/case/edtech/`, `/case/research/`, `/case/smartway/`, `/case/support/`), two résumé pages (`/cv/`, `/cv/full-stack/`), and `/404.html`.
 - **Stack:** zero-build static HTML, CSS, and one `script.js`. No framework, bundler, or package manifest.
 - **CSP** (`vercel.json`): `default-src 'self'`, `script-src 'self'`. No inline scripts (JSON-LD blocks are fine), no third-party scripts, fonts, analytics, or embeds. Fonts and images are self-hosted.
-- **Generated assets:** the résumé PDFs are built from `cv/` HTML, and the social images from `art/` HTML boards, both via `scripts/build-assets.sh`. Edit the sources, never the outputs.
+- **Generated assets:** the résumé PDFs are built from `cv/` HTML, and the social images from `art/` HTML export boards, both via `scripts/build-assets.sh`. The current social boards use imagegen raster masters and saved prompts in `art/generated/linkedin-2026-11-05/`; update those sources before rebuilding the public exports. Edit the sources, never only the outputs.
 - **Language:** English only.
 - **Facts discipline:**
   - Every claim on the site must match the CV.

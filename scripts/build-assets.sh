@@ -66,7 +66,7 @@ chrome_to_file() {
   wait "$CHROME_PID" 2>/dev/null || true
 }
 
-if [ "${1:-}" != "--resumes-only" ]; then
+if [ "${1:-}" != "--resumes-only" ] && [ "${1:-}" != "--social-only" ]; then
   chrome_to_file "$TMP_DIR/app-icon.png" 1 --window-size=720,720 --screenshot="$TMP_DIR/app-icon.png" "file://$ROOT/art/app-icon.html"
   sips -z 180 180 "$TMP_DIR/app-icon.png" --out "$ROOT/public/apple-touch-icon.png" >/dev/null
 fi
@@ -106,7 +106,7 @@ fi
 chrome_to_file "$TMP_DIR/og-image@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-image@2x.png" "file://$ROOT/art/og-image.html"
 chrome_to_file "$TMP_DIR/og-cv@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-cv@2x.png" "file://$ROOT/art/og-cv.html"
 chrome_to_file "$TMP_DIR/og-smartway@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-smartway@2x.png" "file://$ROOT/art/og-smartway.html"
-chrome_to_file "$TMP_DIR/linkedin-banner@2x.png" 2 --window-size=3168,792 --screenshot="$TMP_DIR/linkedin-banner@2x.png" "file://$ROOT/art/linkedin-banner.html"
+chrome_to_file "$TMP_DIR/linkedin-banner.png" 1 --window-size=3168,792 --screenshot="$TMP_DIR/linkedin-banner.png" "file://$ROOT/art/linkedin-banner.html"
 
 rm -f \
   "$ROOT/public/og-image.jpg" \
@@ -117,15 +117,14 @@ rm -f \
   "$ROOT/public/og-smartway.png" \
   "$ROOT/public/linkedin-banner.png"
 
-# Keep the Open Graph cards at the full 2x render size. The flat, text-heavy
-# artwork stays lossless in PNG, avoiding JPEG ringing and chroma blur.
+# Export the imagegen masters through the source boards at exact public sizes.
+# PNG preserves the typography without adding JPEG compression artifacts.
 cp "$TMP_DIR/og-image@2x.png" "$ROOT/public/og-image.png"
 cp "$TMP_DIR/og-cv@2x.png" "$ROOT/public/og-cv.png"
 cp "$TMP_DIR/og-smartway@2x.png" "$ROOT/public/og-smartway.png"
 
-# LinkedIn recommends a 1584x396 canvas. This 2x deliverable is first rendered
-# at 4x and then downsampled once for cleaner type and rules on high-DPI screens.
-sips -z 792 3168 "$TMP_DIR/linkedin-banner@2x.png" --out "$ROOT/public/linkedin-banner.png" >/dev/null
+# The board applies the avatar-safe 4:1 crop without stretching the raster.
+cp "$TMP_DIR/linkedin-banner.png" "$ROOT/public/linkedin-banner.png"
 
 rm -rf "$TMP_DIR"
 
