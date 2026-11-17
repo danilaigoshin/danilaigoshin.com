@@ -1184,6 +1184,7 @@ html:not(.js) .contact-email-row button {
 
 .site-header { background: rgba(248, 248, 246, 0.94); }
 .nav-shell { min-height: 80px; }
+.header-resume { display: none; }
 .brand-mark { width: 42px; height: 42px; border-radius: var(--radius-control); }
 .brand-copy { display: grid; gap: 3px; font-size: 16px; font-weight: 650; letter-spacing: -0.025em; line-height: 1.2; }
 .brand-role { color: var(--muted); font-size: 12px; font-weight: 400; letter-spacing: 0; opacity: var(--header-role-opacity); transition: opacity 160ms ease; }
@@ -1499,6 +1500,22 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
 @media (max-width: 900px) {
   .portfolio-page,
   .case-page { --shell: calc(100% - 64px); }
+  .js .nav-shell { grid-template-columns: minmax(0, 1fr) auto auto; column-gap: 12px; }
+  .js .brand { max-width: 100%; }
+  .js .header-resume {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 4px;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 550;
+    pointer-events: auto;
+    transform: translate(calc(-1 * var(--header-side-shift)), var(--header-y-shift));
+    transition: transform 240ms var(--ease);
+  }
+  .header-resume:is(:hover, :focus-visible) { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 4px; }
+  body.menu-open .header-resume { visibility: hidden; }
   .site-header {
     --header-content-width: calc(100vw - 64px);
     --header-float-width: calc(var(--header-viewport-width) - 32px);
@@ -1514,6 +1531,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
     z-index: 3;
   }
   .js .menu-toggle {
+    grid-column: 3;
     transform: translate(calc(-1 * var(--header-side-shift)), var(--header-y-shift));
     transition: transform 240ms var(--ease), background-color 160ms ease;
   }
@@ -1568,6 +1586,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle { pointer-events: aut
 }
 
 @media (max-width: 480px) {
+  .js .nav-shell { column-gap: 6px; }
   .site-contact .contact-links { grid-template-columns: minmax(0, 1fr); }
   .site-contact .contact-links a { min-height: 48px; padding-block: 12px; }
 }

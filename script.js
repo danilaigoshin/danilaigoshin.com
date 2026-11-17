@@ -292,7 +292,7 @@
       });
     }
 
-    const projectMediaLinks = Array.from(document.querySelectorAll(".project-media-link"));
+    const projectMediaLinks = document.querySelectorAll("[data-project-zoom]");
     const lightbox = document.querySelector("[data-project-lightbox]");
     const lightboxImage = lightbox?.querySelector("[data-project-lightbox-image]");
     const lightboxCaption = lightbox?.querySelector("[data-project-lightbox-caption]");
@@ -306,9 +306,10 @@
     if (lightbox && lightboxImage && lightboxCaption && lightboxClose) {
       projectMediaLinks.forEach((link) => {
         link.addEventListener("click", (event) => {
-          if (typeof lightbox.showModal !== "function") return;
+          if (typeof lightbox.showModal !== "function" || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
-          const preview = link.querySelector("img");
+          const figure = link.closest("figure");
+          const preview = figure?.querySelector("img");
           if (!preview) return;
 
           event.preventDefault();
@@ -323,10 +324,8 @@
           });
           fullImage.src = link.href;
           lightboxImage.alt = preview.alt;
-          const previewCaption = link
-            .closest("figure")
-            ?.querySelector("figcaption")
-            ?.firstElementChild?.textContent?.trim();
+          const caption = figure.querySelector("figcaption");
+          const previewCaption = (caption?.firstElementChild || caption)?.textContent.trim();
           lightboxCaption.textContent = previewCaption || preview.alt;
           document.documentElement.classList.add("lightbox-open");
           document.body.classList.add("lightbox-open");

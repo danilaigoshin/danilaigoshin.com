@@ -346,7 +346,27 @@
   .case-outcomes[data-stats="0"] .shipped { margin-top: 0; border-top: 0; }
   .case-outcomes[data-stats="1"] .stat { grid-column: 1 / -1; }
   .case-body { grid-template-columns: minmax(0, 1fr); }
-  .case-toc { display: none; }
+  .case-toc {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 24px;
+    margin-block: 24px 12px;
+    padding-block: 14px 8px;
+    border-block: 1px solid var(--line);
+  }
+  .case-toc p { flex-basis: 100%; margin: 0; color: var(--ink); font-weight: 600; }
+  .case-toc a, .case-toc a.is-active {
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    color: var(--accent-dark);
+    text-decoration: underline;
+    text-decoration-color: var(--line-control);
+    text-underline-offset: 4px;
+  }
+  .case-toc a:is(:hover, :focus-visible, .is-active) { text-decoration-color: currentColor; }
   .case-section:first-child { padding-top: 24px; }
 }
 
