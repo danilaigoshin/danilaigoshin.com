@@ -33,6 +33,13 @@
 
 .case-hero-copy { min-width: 0; }
 
+/* Wide layouts pair the introduction with the project facts. On phones the
+   document order brings the product screenshot directly below the summary. */
+.case-hero-copy,
+.case-glance { grid-row: 1; }
+.case-hero .case-outcomes { grid-row: 2; }
+.case-hero .case-cover { grid-column: 1 / -1; grid-row: 3; }
+
 .case-hero .meta-line { justify-content: flex-start; margin-bottom: 20px; font-size: 15px; }
 .case-hero .meta-line span + span::before { margin-right: 12px; color: var(--line-control); content: "·"; }
 
@@ -45,6 +52,7 @@
 }
 
 .case-deck { max-width: 36em; margin: 0; color: var(--muted); font-size: clamp(17px, 0.95rem + 0.3vw, 19px); line-height: 1.6; }
+.case-deck strong { color: var(--ink); font-weight: 600; }
 
 .case-glance { padding: 6px 0 6px 24px; border-left: 1px solid var(--line); }
 
@@ -93,7 +101,7 @@
 
 /* The product */
 
-.case-cover { margin-top: clamp(36px, 4vw, 56px); }
+.case-cover { margin: 0; }
 
 .case-cover figcaption {
   justify-self: start;
@@ -103,6 +111,10 @@
 }
 
 /* Reasoning: a sticky contents rail beside a readable column. */
+
+/* A direct link can land several screens into a case study. */
+html:has(.case-section:target) { scroll-behavior: auto; }
+.case-section:target { opacity: 1; transform: none; }
 
 .case-body {
   display: grid;
@@ -261,8 +273,7 @@
 .case-next .media-frame { border-left: 1px solid var(--line-soft); }
 
 @media (hover: hover) {
-  .case-next > a:hover .media-frame img,
-  .case-card > a:hover .media-frame img {
+  .case-next > a:hover .media-frame img {
     transform: translateY(-3px);
     box-shadow: 0 1px 2px rgba(21, 24, 29, 0.05), 0 26px 48px -24px rgba(21, 24, 29, 0.36);
   }
@@ -274,66 +285,70 @@
 .error-page { display: flex; min-height: 100dvh; flex-direction: column; }
 .error-page main { flex: 1 0 auto; }
 
-/* Case index */
+/* Case index: comparable project outcomes, with one link per row. */
 
 .case-index-hero { padding-block: clamp(24px, 3.4vw, 48px) clamp(32px, 4vw, 56px); }
+.case-index-hero .case-back { margin-bottom: 8px; }
 
 .case-index-hero h1 {
   max-width: 14em;
-  margin-bottom: 22px;
+  margin: 0 0 22px;
   font-size: clamp(2.5rem, 1.05rem + 3.6vw, 4.25rem);
   line-height: 1.02;
   letter-spacing: -0.048em;
 }
 
-/* Each card spans five shared row tracks (image, meta, title, summary,
-   link) through subgrid, so the cards in a row line up line for line. */
-.case-grid {
+.case-index-hero h1:last-child { margin: 0; }
+
+.case-directory { margin-block: 0; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
+.case-directory li { border-bottom: 1px solid var(--line); }
+
+.case-entry {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 24px;
-  padding-bottom: clamp(80px, 9vw, 128px);
+  grid-template-columns: minmax(140px, 0.85fr) minmax(0, 2fr) clamp(144px, 16vw, 216px) auto;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding-block: clamp(20px, 2vw, 30px);
 }
 
-.case-card {
-  display: grid;
-  grid-row: span 5;
-  grid-template-rows: subgrid;
-  margin-bottom: 24px;
-}
-
-.case-card > a {
-  display: grid;
-  grid-row: 1 / -1;
-  grid-template-rows: subgrid;
-  background: transparent;
-}
-
-.case-card > a:active { transform: translateY(1px); }
-.case-card .media-frame { aspect-ratio: 16 / 10; }
-.case-card .media-frame img { transition: transform 400ms var(--ease), box-shadow 400ms var(--ease); }
-
-.case-card-body {
-  display: grid;
-  grid-row: 2 / -1;
-  grid-template-rows: subgrid;
-  justify-items: start;
-  padding: 24px 0 0;
-}
-
-.case-card .meta-line { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; }
-
-.case-card h2 {
-  margin-bottom: 14px;
-  font-size: clamp(1.5rem, 1.15rem + 0.9vw, 1.875rem);
-  line-height: 1.14;
+.case-entry-client { display: grid; gap: 2px; font-size: 15px; font-weight: 600; }
+.case-entry-date { color: var(--muted); font-size: 14px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.case-entry-copy h2 {
+  margin: 0 0 6px;
+  font-size: clamp(1.375rem, 1rem + 1.2vw, 2rem);
+  line-height: 1.15;
   letter-spacing: -0.035em;
 }
 
-.case-card p { margin-bottom: 24px; color: var(--muted); font-size: 16px; line-height: 1.6; }
-.case-card .arrow-link { align-self: end; }
-.case-card > a:hover .arrow-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
-.case-card > a:hover .arrow-link span[aria-hidden] { transform: translateX(3px); }
+.case-entry-copy p { max-width: 48ch; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.5; }
+
+.case-entry-preview { display: grid; place-items: center; aspect-ratio: 16 / 9; padding: 8px; background: var(--surface-muted); }
+.case-entry-preview img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 2px; }
+.case-entry-arrow { color: var(--accent-dark); font-size: 24px; }
+.case-entry:is(:focus-visible, :hover) h2 { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 0.16em; text-decoration-thickness: 1px; }
+
+@media (max-width: 900px) {
+  .case-entry {
+    grid-template-columns: minmax(0, 1fr) clamp(110px, 22vw, 190px) auto;
+    grid-template-areas: "client preview arrow" "copy preview arrow";
+    gap: 8px 20px;
+  }
+  .case-entry-client { grid-area: client; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
+  .case-entry-copy { grid-area: copy; }
+  .case-entry-preview { grid-area: preview; }
+  .case-entry-arrow { grid-area: arrow; }
+}
+
+@media (max-width: 600px) {
+  .case-entry {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "client arrow" "copy copy";
+    gap: 6px 12px;
+  }
+  .case-entry-client { font-size: 14px; }
+  .case-entry-preview { display: none; }
+  .case-entry-arrow { font-size: 20px; line-height: 1; }
+}
 
 /* Responsive */
 
@@ -372,9 +387,12 @@
 
 @media (max-width: 900px) {
   .case-hero { grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
+  .case-hero-copy,
+  .case-glance,
+  .case-hero .case-outcomes,
+  .case-hero .case-cover { grid-row: auto; }
   .case-next > a { grid-template-columns: minmax(0, 1fr); }
   .case-next .media-frame { grid-row: 1; border-bottom: 1px solid var(--line-soft); border-left: 0; }
-  .case-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
@@ -384,6 +402,7 @@
 
 @media (max-width: 760px) {
   .case-back { margin-bottom: 12px; }
+  .case-index-hero h1 { font-size: clamp(2.25rem, 1.2rem + 5vw, 3rem); }
   .case-hero .meta-line { margin-bottom: 14px; font-size: 14px; }
   .case-hero h1 { margin-bottom: 18px; font-size: clamp(2rem, 1.2rem + 3.6vw, 2.5rem); }
   .case-deck { font-size: 17px; }
@@ -393,7 +412,6 @@
   .shipped { padding: 20px 0 0; }
   .shipped li { font-size: 14px; }
   .case-outcomes[data-stats] .shipped ul { grid-template-columns: minmax(0, 1fr); }
-  .case-cover { margin-top: 32px; }
   .case-cover figcaption { margin-top: 12px; font-size: 13px; }
   .case-section { padding-block: 44px; }
   .case-section > p:not([class]) { font-size: 16px; }
@@ -405,9 +423,6 @@
   .case-decision { padding: 20px 20px 22px; }
   .case-page .case-decision h3 { font-size: 18px; }
   .case-next { padding-bottom: 72px; }
-  .case-index-hero h1 { font-size: clamp(2.25rem, 1.2rem + 5vw, 3rem); }
-  .case-grid { padding-bottom: 56px; }
-  .case-card { margin-bottom: 16px; }
 }
 
 /* First paint: the case hero assembles in reading order, once. */
