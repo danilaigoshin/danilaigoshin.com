@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
   <title>Danila Igoshin D/I monogram</title>
   <rect width="64" height="64" rx="4.5" fill="#20221f"/>
-  <g transform="translate(9.5 20.586) scale(.0819672)" fill="#f8f8f6">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1h86.5C167 1 211.5 52.5 211.5 135S167 269 86.5 269H0V1ZM53.5 53v164h36c46 0 64.5-28.5 64.5-82S135.5 53 89.5 53h-36Z"/>
-    <path d="M340 0h49L273 278.5h-49L340 0Z"/>
-    <path d="M433 1h116v51h-31v168h31v49H433v-49h31V52h-31V1Z"/>
+  <g fill="#f8f8f6">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.6 20h7.1C22.4 20 26.8 24.4 26.8 32s-4.4 12-11.1 12H8.6V20Zm4.6 4.4v15.2h2.7c4.2 0 6.2-2.6 6.2-7.6s-2-7.6-6.2-7.6h-2.7Z"/>
+    <path d="M35.8 19h3.7l-8.2 26h-3.7l8.2-26Z"/>
+    <path d="M43.8 20h11.6v4.4h-3.5v15.2h3.5V44H43.8v-4.4h3.5V24.4h-3.5V20Z"/>
   </g>
 </svg>
