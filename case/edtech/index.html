@@ -20,9 +20,9 @@
     <link rel="icon" href="/public/favicon.svg?v=20261104-di-precision" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png?v=20261104-di-precision" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/styles.css?v=20261117-mobile-resume" />
-    <link rel="stylesheet" href="/case/styles.css?v=20261118-case-reading" />
-    <script src="/script.js?v=20261117-case-links" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=20261119-ux3" />
+    <link rel="stylesheet" href="/case/styles.css?v=20261119-ux" />
+    <script src="/script.js?v=20261119-ux" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -61,7 +61,7 @@
 
         <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
           <div class="nav-panel" data-nav-panel>
-            <a href="/#work" data-nav-link>Work</a>
+            <a class="is-active" href="/#work" data-nav-link>Work</a>
             <a href="/#experience" data-nav-link>Experience</a>
             <a href="/#about" data-nav-link>About</a>
             <a class="nav-resume" href="/cv/">Résumé</a>
@@ -129,6 +129,7 @@
           <a href="#decisions" data-nav-link>Decisions</a>
           <a href="#shipped" data-nav-link>What shipped</a>
           <a href="#scope" data-nav-link>Scope &amp; stack</a>
+          <a class="case-toc-resume" href="/Danila_Igoshin_Product_Engineer_CV.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
         </nav>
         <article class="case-article">
           <section class="case-section reveal" id="brief" aria-labelledby="brief-title" data-section>
@@ -159,22 +160,22 @@
             <h2 id="decisions-title">A small architecture with explicit boundaries around external complexity.</h2>
             <p>The frontend was organized around product workflows, with a BFF layer absorbing API orchestration and infrastructure details that did not belong in page components.</p>
             <div class="case-decisions">
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>Product surface</span>
                 <h3>Build learner and instructor workflows as one product system.</h3>
                 <p>Delivered the marketplace, profiles, progress, practice booking, schedule management, and instructor progress views on shared domain rules.</p>
               </article>
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>API boundary</span>
                 <h3>Use a Next.js BFF for orchestration and stable client contracts.</h3>
                 <p>Kept backend composition, validation, and integration-specific behavior behind a server boundary instead of spreading it through UI code.</p>
               </article>
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>Content delivery</span>
                 <h3>Keep access control attached to media delivery.</h3>
                 <p>Implemented secure viewing for video, audio, PDFs, and documents stored in S3, with product permissions governing access.</p>
               </article>
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>Migration</span>
                 <h3>Automate extraction when no migration API exists.</h3>
                 <p>Used Playwright-based scraping to move existing courses and content without manual re-entry, then put deployment behind GitLab CI/CD and Docker.</p>

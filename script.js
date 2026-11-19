@@ -11,7 +11,8 @@
     const navigation = document.querySelector("[data-nav]");
     const navigationPanel = navigation?.querySelector("[data-nav-panel]");
     const brandLink = header?.querySelector(".brand");
-    const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
+    const allNavLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
+    const hashNavLinks = allNavLinks.filter((link) => link.getAttribute("href")?.startsWith("#"));
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const menuBackground = Array.from(
       document.querySelectorAll("body > .skip-link, main, body > .page-finale, body > footer, .nav-actions"),
@@ -34,18 +35,37 @@
       if (restoreFocus) window.requestAnimationFrame(() => menuButton?.focus({ preventScroll: true }));
     };
 
-    const focusSection = (link) => {
-      const hash = link.getAttribute("href");
-      if (!hash?.startsWith("#") || hash.length === 1) return;
+    // Reveal management (defined early so anchor jumps can settle targets immediately)
+    const settleReveal = (item) => {
+      item.classList.remove("will-reveal", "is-visible");
+      item.style.removeProperty("--reveal-delay");
+    };
 
+    const revealImmediately = (root) => {
+      if (!root) return;
+      if (root.classList?.contains("will-reveal")) settleReveal(root);
+      root.querySelectorAll?.(".will-reveal").forEach(settleReveal);
+    };
+
+    const revealByHash = (hash) => {
+      if (!hash?.startsWith("#") || hash.length === 1) return null;
       let targetId = hash.slice(1);
       try {
         targetId = decodeURIComponent(targetId);
       } catch (_error) {
         // Keep the raw fragment if it contains malformed escape sequences.
       }
-
       const target = document.getElementById(targetId);
+      if (target) {
+        revealImmediately(target);
+        const parentSection = target.closest("[data-section], section");
+        if (parentSection) revealImmediately(parentSection);
+      }
+      return target;
+    };
+
+    const focusSection = (link) => {
+      const target = revealByHash(link.getAttribute("href"));
       if (!target) return;
 
       window.requestAnimationFrame(() => {
@@ -68,7 +88,7 @@
 
         if (nextOpen) {
           window.requestAnimationFrame(() => {
-            if (isMenuOpen()) navLinks[0]?.focus({ preventScroll: true });
+            if (isMenuOpen()) navigation.querySelector("a[href]")?.focus({ preventScroll: true });
           });
         }
       });
@@ -89,11 +109,8 @@
 
       brandLink?.addEventListener("click", closeMenu);
 
-      // Past this width the toggle is hidden and the nav is inline, so an open
-      // drawer would leave the page inert with no way to dismiss it.
       const inlineNav = window.matchMedia("(min-width: 901px)");
       const syncNavMode = () => {
-        // Do not animate the desktop navigation into a closed mobile drawer.
         document.documentElement.classList.remove("js-ready");
         if (inlineNav.matches && isMenuOpen()) closeMenu();
         window.requestAnimationFrame(() => {
@@ -142,24 +159,20 @@
           firstItem.focus({ preventScroll: true });
         } else if (!focusableItems.includes(document.activeElement)) {
           event.preventDefault();
-          navLinks[0]?.focus({ preventScroll: true });
+          navigation.querySelector("a[href]")?.focus({ preventScroll: true });
         }
       });
-
     }
 
-    // Scroll-dependent UI is driven by IntersectionObserver rather than a
-    // scroll listener: the browser reports when a boundary is crossed and
-    // nothing runs while the reader simply scrolls inside one section. The
-    // progress bar is a CSS scroll-driven animation (see styles.css).
+    // Scroll-dependent UI uses IntersectionObserver rather than a continuous
+    // scroll listener. The progress bar uses CSS animation-timeline: scroll().
     const hasObserver = "IntersectionObserver" in window;
 
+    let syncHeaderScrolled = () => {};
     if (header && hasObserver) {
       const headerShell = header.querySelector(".nav-shell");
       const syncHeaderGeometry = () => {
         if (!headerShell) return;
-        // Measure the unchanged layout boxes, not the animated child controls.
-        // The floating panel therefore stays centered even with scrollbars.
         header.style.setProperty("--header-content-width", `${headerShell.getBoundingClientRect().width}px`);
         header.style.setProperty("--header-viewport-width", `${header.getBoundingClientRect().width}px`);
         header.style.setProperty("--header-base-height", `${header.offsetHeight}px`);
@@ -177,35 +190,46 @@
       topMarker.className = "scroll-sentinel";
       topMarker.setAttribute("aria-hidden", "true");
       document.body.prepend(topMarker);
-      new IntersectionObserver(([entry]) => {
-        header.classList.toggle("is-scrolled", !entry.isIntersecting);
+
+      syncHeaderScrolled = () => {
+        const scrolled = window.scrollY >= (topMarker.offsetHeight || 80);
+        header.classList.toggle("is-scrolled", scrolled);
+      };
+
+      new IntersectionObserver((entries) => {
+        const latest = entries[entries.length - 1];
+        if (!latest) return;
+        header.classList.toggle("is-scrolled", !latest.isIntersecting && latest.boundingClientRect.top < 0);
       }).observe(topMarker);
+
+      syncHeaderScrolled();
     }
 
+    // Active section scrollspy (in-page hash links only — preserves cross-page active nav items)
     const sections = Array.from(document.querySelectorAll("[data-section]"));
     let activeSectionId;
 
-    const updateActiveSection = () => {
-      if (!sections.length) return;
+    const getActivationLine = () =>
+      Math.max((header?.offsetHeight || 80) + 40, Math.round(window.innerHeight * 0.32));
 
-      // Read all section positions, rather than only the intersections that
-      // changed. This also covers long sections, gaps, and upward scrolling.
-      // The same one-pixel band the observer below watches: a section counts
-      // as reached as soon as its top enters the band, not a pixel later.
-      const activationLine = (header?.offsetHeight || 0) + 24;
+    const updateActiveSection = () => {
+      if (!sections.length || !hashNavLinks.length) return;
+
+      const activationLine = getActivationLine();
       let activeSection = sections[0];
       for (const section of sections) {
-        if (section.getBoundingClientRect().top >= activationLine + 1) break;
+        if (section.getBoundingClientRect().top > activationLine + 1) break;
         activeSection = section;
       }
+
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll > 0 && window.scrollY >= maxScroll - 1) {
+      if (maxScroll > 0 && window.scrollY >= maxScroll - 2) {
         activeSection = sections[sections.length - 1];
       }
 
       if (activeSection.id === activeSectionId) return;
       activeSectionId = activeSection.id;
-      navLinks.forEach((link) => {
+      hashNavLinks.forEach((link) => {
         const isActive = link.getAttribute("href") === `#${activeSectionId}`;
         link.classList.toggle("is-active", isActive);
         if (isActive) link.setAttribute("aria-current", "location");
@@ -213,10 +237,7 @@
       });
     };
 
-    if (sections.length && hasObserver) {
-      // A one-pixel band at the activation line: a section crossing it is the
-      // only moment the answer can change. The end marker covers the last,
-      // shorter sections that never reach the line before the page ends.
+    if (sections.length && hashNavLinks.length && hasObserver) {
       const endMarker = document.createElement("div");
       endMarker.className = "scroll-sentinel-end";
       endMarker.setAttribute("aria-hidden", "true");
@@ -225,7 +246,7 @@
       let sectionObserver;
       const observeSections = () => {
         sectionObserver?.disconnect();
-        const line = (header?.offsetHeight || 0) + 24;
+        const line = getActivationLine();
         const below = Math.max(0, window.innerHeight - line - 1);
         sectionObserver = new IntersectionObserver(updateActiveSection, {
           rootMargin: `-${line}px 0px -${below}px 0px`,
@@ -243,95 +264,209 @@
         window.requestAnimationFrame(() => {
           resizePending = false;
           observeSections();
+          syncHeaderScrolled();
           updateActiveSection();
         });
       });
-      window.addEventListener("pageshow", updateActiveSection);
-      window.addEventListener("hashchange", updateActiveSection);
     }
+
+    // Also handle in-page hash links outside the mobile nav (e.g. "View work ↓" & case TOC)
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      if (link.closest("[data-nav]")) return;
+      link.addEventListener("click", () => {
+        revealByHash(link.getAttribute("href"));
+      });
+    });
+
+    window.addEventListener("pageshow", () => {
+      syncHeaderScrolled();
+      updateActiveSection();
+    });
+
+    window.addEventListener("hashchange", () => {
+      revealByHash(window.location.hash);
+      syncHeaderScrolled();
+      updateActiveSection();
+    });
 
     updateActiveSection();
 
+    // Snappy, never-stuck scroll reveals
     const revealItems = Array.from(document.querySelectorAll(".reveal"));
-    if (hasObserver && !reducedMotion.matches) {
-      const settle = (item) => {
-        item.classList.remove("will-reveal", "is-visible");
-        item.style.removeProperty("--reveal-delay");
-      };
+    let revealObserver;
+    const triggerReveal = (item, delayMs = 0) => {
+      revealObserver?.unobserve(item);
+      if (!item.classList.contains("will-reveal")) return;
+      item.style.setProperty("--reveal-delay", `${delayMs}ms`);
+      item.classList.add("is-visible");
+      const fallbackTimer = window.setTimeout(() => settleReveal(item), 680 + delayMs);
+      item.addEventListener(
+        "transitionend",
+        function onEnd(event) {
+          if (event.target !== item || event.propertyName !== "transform") return;
+          item.removeEventListener("transitionend", onEnd);
+          window.clearTimeout(fallbackTimer);
+          settleReveal(item);
+        },
+      );
+    };
 
-      const revealObserver = new IntersectionObserver(
-        (entries, observer) => {
-          // Blocks that arrive in the same frame cascade in document order.
+    const sweepVisibleReveals = () => {
+      const limit = window.innerHeight + 60;
+      document.querySelectorAll(".will-reveal").forEach((item) => {
+        if (item.getBoundingClientRect().top <= limit) {
+          triggerReveal(item, 0);
+        }
+      });
+    };
+
+    if (hasObserver && !reducedMotion.matches && revealItems.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
           entries
             .filter((entry) => entry.isIntersecting)
             .forEach((entry, index) => {
-              const item = entry.target;
-              observer.unobserve(item);
-              item.style.setProperty("--reveal-delay", `${Math.min(index, 5) * 70}ms`);
-              item.classList.add("is-visible");
-              item.addEventListener(
-                "transitionend",
-                function onEnd(event) {
-                  if (event.target !== item || event.propertyName !== "transform") return;
-                  item.removeEventListener("transitionend", onEnd);
-                  settle(item);
-                },
-              );
+              triggerReveal(entry.target, Math.min(index, 3) * 50);
             });
         },
-        { rootMargin: "0px 0px -8%", threshold: 0.08 },
+        { rootMargin: "0px 0px 48px 0px", threshold: 0.01 },
       );
 
-      // Anything already on screen stays put; only what starts below the fold
-      // is held back, so the first paint never blinks.
       const fold = window.innerHeight;
       revealItems.forEach((item) => {
         if (item.getBoundingClientRect().top < fold) return;
         item.classList.add("will-reveal");
         revealObserver.observe(item);
       });
+
+      if (window.location.hash) {
+        revealByHash(window.location.hash);
+      }
+
+      if ("onscrollend" in window) {
+        window.addEventListener("scrollend", () => {
+          syncHeaderScrolled();
+          updateActiveSection();
+          sweepVisibleReveals();
+        }, { passive: true });
+      }
     }
 
-    const projectMediaLinks = document.querySelectorAll("[data-project-zoom]");
+    // Project image lightbox with optional gallery navigation on multi-project pages
+    const projectMediaLinks = Array.from(document.querySelectorAll("[data-project-zoom]"));
     const lightbox = document.querySelector("[data-project-lightbox]");
+    const lightboxShell = lightbox?.querySelector(".project-lightbox-shell");
     const lightboxImage = lightbox?.querySelector("[data-project-lightbox-image]");
     const lightboxCaption = lightbox?.querySelector("[data-project-lightbox-caption]");
     const lightboxClose = lightbox?.querySelector("[data-project-lightbox-close]");
     let lightboxTrigger;
+    let lightboxIndex = -1;
+    let lightboxCounter;
 
     const closeLightbox = () => {
       if (lightbox?.open) lightbox.close();
     };
 
-    if (lightbox && lightboxImage && lightboxCaption && lightboxClose) {
-      projectMediaLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-          if (typeof lightbox.showModal !== "function" || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (lightbox && lightboxShell && lightboxImage && lightboxCaption && lightboxClose && projectMediaLinks.length) {
+      const hasGallery = projectMediaLinks.length > 1;
+      let prevButton;
+      let nextButton;
 
-          const figure = link.closest("figure");
-          const preview = figure?.querySelector("img");
-          if (!preview) return;
+      if (hasGallery) {
+        lightbox.classList.add("has-gallery");
+        const bar = document.createElement("div");
+        bar.className = "project-lightbox-bar";
+
+        const nav = document.createElement("div");
+        nav.className = "project-lightbox-nav";
+
+        prevButton = document.createElement("button");
+        prevButton.type = "button";
+        prevButton.className = "project-lightbox-btn";
+        prevButton.setAttribute("aria-label", "Previous screenshot");
+        prevButton.innerHTML = '<span aria-hidden="true">←</span>';
+
+        lightboxCounter = document.createElement("span");
+        lightboxCounter.className = "project-lightbox-counter";
+        lightboxCounter.setAttribute("aria-live", "polite");
+
+        nextButton = document.createElement("button");
+        nextButton.type = "button";
+        nextButton.className = "project-lightbox-btn";
+        nextButton.setAttribute("aria-label", "Next screenshot");
+        nextButton.innerHTML = '<span aria-hidden="true">→</span>';
+
+        nav.append(prevButton, lightboxCounter, nextButton);
+        bar.append(nav, lightboxClose);
+        lightboxShell.prepend(bar);
+      }
+
+      const showLightboxAt = (index) => {
+        const normalized = ((index % projectMediaLinks.length) + projectMediaLinks.length) % projectMediaLinks.length;
+        const link = projectMediaLinks[normalized];
+        const figure = link?.closest("figure");
+        const preview = figure?.querySelector("img");
+        if (!link || !preview) return false;
+
+        lightboxIndex = normalized;
+        lightboxTrigger = link;
+
+        if (lightboxCounter) {
+          lightboxCounter.textContent = `${normalized + 1} / ${projectMediaLinks.length}`;
+        }
+
+        lightboxImage.classList.add("is-switching");
+        lightboxImage.src = preview.currentSrc || preview.src;
+        lightboxImage.alt = preview.alt;
+        window.requestAnimationFrame(() => lightboxImage.classList.remove("is-switching"));
+
+        const fullImage = new Image();
+        fullImage.addEventListener("load", () => {
+          if (lightbox.open && lightboxIndex === normalized) {
+            lightboxImage.src = link.href;
+          }
+        });
+        fullImage.src = link.href;
+
+        const caption = figure.querySelector("figcaption");
+        const previewCaption = (caption?.firstElementChild || caption)?.textContent.trim();
+        lightboxCaption.textContent = previewCaption || preview.alt;
+        return true;
+      };
+
+      projectMediaLinks.forEach((link, index) => {
+        link.addEventListener("click", (event) => {
+          if (
+            typeof lightbox.showModal !== "function" ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          ) {
+            return;
+          }
 
           event.preventDefault();
-          lightboxTrigger = link;
-          // Show the preview the page already loaded, then swap in the full
-          // file once it arrives, so a slow connection never shows an empty
-          // dark viewer.
-          lightboxImage.src = preview.currentSrc || preview.src;
-          const fullImage = new Image();
-          fullImage.addEventListener("load", () => {
-            if (lightbox.open && lightboxTrigger === link) lightboxImage.src = link.href;
-          });
-          fullImage.src = link.href;
-          lightboxImage.alt = preview.alt;
-          const caption = figure.querySelector("figcaption");
-          const previewCaption = (caption?.firstElementChild || caption)?.textContent.trim();
-          lightboxCaption.textContent = previewCaption || preview.alt;
+          if (!showLightboxAt(index)) return;
           document.documentElement.classList.add("lightbox-open");
           document.body.classList.add("lightbox-open");
           lightbox.showModal();
           lightboxClose.focus();
         });
+      });
+
+      prevButton?.addEventListener("click", () => showLightboxAt(lightboxIndex - 1));
+      nextButton?.addEventListener("click", () => showLightboxAt(lightboxIndex + 1));
+
+      lightbox.addEventListener("keydown", (event) => {
+        if (!hasGallery || !lightbox.open) return;
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          showLightboxAt(lightboxIndex - 1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          showLightboxAt(lightboxIndex + 1);
+        }
       });
 
       lightboxClose.addEventListener("click", closeLightbox);
@@ -348,9 +483,11 @@
         lightboxCaption.textContent = "";
         lightboxTrigger?.focus({ preventScroll: true });
         lightboxTrigger = undefined;
+        lightboxIndex = -1;
       });
     }
 
+    // Intro video modal
     const introLinks = Array.from(document.querySelectorAll("[data-intro-open]"));
     const introBox = document.querySelector("[data-intro-lightbox]");
     const introVideo = introBox?.querySelector("[data-intro-video]");
@@ -358,7 +495,6 @@
     const prefersStill = window.matchMedia("(prefers-reduced-motion: reduce)");
     let introTrigger;
 
-    // Without dialog support the links still open the MP4 itself.
     if (introLinks.length && introBox && introVideo && introClose && typeof introBox.showModal === "function") {
       introLinks.forEach((link) => {
         link.addEventListener("click", (event) => {
@@ -368,8 +504,6 @@
           document.body.classList.add("lightbox-open");
           introBox.showModal();
           introVideo.focus({ preventScroll: true });
-          // The click that opened the viewer starts the video, unless the
-          // visitor asked for less motion; then it waits for play.
           if (!prefersStill.matches) {
             introVideo.play().catch(() => {});
           }
@@ -392,15 +526,14 @@
       });
     }
 
-    const copyButton = document.querySelector("[data-copy-email]");
+    // One-click email copy (supports both contact block and mobile menu utility)
+    const copyButtons = Array.from(document.querySelectorAll("[data-copy-email]"));
     const copyToast = document.querySelector("[data-copy-toast]");
-    const emailLink = copyButton
-      ?.closest(".contact-email-row")
-      ?.querySelector('a[href^="mailto:"]');
+    const primaryEmailLink = document.querySelector('.contact-email-row a[href^="mailto:"], a[href^="mailto:"]');
     let toastTimer;
-    let copyButtonResetTimer;
+    const buttonResetTimers = new WeakMap();
 
-    const showCopyStatus = (message, duration = 2200) => {
+    const showCopyStatus = (message, duration = 2400) => {
       if (!copyToast) return;
       window.clearTimeout(toastTimer);
       copyToast.textContent = "";
@@ -415,8 +548,11 @@
       });
     };
 
-    const getEmailAddress = () => {
-      const mailto = emailLink?.getAttribute("href") || "";
+    const getEmailAddress = (button) => {
+      const explicit = button?.getAttribute("data-copy-email");
+      if (explicit) return explicit;
+      const nearbyLink = button?.closest(".contact-email-row")?.querySelector('a[href^="mailto:"]') || primaryEmailLink;
+      const mailto = nearbyLink?.getAttribute("href") || "";
       const encodedAddress = mailto.replace(/^mailto:/i, "").split("?", 1)[0];
       try {
         return decodeURIComponent(encodedAddress);
@@ -425,8 +561,8 @@
       }
     };
 
-    const copyEmail = async () => {
-      const email = getEmailAddress();
+    const copyEmail = async (button) => {
+      const email = getEmailAddress(button);
       if (!email) {
         showCopyStatus("Could not find the email address", 3200);
         return;
@@ -461,68 +597,39 @@
       }
 
       showCopyStatus(
-        copied ? "Email copied" : "Could not copy. Select the email address.",
-        copied ? 2200 : 3200,
+        copied ? "Email copied to clipboard" : "Could not copy. Select the email address.",
+        copied ? 2400 : 3200,
       );
 
-      if (copyButton) {
-        window.clearTimeout(copyButtonResetTimer);
+      if (button) {
+        const defaultLabel = button.dataset.defaultLabel || button.textContent.trim() || "Copy";
+        button.dataset.defaultLabel = defaultLabel;
+        window.clearTimeout(buttonResetTimers.get(button));
         if (copied) {
-          copyButton.textContent = "Copied";
-          copyButton.setAttribute("aria-label", "Email address copied");
-          copyButtonResetTimer = window.setTimeout(() => {
-            copyButton.textContent = "Copy";
-            copyButton.setAttribute("aria-label", "Copy email address");
-          }, 2200);
+          button.classList.add("is-copied");
+          button.textContent = "Copied";
+          button.setAttribute("aria-label", "Email address copied");
+          const timer = window.setTimeout(() => {
+            button.classList.remove("is-copied");
+            button.textContent = defaultLabel;
+            button.setAttribute("aria-label", "Copy email address");
+          }, 2400);
+          buttonResetTimers.set(button, timer);
         } else {
-          copyButton.textContent = "Copy";
-          copyButton.setAttribute("aria-label", "Copy email address");
+          button.classList.remove("is-copied");
+          button.textContent = defaultLabel;
+          button.setAttribute("aria-label", "Copy email address");
         }
       }
     };
 
-    if (copyButton) copyButton.addEventListener("click", copyEmail);
-
-    // Local time in Yerevan, and how far that is from the visitor's own clock.
-    // Armenia keeps UTC+4 all year (no daylight saving), so the offset is fixed.
-    const localTime = document.querySelector("[data-local-time]");
-    if (localTime && typeof Intl !== "undefined") {
-      const yerevanOffsetMinutes = 4 * 60;
-
-      const describeDifference = () => {
-        const difference = yerevanOffsetMinutes + new Date().getTimezoneOffset();
-        if (difference === 0) return "same time as you";
-        const hours = Math.floor(Math.abs(difference) / 60);
-        const minutes = Math.abs(difference) % 60;
-        const amount = [hours && `${hours} h`, minutes && `${minutes} min`].filter(Boolean).join(" ");
-        return `${amount} ${difference > 0 ? "ahead of" : "behind"} you`;
-      };
-
-      try {
-        const timeFormat = new Intl.DateTimeFormat("en-GB", {
-          timeZone: "Asia/Yerevan",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-        const renderTime = () => {
-          localTime.textContent = `${timeFormat.format(new Date())} in Yerevan, ${describeDifference()}`;
-        };
-
-        renderTime();
-        localTime.hidden = false;
-        window.setTimeout(() => {
-          renderTime();
-          window.setInterval(renderTime, 60000);
-        }, 60000 - (Date.now() % 60000));
-      } catch (_error) {
-        localTime.hidden = true;
-      }
-    }
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", () => copyEmail(button));
+    });
 
     const year = document.querySelector("[data-year]");
     if (year) year.textContent = String(new Date().getFullYear());
 
-    // Keep the drawer closed from the first render, then enable user-triggered motion.
     window.requestAnimationFrame(() => {
       document.documentElement.classList.add("js-ready");
     });

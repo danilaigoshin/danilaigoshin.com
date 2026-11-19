@@ -24,9 +24,9 @@
     <link rel="icon" href="/public/favicon.svg?v=20261104-di-precision" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png?v=20261104-di-precision" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/styles.css?v=20261117-mobile-resume" />
-    <link rel="stylesheet" href="/case/styles.css?v=20261118-case-reading" />
-    <script src="/script.js?v=20261117-case-links" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=20261119-ux3" />
+    <link rel="stylesheet" href="/case/styles.css?v=20261119-ux" />
+    <script src="/script.js?v=20261119-ux" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -65,7 +65,7 @@
 
         <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
           <div class="nav-panel" data-nav-panel>
-            <a href="/#work" data-nav-link>Work</a>
+            <a class="is-active" href="/#work" data-nav-link>Work</a>
             <a href="/#experience" data-nav-link>Experience</a>
             <a href="/#about" data-nav-link>About</a>
             <a class="nav-resume" href="/cv/">Résumé</a>
@@ -124,6 +124,7 @@
           <a href="#decisions" data-nav-link>Decisions</a>
           <a href="#outcomes" data-nav-link>Outcomes</a>
           <a href="#scope" data-nav-link>Scope &amp; stack</a>
+          <a class="case-toc-resume" href="/Danila_Igoshin_Product_Engineer_CV.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
         </nav>
         <article class="case-article">
           <section class="case-section reveal" id="situation" aria-labelledby="situation-title" data-section>
@@ -154,22 +155,22 @@
             <h2 id="decisions-title">Incremental changes, each useful before the migration was complete.</h2>
             <p>The modernization was structured so feature teams could keep shipping. Each change reduced an immediate constraint while making the next change safer.</p>
             <div class="case-decisions">
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>Migration</span>
                 <h3>Move the full codebase and UI library to TypeScript in slices.</h3>
                 <p>Introduced TypeScript, established usable boundaries, and completed the product-wide migration within one year without a stop-the-world rewrite.</p>
               </article>
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>Build system</span>
                 <h3>Replace Webpack with Vite around active delivery.</h3>
                 <p>Changed the build pipeline while preserving the team's working product surface and integrations, then validated the improvement against real build timings.</p>
               </article>
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>Runtime</span>
                 <h3>Narrow state ownership and render boundaries in the cart.</h3>
                 <p>Profiled the shopping flow, reduced the work triggered by common actions, and kept the optimization attached to the real user workload.</p>
               </article>
-              <article class="case-decision reveal">
+              <article class="case-decision">
                 <span>Team system</span>
                 <h3>Make quality repeatable beyond one contributor.</h3>
                 <p>Established review and CI/CD practices, documented decisions, ran technical talks, and mentored three developers through regular code review.</p>
