@@ -112,18 +112,18 @@ rm -f \
   "$ROOT/public/og-image.jpg" \
   "$ROOT/public/og-cv.jpg" \
   "$ROOT/public/linkedin-banner.jpg" \
-  "$ROOT/public/og-image.png" \
-  "$ROOT/public/og-cv.png" \
+  "$ROOT/public/og-image-v2.png" \
+  "$ROOT/public/og-cv-v2.png" \
   "$ROOT/public/og-smartway.png" \
   "$ROOT/public/linkedin-banner.png"
 
 # Export the imagegen masters through the source boards at exact public sizes.
 # PNG preserves the typography without adding JPEG compression artifacts.
-cp "$TMP_DIR/og-image@2x.png" "$ROOT/public/og-image.png"
-cp "$TMP_DIR/og-cv@2x.png" "$ROOT/public/og-cv.png"
+cp "$TMP_DIR/og-image@2x.png" "$ROOT/public/og-image-v2.png"
+cp "$TMP_DIR/og-cv@2x.png" "$ROOT/public/og-cv-v2.png"
 cp "$TMP_DIR/og-smartway@2x.png" "$ROOT/public/og-smartway.png"
 
-# The board applies the avatar-safe 4:1 crop without stretching the raster.
+# Export the 4:1 avatar-safe banner without stretching the raster.
 cp "$TMP_DIR/linkedin-banner.png" "$ROOT/public/linkedin-banner.png"
 
 rm -rf "$TMP_DIR"

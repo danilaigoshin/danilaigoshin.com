@@ -26,9 +26,8 @@ body {
   object-fit: cover;
 }
 
-/* The generated master is 3:1. This 4:1 export removes empty background
-   above/below the artwork while keeping the logo, role and full headline.
-   The left quarter below the brand remains clear for the profile avatar. */
+/* The current banner master is already native 4:1 (3168×792) with the
+   lower-left quarter kept clear for the LinkedIn profile avatar. */
 .artboard-banner .artwork {
-  object-position: 50% 24%;
+  object-position: 50% 50%;
 }

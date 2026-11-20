@@ -1,0 +1,28 @@
+Initial generation
+
+Use case: ads-marketing. Create a 2400 × 1260 landscape Open Graph card for Danila Igoshin’s two-page résumé, a companion to the portfolio card for LinkedIn Featured. Reference 1 is the older résumé card: use its two-sheet illustration and front-page content structure. Reference 2 is the matching portfolio card: follow its flat color treatment, type family, strong hierarchy, header scale and generous outside margins. Reference 3 supplies the exact D/I letter shapes. Deliver the finished flat graphic only.
+
+Work on a uniform, solid warm off-white #f8f8f6 canvas, without texture. Inset ALL essential content at least 7% on all four sides. Use near-black #20221f, muted #5b5e58, terracotta #b2472c and rules #d8dad4. Bold Inter-style grotesque lettering, close editorial tracking, crisp medium-weight monospace for the eyebrow and top-right label.
+
+Header: At top left, the small dark #20221f square with subtly rounded corners, holding the exact warm-white D/I monogram. Preserve the short straight crossbars at both ends of the I. Beside it write “Danila Igoshin” in semibold #20221f. At upper right put the restrained mono label “RÉSUMÉ” in muted gray. This is R, É, S, U, M, É, with an acute accent on BOTH E letters.
+
+Main left two-thirds: place the exact single-line eyebrow “Product Engineer / Full-stack Engineer” above the headline. Preserve sentence case, the capital Es, hyphen and spaces. Both role names are #5b5e58. Only the forward slash is #b2472c. Below it set precisely these two lines of heavy Inter-style type, with a strong common left edge and tight leading:
+6 years building
+— B2B products.
+The first line is #20221f. The entire second line, its short thin dash, the indented phrase and the final period, is #b2472c.
+
+Main right third: depict EXACTLY TWO overlapping flat white portrait résumé sheets. The front sheet is perfectly straight with page edges parallel to the canvas. ONE blank back sheet is slightly offset upward and to the right so a single white back sheet is visible. Each sheet is #ffffff, with 3px corners, hairline #e4e5df outline and an extremely soft, short neutral shadow. The sheets are a quiet, legible document illustration seen straight on. On the front sheet put only these items, in order:
+• a tiny exact D/I icon beside the small masthead “Danila Igoshin”;
+• a larger bold “Danila Igoshin”, then “Product Engineer”;
+• a small monospace stack line matching the résumé, “Full-stack TypeScript / React / Node.js”;
+• one horizontal row of four well-spaced numbers: “≈10×”    “≈3×”    “70%”    “5 mo.”. The two approximate signs each have two wavy strokes; use multiplication signs and preserve the last period;
+• a thin horizontal rule, the heading “Experience”, then two or three groups of simple short and long pale gray placeholder bars in the lower area. The bars are continuous graphic strokes without letters.
+
+Footer: one crisp 1px #d8dad4 horizontal rule spans the complete inset content width. Beneath it left-align a single comfortably readable sans-serif line: “Two pages · Remote · danilaigoshin.com”. Text #20221f; the two centered middle dots #5b5e58.
+
+Render exactly that copy. Allow whitespace around the paper stack and below the footer. Two sheets only. No extra labels, dates, page numbers, paragraphs, logos, vertical dividers, buttons, hands, desk, device, blue tones, gradients, outer frame or physical mockup.
+
+Typography refinement
+
+Refine the single small role line above the headline in this résumé artwork. Typeset “Product Engineer / Full-stack Engineer” in an unmistakable true fixed-pitch monospace, the same kind of lettering as Menlo or IBM Plex Mono. Every letter, including the narrow lowercase l and i, occupies exactly one equal-width character cell. Preserve the capital letters and the hyphen, with one ordinary space on each side of the solitary terracotta slash. Keep the words muted gray. Keep the line compact and subordinate to the two-line headline. All other typography, the two perfectly flat sheets, their contents, both acute accents in RÉSUMÉ, the footer, palette and composition stay as shown. Keep the output a landscape Open Graph card.
+

@@ -1,0 +1,18 @@
+Use case: ads-marketing.
+Create the finished flat LinkedIn personal profile cover, 3168 × 792, 4:1 panoramic. Image 1 is the portfolio’s previous cover, a reference for the two-column composition and type family. Create a new, cleaner edition using the exact copy and spacing below. Image 2 is the canonical D/I glyph reference. Match its three white shapes precisely, including the capital I with flat horizontal caps. Place them in the #20221f square with 7% corner radii.
+
+Make the entire canvas a single perfectly solid #f8f8f6 swatch, edge to edge. All letter interiors use solid flat inks. Crisp, professionally typeset Inter-style grotesque. Completely flat digital artwork ready to upload.
+
+Use the width of the 4:1 cover to set three horizontal positions.
+• At x=3.5%, near the top of the safe band, place a small black square D/I mark, then “Danila Igoshin” in semibold #20221f. The name and mark form one compact, vertically centered lockup. Everything underneath it in the leftmost 27% must be empty for the overlapping avatar.
+• Start the main text at x=29%. Set the one-line eyebrow “React / TypeScript / Node.js” in crisp, medium-weight monospace, preserving the exact letter case, spaces and punctuation. The three technology names are #5b5e58 and ONLY the two slash marks are #b2472c. Below this set exactly three lines of dominant, bold, tightly tracked display type with close, even leading:
+B2B products.
+From zero to
+— production.
+Lines one and two are #20221f. The ENTIRE third line is #b2472c, including the period. Draw the em dash as a short, optically thin horizontal dash at the common left edge, followed by a modest indent before “production.” All letters are upright and unsquashed.
+• At x=72% align a subordinate text block with the lower half of the headline. In #5b5e58, regular Inter, set these exact two lines and keep the second line unbroken:
+Frontend first.
+Full-stack when the product needs it.
+Add a clear gap, then “danilaigoshin.com” in semibold #20221f. Leave a comfortable right margin.
+
+Keep all content in a vertically centered band, with about 11–14% of the height empty above the first ink and below the last descender. If the output canvas is taller than 4:1, center the complete 4:1 composition vertically in it, with the surplus height pure background. Preserve letter proportions. Copy only the supplied strings once each. No role title, portrait, illustrations, mockup, page UI, borders, dividers, gradients, shadows, paper texture, noise, or decorative elements.

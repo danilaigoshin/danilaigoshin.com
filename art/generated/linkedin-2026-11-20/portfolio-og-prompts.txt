@@ -1,0 +1,30 @@
+Initial generation
+
+Use case: ads-marketing. Deliver one finished, flat 2400 × 1260 landscape Open Graph image for Danila Igoshin’s portfolio, intended for a small LinkedIn Featured card. Image 1 is the previous portfolio OG artwork to adapt. Image 2 is the companion profile cover and is the reference for the exact D/I mark, lettering, and flat colors. Use the landscape card proportions of image 1.
+
+Set everything on one uninterrupted solid warm-white #f8f8f6 field. Reserve a minimum of 7% clear space at every edge, including on the right of the longest caption. Use precise optical left alignments, confident heavy Inter-style grotesque lettering with close tracking, crisp ordinary sans serif for body, and enough whitespace to keep small copy readable. Make the following complete composition. The quoted strings are the artwork’s exact copy and are printed once, without quotation marks.
+
+Upper-left signature: small #20221f square with subtle 7% corner rounding and the EXACT light “D/I” monogram from image 2. The I has straight horizontal terminals above and below its stem. Beside it place “Danila Igoshin” in semibold ink #20221f. Directly below the name put the restrained smaller #5b5e58 label “Product & Full-stack Engineer” in title case exactly as written.
+
+Hero on the left, with about 60% of the content width: set the mono eyebrow “React / TypeScript / Node.js” in muted #5b5e58. Only the two forward slashes are terracotta #b2472c. Below it, set the large, heavy headline on precisely these three lines:
+B2B products.
+From zero to
+— production.
+The first two lines are #20221f. The whole third line including its period is terracotta #b2472c. The dash begins on the same left edge as lines 1 and 2, is short and thin, with the word production. indented after it. Closely spaced clean lines.
+
+To the right of the lower half of the headline, left-align exactly:
+Frontend first.
+Full-stack when the product needs it.
+Both lines in muted gray #5b5e58. Keep the long second sentence on ONE line. Below with a distinct vertical gap, “danilaigoshin.com” in semibold #20221f.
+
+Proof strip occupies the lower quarter of the card. Separate it from the hero with exactly one crisp 1 px horizontal rule in #d8dad4, running the full width of the inset content. Lay out three equal-width columns on one shared top and baseline with generous gutters and no vertical lines. Every column is left aligned. Keep captions readable and close below their own metric:
+Left: “≈5 months” in #20221f. Typeset ≈5 large and bold; put the word months slightly smaller, medium weight, after a word space on the same baseline. Beneath: “Frontend repo to launch” in #5b5e58.
+Middle: “≈10×” large, bold, #20221f. The leading symbol has two wavy strokes; the last character is the multiplication sign ×. Beneath: “Faster builds” in #5b5e58.
+Right: “70%” large, bold, #20221f. Directly beneath, two distinct lines in #5b5e58: “Faster rendering” and “Threads with 1,000+ messages”. Give the qualifier sufficient size to read in a thumbnail.
+
+No other text, graphics, texture, gradients, shading, shadows, portraits, buttons, dividers besides the single horizontal rule, browser chrome, framing or mockups. Render like a clean digital typographic original.
+
+Typography refinement
+
+Make one targeted typography refinement to this exact Open Graph artwork. In the lower-left metric “≈5 months”, give the word “months” a visibly lighter Inter Medium weight (500) and approximately four-fifths of the numeral's nominal font size, with a normal word space. Its baseline must line up perfectly with the 5. “≈5” stays large and bold exactly like the two other metrics. Retain every other letter and graphic from the reference, all line breaks, the single horizontal rule, all colors, the D/I monogram and the complete qualifier “Threads with 1,000+ messages”. Output the same flat landscape card.
+
