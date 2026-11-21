@@ -23,9 +23,9 @@
     <link rel="icon" href="/public/favicon.svg?v=20261119-di-optical" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png?v=20261119-di-optical" />
     <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/styles.css?v=20261119-ux3" />
-    <link rel="stylesheet" href="/case/styles.css?v=20261119-ux" />
-    <script src="/script.js?v=20261119-ux" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=20261121-ux" />
+    <link rel="stylesheet" href="/case/styles.css?v=20261121-ux" />
+    <script src="/script.js?v=20261121-ux" defer></script>
   </head>
   <body class="case-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -59,6 +59,8 @@
             <a class="nav-resume" href="/cv/">Résumé</a>
             <a class="nav-email" href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
             <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <button type="button" data-copy-email="danigoshin@gmail.com"><span data-copy-label>Copy email</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.2"></rect><path d="M11 5V3.5A1.2 1.2 0 0 0 9.8 2.3H3.5A1.2 1.2 0 0 0 2.3 3.5v6.3A1.2 1.2 0 0 0 3.5 11H5"></path></svg></button>
+              <a href="/Danila_Igoshin_Product_Engineer_CV.pdf" download>Résumé PDF <span aria-hidden="true">↓</span></a>
               <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
                 LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
               </a>
@@ -76,6 +78,7 @@
       <header class="case-index-hero section-shell" id="top">
         <a class="case-back" href="/#work"><span aria-hidden="true">←</span> Selected work</a>
         <h1>Case studies</h1>
+        <p class="case-deck">Four shipped B2B products: constraints, ownership, engineering decisions, and outcomes.</p>
       </header>
 
       <ul class="case-directory section-shell" aria-label="Case studies">
@@ -85,6 +88,7 @@
             <div class="case-entry-copy">
               <h2 id="edtech-project">Learning marketplace</h2>
               <p>As sole frontend engineer, I shipped the first release in ≈5 months.</p>
+              <p class="case-entry-stack">Next.js · TypeScript · Strapi · AWS S3 · Docker</p>
             </div>
             <div class="case-entry-preview"><img src="/public/optimized/v1/online-institute-720.webp" alt="" width="1672" height="941" decoding="async" /></div>
             <span class="case-entry-arrow" aria-hidden="true">→</span>
@@ -96,6 +100,7 @@
             <div class="case-entry-copy">
               <h2 id="research-project">Scientific authoring workspace</h2>
               <p>Scientists can edit a paper, preview the PDF, and review AI feedback in one place.</p>
+              <p class="case-entry-stack">React 19 · TypeScript · Monaco · PDF.js · Yjs</p>
             </div>
             <div class="case-entry-preview"><img src="/public/optimized/v1/ai4s-720.webp" alt="" width="3024" height="1472" decoding="async" /></div>
             <span class="case-entry-arrow" aria-hidden="true">→</span>
@@ -107,6 +112,7 @@
             <div class="case-entry-copy">
               <h2 id="smartway-project">Corporate travel platform</h2>
               <p>≈10× faster builds and ≈3× faster cart interactions while the team kept shipping.</p>
+              <p class="case-entry-stack">React · TypeScript · Vite · React Native</p>
             </div>
             <div class="case-entry-preview"><img src="/public/optimized/v1/smartway-720.webp" alt="" width="1672" height="941" decoding="async" /></div>
             <span class="case-entry-arrow" aria-hidden="true">→</span>
@@ -118,6 +124,7 @@
             <div class="case-entry-copy">
               <h2 id="support-project">Real-time support</h2>
               <p>70% faster rendering in support threads with more than 1,000 messages.</p>
+              <p class="case-entry-stack">Preact · TypeScript · Redux Toolkit · WebSocket</p>
             </div>
             <div class="case-entry-preview"><img src="/public/optimized/v1/chat-720.webp" alt="" width="1672" height="941" decoding="async" /></div>
             <span class="case-entry-arrow" aria-hidden="true">→</span>
@@ -154,27 +161,5 @@
       aria-atomic="true"
       data-copy-toast
     ></div>
-
-    <dialog
-      class="project-lightbox"
-      aria-label="Project image viewer"
-      aria-describedby="project-lightbox-caption"
-      data-project-lightbox
-    >
-      <div class="project-lightbox-shell">
-        <button
-          class="project-lightbox-close"
-          type="button"
-          aria-label="Close full-size image"
-          data-project-lightbox-close
-        >
-          <span>Close</span><span aria-hidden="true">×</span>
-        </button>
-        <figure>
-          <img alt="" data-project-lightbox-image />
-          <figcaption id="project-lightbox-caption" data-project-lightbox-caption></figcaption>
-        </figure>
-      </div>
-    </dialog>
   </body>
 </html>

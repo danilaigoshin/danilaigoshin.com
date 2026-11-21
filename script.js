@@ -15,7 +15,7 @@
     const hashNavLinks = allNavLinks.filter((link) => link.getAttribute("href")?.startsWith("#"));
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const menuBackground = Array.from(
-      document.querySelectorAll("body > .skip-link, main, body > .page-finale, body > footer, .nav-actions"),
+      document.querySelectorAll("body > .skip-link, main, body > .page-finale, body > footer, .header-resume"),
     );
 
     const isMenuOpen = () => menuButton?.getAttribute("aria-expanded") === "true";
@@ -100,6 +100,7 @@
             focusSection(link);
           } else if (
             link.target === "_blank" ||
+            link.hasAttribute("download") ||
             link.getAttribute("href")?.startsWith("mailto:")
           ) {
             window.requestAnimationFrame(() => menuButton.focus({ preventScroll: true }));
@@ -171,11 +172,24 @@
     let syncHeaderScrolled = () => {};
     if (header && hasObserver) {
       const headerShell = header.querySelector(".nav-shell");
+      const topMarker = document.createElement("div");
+      topMarker.className = "scroll-sentinel";
+      topMarker.setAttribute("aria-hidden", "true");
+      document.body.prepend(topMarker);
+
+      syncHeaderScrolled = () => {
+        const scrolled = window.scrollY >= (topMarker.offsetHeight || header.offsetHeight || 80);
+        header.classList.toggle("is-scrolled", scrolled);
+      };
+
       const syncHeaderGeometry = () => {
         if (!headerShell) return;
+        const headerHeight = header.offsetHeight || 80;
         header.style.setProperty("--header-content-width", `${headerShell.getBoundingClientRect().width}px`);
         header.style.setProperty("--header-viewport-width", `${header.getBoundingClientRect().width}px`);
-        header.style.setProperty("--header-base-height", `${header.offsetHeight}px`);
+        header.style.setProperty("--header-base-height", `${headerHeight}px`);
+        topMarker.style.height = `${headerHeight}px`;
+        syncHeaderScrolled();
       };
       syncHeaderGeometry();
       if ("ResizeObserver" in window) {
@@ -185,16 +199,6 @@
       } else {
         window.addEventListener("resize", syncHeaderGeometry, { passive: true });
       }
-
-      const topMarker = document.createElement("div");
-      topMarker.className = "scroll-sentinel";
-      topMarker.setAttribute("aria-hidden", "true");
-      document.body.prepend(topMarker);
-
-      syncHeaderScrolled = () => {
-        const scrolled = window.scrollY >= (topMarker.offsetHeight || 80);
-        header.classList.toggle("is-scrolled", scrolled);
-      };
 
       new IntersectionObserver((entries) => {
         const latest = entries[entries.length - 1];
@@ -208,6 +212,7 @@
     // Active section scrollspy (in-page hash links only — preserves cross-page active nav items)
     const sections = Array.from(document.querySelectorAll("[data-section]"));
     let activeSectionId;
+    let observeSections = () => {};
 
     const getActivationLine = () =>
       Math.max((header?.offsetHeight || 80) + 40, Math.round(window.innerHeight * 0.32));
@@ -223,7 +228,7 @@
       }
 
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll > 0 && window.scrollY >= maxScroll - 2) {
+      if (maxScroll > 0 && window.scrollY >= maxScroll - 24) {
         activeSection = sections[sections.length - 1];
       }
 
@@ -244,7 +249,7 @@
       document.body.append(endMarker);
 
       let sectionObserver;
-      const observeSections = () => {
+      observeSections = () => {
         sectionObserver?.disconnect();
         const line = getActivationLine();
         const below = Math.max(0, window.innerHeight - line - 1);
@@ -255,41 +260,10 @@
       };
 
       observeSections();
-      new IntersectionObserver(updateActiveSection).observe(endMarker);
-
-      let resizePending = false;
-      window.addEventListener("resize", () => {
-        if (resizePending) return;
-        resizePending = true;
-        window.requestAnimationFrame(() => {
-          resizePending = false;
-          observeSections();
-          syncHeaderScrolled();
-          updateActiveSection();
-        });
-      });
+      new IntersectionObserver(updateActiveSection, {
+        rootMargin: "0px 0px 48px 0px",
+      }).observe(endMarker);
     }
-
-    // Also handle in-page hash links outside the mobile nav (e.g. "View work ↓" & case TOC)
-    document.querySelectorAll('a[href^="#"]').forEach((link) => {
-      if (link.closest("[data-nav]")) return;
-      link.addEventListener("click", () => {
-        revealByHash(link.getAttribute("href"));
-      });
-    });
-
-    window.addEventListener("pageshow", () => {
-      syncHeaderScrolled();
-      updateActiveSection();
-    });
-
-    window.addEventListener("hashchange", () => {
-      revealByHash(window.location.hash);
-      syncHeaderScrolled();
-      updateActiveSection();
-    });
-
-    updateActiveSection();
 
     // Snappy, never-stuck scroll reveals
     const revealItems = Array.from(document.querySelectorAll(".reveal"));
@@ -342,14 +316,71 @@
       if (window.location.hash) {
         revealByHash(window.location.hash);
       }
+    }
+
+    const handleReducedMotionChange = () => {
+      if (!reducedMotion.matches) return;
+      revealObserver?.disconnect();
+      document.querySelectorAll(".will-reveal").forEach(settleReveal);
+    };
+    if (reducedMotion.addEventListener) {
+      reducedMotion.addEventListener("change", handleReducedMotionChange);
+    } else if (reducedMotion.addListener) {
+      reducedMotion.addListener(handleReducedMotionChange);
+    }
+
+    // Also handle in-page hash links outside the mobile nav (e.g. "View work ↓" & case TOC)
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      if (link.closest("[data-nav]")) return;
+      link.addEventListener("click", () => {
+        revealByHash(link.getAttribute("href"));
+      });
+    });
+
+    const onScrollSettle = () => {
+      syncHeaderScrolled();
+      updateActiveSection();
+      sweepVisibleReveals();
+    };
+
+    if (header || (sections.length && hashNavLinks.length) || revealItems.length) {
+      let resizePending = false;
+      window.addEventListener(
+        "resize",
+        () => {
+          if (resizePending) return;
+          resizePending = true;
+          window.requestAnimationFrame(() => {
+            resizePending = false;
+            observeSections();
+            onScrollSettle();
+          });
+        },
+        { passive: true },
+      );
 
       if ("onscrollend" in window) {
-        window.addEventListener("scrollend", () => {
-          syncHeaderScrolled();
-          updateActiveSection();
-          sweepVisibleReveals();
-        }, { passive: true });
+        window.addEventListener("scrollend", onScrollSettle, { passive: true });
+      } else {
+        let scrollSettleTimer;
+        window.addEventListener(
+          "scroll",
+          () => {
+            window.clearTimeout(scrollSettleTimer);
+            scrollSettleTimer = window.setTimeout(onScrollSettle, 120);
+          },
+          { passive: true },
+        );
       }
+
+      window.addEventListener("pageshow", onScrollSettle);
+
+      window.addEventListener("hashchange", () => {
+        revealByHash(window.location.hash);
+        onScrollSettle();
+      });
+
+      updateActiveSection();
     }
 
     // Project image lightbox with optional gallery navigation on multi-project pages
@@ -371,12 +402,13 @@
       const hasGallery = projectMediaLinks.length > 1;
       let prevButton;
       let nextButton;
+      let loadToken = 0;
+
+      const bar = document.createElement("div");
+      bar.className = "project-lightbox-bar";
 
       if (hasGallery) {
         lightbox.classList.add("has-gallery");
-        const bar = document.createElement("div");
-        bar.className = "project-lightbox-bar";
-
         const nav = document.createElement("div");
         nav.className = "project-lightbox-nav";
 
@@ -397,9 +429,47 @@
         nextButton.innerHTML = '<span aria-hidden="true">→</span>';
 
         nav.append(prevButton, lightboxCounter, nextButton);
-        bar.append(nav, lightboxClose);
-        lightboxShell.prepend(bar);
+        bar.append(nav);
       }
+
+      const zoomButton = document.createElement("button");
+      zoomButton.type = "button";
+      zoomButton.className = "project-lightbox-zoom";
+      zoomButton.setAttribute("aria-pressed", "false");
+      zoomButton.setAttribute("aria-label", "Zoom screenshot to 100%");
+      zoomButton.textContent = "100%";
+
+      bar.append(zoomButton, lightboxClose);
+      lightboxShell.prepend(bar);
+
+      const lightboxFooter = document.createElement("div");
+      lightboxFooter.className = "project-lightbox-footer";
+      const lightboxCaseLink = document.createElement("a");
+      lightboxCaseLink.className = "project-lightbox-case-link";
+      lightboxCaseLink.hidden = true;
+      lightboxCaption.replaceWith(lightboxFooter);
+      lightboxFooter.append(lightboxCaption, lightboxCaseLink);
+
+      const setLightboxZoomed = (nextZoomed) => {
+        lightbox.classList.toggle("is-zoomed", nextZoomed);
+        zoomButton.setAttribute("aria-pressed", String(nextZoomed));
+        zoomButton.setAttribute("aria-label", nextZoomed ? "Fit screenshot to screen" : "Zoom screenshot to 100%");
+        zoomButton.textContent = nextZoomed ? "Fit" : "100%";
+        lightbox.scrollTo(0, 0);
+      };
+
+      const getLightboxCaption = (link, figure, preview) => {
+        const explicitCaption = link.getAttribute("data-lightbox-caption")?.trim();
+        if (explicitCaption) return explicitCaption;
+
+        const caption = figure.querySelector("figcaption");
+        if (caption && !caption.classList.contains("project-figure-meta")) {
+          const previewCaption = (caption.firstElementChild || caption).textContent.trim();
+          if (previewCaption) return previewCaption;
+        }
+
+        return preview.alt?.trim() || "";
+      };
 
       const showLightboxAt = (index) => {
         const normalized = ((index % projectMediaLinks.length) + projectMediaLinks.length) % projectMediaLinks.length;
@@ -410,27 +480,68 @@
 
         lightboxIndex = normalized;
         lightboxTrigger = link;
+        setLightboxZoomed(false);
 
         if (lightboxCounter) {
           lightboxCounter.textContent = `${normalized + 1} / ${projectMediaLinks.length}`;
         }
 
+        const token = ++loadToken;
+        const previewSrc = preview.currentSrc || preview.src;
+        const fullSrc = link.href;
+
         lightboxImage.classList.add("is-switching");
-        lightboxImage.src = preview.currentSrc || preview.src;
+        lightboxImage.classList.remove("is-loading");
+        lightboxImage.src = previewSrc;
         lightboxImage.alt = preview.alt;
-        window.requestAnimationFrame(() => lightboxImage.classList.remove("is-switching"));
-
-        const fullImage = new Image();
-        fullImage.addEventListener("load", () => {
-          if (lightbox.open && lightboxIndex === normalized) {
-            lightboxImage.src = link.href;
-          }
+        window.requestAnimationFrame(() => {
+          if (loadToken === token) lightboxImage.classList.remove("is-switching");
         });
-        fullImage.src = link.href;
 
-        const caption = figure.querySelector("figcaption");
-        const previewCaption = (caption?.firstElementChild || caption)?.textContent.trim();
-        lightboxCaption.textContent = previewCaption || preview.alt;
+        if (fullSrc && fullSrc !== previewSrc) {
+          lightboxImage.classList.add("is-loading");
+          lightbox.setAttribute("aria-busy", "true");
+          const fullImage = new Image();
+          const finishLoad = () => {
+            if (loadToken !== token) return;
+            lightboxImage.classList.remove("is-loading");
+            lightbox.removeAttribute("aria-busy");
+          };
+          fullImage.addEventListener("load", () => {
+            if (loadToken === token) {
+              lightboxImage.src = fullSrc;
+            }
+            finishLoad();
+          });
+          fullImage.addEventListener("error", finishLoad);
+          fullImage.src = fullSrc;
+          if (fullImage.complete && fullImage.naturalWidth > 0) {
+            if (loadToken === token) {
+              lightboxImage.src = fullSrc;
+            }
+            finishLoad();
+          }
+        } else {
+          lightbox.removeAttribute("aria-busy");
+        }
+
+        lightboxCaption.textContent = getLightboxCaption(link, figure, preview);
+
+        const caseHref = link.getAttribute("data-lightbox-href")?.trim();
+        if (caseHref) {
+          const caseLabel = link.getAttribute("data-lightbox-link-label")?.trim() || "Read case study";
+          const arrow = document.createElement("span");
+          arrow.setAttribute("aria-hidden", "true");
+          arrow.textContent = "→";
+          lightboxCaseLink.href = caseHref;
+          lightboxCaseLink.textContent = "";
+          lightboxCaseLink.append(document.createTextNode(`${caseLabel} `), arrow);
+          lightboxCaseLink.hidden = false;
+        } else {
+          lightboxCaseLink.hidden = true;
+          lightboxCaseLink.removeAttribute("href");
+        }
+
         return true;
       };
 
@@ -451,9 +562,26 @@
           document.documentElement.classList.add("lightbox-open");
           document.body.classList.add("lightbox-open");
           lightbox.showModal();
+          lightbox.scrollTo(0, 0);
           lightboxClose.focus();
         });
       });
+
+      zoomButton.addEventListener("click", () => {
+        setLightboxZoomed(!lightbox.classList.contains("is-zoomed"));
+      });
+
+      const mobileLightboxMedia = window.matchMedia("(max-width: 760px)");
+      const syncLightboxZoomMode = () => {
+        if (!mobileLightboxMedia.matches && lightbox.classList.contains("is-zoomed")) {
+          setLightboxZoomed(false);
+        }
+      };
+      if (mobileLightboxMedia.addEventListener) {
+        mobileLightboxMedia.addEventListener("change", syncLightboxZoomMode);
+      } else if (mobileLightboxMedia.addListener) {
+        mobileLightboxMedia.addListener(syncLightboxZoomMode);
+      }
 
       prevButton?.addEventListener("click", () => showLightboxAt(lightboxIndex - 1));
       nextButton?.addEventListener("click", () => showLightboxAt(lightboxIndex + 1));
@@ -466,21 +594,80 @@
         } else if (event.key === "ArrowRight") {
           event.preventDefault();
           showLightboxAt(lightboxIndex + 1);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          showLightboxAt(0);
+        } else if (event.key === "End") {
+          event.preventDefault();
+          showLightboxAt(projectMediaLinks.length - 1);
         }
       });
 
+      if (hasGallery) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let trackingSwipe = false;
+
+        lightbox.addEventListener(
+          "touchstart",
+          (event) => {
+            if (!lightbox.open || lightbox.classList.contains("is-zoomed") || event.touches.length !== 1) {
+              trackingSwipe = false;
+              return;
+            }
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+            trackingSwipe = true;
+          },
+          { passive: true },
+        );
+
+        lightbox.addEventListener(
+          "touchcancel",
+          () => {
+            trackingSwipe = false;
+          },
+          { passive: true },
+        );
+
+        lightbox.addEventListener(
+          "touchend",
+          (event) => {
+            if (!trackingSwipe || !lightbox.open || lightbox.classList.contains("is-zoomed")) {
+              trackingSwipe = false;
+              return;
+            }
+            trackingSwipe = false;
+            const touch = event.changedTouches[0];
+            if (!touch) return;
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+            if (Math.abs(deltaX) >= 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+              showLightboxAt(lightboxIndex + (deltaX < 0 ? 1 : -1));
+            }
+          },
+          { passive: true },
+        );
+      }
+
       lightboxClose.addEventListener("click", closeLightbox);
       lightbox.addEventListener("click", (event) => {
-        if (event.target instanceof Element && !event.target.closest("img, button")) {
+        if (event.target instanceof Element && !event.target.closest("img, button, a")) {
           closeLightbox();
         }
       });
       lightbox.addEventListener("close", () => {
+        loadToken += 1;
+        setLightboxZoomed(false);
+        lightboxImage.classList.remove("is-loading", "is-switching");
+        lightbox.removeAttribute("aria-busy");
         document.documentElement.classList.remove("lightbox-open");
         document.body.classList.remove("lightbox-open");
         lightboxImage.removeAttribute("src");
         lightboxImage.alt = "";
         lightboxCaption.textContent = "";
+        lightboxCaseLink.hidden = true;
+        lightboxCaseLink.removeAttribute("href");
         lightboxTrigger?.focus({ preventScroll: true });
         lightboxTrigger = undefined;
         lightboxIndex = -1;
@@ -492,7 +679,6 @@
     const introBox = document.querySelector("[data-intro-lightbox]");
     const introVideo = introBox?.querySelector("[data-intro-video]");
     const introClose = introBox?.querySelector("[data-intro-close]");
-    const prefersStill = window.matchMedia("(prefers-reduced-motion: reduce)");
     let introTrigger;
 
     if (introLinks.length && introBox && introVideo && introClose && typeof introBox.showModal === "function") {
@@ -504,10 +690,16 @@
           document.body.classList.add("lightbox-open");
           introBox.showModal();
           introVideo.focus({ preventScroll: true });
-          if (!prefersStill.matches) {
+          if (!reducedMotion.matches) {
             introVideo.play().catch(() => {});
           }
         });
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && introBox.open && !introVideo.paused) {
+          introVideo.pause();
+        }
       });
 
       introClose.addEventListener("click", () => introBox.close());
@@ -526,23 +718,41 @@
       });
     }
 
-    // One-click email copy (supports both contact block and mobile menu utility)
+    // One-click email copy (supports contact block, mobile menu utility, and web résumé)
     const copyButtons = Array.from(document.querySelectorAll("[data-copy-email]"));
-    const copyToast = document.querySelector("[data-copy-toast]");
+    let copyToast = document.querySelector("[data-copy-toast]");
     const primaryEmailLink = document.querySelector('.contact-email-row a[href^="mailto:"], a[href^="mailto:"]');
     let toastTimer;
     const buttonResetTimers = new WeakMap();
 
+    const ensureCopyToast = () => {
+      if (copyToast && copyToast.isConnected) return copyToast;
+      const toast = document.createElement("div");
+      toast.className = "copy-toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      toast.setAttribute("aria-atomic", "true");
+      toast.setAttribute("data-copy-toast", "");
+      document.body.append(toast);
+      copyToast = toast;
+      return toast;
+    };
+
+    if (copyButtons.length) {
+      ensureCopyToast();
+    }
+
     const showCopyStatus = (message, duration = 2400) => {
-      if (!copyToast) return;
+      const toast = ensureCopyToast();
+      if (!toast) return;
       window.clearTimeout(toastTimer);
-      copyToast.textContent = "";
-      copyToast.classList.remove("is-visible");
+      toast.textContent = "";
+      toast.classList.remove("is-visible");
       window.requestAnimationFrame(() => {
-        copyToast.textContent = message;
-        copyToast.classList.add("is-visible");
+        toast.textContent = message;
+        toast.classList.add("is-visible");
         toastTimer = window.setTimeout(
-          () => copyToast.classList.remove("is-visible"),
+          () => toast.classList.remove("is-visible"),
           duration,
         );
       });
@@ -602,23 +812,33 @@
       );
 
       if (button) {
-        const defaultLabel = button.dataset.defaultLabel || button.textContent.trim() || "Copy";
+        const labelTarget = button.querySelector("[data-copy-label]") || button;
+        const defaultLabel = button.dataset.defaultLabel || labelTarget.textContent.trim() || "Copy";
         button.dataset.defaultLabel = defaultLabel;
+        if (!("defaultAriaLabel" in button.dataset)) {
+          button.dataset.defaultAriaLabel = button.getAttribute("aria-label") || "";
+        }
+        const defaultAriaLabel = button.dataset.defaultAriaLabel;
+        const restoreAriaLabel = () => {
+          if (defaultAriaLabel) button.setAttribute("aria-label", defaultAriaLabel);
+          else button.removeAttribute("aria-label");
+        };
+
         window.clearTimeout(buttonResetTimers.get(button));
         if (copied) {
           button.classList.add("is-copied");
-          button.textContent = "Copied";
+          labelTarget.textContent = "Copied";
           button.setAttribute("aria-label", "Email address copied");
           const timer = window.setTimeout(() => {
             button.classList.remove("is-copied");
-            button.textContent = defaultLabel;
-            button.setAttribute("aria-label", "Copy email address");
+            labelTarget.textContent = defaultLabel;
+            restoreAriaLabel();
           }, 2400);
           buttonResetTimers.set(button, timer);
         } else {
           button.classList.remove("is-copied");
-          button.textContent = defaultLabel;
-          button.setAttribute("aria-label", "Copy email address");
+          labelTarget.textContent = defaultLabel;
+          restoreAriaLabel();
         }
       }
     };

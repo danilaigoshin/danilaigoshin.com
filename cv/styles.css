@@ -10,27 +10,56 @@
   --canvas: #f8f8f6;
   --paper: #fff;
   --ink: #20221f;
+  --ink-body: #3e403b;
   --muted: #5b5e58;
+  --line-soft: #e4e5df;
   --line: #d8dad4;
   --line-strong: #bec0b8;
-  --line-control: #8f918a;
+  --line-control: #82857d;
   --accent: #b2472c;
   --accent-dark: #873720;
+  --accent-soft: rgba(178, 71, 44, 0.08);
+  --accent-wash: rgba(178, 71, 44, 0.045);
   --radius-control: 3px;
+  --radius-media: 6px;
   --shell: min(1120px, calc(100% - 96px));
   --sans: "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --z-toast: 300;
+  --z-skip: 1000;
 }
 
 * { box-sizing: border-box; }
 html { background: var(--canvas); }
 body { margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-feature-settings: "cv11"; }
 a { color: inherit; text-decoration: none; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { color: inherit; font: inherit; border-radius: var(--radius-control); }
 img { display: block; max-width: 100%; }
 p, h1, h2, h3 { margin-top: 0; }
 h1, h2, h3 { text-wrap: balance; }
 ::selection { background: #eddbd2; color: var(--ink); }
 :focus-visible { outline: 2px solid var(--accent-dark); outline-offset: 4px; }
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: var(--z-skip);
+  padding: 10px 14px;
+  transform: translateY(-160%);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-control);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 650;
+  box-shadow: 0 1px 2px rgba(32, 34, 31, 0.05), 0 14px 28px -16px rgba(32, 34, 31, 0.26);
+  transition: transform 180ms var(--ease);
+}
+.skip-link:focus { transform: translateY(0); }
 
 /* The web résumé uses the same open editorial canvas as the portfolio. */
 .resume-toolbar {
@@ -44,10 +73,17 @@ h1, h2, h3 { text-wrap: balance; }
   width: 100%;
   min-height: 76px;
   padding-inline: max(48px, calc((100% - 1120px) / 2));
-  border-bottom: 1px solid #e4e5df;
+  border-bottom: 1px solid var(--line-soft);
   background: rgba(248, 248, 246, 0.92);
   -webkit-backdrop-filter: blur(18px) saturate(1.15);
   backdrop-filter: blur(18px) saturate(1.15);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .resume-toolbar {
+    background: var(--canvas);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 .resume-toolbar a {
   display: inline-flex;
@@ -57,18 +93,18 @@ h1, h2, h3 { text-wrap: balance; }
   font-size: 14px;
   font-weight: 520;
   white-space: nowrap;
-  transition: color 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1), transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 180ms var(--ease), border-color 180ms var(--ease), background-color 180ms var(--ease), box-shadow 200ms var(--ease), transform 160ms var(--ease);
 }
 .resume-toolbar a span[aria-hidden] {
   display: inline-block;
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 200ms var(--ease);
 }
 .resume-back { justify-self: start; color: var(--muted); }
 .resume-back:hover, .resume-back:focus-visible { color: var(--accent-dark); }
 .resume-back:hover span[aria-hidden], .resume-back:focus-visible span[aria-hidden] { transform: translateX(-3px); }
 .resume-versions { display: flex; gap: 26px; }
 .resume-versions a { position: relative; color: var(--muted); }
-.resume-versions a::after { position: absolute; right: 0; bottom: 5px; left: 0; height: 1.5px; transform: scaleX(0); transform-origin: left; background: var(--accent); content: ""; transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1); }
+.resume-versions a::after { position: absolute; right: 0; bottom: 5px; left: 0; height: 1.5px; transform: scaleX(0); transform-origin: left; background: var(--accent); content: ""; transition: transform 200ms var(--ease); }
 .resume-versions a[aria-current="page"] { color: var(--ink); font-weight: 580; }
 .resume-versions a:hover { color: var(--ink); }
 .resume-versions a[aria-current="page"]::after,
@@ -155,11 +191,139 @@ h1, h2, h3 { text-wrap: balance; }
 .resume-footer { display: flex; gap: 24px; justify-content: space-between; align-items: center; padding-top: 20px; margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.5; }
 .resume-footer strong { color: var(--ink); font-weight: 500; }
 
+.copy-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  z-index: var(--z-toast);
+  max-width: calc(100vw - 32px);
+  padding: 10px 18px;
+  transform: translate(-50%, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-media);
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 14px 36px -10px rgba(20, 22, 19, 0.42);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 540;
+  text-align: center;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease), transform 240ms var(--ease-spring);
+}
+.copy-toast.is-visible {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
 @media screen {
+  [id] { scroll-margin-top: 96px; }
+  .resume-print-only { display: none; }
+  .resume-contact > div { align-items: baseline; }
+  .resume-email-dd {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    align-items: center;
+  }
+  .resume-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    min-height: 26px;
+    padding: 0 9px;
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius-control);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 550;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 180ms var(--ease), background-color 180ms var(--ease), color 180ms var(--ease), transform 150ms var(--ease);
+  }
+  .resume-copy-btn:hover,
+  .resume-copy-btn:focus-visible {
+    border-color: var(--accent);
+    background: var(--accent-wash);
+    color: var(--accent-dark);
+  }
+  .resume-copy-btn:active { transform: scale(0.97); }
+  .resume-copy-btn.is-copied {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+  }
+  html:not(.js) .resume-copy-btn { display: none; }
+
+  .resume-summary {
+    max-width: 68ch;
+    color: var(--ink-body);
+  }
+  .experience-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .resume-case-link {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    color: var(--accent-dark);
+    font-size: 13px;
+    font-weight: 560;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: color 180ms var(--ease), text-decoration-color 200ms var(--ease);
+  }
+  .resume-case-link span[aria-hidden] {
+    display: inline-block;
+    transition: transform 200ms var(--ease);
+  }
+  .resume-case-link:hover,
+  .resume-case-link:focus-visible {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+  .resume-case-link:hover span[aria-hidden],
+  .resume-case-link:focus-visible span[aria-hidden] {
+    transform: translateX(3px);
+  }
+  .experience-list li {
+    max-width: 72ch;
+    color: var(--ink-body);
+  }
+  .experience-list strong { color: var(--ink); }
+
+  /* Seamlessly continue Experience across page 1 and page 2 on web screens. */
+  .resume-page:first-child { padding-bottom: 0; }
+  .resume-page:first-child .resume-section:last-of-type { margin-bottom: 0; }
   .resume-page + .resume-page { padding-top: 0; }
   .resume-page + .resume-page .resume-mast,
+  .resume-page + .resume-page .resume-continued-head,
   .resume-page:first-child .resume-footer,
   .resume-page:last-child .resume-footer > span:last-child { display: none; }
+  .resume-page + .resume-page .resume-section:first-of-type .experience-item:first-of-type {
+    border-top: 1px solid var(--line);
+  }
+}
+
+@media screen and (pointer: coarse) {
+  .resume-toolbar .resume-download,
+  .resume-versions a,
+  .resume-copy-btn,
+  .resume-case-link {
+    min-height: 44px;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -173,26 +337,58 @@ h1, h2, h3 { text-wrap: balance; }
 
 @media screen and (max-width: 640px) {
   :root { --shell: calc(100% - 40px); }
-  .resume-toolbar { position: sticky; top: 0; grid-template-columns: 1fr auto; gap: 4px 12px; min-height: 0; padding: 10px 20px 6px; }
+  .resume-toolbar { position: sticky; top: 0; grid-template-columns: 1fr auto; gap: 0 12px; min-height: 0; padding: 6px 20px 2px; }
   .resume-versions { grid-column: 1 / -1; grid-row: 2; gap: 24px; }
-  .resume-versions a { min-height: 36px; }
+  .resume-versions a { min-height: 44px; }
+  .resume-versions a::after { bottom: 6px; }
   .resume-toolbar a { font-size: 13px; }
-  .resume-toolbar .resume-download { gap: 10px; min-height: 38px; padding-inline: 14px; }
+  .resume-toolbar .resume-download { gap: 10px; min-height: 44px; padding-inline: 14px; }
   .resume-page { padding-block: 28px 36px; }
+  .resume-page:first-child { padding-bottom: 0; }
+  .resume-page + .resume-page { padding-top: 0; }
   .resume-mast { gap: 16px; align-items: flex-start; margin-bottom: 28px; }
   .resume-edition { max-width: 140px; text-align: right; }
   .resume-name { font-size: clamp(36px, 9.8vw, 56px); }
   .resume-role strong { font-size: 20px; }
   .resume-role span { font-size: 12px; }
+  .resume-contact { gap: 2px; }
+  .resume-contact > div { align-items: center; }
+  .resume-contact a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 6px;
+    line-height: 1.4;
+  }
+  .resume-contact > div:last-child { padding-block: 8px; }
+  .resume-email-dd { gap: 4px 12px; }
+  .resume-copy-btn {
+    min-height: 44px;
+    min-width: 68px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
   .resume-summary { font-size: 16px; }
   .impact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; margin-bottom: 36px; }
   .impact-item strong { font-size: 32px; }
   .resume-section { margin-bottom: 32px; }
+  .resume-page:first-child .resume-section:last-of-type { margin-bottom: 0; }
   .resume-section-heading { gap: 16px; align-items: flex-start; }
   .resume-section-heading h2 { font-size: 24px; }
   .resume-section-heading > span { max-width: 120px; text-align: right; }
-  .experience-head { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .experience-head { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .experience-head h3 { font-size: 19px; }
+  .experience-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 16px;
+  }
+  .resume-case-link {
+    min-height: 44px;
+    padding-block: 6px;
+  }
   .experience-context { font-size: 12px; }
   .skills-grid, .fit-grid, .resume-bottom-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .resume-footer { align-items: flex-start; flex-direction: column; gap: 8px; margin-top: 24px; }
@@ -207,7 +403,12 @@ h1, h2, h3 { text-wrap: balance; }
 @media print {
   html, body { width: 210mm; margin: 0; background: var(--paper); }
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .resume-toolbar { display: none; }
+  .skip-link,
+  .copy-toast,
+  .resume-toolbar,
+  .resume-copy-btn,
+  .resume-case-link,
+  .resume-screen-only { display: none; }
   .resume-document { width: 210mm; margin: 0; }
   .resume-page { width: 210mm; height: 297mm; padding: 11mm 14mm 10mm; margin: 0; break-after: page; page-break-after: always; }
   .resume-page:last-child { break-after: auto; page-break-after: auto; }

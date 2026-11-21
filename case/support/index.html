@@ -1,14 +1,42 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Real-time support case study — Danila Igoshin</title>
-<meta name="description" content="Real-time support by Danila Igoshin. 70% faster rendering for conversations with more than 1,000 messages after list virtualization." />
-<meta name="theme-color" content="#f8f8f6" /><link rel="canonical" href="https://danilaigoshin.com/case/support/" />
-<meta property="og:site_name" content="Danila Igoshin" /><meta property="og:title" content="Real-time support that stays responsive." /><meta property="og:description" content="70% faster rendering for conversations with more than 1,000 messages after list virtualization." /><meta property="og:type" content="article" /><meta property="og:url" content="https://danilaigoshin.com/case/support/" />
-<link rel="icon" href="/public/favicon.svg?v=20261119-di-optical" type="image/svg+xml" /><link rel="apple-touch-icon" href="/public/apple-touch-icon.png?v=20261119-di-optical" />
-<link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="/styles.css?v=20261119-ux3" /><link rel="stylesheet" href="/case/styles.css?v=20261119-ux" /><script src="/script.js?v=20261119-ux" defer></script>
-</head><body class="case-page">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Real-time support case study by Danila Igoshin: embeddable Preact widget, ticket workspace, HMAC authentication migration, and 70% faster rendering for threads with more than 1,000 messages."
+    />
+    <meta name="theme-color" content="#f8f8f6" />
+    <link rel="canonical" href="https://danilaigoshin.com/case/support/" />
+    <meta property="og:site_name" content="Danila Igoshin" />
+    <meta property="og:title" content="Real-time support that stays responsive — Danila Igoshin" />
+    <meta property="og:description" content="70% faster rendering for conversations with more than 1,000 messages after list virtualization." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://danilaigoshin.com/case/support/" />
+    <meta property="og:image" content="https://danilaigoshin.com/public/chat.webp" />
+    <meta property="og:image:alt" content="Support workspace showing a ticket queue, conversation, and request details" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Real-time support case study — Danila Igoshin</title>
+    <link rel="icon" href="/public/favicon.svg?v=20261119-di-optical" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png?v=20261119-di-optical" />
+    <link rel="preload" href="/public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/styles.css?v=20261121-ux" />
+    <link rel="stylesheet" href="/case/styles.css?v=20261121-ux" />
+    <script src="/script.js?v=20261121-ux" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Real-time support that stays responsive",
+        "author": { "@type": "Person", "name": "Danila Igoshin", "url": "https://danilaigoshin.com/" },
+        "dateModified": "2026-11-21",
+        "mainEntityOfPage": "https://danilaigoshin.com/case/support/",
+        "image": "https://danilaigoshin.com/public/chat.webp"
+      }
+    </script>
+  </head>
+  <body class="case-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
@@ -40,6 +68,8 @@
             <a class="nav-resume" href="/cv/">Résumé</a>
             <a class="nav-email" href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
             <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <button type="button" data-copy-email="danigoshin@gmail.com"><span data-copy-label>Copy email</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.2"></rect><path d="M11 5V3.5A1.2 1.2 0 0 0 9.8 2.3H3.5A1.2 1.2 0 0 0 2.3 3.5v6.3A1.2 1.2 0 0 0 3.5 11H5"></path></svg></button>
+              <a href="/Danila_Igoshin_Product_Engineer_CV.pdf" download>Résumé PDF <span aria-hidden="true">↓</span></a>
               <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
                 LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
               </a>
@@ -62,11 +92,11 @@
           <p class="case-deck">As senior frontend engineer, I worked on an embeddable support widget and ticket workspace for corporate travel teams. Virtualizing threads with more than 1,000 messages made chat rendering <strong>70% faster</strong>.</p>
         </div>
         <figure class="case-cover media-frame">
-          <a class="project-media-link" data-project-zoom href="/public/chat.webp" aria-label="Enlarge the support workspace screenshot">
+          <a class="project-media-link" data-project-zoom data-lightbox-caption="Smartway Support · real-time support workspace in production" href="/public/chat.webp" aria-label="Enlarge the support workspace screenshot">
             <img src="/public/optimized/v1/chat-1440.webp" srcset="/public/optimized/v1/chat-720.webp 720w, /public/optimized/v1/chat-1080.webp 1080w, /public/optimized/v1/chat-1440.webp 1440w, /public/chat.webp 1672w" sizes="(max-width: 760px) calc(100vw - 78px), min(1160px, calc(100vw - 178px))" width="1672" height="941" decoding="async" alt="Support workspace showing a ticket queue, conversation, and request details" />
             <span class="media-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg></span>
           </a>
-          <figcaption><span>Support workspace in production</span></figcaption>
+          <figcaption><span>Support workspace in production</span><span class="case-cover-hint" aria-hidden="true">Click image to expand</span></figcaption>
         </figure>
         <aside class="case-glance" aria-label="Project facts">
           <dl class="fact-list">
@@ -103,39 +133,60 @@
         <article class="case-article">
           <section class="case-section reveal" id="context" aria-labelledby="context-title" data-section>
             <p class="case-label">Problem &amp; ownership</p>
-            <h2 id="context-title">The product context and my responsibility.</h2>
-            <dl class="fact-list case-facts">
+            <h2 id="context-title">Fast support operations without breaking live integrations.</h2>
+            <p>Returning to Smartway for a second engagement, I built an embeddable support widget and ticket-management workspace for corporate travel teams handling live customer conversations, file attachments, and operational request routing.</p>
+            <dl class="case-brief">
               <div><dt>Product context</dt><dd>Real-time customer communication, ticket routing, uploads, and operational request handling.</dd></div>
-              <div><dt>Constraint</dt><dd>Long threads had to stay smooth while public integrations and existing authentication continued to work.</dd></div>
+              <div><dt>Operating constraint</dt><dd>Keep long threads responsive while public widget integrations and existing authentication continued to work.</dd></div>
               <div><dt>My ownership</dt><dd>Widget architecture, public integration API, performance work, HMAC migration, uploads, and routing.</dd></div>
-              <div><dt>Key decision</dt><dd>Virtualize long threads and move authentication to HMAC without breaking existing integrations.</dd></div>
-              <div><dt>Measured outcome</dt><dd>70% faster chat rendering; threads with more than 1,000 messages scroll smoothly.</dd></div>
+              <div><dt>Key decision</dt><dd>Virtualize long message threads and migrate authentication to HMAC with backward compatibility.</dd></div>
             </dl>
           </section>
           <section class="case-section reveal" id="implementation" aria-labelledby="implementation-title" data-section>
             <p class="case-label">Implementation</p>
-            <h2 id="implementation-title">How the workflow came together.</h2>
-            <dl class="fact-list case-facts">
-              <div><dt>Architecture</dt><dd>Embeddable widget with a public integration API, Feature-Sliced Design, and domain-driven modules.</dd></div>
-              <div><dt>Performance</dt><dd>List virtualization reduced render work in operational threads of more than 1,000 messages.</dd></div>
-              <div><dt>Integration safety</dt><dd>HMAC authentication was introduced with backward compatibility for existing consumers.</dd></div>
-              <div><dt>Operational scope</dt><dd>Validated drag-and-drop upload for 15+ formats plus ticket categorization and routing by travel team.</dd></div>
-            </dl>
+            <h2 id="implementation-title">How the widget and workspace came together.</h2>
+            <p>Engineering work spanned four areas: clear boundaries for host integrations, runtime performance in long conversations, backward-compatible authentication, and day-to-day ticket workflows.</p>
+            <div class="case-decisions">
+              <article class="case-decision">
+                <span>Architecture</span>
+                <h3>Ship an embeddable widget behind a public integration API.</h3>
+                <p>Structured the embeddable support widget and ticket workspace with Feature-Sliced Design, domain-driven modules, and a public integration API.</p>
+              </article>
+              <article class="case-decision">
+                <span>Performance</span>
+                <h3>Virtualize long threads to cut render work.</h3>
+                <p>Introduced list virtualization to reduce render work in operational threads exceeding 1,000 messages so conversations stay responsive while scrolling.</p>
+              </article>
+              <article class="case-decision">
+                <span>Integration safety</span>
+                <h3>Migrate authentication to HMAC without breaking consumers.</h3>
+                <p>Introduced HMAC authentication while preserving backward compatibility for existing host integrations.</p>
+              </article>
+              <article class="case-decision">
+                <span>Operational scope</span>
+                <h3>Validate uploads and route tickets by travel team.</h3>
+                <p>Delivered validated drag-and-drop uploads for 15+ file formats alongside ticket categorization and routing by travel team.</p>
+              </article>
+            </div>
           </section>
           <section class="case-section reveal" id="result" aria-labelledby="result-title" data-section>
             <p class="case-label">Result &amp; stack</p>
-            <h2 id="result-title">70% faster rendering for conversations with more than 1,000 messages after list virtualization.</h2>
-            <p class="case-note"><strong>Measurement note.</strong> The performance result refers to rendering long conversations, not a general application-speed or business-impact measurement.</p>
+            <h2 id="result-title">70% faster rendering in threads with more than 1,000 messages.</h2>
+            <p>List virtualization kept long support threads smooth, HMAC authentication rolled out without breaking existing consumers, and support operations gained multi-format uploads and travel-team routing. Alongside delivery, I introduced practical LLM workflows for architecture, review, and testing, wrote guidelines, and trained the team.</p>
+            <p class="case-note"><strong>Measurement note.</strong> The performance result refers to rendering long conversations after list virtualization, not a general application-speed or business-impact measurement.</p>
             <p class="case-stack-label">Technology used</p>
             <ul class="case-stack" aria-label="Technology stack"><li>Preact</li><li>TypeScript</li><li>Vite</li><li>Redux Toolkit</li><li>WebSocket</li><li>SCSS Modules</li><li>OpenAPI</li></ul>
           </section>
         </article>
       </div>
 
-      <nav class="case-next section-shell reveal" aria-label="Next case study">
+      <nav class="case-next section-shell reveal" aria-label="More case studies">
+        <div class="case-next-head">
+          <p class="case-next-label">Next case study</p>
+          <a class="arrow-link case-next-all" href="/case/">All case studies <span aria-hidden="true">→</span></a>
+        </div>
         <a href="/case/edtech/">
           <span class="case-next-copy">
-            <span class="case-next-label">Next case study</span>
             <span class="meta-line"><span>Smart Online Institute</span><span>2025</span></span>
             <span class="case-next-title">From an empty repository to a production learning product.</span>
             <span class="arrow-link">Read the case study <span aria-hidden="true">→</span></span>

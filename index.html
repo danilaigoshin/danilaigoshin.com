@@ -30,9 +30,9 @@
     <link rel="icon" href="public/favicon.svg?v=20261119-di-optical" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="public/apple-touch-icon.png?v=20261119-di-optical" />
     <link rel="preload" href="public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20261119-ux3" />
-    <link rel="stylesheet" href="/home.css?v=20261119-ux" />
-    <script src="script.js?v=20261119-ux" defer data-enhancements></script>
+    <link rel="stylesheet" href="/styles.css?v=20261121-ux" />
+    <link rel="stylesheet" href="/home.css?v=20261121-ux" />
+    <script src="/script.js?v=20261121-ux" defer data-enhancements></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -106,6 +106,13 @@
             <a class="nav-resume" href="/cv/">Résumé</a>
             <a class="nav-email" href="mailto:danigoshin@gmail.com">Email <span aria-hidden="true">↗</span></a>
             <div class="mobile-nav-utilities" role="group" aria-label="Quick links">
+              <button type="button" data-copy-email="danigoshin@gmail.com">
+                <span data-copy-label>Copy email</span>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.2"></rect><path d="M11 5V3.5A1.2 1.2 0 0 0 9.8 2.3H3.5A1.2 1.2 0 0 0 2.3 3.5v6.3A1.2 1.2 0 0 0 3.5 11H5"></path></svg>
+              </button>
+              <a href="/Danila_Igoshin_Product_Engineer_CV.pdf" download>
+                Résumé PDF <span aria-hidden="true">↓</span>
+              </a>
               <a href="https://www.linkedin.com/in/developer-danila" target="_blank" rel="noopener noreferrer">
                 LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
               </a>
@@ -191,15 +198,23 @@
           <article class="project project-featured reveal" aria-labelledby="edtech-title">
             <div class="project-description">
               <p class="project-figure-meta"><span><span class="project-number">01 /</span> Smart Online Institute</span><span>2025</span></p>
-              <h3 id="edtech-title">A learning product.<br />From first commit to launch.</h3>
+              <h3 id="edtech-title"><a class="project-title-link" href="/case/edtech/">A learning product.<br />From first commit to launch.</a></h3>
               <p class="project-summary">Marketplace, learning experience, and instructor workspace.</p>
               <a class="arrow-link project-link" href="/case/edtech/">Read the case study <span aria-hidden="true">→</span><span class="sr-only"> for Smart Online Institute</span></a>
             </div>
             <figure class="project-figure">
               <a class="project-cover-link" href="/case/edtech/" aria-label="Read the Smart Online Institute case study">
-                <img src="/public/optimized/v1/online-institute-1080.webp" srcset="/public/optimized/v1/online-institute-720.webp 720w, /public/optimized/v1/online-institute-1080.webp 1080w, /public/optimized/v1/online-institute-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 80px), (max-width: 1340px) 51vw, 654px" width="1672" height="941" loading="lazy" decoding="async" alt="Smart Online Institute marketplace with course discovery, navigation, and a featured event" />
+                <img src="/public/optimized/v1/online-institute-1080.webp" srcset="/public/optimized/v1/online-institute-720.webp 720w, /public/optimized/v1/online-institute-1080.webp 1080w, /public/optimized/v1/online-institute-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 80px), (max-width: 900px) calc(100vw - 120px), (max-width: 1340px) 51vw, 654px" width="1672" height="941" loading="lazy" decoding="async" alt="Smart Online Institute marketplace with course discovery, navigation, and a featured event" />
               </a>
-              <a class="media-zoom" href="/public/online-institute.webp" data-project-zoom aria-label="Enlarge the Smart Online Institute product screenshot">
+              <a
+                class="media-zoom"
+                href="/public/online-institute.webp"
+                data-project-zoom
+                data-lightbox-caption="Smart Online Institute · course marketplace, navigation, and featured event"
+                data-lightbox-href="/case/edtech/"
+                data-lightbox-link-label="Read case study"
+                aria-label="Enlarge the Smart Online Institute product screenshot"
+              >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg>
               </a>
               <figcaption class="sr-only">Smart Online Institute course marketplace</figcaption>
@@ -223,13 +238,21 @@
                   <a class="project-cover-link" href="/case/research/" aria-label="Read the Morizo Digital case study">
                     <img src="/public/optimized/v1/ai4s-1080.webp" srcset="/public/optimized/v1/ai4s-720.webp 720w, /public/optimized/v1/ai4s-1080.webp 1080w, /public/optimized/v1/ai4s-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 76px), (max-width: 1340px) 42vw, 552px" width="3024" height="1472" loading="lazy" decoding="async" alt="Research workspace connecting source editing, compiled document preview, and an AI assistant" />
                   </a>
-                  <a class="media-zoom" href="/public/ai4s.webp" data-project-zoom aria-label="Enlarge the AI research workspace screenshot">
+                  <a
+                    class="media-zoom"
+                    href="/public/ai4s.webp"
+                    data-project-zoom
+                    data-lightbox-caption="Morizo Digital · scientific research workspace connecting source editing, PDF preview, and AI feedback"
+                    data-lightbox-href="/case/research/"
+                    data-lightbox-link-label="Read case study"
+                    aria-label="Enlarge the AI research workspace screenshot"
+                  >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg>
                   </a>
                 </div>
               </figure>
               <div class="project-body">
-                <h3 id="research-title">One workspace for scientific research.</h3>
+                <h3 id="research-title"><a class="project-title-link" href="/case/research/">One workspace for scientific research.</a></h3>
                 <p class="project-summary">Connected source editing, PDF review, and AI feedback in one authoring workflow.</p>
                 <dl class="project-facts">
                   <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
@@ -245,13 +268,21 @@
                   <a class="project-cover-link" href="/case/smartway/" aria-label="Read the Smartway travel platform case study">
                     <img src="/public/optimized/v1/smartway-1080.webp" srcset="/public/optimized/v1/smartway-720.webp 720w, /public/optimized/v1/smartway-1080.webp 1080w, /public/optimized/v1/smartway-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 76px), (max-width: 1340px) 42vw, 552px" width="1672" height="941" loading="lazy" decoding="async" alt="Smartway corporate travel platform with booking, approvals, and trip management" />
                   </a>
-                  <a class="media-zoom" href="/public/smartway.webp" data-project-zoom aria-label="Enlarge the Smartway corporate travel screenshot">
+                  <a
+                    class="media-zoom"
+                    href="/public/smartway.webp"
+                    data-project-zoom
+                    data-lightbox-caption="Smartway · corporate travel platform with booking, approvals, and trip management"
+                    data-lightbox-href="/case/smartway/"
+                    data-lightbox-link-label="Read case study"
+                    aria-label="Enlarge the Smartway corporate travel screenshot"
+                  >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg>
                   </a>
                 </div>
               </figure>
               <div class="project-body">
-                <h3 id="travel-title">A faster platform.<br />Without pausing delivery.</h3>
+                <h3 id="travel-title"><a class="project-title-link" href="/case/smartway/">A faster platform.<br />Without pausing delivery.</a></h3>
                 <p class="project-results"><span class="result-accent">≈10×</span> faster builds · <span class="result-accent">≈3×</span> faster cart interactions</p>
                 <p class="project-summary">Modernized the frontend foundation while the travel platform stayed live.</p>
                 <dl class="project-facts">
@@ -264,20 +295,27 @@
           </div>
           <article class="project project-wide reveal" aria-labelledby="support-title">
             <figure class="project-figure">
-              <figcaption class="project-figure-meta"><span><span class="project-number">04 /</span> Smartway</span><span>2025-2026</span></figcaption>
+              <figcaption class="project-figure-meta"><span><span class="project-number">04 /</span> Smartway · Customer support</span><span>2025-2026</span></figcaption>
               <div class="project-image">
                 <a class="project-cover-link" href="/case/support/" aria-label="Read the Smartway Support case study">
                   <img src="/public/optimized/v1/chat-1080.webp" srcset="/public/optimized/v1/chat-720.webp 720w, /public/optimized/v1/chat-1080.webp 1080w, /public/optimized/v1/chat-1440.webp 1440w" sizes="(max-width: 900px) calc(100vw - 76px), (max-width: 1340px) 48vw, 618px" width="1672" height="941" loading="lazy" decoding="async" alt="Support workspace showing a ticket queue, conversation, and request details" />
                 </a>
-                <a class="media-zoom" href="/public/chat.webp" data-project-zoom aria-label="Enlarge the support workspace screenshot">
+                <a
+                  class="media-zoom"
+                  href="/public/chat.webp"
+                  data-project-zoom
+                  data-lightbox-caption="Smartway Support · real-time support workspace with ticket queue, conversation thread, and request details"
+                  data-lightbox-href="/case/support/"
+                  data-lightbox-link-label="Read case study"
+                  aria-label="Enlarge the support workspace screenshot"
+                >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg>
                 </a>
               </div>
             </figure>
             <div class="project-body">
               <div class="project-description">
-                <p class="project-client">Smartway / Customer support</p>
-                <h3 id="support-title">Real-time support that stays responsive.</h3>
+                <h3 id="support-title"><a class="project-title-link" href="/case/support/">Real-time support that stays responsive.</a></h3>
                 <div class="project-outcome support-outcome">
                   <strong>70% <small>faster rendering</small></strong>
                   <p>Threads with 1,000+ messages</p>
@@ -285,8 +323,8 @@
                 <p class="project-summary">Built a real-time widget and ticket workspace for complex support conversations.</p>
               </div>
               <dl class="project-facts">
-                  <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
-                </dl>
+                <div><dt>Role</dt><dd>Senior Frontend Engineer</dd></div>
+              </dl>
               <p class="project-stack">Preact, TypeScript, Redux Toolkit, WebSocket</p>
               <a class="arrow-link project-link" href="/case/support/">Read the case study <span aria-hidden="true">→</span><span class="sr-only"> for Smartway Support</span></a>
             </div>

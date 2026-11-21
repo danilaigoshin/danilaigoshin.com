@@ -16,12 +16,12 @@
   --ink-body: #3e403b;
   --muted: #5b5e58;
   /* Four visible steps: internal divider, module border, structural emphasis,
-     and control boundary. The last clears 3:1 on both canvas and white so a
-     button reads as a control without leaning on its label alone. */
+     and control boundary. The last clears 3:1 across canvas, white, and tinted
+     surfaces so a button reads as a control without leaning on its label alone. */
   --line-soft: #e4e5df;
   --line: #d8dad4;
   --line-strong: #bec0b8;
-  --line-control: #8f918a;
+  --line-control: #82857d;
   --accent: #b2472c;
   --accent-dark: #873720;
   --accent-soft: rgba(178, 71, 44, 0.08);
@@ -32,6 +32,7 @@
   --radius-control: 3px;
   --radius-media: 6px;
   --radius-frame: 8px;
+  --touch-target: 44px;
   --ink-900: #12151a;
   --shadow-pop: 0 24px 80px rgba(10, 13, 17, 0.48);
   --shadow-float:
@@ -56,13 +57,12 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
-  --nav-drawer-width: 100vw;
   /* Systemic z-index scale */
   --z-grain: 90;
   --z-header: 100;
-  --z-toast: 115;
   --z-progress: 120;
   --z-drawer: 200;
+  --z-toast: 300;
   --z-skip: 1000;
 }
 
@@ -75,6 +75,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 104px;
+  scrollbar-gutter: stable;
   background: var(--canvas);
 }
 
@@ -336,14 +337,6 @@ img {
   pointer-events: none;
   content: "";
   transition: opacity 240ms var(--ease);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .site-header::before {
-    background: var(--canvas);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
 }
 
 .nav-shell {
@@ -661,8 +654,13 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
 .button-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
   margin-top: 32px;
+}
+
+.button-row .arrow-link {
+  padding-inline: 6px;
 }
 
 .text-link,
@@ -728,7 +726,8 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
 }
 
 .button-primary.resume-download:hover span[aria-hidden],
-.contact-links a[download]:hover span[aria-hidden] {
+.contact-links a[download]:hover span[aria-hidden],
+.mobile-nav-utilities a[download]:hover span[aria-hidden] {
   transform: translateY(2px);
 }
 
@@ -776,7 +775,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
 }
 
 .meta-line span:first-child {
-  color: var(--accent);
+  color: var(--accent-dark);
   font-weight: 600;
 }
 
@@ -895,9 +894,9 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
   width: 40px;
   height: 40px;
   place-items: center;
-  border: 1px solid rgba(32, 34, 31, 0.16);
+  border: 1px solid rgba(32, 34, 31, 0.22);
   border-radius: var(--radius-control);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.94);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   color: var(--ink);
@@ -1003,7 +1002,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
 
 .project-lightbox-bar {
   display: flex;
-  width: 100%;
+  width: min(100%, 1180px);
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
@@ -1018,13 +1017,14 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
 
 .project-lightbox-counter {
   padding: 0 10px;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.85);
   font-family: var(--font-mono);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 
 .project-lightbox-btn,
+.project-lightbox-zoom,
 .project-lightbox-close {
   display: inline-flex;
   gap: 10px;
@@ -1055,12 +1055,25 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
   padding: 0 12px;
 }
 
+.project-lightbox-zoom {
+  display: none;
+  min-width: 58px;
+  font-variant-numeric: tabular-nums;
+}
+
+.project-lightbox-zoom[aria-pressed="true"] {
+  border-color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .project-lightbox-close {
   justify-self: end;
 }
 
 .project-lightbox-btn:hover,
 .project-lightbox-btn:focus-visible,
+.project-lightbox-zoom:hover,
+.project-lightbox-zoom:focus-visible,
 .project-lightbox-close:hover,
 .project-lightbox-close:focus-visible {
   border-color: rgba(255, 255, 255, 0.72);
@@ -1068,6 +1081,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
 }
 
 .project-lightbox-btn:active,
+.project-lightbox-zoom:active,
 .project-lightbox-close:active {
   transform: scale(0.96);
 }
@@ -1101,20 +1115,86 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
   opacity: 0.5;
 }
 
+.project-lightbox img.is-loading {
+  opacity: 0.84;
+  animation: lightbox-loading 1.1s var(--ease) infinite alternate;
+}
+
+@keyframes lightbox-loading {
+  from {
+    opacity: 0.74;
+  }
+  to {
+    opacity: 0.94;
+  }
+}
+
+.project-lightbox-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 18px;
+  width: 100%;
+  max-width: min(100%, 1180px);
+  margin-inline: auto;
+}
+
 .project-lightbox figcaption {
   max-width: min(100%, 1100px);
-  margin-inline: auto;
-  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
   font-family: var(--font-sans);
   font-size: 13px;
   line-height: 1.45;
   text-align: center;
 }
 
+.project-lightbox-case-link {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: var(--radius-control);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 560;
+  white-space: nowrap;
+  transition:
+    border-color 160ms var(--ease),
+    background-color 160ms var(--ease),
+    transform 160ms var(--ease);
+}
+
+.project-lightbox-case-link span[aria-hidden] {
+  display: inline-block;
+  transition: transform 200ms var(--ease);
+}
+
+.project-lightbox-case-link:hover,
+.project-lightbox-case-link:focus-visible {
+  border-color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.project-lightbox-case-link:hover span[aria-hidden],
+.project-lightbox-case-link:focus-visible span[aria-hidden] {
+  transform: translateX(3px);
+}
+
+.project-lightbox-case-link:active {
+  transform: scale(0.97);
+}
+
 @media (hover: hover) {
   .project-lightbox figcaption::after {
     margin-left: 14px;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.72);
     font-family: var(--font-mono);
     font-size: 12px;
     content: "Esc to close";
@@ -1123,6 +1203,10 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
   .project-lightbox.has-gallery figcaption::after {
     content: "← → navigate · Esc to close";
   }
+}
+
+.intro-lightbox .project-lightbox-shell {
+  width: min(100%, 1180px);
 }
 
 .intro-lightbox video {
@@ -1142,16 +1226,16 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
   }
 
   .project-lightbox[open] {
-    place-items: start;
+    place-items: center;
   }
 
   .project-lightbox-shell {
     display: grid;
-    grid-template-rows: auto;
-    width: max-content;
-    min-width: 100%;
-    padding-top: 58px;
-    place-items: start;
+    grid-template-rows: minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
+    padding-top: 56px;
+    place-items: center;
   }
 
   .project-lightbox-bar {
@@ -1161,6 +1245,7 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
     left: 12px;
     z-index: 2;
     width: auto;
+    max-width: none;
   }
 
   .project-lightbox-shell > .project-lightbox-close {
@@ -1171,39 +1256,96 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
   }
 
   .project-lightbox-btn,
+  .project-lightbox-zoom,
   .project-lightbox-close {
-    min-width: 42px;
-    min-height: 42px;
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
+  }
+
+  .project-lightbox-zoom {
+    display: inline-flex;
+    min-width: 58px;
+  }
+
+  .project-lightbox-case-link {
+    min-height: var(--touch-target);
+    padding: 0 16px;
   }
 
   .project-lightbox figure {
-    width: max-content;
-    max-height: none;
+    width: 100%;
+    max-height: calc(100dvh - 80px);
+    gap: 12px;
+    justify-items: center;
   }
 
   .project-lightbox img {
     width: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 150px);
+    margin: auto;
+  }
+
+  .project-lightbox-footer {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .project-lightbox figcaption {
+    max-width: 100%;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .project-lightbox figcaption::after {
+    display: block;
+    margin: 6px 0 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    content: "Tap 100% to inspect details";
+  }
+
+  .project-lightbox.has-gallery figcaption::after {
+    content: "Swipe to navigate · Tap 100% to zoom";
+  }
+
+  .project-lightbox.is-zoomed[open] {
+    place-items: start;
+  }
+
+  .project-lightbox.is-zoomed .project-lightbox-shell {
+    width: max-content;
+    min-width: 100%;
+    place-items: start;
+  }
+
+  .project-lightbox.is-zoomed figure {
+    width: max-content;
+    max-height: none;
+    justify-items: start;
+  }
+
+  .project-lightbox.is-zoomed img {
     max-width: 1400px;
     max-height: none;
     margin: 0;
   }
 
-  .project-lightbox figcaption {
+  .project-lightbox.is-zoomed .project-lightbox-footer {
     position: sticky;
     left: 0;
     width: calc(100vw - 24px);
     max-width: none;
-    margin-inline: 0;
-    font-size: 13px;
+    justify-content: flex-start;
+  }
+
+  .project-lightbox.is-zoomed figcaption {
     text-align: left;
   }
 
-  .project-lightbox figcaption::after {
-    display: block;
-    margin-top: 4px;
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 12px;
-    content: "Drag to pan · pinch to zoom";
+  .project-lightbox.is-zoomed figcaption::after {
+    content: "Drag to pan · Tap Fit to reset";
   }
 
   .intro-lightbox[open] {
@@ -1213,8 +1355,13 @@ body:not(.menu-open) .site-header.is-scrolled .menu-toggle {
   .intro-lightbox .project-lightbox-shell {
     width: 100%;
     min-width: 0;
-    padding-top: 0;
+    padding-top: 56px;
     place-items: center;
+  }
+
+  .intro-lightbox video {
+    width: min(100%, calc((100dvh - 88px) * 16 / 9));
+    max-height: calc(100dvh - 88px);
   }
 }
 
@@ -1406,6 +1553,8 @@ html:not(.js) .contact-email-row button {
   bottom: 24px;
   left: 50%;
   z-index: var(--z-toast);
+  width: max-content;
+  max-width: calc(100vw - 32px);
   padding: 10px 18px;
   transform: translate(-50%, 16px);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -1416,7 +1565,8 @@ html:not(.js) .contact-email-row button {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 540;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
   opacity: 0;
   pointer-events: none;
   transition: opacity 200ms var(--ease), transform 240ms var(--ease-spring);
@@ -1430,13 +1580,6 @@ html:not(.js) .contact-email-row button {
 /* ==========================================================================
    Scroll Reveals — crisp, fast, never stuck hidden.
    ========================================================================== */
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
 
 .will-reveal {
   opacity: 0;
@@ -1604,7 +1747,7 @@ html:not(.js) .contact-email-row button {
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
-    padding: 92px 32px max(24px, env(safe-area-inset-bottom));
+    padding: calc(var(--header-base-height, 80px) + 12px) 32px max(24px, env(safe-area-inset-bottom));
     overflow-x: hidden;
     overflow-y: auto;
     transform: translateY(-8px);
@@ -1623,7 +1766,7 @@ html:not(.js) .contact-email-row button {
 
   .js .nav-panel::before {
     position: absolute;
-    top: 82px;
+    top: var(--header-base-height, 80px);
     right: 32px;
     left: 32px;
     height: 1px;
@@ -1638,8 +1781,8 @@ html:not(.js) .contact-email-row button {
     align-items: center;
     justify-content: space-between;
     min-width: 0;
-    min-height: 62px;
-    padding: 0 4px 0 0;
+    min-height: 66px;
+    padding: 0 10px;
     overflow-wrap: anywhere;
     border-bottom: 1px solid var(--line);
     background: transparent;
@@ -1652,7 +1795,7 @@ html:not(.js) .contact-email-row button {
 
   .js .nav-panel > a::before {
     position: absolute;
-    left: -14px;
+    left: 10px;
     width: 2.5px;
     height: 20px;
     transform: scaleY(0);
@@ -1672,14 +1815,23 @@ html:not(.js) .contact-email-row button {
     color: var(--accent-dark);
   }
 
+  .js .nav-panel > a:focus-visible {
+    outline-offset: -3px;
+    border-radius: var(--radius-control);
+  }
+
+  .js .nav-panel > a.is-active {
+    padding-left: 22px;
+  }
+
   .js .nav-panel > a.is-active::before {
     transform: scaleY(1);
   }
 
   .js .nav-panel > .nav-email {
     justify-content: space-between;
-    min-height: 50px;
-    margin-top: 22px;
+    min-height: 52px;
+    margin-top: 26px;
     padding: 12px 16px;
     border: 1px solid var(--line-control);
     border-radius: var(--radius-control);
@@ -1690,6 +1842,10 @@ html:not(.js) .contact-email-row button {
     letter-spacing: -0.01em;
   }
 
+  .js .nav-panel > .nav-email::before {
+    display: none;
+  }
+
   .js .nav-panel > .nav-email:hover,
   .js .nav-panel > .nav-email:focus-visible {
     border-color: var(--accent);
@@ -1697,12 +1853,16 @@ html:not(.js) .contact-email-row button {
     color: var(--accent-dark);
   }
 
+  .js .nav-panel > .nav-email:focus-visible {
+    outline-offset: 2px;
+  }
+
   .js .mobile-nav-utilities {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     flex: 0 0 auto;
-    margin-top: auto;
-    padding-top: 28px;
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
   }
 
   .js .mobile-nav-utilities > a,
@@ -1712,15 +1872,14 @@ html:not(.js) .contact-email-row button {
     align-items: center;
     justify-content: space-between;
     min-width: 0;
-    min-height: 48px;
-    padding: 0 10px;
+    min-height: 50px;
+    padding: 0 12px;
     border: 0;
-    border-top: 1px solid var(--line);
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     border-radius: 0;
     background: transparent;
-    color: var(--muted);
+    color: var(--ink-body);
     font-size: 13px;
     font-weight: 600;
     line-height: 1.2;
@@ -1729,12 +1888,13 @@ html:not(.js) .contact-email-row button {
   }
 
   .js .mobile-nav-utilities > :nth-child(2n) {
-    padding-left: 14px;
     border-right: 0;
   }
 
-  .js .mobile-nav-utilities > :nth-child(2n + 1) {
-    padding-left: 0;
+  .js .mobile-nav-utilities > button svg {
+    flex: none;
+    opacity: 0.78;
+    transition: opacity 160ms var(--ease);
   }
 
   .js .mobile-nav-utilities > a:hover,
@@ -1743,6 +1903,21 @@ html:not(.js) .contact-email-row button {
   .js .mobile-nav-utilities > button:focus-visible {
     background: var(--surface-muted);
     color: var(--ink);
+  }
+
+  .js .mobile-nav-utilities > a:focus-visible,
+  .js .mobile-nav-utilities > button:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .js .mobile-nav-utilities > button:hover svg,
+  .js .mobile-nav-utilities > button:focus-visible svg {
+    opacity: 1;
+  }
+
+  .js .mobile-nav-utilities > button.is-copied {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
   }
 
   .site-contact {
@@ -1805,6 +1980,7 @@ html:not(.js) .contact-email-row button {
   .brand {
     gap: 10px;
     min-width: 0;
+    min-height: var(--touch-target);
   }
 
   .brand-mark {
@@ -1813,7 +1989,17 @@ html:not(.js) .contact-email-row button {
   }
 
   .brand-copy {
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
     font-size: 14px;
+  }
+
+  .brand-name,
+  .brand-role {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .brand-role {
@@ -1821,22 +2007,18 @@ html:not(.js) .contact-email-row button {
   }
 
   .js .nav-panel {
-    padding: 80px 20px max(20px, env(safe-area-inset-bottom));
+    padding-inline: 20px;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
   }
 
   .js .nav-panel::before {
-    top: 74px;
     right: 20px;
     left: 20px;
   }
 
   .js .nav-panel > a {
-    min-height: 58px;
+    min-height: 62px;
     font-size: clamp(1.5rem, 6.2vw, 1.85rem);
-  }
-
-  .js .nav-panel > a::before {
-    left: -12px;
   }
 
   .button {
@@ -1877,8 +2059,8 @@ html:not(.js) .contact-email-row button {
   .media-zoom {
     top: 8px;
     right: 8px;
-    width: 38px;
-    height: 38px;
+    width: var(--touch-target);
+    height: var(--touch-target);
   }
 
   .site-contact {
@@ -1889,6 +2071,11 @@ html:not(.js) .contact-email-row button {
   .site-contact .contact-email-row a {
     min-height: 58px;
     font-size: clamp(1.18rem, 0.9rem + 1.5vw, 1.48rem);
+  }
+
+  .contact-email-row button {
+    min-width: 82px;
+    min-height: var(--touch-target);
   }
 
   .site-contact .contact-links {
@@ -1908,6 +2095,69 @@ html:not(.js) .contact-email-row button {
   .contact-links a {
     min-height: 46px;
     padding-block: 10px;
+  }
+}
+
+@media (pointer: coarse) {
+  .media-zoom {
+    width: var(--touch-target);
+    height: var(--touch-target);
+  }
+
+  .project-lightbox-btn,
+  .project-lightbox-zoom,
+  .project-lightbox-close {
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
+  }
+
+  .project-lightbox-case-link {
+    min-height: var(--touch-target);
+    padding: 0 16px;
+  }
+
+  .contact-email-row button {
+    min-width: 82px;
+    min-height: var(--touch-target);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-header::before {
+    background: var(--canvas);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  body:not(.menu-open) .site-header.is-scrolled .site-nav .nav-email {
+    background: var(--surface);
+  }
+
+  .media-zoom {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .project-lightbox::backdrop {
+    background: #0e1012;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .project-lightbox-btn,
+  .project-lightbox-zoom,
+  .project-lightbox-close,
+  .project-lightbox-case-link {
+    background: #14171b;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .project-lightbox-zoom[aria-pressed="true"],
+  .project-lightbox-case-link:hover,
+  .project-lightbox-case-link:focus-visible {
+    background: #272c33;
   }
 }
 
@@ -1962,7 +2212,8 @@ html:not(.js) .contact-email-row button {
 }
 
 @media print {
-  body::before {
+  body::before,
+  .copy-toast {
     display: none;
   }
 
