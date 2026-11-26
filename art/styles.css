@@ -26,8 +26,21 @@ body {
   object-fit: cover;
 }
 
-/* The current banner master is already native 4:1 (3168×792) with the
-   lower-left quarter kept clear for the LinkedIn profile avatar. */
+/* The LinkedIn artwork keeps its copy in a centered 4:1 band. */
 .artboard-banner .artwork {
   object-position: 50% 50%;
+}
+
+.artboard-smartway {
+  position: relative;
+}
+
+.smartway-screenshot {
+  position: absolute;
+  top: 22%;
+  right: 4.8%;
+  width: 43.5%;
+  height: auto;
+  border: 1px solid #d8dad4;
+  border-radius: 8px;
 }

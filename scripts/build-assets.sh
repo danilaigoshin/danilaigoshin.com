@@ -108,14 +108,15 @@ chrome_to_file "$TMP_DIR/og-cv@2x.png" 2 --window-size=1200,630 --screenshot="$T
 chrome_to_file "$TMP_DIR/og-smartway@2x.png" 2 --window-size=1200,630 --screenshot="$TMP_DIR/og-smartway@2x.png" "file://$ROOT/art/og-smartway.html"
 chrome_to_file "$TMP_DIR/linkedin-banner.png" 1 --window-size=3168,792 --screenshot="$TMP_DIR/linkedin-banner.png" "file://$ROOT/art/linkedin-banner.html"
 
+for HEADER in x-banner x-banner-dark; do
+  sips --resampleWidth 1500 "$ROOT/art/generated/product-engineer-2026-11-26/$HEADER.png" \
+    --out "$TMP_DIR/$HEADER.png" >/dev/null
+done
+
 rm -f \
   "$ROOT/public/og-image.jpg" \
   "$ROOT/public/og-cv.jpg" \
-  "$ROOT/public/linkedin-banner.jpg" \
-  "$ROOT/public/og-image-v2.png" \
-  "$ROOT/public/og-cv-v2.png" \
-  "$ROOT/public/og-smartway.png" \
-  "$ROOT/public/linkedin-banner.png"
+  "$ROOT/public/linkedin-banner.jpg"
 
 # Export the imagegen masters through the source boards at exact public sizes.
 # PNG preserves the typography without adding JPEG compression artifacts.
@@ -123,8 +124,10 @@ cp "$TMP_DIR/og-image@2x.png" "$ROOT/public/og-image-v2.png"
 cp "$TMP_DIR/og-cv@2x.png" "$ROOT/public/og-cv-v2.png"
 cp "$TMP_DIR/og-smartway@2x.png" "$ROOT/public/og-smartway.png"
 
-# Export the 4:1 avatar-safe banner without stretching the raster.
-cp "$TMP_DIR/linkedin-banner.png" "$ROOT/public/linkedin-banner.png"
+# Old direct links should show the same portfolio and résumé cards.
+cp "$TMP_DIR/og-image@2x.png" "$ROOT/public/og-image.png"
+cp "$TMP_DIR/og-cv@2x.png" "$ROOT/public/og-cv.png"
+cp "$TMP_DIR/linkedin-banner.png" "$TMP_DIR/x-banner.png" "$TMP_DIR/x-banner-dark.png" "$ROOT/public/"
 
 rm -rf "$TMP_DIR"
 

@@ -15,7 +15,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.16fr) minmax(0, 1fr);
   grid-template-areas:
-    "stack ."
+    "role ."
     "heading description"
     "actions description"
     "proof proof";
@@ -24,12 +24,20 @@
   padding-top: clamp(24px, 2.5vw, 36px);
 }
 
+.hero-role {
+  grid-area: role;
+  margin: 0;
+  color: var(--muted);
+  font: 600 14px/1.5 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .hero-stack {
   display: flex;
-  grid-area: stack;
   gap: 10px;
   align-items: baseline;
-  margin: 0;
+  margin: 18px 0 0;
   color: var(--muted);
   font: 500 13px/1.5 var(--font-mono);
 }
@@ -1248,7 +1256,7 @@
   .home-hero {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "stack"
+      "role"
       "heading"
       "description"
       "actions"

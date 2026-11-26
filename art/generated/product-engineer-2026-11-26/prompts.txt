@@ -1,0 +1,136 @@
+Product Engineer social artwork · 2026-11-26
+Built-in ImageGen
+
+Current production edition
+
+These five copy edits use the earlier outputs documented below. The Smartway artwork continues to use its original prompt and dashboard screenshot.
+
+linkedin-banner.png
+===================
+1. public/linkedin-banner.png
+
+Use case: text-localization. Edit the attached finished Danila Igoshin LinkedIn cover. It is the edit target and layout reference. Produce a finished 4:1 banner to be exported at 3168 × 792; if the tool renders 3:1, center the entire 4:1 design in a horizontal band with additional plain margins above and below. All ink must fit in the central 80% of the height of that band. Leave the lower-left quarter empty for the avatar.
+The revised cover addresses all software product teams. Keep the D/I monogram with capped I and “Danila Igoshin” at upper left. Center-left at x≈28%, keep the legible letterspaced role “PRODUCT ENGINEER”. Set only TWO large headline lines below it:
+From zero to
+— production.
+Delete the complete old sector line “B2B products.”. Increase the two remaining lines slightly and center the role and headline together vertically. First line dark ink, thin short dash and complete second line rich terracotta #b2472c. Keep the common left alignment, heavy refined grotesque and the warm off-white flat field. In the existing right column starting x≈73%, include two unobtrusive but legible gray lines “Interfaces and APIs.” and “Data and deployment.” above the stronger “danilaigoshin.com”. Preserve breathing space between text blocks and the right margin. All three right-hand lines fit individually. Do not insert any other copy, decoration, technologies, sector, photograph, or border. The approved vocabulary, spelling, casing and line breaks above are exact. Keep this a precise digital graphic.
+
+x-banner.png
+============
+1. art/generated/product-engineer-2026-11-26/x-banner.png
+
+Use case: text-localization. Image 1 is the light 3:1 X profile header to edit. Same 3:1 full-bleed panorama, for a 1500 × 500 export. Preserve the ghostlike thin technical arcs and grid on the far right, warm off-white field, D/I with capped I plus “Danila Igoshin” signature at upper left, and an empty lower-left quarter for the avatar. Preserve the ink/terracotta editorial type family and main-column start at 31%.
+Typeset the role “PRODUCT ENGINEER” legibly above exactly two prominent display lines:
+From zero to
+— production.
+Eliminate the old extra headline line about B2B. Enlarge the remaining two lines slightly and balance the role and headline within the middle of the height. Dark ink first line, second line and thin leading dash in terracotta. In the right-hand quarter, add the modest but readable gray lines “Interfaces and APIs.” and “Data and deployment.” above the existing bolder “danilaigoshin.com”. Keep the right group separate from the hero, a clean column with left-aligned lines. Keep the original monogram, other design details, and unclipped generous padding. This is the complete cover. Only the supplied words appear.
+
+x-banner-dark.png
+=================
+1. x-banner.png (new light edition)
+2. x-banner-dark.png (previous edition)
+
+Use case: text-localization. Image 1 is the finished new light X header (edit target), image 2 is the companion older dark palette and geometric field (style reference only). Recolor image 1 into its exact dark counterpart. Deliver a full-bleed 3:1 panoramic X banner for a 1500 × 500 export, with all the typography, placements, line breaks, avatar-safe lower left and outside margins of image 1. Dark charcoal ground, near-white name and first headline line, readable light gray supporting copy, luminous warm terracotta for the entire second headline line including the thin dash. At the upper left use the inverse small square D/I mark with the capped capital I as in image 2. Retain the subtle right-hand technical geometry.
+The ONLY text, exactly: “D/I” alongside “Danila Igoshin”; role “PRODUCT ENGINEER”; two large lines “From zero to” and “— production.”; two subordinate right-hand lines “Interfaces and APIs.” and “Data and deployment.”, and stronger “danilaigoshin.com” underneath. No additional words or previous market label. Keep the original layout exactly registered to image 1 like a pair of light/dark interface modes.
+
+og-image.png
+============
+1. art/generated/product-engineer-2026-11-26/og-image.png
+
+Use case: text-localization. Edit the attached portfolio Open Graph card. Keep its complete wide 1.905:1 canvas and safe margins. Keep the top-left D/I square, name “Danila Igoshin” and title “Product Engineer”, and the small “danilaigoshin.com” at upper right. Replace the three-line headline with exactly two substantial display lines, left aligned and balanced in the middle above the proof strip:
+From zero to
+— production.
+Use near-black on the first line, muted rich terracotta on the entire second line with its short thin dash. Remove the old “B2B products.” line entirely. No sector or stack name in the personal title. In the open right part of the middle, put the two subordinate readable gray lines “Interfaces and APIs.” and “Data and deployment.”. Art direct them as a quiet counterpart to the main headline with a wide gutter. The headline dominates.
+Keep the warm white background, editorial sans, single divider, and all three labeled proof points exactly as in the source: “≈5 months” / “To first EdTech release”; “≈10×” / “Faster builds”; “70%” / “Faster rendering” / “Threads with 1,000+ messages”. Approximation signs have two strokes. Preserve every number, I crossbars, complete qualifier and comfortable original margins. No extra marks, no other wording. Deliver the flat landscape social card, full bleed and uncropped.
+
+og-cv.png
+=========
+1. art/generated/product-engineer-2026-11-26/og-cv.png
+
+Use case: text-localization. Image 1 is the finished 1.905:1 RÉSUMÉ social preview to edit. Match the same wide aspect ratio, masthead, exact spacing, signature, footer and illustration of two overlapping upright pages. Keep the cover's “Product Engineer” role. Make one precise copy change only to the large headline: it should now read
+6 years building
+— software.
+Preserve the black first line exactly; change the entire second line to a thin terracotta dash and “software.” in the same bold terracotta style. Absolutely no sector or market label in this revised headline. Keep generous space after the shorter word. The header contains “D/I”, “Danila Igoshin”, “RÉSUMÉ”; preserve both accents. The two-page illustration still has “D/I”, “Danila Igoshin”, “Product Engineer” and “Experience”. Preserve the footer “Two pages · Remote · danilaigoshin.com”. Entire card shown flat, with the portrait sheets at right, warm neutral background, high-quality type, and blank space at each edge. No new copy or role. Deliver a 2400×1260 proportioned landscape Open Graph card; if extra height is unavoidable, center the composition in a 1.905:1 safe band.
+
+Earlier generation prompts and Smartway master
+
+Reference paths are relative to the repository root. The original X backgrounds in public/ are from commit 3e92ae6. The 4:1 positioning reference is the PNG supplied with the brief.
+
+linkedin-banner.png
+===================
+1. B2B Products From Zero to Production.png
+2. public/apple-touch-icon.png
+
+Use case: text-localization. Edit image 1, a personal LinkedIn cover for Danila Igoshin, with two copy changes. Image 2 is a glyph reference for the D/I logo only. Return the finished flat cover, 4:1 panoramic, ideally 3168 × 792. If the output canvas is taller, place the entire 4:1 design in a centered horizontal band and leave the remaining space plain background so it can be cropped.
+
+Use the precise editorial layout of image 1. On a clean, solid warm-white #f8f8f6 field, put its small nearly black D/I square and “Danila Igoshin” at upper left, with the entire lower-left 27% empty for the profile photo. The glyph is an uppercase D, a forward slash, and a capital I with two horizontal caps. Preserve the width and normal proportions of the heavy Inter-like grotesque. Start the main group about 29% from the left. The new single muted letterspaced eyebrow reads exactly “PRODUCT ENGINEER”. Below it preserve the three oversized lines, generous breathing room and clean, tight leading:
+B2B products.
+From zero to
+— production.
+Use #20221f on the first two lines, #b2472c on the whole last line and its thin dash. Keep all ink within the central 80% of the 4:1 band's height. At the far right, aligned optically with the last headline line with a comfortable right inset, set just “danilaigoshin.com” in bold ink. The former two explanatory lines disappear completely, leaving purposeful open space. The personal name, role, headline and domain are the complete copy. Clean flat letters, crisp print-quality edges; no texture, tech names, secondary role, icons, border or extraneous text.
+
+x-banner.png
+============
+1. public/x-banner.png
+2. B2B Products From Zero to Production.png
+3. public/apple-touch-icon.png
+
+Use case: text-localization. Edit image 1, a 3:1 light X profile header, into the Product Engineer edition. Image 2 is a style reference for the headline, identity and restrained terracotta. Image 3 supplies the D/I mark shape. The final graphic is a full-bleed 3:1 panorama for 1500 × 500. Keep the technical construction drawing from image 1 as a ghostlike detail on the far right only: fine graphite construction lines, a faint arc, a few pale square intersections. Retint the ground to subtle warm ivory #f8f8f6. Avoid dark lines underneath words; the left is calm. Keep all copy comfortably 9% inside the top and bottom.
+
+Place the small dark D/I square (capital I with top and bottom caps) and “Danila Igoshin” as a compact signature in the upper left, about 4% inset. The lower-left quarter stays empty for the X profile avatar. At x=32% place the small letterspaced eyebrow “PRODUCT ENGINEER”. Below set only these THREE left-aligned heavy Inter-like lines:
+B2B products.
+From zero to
+— production.
+Closely set first two lines in #20221f, complete third line including its slim leading dash in muted dark terracotta #b2472c. The main block should occupy about 42% of the width and be clear at a small size. Set “danilaigoshin.com” in semibold, modest in size in the right column, aligned with the bottom headline baseline with breathing room before the edge. No other text, tech names, new logos, exposed graphs, device or outer frame. Crisp premium flat typography, authentic geometry and open space.
+
+x-banner-dark.png
+=================
+1. x-banner.png (new light master)
+2. public/x-banner-dark.png (prior dark header)
+
+Use case: text-localization. Finish the dark edition of this X profile header. Image 1 is the exact, already approved LIGHT layout to recolor. Image 2 is the old dark header, a palette and geometric-background reference only. Match image 1's 3:1 proportions and exact typography placements. The output is a finished full-bleed 3:1 banner for 1500 × 500.
+
+Keep every letter, line break, type size and placement of the light reference; change the palette only. Use a deep near-black #171916 background. Ivory #f8f8f6 wordmark, domain and first two hero lines; light gray #c0c2bb eyebrow; clear, luminous warm terracotta #ed8364 for the entire third line and its dash. For the small D/I square, use the inverse mark: warm ivory square, dark D, forward slash and capital I with flat crossbars. Preserve the subtle construction arcs, squares and hairlines off to the far right, in quiet slate against charcoal like image 2. The entire lower-left quarter stays clear. No gradients or grime.
+The only text, with each string at its original position, is “D/I”, “Danila Igoshin”, “PRODUCT ENGINEER”, “B2B products.”, “From zero to”, “— production.”, “danilaigoshin.com”. The output should visually register to image 1 if superimposed. Set all text cleanly in solid ink, keep terracotta readable on dark, no additional detail or words.
+
+og-image.png
+============
+1. art/generated/linkedin-2026-11-20/og-image.png
+2. public/apple-touch-icon.png
+
+Use case: text-localization. Edit image 1, the portfolio Open Graph card for Danila Igoshin, into the Product Engineer edition. Image 2 is the canonical D/I glyph reference. Finished flat landscape graphic matching image 1's 1.905:1 composition (2400 × 1260). Preserve a 7% inset at every edge, clean warm-white #f8f8f6 field, dark ink #20221f, gray #585c56, warm terracotta #b2472c, bold editorial grotesque, strong alignment and readable type.
+
+Upper left is the small square “D/I” brand mark and the signature “Danila Igoshin”. The single subtitle immediately beneath the name is “Product Engineer”. Put “danilaigoshin.com” once, in the upper right balancing the signature. Remove the technology eyebrow and the former explanatory paragraph on the right, leaving breathing space. Main headline is large and bold on three tightly set lines with no compression:
+B2B products.
+From zero to
+— production.
+Only the last line and its short thin dash are terracotta. Use the space recovered from the old text to make the headline comfortably dominant. Preserve the single hairline above the bottom proof row. Three columns of actual results, the follow-up line under its number, exact copy:
+“≈5 months” with “To first EdTech release”
+“≈10×” with “Faster builds”
+“70%” with “Faster rendering” and “Threads with 1,000+ messages”
+Keep the two wavy bars of each approximate sign and the multiplication sign. Use solid pixels and neat baseline alignment like reference 1, and allow space for the last qualifier. The I in D/I has horizontal caps. No additional text, labels, stack or roles. No boxes, gradients, photo, shadows or texture. Print every specified string only in its intended place.
+
+og-cv.png
+=========
+1. art/generated/linkedin-2026-11-20/og-cv.png
+
+Use case: text-localization. The attached WIDE landscape résumé link-preview graphic is the edit target. Preserve the exact 2400 × 1260, 1.905:1 panoramic frame and the source composition, including its wide side-by-side headline and paper illustration. Keep this same viewing distance; show all four edges, header, footer, and comfortable outside margins. Deliver the wide card, about twice as wide as it is high. Top and bottom 8% are plain warm white. If a taller canvas is unavoidable, leave additional unprinted margins above and below a full-width centered 1.905:1 band containing the entire design plus its own margins, ready to crop.
+
+Make only these two local copy edits.
+1) Replace the entire gray main role line “Product Engineer / Full-stack Engineer” with just “Product Engineer”, same left alignment and same gray type size.
+2) Simplify the miniature résumé front sheet. Show the compact D/I mark, “Danila Igoshin”, “Product Engineer”, a fine horizontal rule, “Experience” and a few groups of gray graphic lines. Remove the tech names and numeric row there.
+
+Preserve the two clearly distinct overlapping white sheets. Preserve the subtle corner radius on the D/I square; the capital I has horizontal caps. Preserve the dark line “6 years building” and its terracotta second line “— B2B products.”. Preserve “Danila Igoshin” at upper left, “RÉSUMÉ” at upper right with two acute accents, and the complete bottom line “Two pages · Remote · danilaigoshin.com”. Keep the footer well above the bottom edge, with as much warm off-white padding below it as above the masthead. Follow the actual wide reference for spacing and horizontal scale. One flat warm-white #f8f8f6 card, heavy clean black type and a rich #b2472c accent, crisp and entirely in focus. Do not introduce any additional words.
+
+og-smartway.png
+===============
+1. art/generated/linkedin-2026-11-05/og-smartway.png
+2. public/apple-touch-icon.png
+
+Use case: text-localization. Edit image 1, the Smartway case-study card, to make a finished typographic base layer for a social preview at 2400 × 1260, aspect 1.905:1. Image 2 supplies the precise D/I mark shape, a forward slash and a capital I with crossbars. The real product screenshot will be placed by the publisher as a separate layer. Leave the entire right-hand image area completely blank warm-white between x=54–95% and y=23–71%, ready for this. Do not depict a screenshot, a rectangle, placeholder, a shadow or any marking in that area.
+
+Keep the restrained editorial composition from image 1, with a single perfectly flat warm-white #f8f8f6 background. Keep the compact small D/I and “Danila Igoshin” signature at upper left; put “Product Engineer” in smaller muted type directly beneath the author's name as his byline. In the top-right corner retain “SMARTWAY · CASE STUDY”. Main left area starts 5.5% from the left and ends before 51% of canvas width. Retain the small terracotta eyebrow “PLATFORM MODERNIZATION” and exactly this heavy, tight, left-aligned headline:
+A faster platform.
+Without pausing
+— delivery.
+Set the headline in ink #20221f and its short thin dash in terracotta #b2472c. Leave generous whitespace around it. Across the bottom at about 76% height a single pale horizontal rule. Directly under it keep these two metrics in large type on the left, their labels in readable gray underneath: “≈10×” / “Faster builds” and “≈3×” / “Faster cart interactions”. Both approximation marks have two wavy strokes and both final glyphs are multiplication signs. Put “danilaigoshin.com” bottom right. Use only the supplied text. Keep every inked element inset at least 5%; no frontend or full-stack text, no textures or additional marks.

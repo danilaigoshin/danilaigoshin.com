@@ -390,7 +390,7 @@
     const lightboxImage = lightbox?.querySelector("[data-project-lightbox-image]");
     const lightboxCaption = lightbox?.querySelector("[data-project-lightbox-caption]");
     const lightboxClose = lightbox?.querySelector("[data-project-lightbox-close]");
-    let lightboxTrigger;
+    let lightboxOpener;
     let lightboxIndex = -1;
     let lightboxCounter;
 
@@ -479,7 +479,6 @@
         if (!link || !preview) return false;
 
         lightboxIndex = normalized;
-        lightboxTrigger = link;
         setLightboxZoomed(false);
 
         if (lightboxCounter) {
@@ -559,6 +558,7 @@
 
           event.preventDefault();
           if (!showLightboxAt(index)) return;
+          lightboxOpener = link;
           document.documentElement.classList.add("lightbox-open");
           document.body.classList.add("lightbox-open");
           lightbox.showModal();
@@ -668,8 +668,8 @@
         lightboxCaption.textContent = "";
         lightboxCaseLink.hidden = true;
         lightboxCaseLink.removeAttribute("href");
-        lightboxTrigger?.focus({ preventScroll: true });
-        lightboxTrigger = undefined;
+        lightboxOpener?.focus({ preventScroll: true });
+        lightboxOpener = undefined;
         lightboxIndex = -1;
       });
     }

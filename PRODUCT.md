@@ -20,14 +20,14 @@ Success means a recruiter can shortlist Danila from the first screen, and a forw
 
 ## Positioning
 
-A product engineer with deep frontend expertise and real full-stack range, who owns work from an empty repository to production. The record is specific and measured:
+Danila’s public role is Product Engineer. His profile line is “I build new products and improve the ones people already use.” The work spans interfaces, APIs, databases, and deployment. The portfolio illustrates that range with shipped projects.
 
 - sole frontend engineer who took an EdTech product live in ≈5 months
 - ≈10× faster builds on a live travel platform, done without pausing delivery, followed by a Tech Lead role mentoring three developers
 - an AI-assisted scientific research workspace
 - a B2B e-commerce product built solo, end to end
 
-Other candidates can list the same stack. They can't truthfully claim this record.
+B2B appears in the context of past projects and engagement terms. Historical job titles describe the role Danila held on each team.
 
 ## Operating Context
 
@@ -42,23 +42,23 @@ Other candidates can list the same stack. They can't truthfully claim this recor
 - **Pages:** home (`/`), case index (`/case/`), four case studies (`/case/edtech/`, `/case/research/`, `/case/smartway/`, `/case/support/`), two résumé pages (`/cv/`, `/cv/full-stack/`), and `/404.html`.
 - **Stack:** zero-build static HTML, CSS, and one `script.js`. No framework, bundler, or package manifest.
 - **CSP** (`vercel.json`): `default-src 'self'`, `script-src 'self'`. No inline scripts (JSON-LD blocks are fine), no third-party scripts, fonts, analytics, or embeds. Fonts and images are self-hosted.
-- **Generated assets:** the résumé PDFs are built from `cv/` HTML, and the social images from `art/` HTML export boards, both via `scripts/build-assets.sh`. The current social boards use raster masters and saved prompts under `art/generated/` (currently `art/generated/linkedin-2026-11-20/` for the LinkedIn banner, portfolio card, and résumé card); update those sources before rebuilding the public exports. Edit the sources, never only the outputs.
+- `scripts/build-assets.sh` exports the résumé PDFs from `cv/` HTML and the social images from the artwork in `art/`. The six Product Engineer social masters and their ImageGen prompts are in `art/generated/product-engineer-2026-11-26/`. Update the sources before rebuilding the public exports.
 - **Language:** English only.
 - **Facts discipline:**
   - Every claim on the site must match the CV.
   - All past roles were full-time employment. Morizo Digital is a full-time client engagement. Never label past roles "Contract"; contracting describes what is offered now, not the employment history.
   - "≈5 months" for the EdTech product is the build duration. Never pair it with the Feb-Aug 2025 date range, which reads as longer.
   - The "6 years" figure, the time zone (UTC+4), and the availability status are hardcoded and need periodic re-checking.
-- **Terminology:** "Product Engineer · Full-stack Engineer", "case study", "Résumé". Handles: GitHub `danilaigoshin`, LinkedIn `developer-danila`.
+- The shared identity is “Product Engineer”. The role-specific résumé remains available as “Full-stack Engineer”. Other public labels include “case study” and “Résumé”. The account names are `danilaigoshin` on GitHub and `developer-danila` on LinkedIn.
 
 ## Brand Commitments
 
 - Name and mark: Danila Igoshin, "D/I". The owner selected `output/imagegen/logos-2026-11-04/refined-01-precision-d-i.png`: monochrome lettering with straight horizontal I terminals. Its production vector is `public/favicon.svg`, shared by website headers and browser icons. Derive the Apple touch icon with `scripts/build-assets.sh --icon-only`.
 - All buttons and button-like controls use the same subtle 3px corner radius, including image and video close buttons, screenshot zoom controls, and résumé actions.
 - The header starts full width without a bottom divider, then becomes a centered floating panel after scrolling past its original height: 8px panel corners, a thin border and soft shadow, and compact D/I mark and name. Keep the floating panel's shadow and the rule above the hero metrics. The navigation order is Work, Experience, About, Résumé, Email. Résumé is a text link; Email is an outlined mailto action. Preserve the header's layout footprint during this transition and the full-screen mobile navigation.
-- The hero uses three lines: "B2B products.", "From zero to", "production." Restore the short terracotta dash and indented final line. Its display size is capped at 86.4px, with a 1.03 line height; scale the phone heading so every line fits. On mobile, order the content as heading, identity, description, actions, results.
-- Show the portrait once in a compact identity block at the top of the right column: a 128px square on desktop and 80px on phones, shoulders-up framing, 6px corners, and a 24px gap to "I’m Danila." (22px) and "Product engineer & former tech lead." (16px). Vertically center the name and role together against the photograph. Align the block with the top of the main heading. About keeps its text, languages, and competencies without a second photograph.
-- The identity block has 24px before the two-line summary: "6 years building and shipping B2B products." and "Frontend first. Full-stack when the product needs it." Use 18-20px text at a 1.5 line height, then 28px before the compact secondary engagement details.
+- “Product Engineer” sits above the two-line hero headline “From zero to production.” The final line has a short terracotta dash and an indent. The core technologies sit below the heading. Display type is capped at 86.4px with a 1.03 line height. On mobile, the identity, description, actions, and results follow the heading.
+- The compact identity block aligns with the main heading. It pairs the portrait with “I’m Danila.” and “6 years in software · Former tech lead”. The portrait is 128px square on desktop and 80px on phones, with a shoulders-up crop, 6px corners, and a 24px gap to the text.
+- The hero summary reads “I build new products and improve the ones people already use.” The supporting line reads “My work spans interfaces, APIs, databases, and deployment.” The summary starts 24px below the identity block and uses 18–20px type at a 1.5 line height, with 28px before the engagement details.
 - Availability belongs in the hero description beside the engagement terms: "Open to full-time roles & long-term contracts", "Yerevan · UTC+4 · EU working-day overlap", and "Remote · EOR / B2B". Use plain typography without a separate status label or green online indicator above the hero.
 - Product Engineer is the primary hero résumé download. Keep both explicitly named résumé downloads in the contact block and both CV routes, without a role selector in the hero.
 - Both résumé editions share `cv/styles.css`: the same Inter, ink, muted gray, and terracotta palette as the portfolio, an open responsive web document, quiet result figures, and horizontal rules instead of boxed skills or vertical dividers. Use the canonical D/I SVG in the résumé mast. The dedicated print styles produce two A4 pages per edition; rebuild both downloads with `scripts/build-assets.sh --resumes-only`, including the legacy Product-edition alias.
@@ -66,7 +66,7 @@ Other candidates can list the same stack. They can't truthfully claim this recor
 - The featured Smart Online Institute summary uses two columns on desktop: client, heading, "Marketplace, learning experience, and instructor workspace.", and case link on the left; ≈5 months, the frontend-repo-to-live-product caption, Solo Frontend Engineer, and the stack on the right. Group technologies into "Next.js · TypeScript" and "AWS S3 · Docker". Use no inner separators or Role label. Stack the columns on phones and keep the horizontal separator before the following project pair. The layout reference does not change the site's light palette.
 - Voice: plain, first-person, and factual. It should read as precise rather than promotional, and be understandable to a non-engineer recruiter.
 - No self-referential chrome: no internal design codenames, fake edition or version numbers, or invented labels a recruiter can't decode.
-- Visual direction from the owner's November 2026 reference: a light white-and-gray canvas, bold editorial sans-serif typography, thin rules, restrained terracotta accents, and large real project screenshots. The three-line hero and numbered project captions follow that reference. Product Engineer and Full-stack Engineer remain the primary roles, including in the header and the explicitly named contact downloads. Keep the whole page light. Dates, roles, and technology labels should stay at least 12px, with main body copy at 16-18px.
+- The owner’s November 2026 reference supplies the light white-and-gray canvas, bold editorial type, thin rules, terracotta accents, and large project screenshots. The header identifies Danila as Product Engineer. The contact section names both résumé editions. Dates, roles, and technology labels use at least 12px type, with main body copy at 16–18px.
 
 ## Evidence on Hand
 

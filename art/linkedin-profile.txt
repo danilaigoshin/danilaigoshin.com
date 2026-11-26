@@ -1,0 +1,13 @@
+Headline
+
+Product Engineer | I build new products and improve the ones people already use
+
+About
+
+I’m a product engineer with six years of experience. My work spans interfaces, APIs, databases, and deployment.
+
+At Germo-S, I built and deployed a B2B commerce platform as its sole developer, including the storefront, an Express API, and a MongoDB database. At Smartway, I helped modernize a corporate travel platform while people continued booking trips. Moving the build from Webpack to Vite made it about 10× faster.
+
+I’m based in Yerevan (UTC+4) and open to remote full-time roles and long-term contracts with European working-hour overlap.
+
+danilaigoshin.com
