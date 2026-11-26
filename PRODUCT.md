@@ -23,7 +23,7 @@ Success means a recruiter can shortlist Danila from the first screen, and a forw
 Danila’s public role is Product Engineer. His profile line is “I build new products and improve the ones people already use.” The work spans interfaces, APIs, databases, and deployment. The portfolio illustrates that range with shipped projects.
 
 - sole frontend engineer who took an EdTech product live in ≈5 months
-- ≈10× faster builds on a live travel platform, done without pausing delivery, followed by a Tech Lead role mentoring three developers
+- ≈10× faster builds on a live travel platform while shipping features and mentoring three developers as a Senior Frontend Engineer
 - an AI-assisted scientific research workspace
 - a B2B e-commerce product built solo, end to end
 
@@ -57,7 +57,7 @@ B2B appears in the context of past projects and engagement terms. Historical job
 - All buttons and button-like controls use the same subtle 3px corner radius, including image and video close buttons, screenshot zoom controls, and résumé actions.
 - The header starts full width without a bottom divider, then becomes a centered floating panel after scrolling past its original height: 8px panel corners, a thin border and soft shadow, and compact D/I mark and name. Keep the floating panel's shadow and the rule above the hero metrics. The navigation order is Work, Experience, About, Résumé, Email. Résumé is a text link; Email is an outlined mailto action. Preserve the header's layout footprint during this transition and the full-screen mobile navigation.
 - “Product Engineer” sits above the two-line hero headline “From zero to production.” The final line has a short terracotta dash and an indent. The core technologies sit below the heading. Display type is capped at 86.4px with a 1.03 line height. On mobile, the identity, description, actions, and results follow the heading.
-- The compact identity block aligns with the main heading. It pairs the portrait with “I’m Danila.” and “6 years in software · Former tech lead”. The portrait is 128px square on desktop and 80px on phones, with a shoulders-up crop, 6px corners, and a 24px gap to the text.
+- The compact identity block aligns with the main heading. It pairs the portrait with “I’m Danila.” and “6 years in software”. The portrait is 128px square on desktop and 80px on phones, with a shoulders-up crop, 6px corners, and a 24px gap to the text.
 - The hero summary reads “I build new products and improve the ones people already use.” The supporting line reads “My work spans interfaces, APIs, databases, and deployment.” The summary starts 24px below the identity block and uses 18–20px type at a 1.5 line height, with 28px before the engagement details.
 - Availability belongs in the hero description beside the engagement terms: "Open to full-time roles & long-term contracts", "Yerevan · UTC+4 · EU working-day overlap", and "Remote · EOR / B2B". Use plain typography without a separate status label or green online indicator above the hero.
 - Product Engineer is the primary hero résumé download. Keep both explicitly named résumé downloads in the contact block and both CV routes, without a role selector in the hero.
